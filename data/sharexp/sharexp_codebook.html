@@ -362,24 +362,24 @@ display: none;
 <p>Цель исследования: выяснить, какая иконка «поделиться» (share)
 обознается лучше — быстрее и точнее.</p>
 </blockquote>
-<p>Испытуемым необходимо было искать иконки поделиться (share) iOS и
-Android среди дисктракторов — других иконок, которые для обеих платформ
+<p>Испытуемым необходимо было искать иконки поделиться (share) iOS
+и Android среди дистракторов — других иконок, которые для обеих платформ
 отрисованы одинаково.</p>
 <p><strong>Независимые переменные исследования</strong>:</p>
 <ul>
-<li>тип иконки — иконка iOS (Outgoing Tray) и иконка Android (Three
+<li>тип иконки — иконка iOS (Outgoing Tray) и иконка Android (Three
 Dots)</li>
-<li>количество стимулов в пробе — 8, 12, 16</li>
-<li>используемая платформа смартфона — iOS или Android</li>
+<li>количество стимулов в пробе — 8, 12, 16</li>
+<li>используемая платформа смартфона — iOS или Android</li>
 </ul>
 <p>Последняя переменная является квазиэкспериментальной.</p>
 <p>В дизайн эксперимента были включены пробы с одним целевым стимулом
-(Outgoing Tray <em>или</em> Three Dots) и с двумя целевыми стимулами
-(<em>и</em> Outgoing Tray, <em>и</em> Three Dots)</p>
+(Outgoing Tray <em>или</em> Three Dots) и с двумя целевыми стимулами
+(<em>и</em> Outgoing Tray, <em>и</em> Three Dots)</p>
 <p><strong>Зависимые переменные исследования</strong>:</p>
 <ul>
-<li>время поиска целевого стимула (время реакции) — от начала пробы до
-клика испытуемого</li>
+<li>время поиска целевого стимула (время реакции) — от начала пробы
+до клика испытуемого</li>
 <li>точность поиска целевого стимула — рассчитываемая через координаты
 клика</li>
 </ul>
@@ -388,6 +388,253 @@ Dots)</li>
 <h2>Датасеты</h2>
 <div id="sharexp_raw.zip" class="section level3">
 <h3><code>sharexp_raw.zip</code></h3>
+<p>Архив содержит аутпуты PsychoPy для каждого испытуемого. Все аутпуты
+генерируется программно и имеют одинаковую структуру.</p>
+<p>Датасет содержит следующие переменные:</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Переменная</th>
+<th align="left">Значения</th>
+<th align="left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>stim1</code>—<code>stim16</code></td>
+<td align="left">Строка</td>
+<td align="left">Название графического файла со стимулом</td>
+</tr>
+<tr class="even">
+<td align="left"><code>pos1</code>—<code>pos16</code></td>
+<td align="left">Пара числовых значений</td>
+<td align="left">Позиция стимула на экране</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>size1</code>—<code>size16</code></td>
+<td align="left">Пара числовых значений</td>
+<td align="left">Размер стимула</td>
+</tr>
+<tr class="even">
+<td align="left"><code>ok</code></td>
+<td align="left">Строка</td>
+<td align="left">Название графического файла с кнопкой
+<code>OK</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>posok</code></td>
+<td align="left">Пара числовых значений</td>
+<td align="left">Позиция кнопки <code>OK</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>sizeok</code></td>
+<td align="left">Пара числовых значений</td>
+<td align="left">Размер кнопки <code>OK</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>numtrial</code></td>
+<td align="left">Число</td>
+<td align="left">Номер пробы</td>
+</tr>
+<tr class="even">
+<td align="left"><code>setsize</code></td>
+<td align="left">Число (<code>8</code>, <code>12</code>,
+<code>16</code>)</td>
+<td align="left">Количество стимулов в пробе</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>trialtype</code></td>
+<td align="left"><code>tray</code> — Outgoing Tray<br><code>dots</code>
+— Three Dots<br><code>both</code> — два целевых стимула</td>
+<td align="left">Тип пробы (целевой стимул)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>mouse_main1.time_raw</code></td>
+<td align="left">Число</td>
+<td align="left">Время до первого клика (сек)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>mouse_main1.x_raw</code></td>
+<td align="left">Число</td>
+<td align="left">Горизонтальная координата первого клика (px)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>mouse_main1.y_raw</code></td>
+<td align="left">Число</td>
+<td align="left">Вертикальная координата первого клика (px)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>mouse_main2.time_raw</code></td>
+<td align="left">Число</td>
+<td align="left">Время до второго клика (сек)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>mouse_main2.x_raw</code></td>
+<td align="left">Число</td>
+<td align="left">Горизонтальная координата второго клика (px)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>mouse_main2.y_raw</code></td>
+<td align="left">Число</td>
+<td align="left">Вертикальная координата второго клика (px)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>order</code></td>
+<td align="left">Число</td>
+<td align="left">Порядок предъявления проб в конкретной сессии</td>
+</tr>
+</tbody>
+</table>
+<p>Переменные, отсутствующие в списке, не являются существенными
+для анализа и несут, скорее, техническую информацию.</p>
+<blockquote>
+<p><strong>NB!</strong> В последних строках каждого файла записана
+социально-демографическая информация об испытуемом и техническая
+информация о сессии эксперимента.</p>
+</blockquote>
+</div>
+<div id="targetpositions.xlsx" class="section level3">
+<h3><code>targetpositions.xlsx</code></h3>
+<p>Датасет содержит информацию о координатах целевых стимулов
+и диапазонах координат, в пределах которых клик считается корректным.
+У колонок, относящихся к тренировочной серии, в названии содержится
+аффикс <code>tr</code>.</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Переменная</th>
+<th align="left">Значения</th>
+<th align="left">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>posx1</code></td>
+<td align="left">Число</td>
+<td align="left">Позиция первого целевого стимула по горизонтальной
+оси</td>
+</tr>
+<tr class="even">
+<td align="left"><code>posy1</code></td>
+<td align="left">Число</td>
+<td align="left">Позиция первого целевого стимула по вертикальной
+оси</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>posxmin1</code></td>
+<td align="left">Число</td>
+<td align="left">Минимальная координата клика по горизонтальной оси
+для первого целевого стимула</td>
+</tr>
+<tr class="even">
+<td align="left"><code>posxmax1</code></td>
+<td align="left">Число</td>
+<td align="left">Максимальная координата клика по горизонтальной оси
+для первого целевого стимула</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>posymin1</code></td>
+<td align="left">Число</td>
+<td align="left">Минимальная координата клика по вертикальной оси
+для первого целевого стимула</td>
+</tr>
+<tr class="even">
+<td align="left"><code>posymax1</code></td>
+<td align="left">Число</td>
+<td align="left">Максимальная координата клика по вертикальной оси
+для первого целевого стимула</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>posx2</code></td>
+<td align="left">Число</td>
+<td align="left">Позиция второго целевого стимула по горизонтальной
+оси</td>
+</tr>
+<tr class="even">
+<td align="left"><code>posy2</code></td>
+<td align="left">Число</td>
+<td align="left">Позиция второго целевого стимула по вертикальной
+оси</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>posxmin2</code></td>
+<td align="left">Число</td>
+<td align="left">Минимальная координата клика по горизонтальной оси
+для второго целевого стимула</td>
+</tr>
+<tr class="even">
+<td align="left"><code>posxmax2</code></td>
+<td align="left">Число</td>
+<td align="left">Максимальная координата клика по горизонтальной оси
+для второго целевого стимула</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>posymin2</code></td>
+<td align="left">Число</td>
+<td align="left">Минимальная координата клика по вертикальной оси
+для второго целевого стимула</td>
+</tr>
+<tr class="even">
+<td align="left"><code>posymax2</code></td>
+<td align="left">Число</td>
+<td align="left">Максимальная координата клика по вертикальной оси
+для второго целевого стимула</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>numtrial</code></td>
+<td align="left">Число</td>
+<td align="left">Номер пробы</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="share_platform.csv" class="section level3">
+<h3><code>share_platform.csv</code></h3>
+<p>Датасет содержит информацию об используемой респондентом платформе.
+Данные расположены <a href="https://raw.githubusercontent.com/angelgardt/rs-app-andan-book/refs/heads/master/data/sharexp/share_platform.csv">по ссылке</a>.</p>
+<p>Датасет содержит следующие переменные:</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Переменная</th>
+<th align="left">Значения</th>
+<th align="left">Описание</th>
+<th align="left">Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>id</code></td>
+<td align="left">Число</td>
+<td align="left">Идентификатор испытуемого</td>
+<td align="left">Совпадает с названием файла
+в <code>sharexp_raw.zip</code></td>
+</tr>
+<tr class="even">
+<td align="left"><code>platform</code></td>
+<td align="left"><code>ios</code> — iOS<br><code>andr</code> —
+Androind</td>
+<td align="left">Платформа смартфона испытуемого</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 
