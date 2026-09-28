@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Основания статистики – RS ANDAN // PSY&nbsp;HSE</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../sems/rpy-basics.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-84b129f27be8f528ae7b9875820b10cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ничего не найдено",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отмена",
+    "search-submit-button-title": "Отправить",
+    "search-label": "Поиск"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../sems/intro-basics.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основания статистики</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">RS ANDAN // PSY&nbsp;HSE</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/intro-basics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основания статистики</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/rpy-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Основы R / Python</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/rpy-randvals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/rpy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">rpy-data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/rpy-tidybase.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">rpy-tidybase</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/rpy-tidyadv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">rpy-tidyadv</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/rpy-strdt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">rpy-strdt</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/rpy-vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">rpy-vis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/stats-desc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">stats-desc</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/stats-norm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">stats-norm</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/stats-cltci.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">stats-cltci</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/stats-hyptest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">stats-hyptest</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/stats-chisq.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">stats-chisq</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/stats-freqpval.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">stats-freqpval</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-cor.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">andan-cor</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-lm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">andan-lm</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-lmx.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">andan-lmx</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-owanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">andan-owanova</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-twanova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">andan-twanova</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-nonparam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">andan-nonparam</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-glmlog.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">andan-glmlog</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-ml.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">andan-ml</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-efa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">andan-efa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-cfa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">andan-cfa</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../sems/andan-clust.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">andan-clust</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#intro-sample-pop" id="toc-intro-sample-pop" class="nav-link active" data-scroll-target="#intro-sample-pop"><span class="header-section-number">1.1</span> Выборка и&nbsp;генеральная совокупность</a></li>
+  <li><a href="#intro-main-task" id="toc-intro-main-task" class="nav-link" data-scroll-target="#intro-main-task"><span class="header-section-number">1.2</span> Основная задача статистики</a></li>
+  <li><a href="#intro-main-sample" id="toc-intro-main-sample" class="nav-link" data-scroll-target="#intro-main-sample"><span class="header-section-number">1.3</span> Основная характеристика выборки</a></li>
+  <li><a href="#intro-sampling" id="toc-intro-sampling" class="nav-link" data-scroll-target="#intro-sampling"><span class="header-section-number">1.4</span> Способы формирования выборки</a>
+  <ul class="collapse">
+  <li><a href="#intro-simple-random" id="toc-intro-simple-random" class="nav-link" data-scroll-target="#intro-simple-random"><span class="header-section-number">1.4.1</span> Простая случайная выборка</a></li>
+  <li><a href="#intro-stratified" id="toc-intro-stratified" class="nav-link" data-scroll-target="#intro-stratified"><span class="header-section-number">1.4.2</span> Стратифицированная выборка</a></li>
+  <li><a href="#intro-cluster" id="toc-intro-cluster" class="nav-link" data-scroll-target="#intro-cluster"><span class="header-section-number">1.4.3</span> Групповая выборка</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="intro-basics" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основания статистики</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="intro-sample-pop" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="intro-sample-pop"><span class="header-section-number">1.1</span> Выборка и&nbsp;генеральная совокупность</h2>
+<div id="def-statistics" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 1.1</strong></span> <strong>Статистика (statistics)</strong>&nbsp;— это междисциплинарная область знаний, а&nbsp;также практической деятельности, изучающая массовые явления, а&nbsp;также принципы и&nbsp;методы работы с&nbsp;данными, характеризующими эти явления.</p>
+</div>
+<p>Звучит красиво. Осталось понять, что&nbsp;это значит.</p>
+<p>Массовые явления затрагивают огромные массы людей. Огромность масс, конечно, различна. Скажем, базовые перцептивные закономерности, связанные с&nbsp;тем, как&nbsp;устроена зрительная система, охватывают <em>всех</em> людей. Уровень удовлетворенности жизнью россиян охватывает только <em>население России</em>. Городские блага москвичей&nbsp;— только для&nbsp;<em>жителей Москвы</em>. Учебная мотивация студентов департамента психологии НИУ ВШЭ&nbsp;— это только про&nbsp;<em>людей с&nbsp;психологических бакалавриата и&nbsp;магистратур НИУ ВШЭ</em>.</p>
+<div id="def-population" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 1.2</strong></span> <strong>Генеральная совокупность (population)</strong>&nbsp;— множество всех исследуемых объектов, а&nbsp;также сведения о&nbsp;них.</p>
+</div>
+<div id="def-population-size" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 1.3</strong></span> <strong>Объем совокупности</strong> (<span class="math inline">\(N\)</span>)&nbsp;— число единиц, образующих совокупность.</p>
+</div>
+<p>Здесь необходимо уточнить, в&nbsp;каком смысле мы пониманием «<em>множество</em>» и «<em>исследуемых объектов</em>». Под&nbsp;множеством мы имеем в&nbsp;виду множество в&nbsp;математическом смысле&nbsp;— некий абстрактный мешок, в&nbsp;которым лежат изучаемые нами объекты. Это действительно абстрактная структура, поскольку вряд&nbsp;ли мы когда-нибудь увидим <em>все</em> исследуемые объекты. И&nbsp;дело здесь не&nbsp;только в&nbsp;том, что их много. Чаще всего это так, но&nbsp;ведь изучая, скажем, учебную мотивацию студентов, мы заинтересованы не&nbsp;только в&nbsp;том, чтобы что-либо сказать о&nbsp;мотивации нынешних студентов&nbsp;— мы хотели&nbsp;бы, чтобы полученное знание обобщалось и&nbsp;на&nbsp;будущих студентов. Но мы не&nbsp;можем включить в&nbsp;исследование будущих студентов, потому что здесь-сейчас-сегодня они ещё не&nbsp;студенты. Таким образом, генеральная совокупность для&nbsp;нас <em>принципиально недостижима</em> в&nbsp;полном объёме.</p>
+<p>Ввиду ограниченности&nbsp;времени и&nbsp;денег, а&nbsp;также принципиальной недостижимости генеральной совокупности целиком, приходится из&nbsp;генеральной совокупности извлекать <strong>выборку (sample)</strong>&nbsp;— некоторую часть нашей генеральной совокупности (объемом <span class="math inline">\(n\)</span>). При этом <span class="math inline">\(n \ll N\)</span> (много меньше).</p>
+<p>Нас, конечно&nbsp;же, интересуют какие-то <em>признаки</em>, которыми обладают объекты нашей генеральной совокупности. Эти признаки могут быть выражены количественно в&nbsp;определенных <em>показателях</em> (<a href="#tbl-param-exmpl" class="quarto-xref">Таблица&nbsp;<span>1.1</span></a>).</p>
+<div id="tbl-param-exmpl" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-param-exmpl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;1.1: Примеры признаков и&nbsp;показателей
+</figcaption>
+<div aria-describedby="tbl-param-exmpl-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Признак</th>
+<th style="text-align: left;">Показатель</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Рабочая память</td>
+<td style="text-align: left;">Объем рабочей памяти</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Нейротизм</td>
+<td style="text-align: left;">Уровень нейротизма по BFI</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Заработная плата</td>
+<td style="text-align: left;">Средняя заработная плата</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Когнитивная нагрузка</td>
+<td style="text-align: left;">Уровень когнитивной нагрузки по ЭЭГ-коррелятам</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Доверие к ИИ</td>
+<td style="text-align: left;">Уровень доверия к ИИ по опроснику TAIA</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Индивидуализм/коллективизм</td>
+<td style="text-align: left;">Индекс индивидуализма/коллективизма по модели Хофстеде</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Признаки могут быть очень разными, как и&nbsp;показатели, которыми мы их пытаемся измерить. Не&nbsp;будем сильно в&nbsp;это углубляться, ибо подробнее об&nbsp;этом будет рассказано в&nbsp;других курсах. Что нам важно сейчас: генеральная совокупность характеризуется <em>параметром</em>.</p>
+<div id="def-parameter" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 1.4</strong></span> <strong>Параметр (statistical parameter)</strong> (<span class="math inline">\(\theta\)</span>)&nbsp;— относительно постоянная [от одной совокупности к другой] величина, характеризующая генеральную совокупность по некоторому показателю.</p>
+</div>
+<p>Ну, то&nbsp;есть в&nbsp;принципе существует средний уровень нейротизма студентов-психологов, или&nbsp;средняя удовлетворенность условиями труда сотрудниками IT-компаний, или средний уровень академической мотивации выпускников бакалавриата. Проблема в&nbsp;том, что&nbsp;<em>величина параметра</em>, который мы изучаем, <em>неизвестна</em>. <em>И никогда не будет известна</em>.</p>
+<p>Но почему?</p>
+<ul>
+<li>Мы не&nbsp;можем изучить всю генеральную совокупность</li>
+<li>Наши измерения всегда содержат ошибку&nbsp;— мы даже длину линейкой точно не&nbsp;можем измерить, что&nbsp;уж о&nbsp;психологических измерениях говорить</li>
+</ul>
+<p>Поэтому величину параметра мы можем только <em>предсказать</em> с&nbsp;определённой точностью по&nbsp;<em>выборочной характеристике, или оценке</em>, полученной на&nbsp;выборке.</p>
+<div id="def-estimation" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 1.5</strong></span> <strong>Выборочная оценка (estimation)</strong> (<span class="math inline">\(\hat \theta\)</span>)&nbsp;— эмпирический (измеримый) аналог параметра.</p>
+</div>
+<p>Так, оценкой для&nbsp;среднего уровня нейротизма студентов-психологов может служить средний балл нескольких тысяч студентов-психологов по&nbsp;соответствующей шкале опросника BFI (Big Five Inventory), а&nbsp;оценкой для средней академической мотивации выпускников бакалавриата будет, например, средний балл нескольких тысяч выпускников по&nbsp;опроснику академической мотивации.</p>
+<blockquote class="blockquote">
+<p>Выше приводились примеры, где в&nbsp;качестве параметров и&nbsp;их оценок выступали <em>средние</em>. Чаще всего мы в&nbsp;психологии действительно работаем со&nbsp;средними [арифметическими], однако в&nbsp;других науных областях могут встречаться и&nbsp;более хитрые параметры и&nbsp;оценки.</p>
+</blockquote>
+</section>
+<section id="intro-main-task" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="intro-main-task"><span class="header-section-number">1.2</span> Основная задача статистики</h2>
+<p>Мы в&nbsp;какой-то малоприятной ситуации… Мы пытаемся измерить то, что&nbsp;в&nbsp;определенном смысле невозможно измерить, при&nbsp;этом достаточно точно, чтобы&nbsp;потом это можно было сравнивать или&nbsp;строить какие-то модели. Задача выглядит заведомо провальной…</p>
+<p>Однако именно в&nbsp;этот момент на&nbsp;помощь нам приходит статистика. Не&nbsp;в&nbsp;гордом одиночестве, конечно. Она приводит с&nbsp;собой теорию вероятности, теорию измерений, психометрику, теорию обнаружения сигнала и&nbsp;др. Всё это работает в&nbsp;нашей психологической науке в&nbsp;комплексе. Мы&nbsp;же в&nbsp;данном курсе сосредотачиваемся на&nbsp;статистической части этого салата.</p>
+<p>Статистика даёт нам теоретический и&nbsp;математический инструментарий, чтобы&nbsp;мы могли делать какие-либо выводы о&nbsp;генеральной совокупности по&nbsp;собранным на&nbsp;выборке данным. К&nbsp;сожалению, как&nbsp;бы нам не&nbsp;хотелось, мы <em>не&nbsp;можем делать выводы по&nbsp;сырым данным</em>, потому&nbsp;что измерения по&nbsp;выборке не&nbsp;отражают вот прям ровно то, что&nbsp;есть в&nbsp;генеральной совокупности. Нам их надо определенным образом обсчитать, чтобы&nbsp;наши выводы были корректными. Этим и&nbsp;занимается статистика.</p>
+<p>Если&nbsp;мы попытаемся нарисовать какую-то концептуальную схему работы с&nbsp;выборкой в&nbsp;ходе исследования, то&nbsp;получится нечто такое (<a href="#fig-sampling-inference" class="quarto-xref">Рисунок&nbsp;<span>1.1</span></a>).</p>
+<div id="fig-sampling-inference" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sampling-inference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../img/intro/sampling-inference.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sampling-inference-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;1.1: Схема работы с&nbsp;выборкой в&nbsp;ходе исследования
+</figcaption>
+</figure>
+</div>
+<p>Мы желаем изучить некую <strong>генеральную совокупность (population)</strong>, которая недоступна нам в&nbsp;полном объёме. По&nbsp;этой причине мы извлекаем (sampling) из&nbsp;неё <strong>выборку (sample)</strong>. На&nbsp;выборке мы собираем <strong>данные (data)</strong>, по&nbsp;которым хотим делать <strong>вывод (inference)</strong> о&nbsp;генеральной совокупности. Как&nbsp;именно нам сделать такой вывод и&nbsp;рассказывает статистика.</p>
+<p>Вероятно, сейчас это звучит достаточно абстрактно, но&nbsp;на&nbsp;данном этапе будет достаточно некоторого интуитивного понимания того, зачем нужна статистика. Далее интуиция обрастёт содержанием и&nbsp;уложится, хотелось&nbsp;бы надеяться, в&nbsp;достаточно стройную систему.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Итог
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Cтатистика помогает нам делать выводы об&nbsp;изучаемой генеральной совокупности по&nbsp;выборке.</strong></p>
+</div>
+</div>
+</section>
+<section id="intro-main-sample" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="intro-main-sample"><span class="header-section-number">1.3</span> Основная характеристика выборки</h2>
+<p>Окей, статистика даёт нам теоретический и&nbsp;математический аппарат, который позволяет делать выводы о&nbsp;генеральной совокупности по&nbsp;выборке. Однако если мы криво собрали данные, то&nbsp;никакая математика нас не&nbsp;спасет от&nbsp;некорректных выводов.</p>
+<blockquote class="blockquote">
+<p>Один из&nbsp;принципов машинного обучения, актуальный и&nbsp;для&nbsp;нас, гласит: <strong>garbage in, garbage out</strong>, что&nbsp;значит «плохие данные на&nbsp;входе&nbsp;— бессмысленные результаты на&nbsp;выходе».</p>
+</blockquote>
+<p>Тогда возникает вопрос: как собрать хорошие данные? Аспектов в&nbsp;этом вопросе много, и&nbsp;все они решаются при&nbsp;разработке дизайна исследования. Мы не&nbsp;будем здесь подробно разбирать, как&nbsp;корректно разрабатывать дизайн исследования, ибо&nbsp;это не&nbsp;является задачей курса статистики. Однако одни из&nbsp;ключевых элементов дизайна любого исследования&nbsp;— его <strong>выборка и&nbsp;способ её формирования.</strong></p>
+<p>Среди характеристик выборки можно назвать много чего&nbsp;— например, объём и сбалансированность&nbsp;— но&nbsp;в&nbsp;целом все отдельные характеристики обобщаются в&nbsp;понятие <em>репрезентативности</em>.</p>
+<p><strong>Репрезентативность выборки</strong>&nbsp;— это степень соответствия характеристик выборки характеристикам генеральной совокупности.</p>
+<p>Например, мы хотим исследовать связь учебной мотивации и&nbsp;академической успеваемости бакалавров психологии. Если&nbsp;мы соберем данные <em>только со&nbsp;своих однокурсников</em>, будет нехорошо, так как в&nbsp;нашу выборку не&nbsp;попали (1)&nbsp;другие курсы психологического бакалавриата нашего вуза, (2)&nbsp;бакалавры-психологи других вузов Москвы и&nbsp;(3)&nbsp;бакалавры-психологи вузов других городов России.</p>
+<p>И так работает всегда.</p>
+<blockquote class="blockquote">
+<p>Ну, почти. Есть соблазн проводить исследования на&nbsp;студентах-психологах, потому&nbsp;что они достаточно близко и&nbsp;их можно загнать на&nbsp;эксперименты за&nbsp;баллы. Более-менее сносно это может работать на&nbsp;каких-то базовых когнитивных феноменах из&nbsp;восприятия и&nbsp;памяти. Обычно у&nbsp;нас нет оснований предполагать, что&nbsp;восприятие и&nbsp;память работают принципиально по-разному у&nbsp;людей разного возраста и&nbsp;разных социальных страт. Хотя, например, относительно памяти уже надо разбираться в&nbsp;том, что&nbsp;мы конкретно хотим про&nbsp;память изучать. Всё становится сложнее, если&nbsp;мы собираемся изучать что-то более высокоуровневое&nbsp;— например, мышление&nbsp;— или&nbsp;феномены личностной или&nbsp;социальной психологии.</p>
+</blockquote>
+<p><strong>Почему выборка должна быть репрезентативной?</strong></p>
+<p>Потому&nbsp;что если мы делаем нормально, то&nbsp;хотим обобщать результаты нашего исследования, полученные на&nbsp;выборке, на&nbsp;генеральную совокупность. Если выборка нерепрезентативна, то&nbsp;мы не&nbsp;можем этого сделать. Зачем в таком случае проводить исследование&nbsp;— решительно неясно.</p>
+<p>Тогда возникает вопрос: <strong>как собрать репрезентативную выборку?</strong> Можно предложить следующий общий алгоритм.</p>
+<ol start="0" type="1">
+<li>Осознать, кто наша генеральная совокупность.
+<ul>
+<li>В&nbsp;самом начале этой страницы приводились примеры разных генеральных совокупностей, и&nbsp;для&nbsp;каждой генеральной совокупности репрезентативная выборка будет своя.</li>
+</ul></li>
+<li>Понять, есть&nbsp;ли какая-то группировка, важная для&nbsp;нашего исследования, в&nbsp;нашей генеральной совокупности.
+<ul>
+<li>Социальная страта, специальность образования, сфера работы, пол или гендер, возрастные группы, регион проживания, семейное положение, что-либо ещё.</li>
+</ul></li>
+<li>Рассчитать достаточный объём выборки
+<ul>
+<li>это не&nbsp;самая простая задача, и&nbsp;о&nbsp;ней мы будем говорить отдельно</li>
+<li>пока отметим в&nbsp;назывном порядке, что&nbsp;на&nbsp;объем выборки будут влиять дизайн исследования, изменчивость признака, уровень значимости и размер эффекта [что&nbsp;бы это ни&nbsp;значило]</li>
+</ul></li>
+<li>Обеспечить случайное попадание респондентов в&nbsp;выборку.</li>
+</ol>
+<p>На&nbsp;последнем пункте стоит остановиться подробнее. Если у&nbsp;нас есть ресурсы набрать много людей в&nbsp;выборку&nbsp;— скажем, раза в 2–3 больше, чем достаточный объем выборки&nbsp;— то&nbsp;можно просто случайным образом откуда-то доставать людей, и&nbsp;всё будет хорошо. Некоторые статистические теоремы говорят, что&nbsp;такой вариант вполне пригоден для&nbsp;обеспечения репрезентативности выборки.</p>
+<p>Если&nbsp;мы всё&nbsp;же не&nbsp;можем набрать много людей, то&nbsp;надо набрать выборку достаточного объема и&nbsp;проверить репрезентативна&nbsp;ли она&nbsp;— отражает&nbsp;ли выборка те&nbsp;группировки изучаемых объектов, которые есть в&nbsp;генеральной совокупности.</p>
+<p>Идеальная выборка&nbsp;— это когда каждый человек имеет <em>равную вероятность</em> попасть в&nbsp;число респондентов (или испытуемых). Такая выборка называется <strong>вероятностной (probability sampling)</strong>. Полностью случайный отбор трудно достижим&nbsp;— это очень дорого&nbsp;— но&nbsp;к&nbsp;нему нужно стремиться. Кроме того, сам метод сбора данных может деформировать выборку (например, онлайн-опросы отсекают пенсионеров), поэтому думать о&nbsp;сборе данных необходимо уже на&nbsp;этапе планирования исследования.</p>
+</section>
+<section id="intro-sampling" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="intro-sampling"><span class="header-section-number">1.4</span> Способы формирования выборки</h2>
+<p>Способов формирования выборки существует много. Для&nbsp;каждого отдельного исследования существующие способы можно модифицировать, что&nbsp;даст нам ещё кучу новых способов. Однако в&nbsp;рамках курса мы рассмотрим три основные способа формирования вероятностной выборки.</p>
+<section id="intro-simple-random" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="intro-simple-random"><span class="header-section-number">1.4.1</span> Простая случайная выборка</h3>
+<p>В случае <strong>простой случайной выборки (simple random sample)</strong> элементы генеральной совокупности <em>случайным образом</em> попадают в&nbsp;выборку. Представим, что&nbsp;на&nbsp;этой картинке изображена вся генеральная совокупность:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro-basics_files/figure-html/simple-random-sample-population-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Если мы наберем простую случайную выборку из&nbsp;этой генеральной совокупности, она будет выглядеть так:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro-basics_files/figure-html/simple-random-sample-big-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Как&nbsp;можно заметить, в&nbsp;выборку попали объекты из&nbsp;всех частей нашей генеральной совокупности&nbsp;— это говорит о&nbsp;том, что&nbsp;выборка репрезентативна.</p>
+<p>Простая случайная выборка, конечно, хороша своей простотой, однако у&nbsp;неё есть два существенных недостатка. Во-первых, <em>действительно случайное попадание респондентов (или&nbsp;испытуемых) в&nbsp;выборку обеспечить практически невозможно</em>&nbsp;— всегда будут ограничение на&nbsp;доступ к&nbsp;каким-либо частям генеральной совокупности. Во-вторых, <em>простая случайная выборка будет репрезентативной только при&nbsp;большом объёме</em>. Так, если&nbsp;мы посмотрим на&nbsp;простую случайную выборку малого объёма для&nbsp;той&nbsp;жё генеральной совокупности, что&nbsp;была выше, то получим следующее:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro-basics_files/figure-html/simple-random-sample-little-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>На рисунке видно, что&nbsp;многие части генеральной совокупности не&nbsp;представлены в&nbsp;выборке, что&nbsp;свидетельсвует о&nbsp;нерепрезентативности выборки.</p>
+</section>
+<section id="intro-stratified" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="intro-stratified"><span class="header-section-number">1.4.2</span> Стратифицированная выборка</h3>
+<p>В случае <strong>стратифицированной выборки (stratified sample)</strong> генеральная совокупность разбивается на&nbsp;несколько обособленных и&nbsp;различных по&nbsp;своей природе групп (страт). В&nbsp;каком смысле обособленных? В&nbsp;том, что&nbsp;каждый объект (респондент, испытуемый) может принадлежать только к&nbsp;одной страте. Например, возрастная группа (дети, подростки, молодежь, взрослые, пожилые), пол, среднемесячный доход семьи и&nbsp;др. Важно отметить, что&nbsp;страта — это характеристика изучаемых объектов, <em>важная с&nbsp;точки зрения дизайна исследования</em>. Ровно поэтому мы хотим учесть её при&nbsp;формировании выборки, обеспечив её репрезентативность по&nbsp;данной характеристике.</p>
+<p>Пусть наша генеральная совокупность выглядит как-то так и&nbsp;состоит из&nbsp;четырёх страт:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro-basics_files/figure-html/stratified-sample-population-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Если&nbsp;мы поделим это месиво точек по&nbsp;стратам, то&nbsp;получим следующее:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro-basics_files/figure-html/stratified-sample-strata-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Теперь из&nbsp;каждой страты случайным образом выберем несколько объектов, которые и&nbsp;попадут в&nbsp;выборку.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro-basics_files/figure-html/stratified-sample-sampling-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Относительно количества объектов, извлекаемых из&nbsp;каждой страты, существуют разные варианты. Дизайн исследования может предполагать, что&nbsp;количество респондентов из&nbsp;каждой страты должно быть одинаковым&nbsp;— тогда мы будем набирать равное количество респондентов из&nbsp;каждой страты. Или&nbsp;же нам может быть важно обеспечить в&nbsp;выборке такое&nbsp;же соотношение между&nbsp;стратами по&nbsp;количеству респондентов, какое&nbsp;существует в&nbsp;генеральной совокупности&nbsp;— тогда необходимо, зная общий объём выборки, рассчитать количества респондентов из&nbsp;каждой страты, зная пропорции в&nbsp;генеральной совокупности, например, из&nbsp;данных государственной статистики или&nbsp;других источников.</p>
+</section>
+<section id="intro-cluster" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="intro-cluster"><span class="header-section-number">1.4.3</span> Групповая выборка</h3>
+<p>В&nbsp;случае <strong>групповой выборки (cluster sample)</strong> мы разбиваем генеральную совокупность на&nbsp;несколько обособленных, но&nbsp;<em>одинаковых</em> групп (кластеров). Обособленный в&nbsp;том&nbsp;же смысле, что&nbsp;и&nbsp;в&nbsp;случае стратифицированной выборки — один респондент может принадлежать только к&nbsp;одной группе наблюдений. В&nbsp;каком смысле группы тогда должны быть одинаковыми? Они должны быть одинаковыми с&nbsp;точки зрения дизайна исследования. Пусть мы изучаем удовлетворенность городскими благами жителей некоторого города. Группой (cluster) в&nbsp;этом случае может выступить район города, в&nbsp;котором проживает респондент, если&nbsp;у&nbsp;нас нет оснований предполагать, что&nbsp;районы города различаются по&nbsp;характеристике «городские блага». Зачем нам такое разделение может пригодится? Возможно, у&nbsp;нас доступ к&nbsp;организациям городского района, которые&nbsp;могут помочь нам распространить опрос, что&nbsp;снизит затраты на&nbsp;проведение исследования.</p>
+<p>Пусть мы разделили нашу генеральную совокупность на&nbsp;шесть кластеров:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro-basics_files/figure-html/cluster-sample-population-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Кластеры мы считаем примерно одинаковыми по&nbsp;характеристикам между собой&nbsp;— по&nbsp;крайне мере, мы так предполагаем с&nbsp;точки зрения дизайна исследования. Выберем случайно три кластера, которые примут участие в&nbsp;исследовании:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro-basics_files/figure-html/cluster-sample-clusters-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Теперь из&nbsp;этих кластеров наберем выборку случайным образом:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="intro-basics_files/figure-html/cluster-sample-sampling-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Хотя такой подход к&nbsp;формированию выборки позволяет экономить драгоценные временные и&nbsp;денежные ресурсы, он имеет свои недостатки. В частности, мы должны быть уверенны, что&nbsp;выделенные нами группы действительно одинаковы с&nbsp;точки зрения исследования&nbsp;— это можно утверждать далеко не&nbsp;всегда.</p>
+<hr>
+<p>Пока&nbsp;что остановимся на&nbsp;этом — для&nbsp;первого знакомства со&nbsp;статистикой будет достаточно. Мы еще не&nbsp;раз будем возвращаться к&nbsp;этим вопросам, и&nbsp;на&nbsp;других курсах вы тоже будете говорить о&nbsp;репрезентативности выборки.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../sems/rpy-basics.html" class="pagination-link" aria-label="Основы R / Python">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Основы R / Python</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

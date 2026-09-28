@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>RS ANDAN // PSY&nbsp;HSE - 2&nbsp; Измерения. Шкалы. Случайные величины</title>
+<title>3&nbsp; Измерения. Шкалы. Случайные величины – RS ANDAN // PSY&nbsp;HSE</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -30,17 +33,20 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chpts/rpy-basics.html" rel="next">
-<link href="../chpts/prob-sample.html" rel="prev">
-<script src="../site_libs/quarto-html/quarto.js"></script>
+<link href="../chpts/rpy-basics.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-84b129f27be8f528ae7b9875820b10cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -68,23 +74,55 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Поиск"
   }
 }</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chpts/prob-randvals.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chpts/prob-randvals.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -114,152 +152,20 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chpts/prob-sample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Статистика в&nbsp;контексте исследования</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/prob-randvals.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></a>
+  <a href="../chpts/intro-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основания статистики</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chpts/rpy-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Основы R / Python</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Основы R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chpts/rpy-data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовое исследование данных</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/rpy-tidybase.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Базовая предобработка данных</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/rpy-tidyadv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Продвинутая предобработка данных</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/rpy-strdt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Дата и&nbsp;время</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/rpy-vis.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Визуализация данных</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/stats-desc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Описательные статистики</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/stats-norm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Нормальное распределение</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/stats-cltci.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Интервальные оценки параметров</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/stats-hyptest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Тестирвоание статистических гипотез</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-chisq.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Анализ частотных данных</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/stats-freqpval.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Фреквентизм и&nbsp;тестирование гипотез</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-cor.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">andan-cor</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-lm.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">andan-lm</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-lmx.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">andan-lmx</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-owanova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">andan-owanova</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-twanova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">andan-twanova</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-nonparam.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">andan-nonparam</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-glmlog.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">andan-glmlog</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-ml.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">andan-ml</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-efa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">andan-efa</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-cfa.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">andan-cfa</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/andan-clust.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">andan-clust</span></span></a>
+  <a href="../chpts/prob-randvals.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></a>
   </div>
 </li>
     </ul>
@@ -268,14 +174,36 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#randvals-measure" id="toc-randvals-measure" class="nav-link active" data-scroll-target="#randvals-measure"><span class="header-section-number">3.1</span> Измерение в&nbsp;социальных науках</a></li>
+  <li><a href="#randvals-variables" id="toc-randvals-variables" class="nav-link" data-scroll-target="#randvals-variables"><span class="header-section-number">3.2</span> Признаки и&nbsp;переменные</a></li>
+  <li><a href="#randvals-scales" id="toc-randvals-scales" class="nav-link" data-scroll-target="#randvals-scales"><span class="header-section-number">3.3</span> Шкалы</a>
+  <ul class="collapse">
+  <li><a href="#randvals-scales-why" id="toc-randvals-scales-why" class="nav-link" data-scroll-target="#randvals-scales-why"><span class="header-section-number">3.3.1</span> Зачем нам знать виды шкал?</a></li>
+  <li><a href="#randvals-scales-types" id="toc-randvals-scales-types" class="nav-link" data-scroll-target="#randvals-scales-types"><span class="header-section-number">3.3.2</span> Типы и&nbsp;виды шкал</a></li>
+  <li><a href="#randvals-scales-order" id="toc-randvals-scales-order" class="nav-link" data-scroll-target="#randvals-scales-order"><span class="header-section-number">3.3.3</span> Порядок шкал по&nbsp;мощности</a></li>
+  </ul></li>
+  <li><a href="#randvals-randvals" id="toc-randvals-randvals" class="nav-link" data-scroll-target="#randvals-randvals"><span class="header-section-number">3.4</span> Случайные величины</a>
+  <ul class="collapse">
+  <li><a href="#randvals-randexp" id="toc-randvals-randexp" class="nav-link" data-scroll-target="#randvals-randexp"><span class="header-section-number">3.4.1</span> Случайный эксперимент</a></li>
+  <li><a href="#randvals-randval" id="toc-randvals-randval" class="nav-link" data-scroll-target="#randvals-randval"><span class="header-section-number">3.4.2</span> Случайная величина</a></li>
+  <li><a href="#randvals-prob" id="toc-randvals-prob" class="nav-link" data-scroll-target="#randvals-prob"><span class="header-section-number">3.4.3</span> Вероятность</a></li>
+  <li><a href="#randvals-discrete" id="toc-randvals-discrete" class="nav-link" data-scroll-target="#randvals-discrete"><span class="header-section-number">3.4.4</span> Дискретные случайные величины</a></li>
+  <li><a href="#randvals-continuous" id="toc-randvals-continuous" class="nav-link" data-scroll-target="#randvals-continuous"><span class="header-section-number">3.4.5</span> Непрерывные случайные величины</a></li>
+  <li><a href="#randvals-density" id="toc-randvals-density" class="nav-link" data-scroll-target="#randvals-density"><span class="header-section-number">3.4.6</span> Плотность вероятности</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="prob-randvals" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></h1>
+<h1 class="title"><span id="prob-randvals" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></h1>
 </div>
 
 
@@ -292,48 +220,1110 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Вспомним, что</p>
+<ul>
+<li>статистика нам помогает делать <em>выводы о&nbsp;генеральной совокупности</em> на&nbsp;основании <em>данных, собранных на&nbsp;выборке</em></li>
+<li>мы хотим изучать <em>параметры генеральной совокупности</em>, но&nbsp;они <em>неизвестны</em> и&nbsp;никогда не&nbsp;будут известны</li>
+<li>поэтому мы <em>используем выборочные характеристики (оценки)</em>, которые мы <em>измерили</em> на&nbsp;нашей выборке</li>
+</ul>
+<p>Теперь&nbsp;бы понять, что&nbsp;такое измерение…</p>
+<section id="randvals-measure" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="randvals-measure"><span class="header-section-number">3.1</span> Измерение в&nbsp;социальных науках</h2>
+<p>Измерение мы будем определять так:</p>
+<div id="def-measurement" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 3.1</strong></span> <strong>Измерение (measurement)</strong> — это приписывание признакам объектов изучаемой совокупности определенных значений на&nbsp;определенной шкале.</p>
+</div>
+<p>Еще раз:</p>
+<ul>
+<li>есть совокупность объектов, которые мы&nbsp;изучаем&nbsp;— выборка,</li>
+<li>в&nbsp;ней есть какие-то объекты,</li>
+<li>у&nbsp;объектов есть признаки,</li>
+<li>если мы приписали признаку какое-то значение на&nbsp;некоторой шкале, значит мы <em>измерили</em> данный признак.</li>
+</ul>
+<p>Такое определение нам позволяет измерить практически всё,&nbsp;что угодно:</p>
+<ul>
+<li>рост</li>
+<li>возраст</li>
+<li>пол (шкала из&nbsp;двух значений <code>male</code> и&nbsp;<code>female</code>)</li>
+<li>национальность</li>
+<li>количество детей в&nbsp;семье</li>
+<li>рейтинг студентов</li>
+<li>курс обучения или&nbsp;уровень образования</li>
+<li>географические координаты (долгота и&nbsp;широта)</li>
+<li>температура</li>
+<li>дата</li>
+<li>IQ</li>
+<li>нарциссизм / макиавеллизм / психопатия</li>
+<li>время реакции</li>
+<li>точность ответов испытуемого в&nbsp;эксперименте</li>
+<li>и&nbsp;т.&nbsp;д.</li>
+</ul>
+<p>Сейчас нас не&nbsp;интересует, как&nbsp;именно «внутри себя» происходит процесс измерения, какие предположения стоят за&nbsp;различными измерениями и&nbsp;как сделать измерение качественным. Об&nbsp;этом подробно рассказывается в&nbsp;курсах когнитивной и&nbsp;экспериментальной психологии, психодиагностики и&nbsp;психометрики и&nbsp;других. Отметим только, что, конечно&nbsp;же, нам как исследователям надо следить за&nbsp;тем, насколько адекватные измерения мы имеем, насколько приписанные значения отражают выраженность, например, психологических черт, или&nbsp;насколько измеряемые (зависимые) экспериментальные переменные адекватны исследовательским задачам.</p>
+<p>Итак, у&nbsp;нас есть интересующие нас признаки генеральной совокупности, которые мы измерили на&nbsp;выборке, то&nbsp;есть приклеили на&nbsp;них некоторые значения из&nbsp;определенных шкал. Успех!</p>
+<p>Но&nbsp;тут, пожалуй, разумно задуматься про&nbsp;шкалы. Ведь очевидно, что возраст и&nbsp;пол будут измеряться по-разному, также как и&nbsp;нарциссизм и&nbsp;время реакции.</p>
+</section>
+<section id="randvals-variables" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="randvals-variables"><span class="header-section-number">3.2</span> Признаки и&nbsp;переменные</h2>
+<p>Мы уже упомянули выше, что&nbsp;мы можем измерять различные признаки. Попытаемся как-то эту кучу систематизировать. В&nbsp;терминах <em>данных</em> признаки&nbsp;— это <em>переменные</em>, поэтому далее мы будем чаще употребляться именно этот термин&nbsp;— переменная&nbsp;— имея в&nbsp;виду то, что&nbsp;мы намерили, изучая признак. Во&nbsp;многом признак и&nbsp;переменная&nbsp;— это&nbsp;синонимы, только первый термин больше из&nbsp;теории измерений, а&nbsp;второй — из&nbsp;статистики и&nbsp;анализа данных. Измерение&nbsp;же от&nbsp;отдельного человека (объекта выборки) называется <em>наблюдение</em>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Типы переменных
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Количественные переменные</strong>&nbsp;— те, которые принимают числовые значения
+<ul>
+<li><strong>непрерывные</strong>&nbsp;— принимают любые значения (рост, возраст, время реакции и&nbsp;др.)</li>
+<li><strong>дискретные</strong>&nbsp;— могут принимать только определенные значения (количество детей в&nbsp;семье, число отчисленных студентов, количество стаканов кофе, выпитых в&nbsp;ночь перед экзаменом и&nbsp;др.)</li>
+</ul></li>
+</ul>
+<p>Число, приписываемое количественному признаку (переменной) ведёт себя как&nbsp;привычное нам&nbsp;математическое число в&nbsp;том смысле, что&nbsp;выражает некоторое количество&nbsp;— сантиметров, лет, секунд, детей, студентов, стаканов кофе…</p>
+<ul>
+<li><strong>Номинальные (категориальные) переменные</strong>&nbsp;— используются для&nbsp;разделения наших наблюдений на&nbsp;группы (пол, национальность, курс обучения, используемая операционная система компьютера и&nbsp;др.).
+<ul>
+<li>Записаны эти переменные обычно текстом (скажем, как в примерах выше, пол&nbsp;— <code>male</code> и&nbsp;<code>female</code> — или&nbsp;операционная система&nbsp;— <code>Win</code>, <code>macOS</code>, <code>Linux</code>).</li>
+<li>Однако, например, курс обучения можно записать по-разному: текстом&nbsp;— <code>freshman</code>, <code>sophomore</code>, <code>junior</code>, <code>senior</code>&nbsp;— или&nbsp;числом&nbsp;— <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>. Однако в&nbsp;данном случае числа не&nbsp;несут никакого математического смысла&nbsp;— это&nbsp;просто <em>лейблы</em>, с&nbsp;помощью которых мы различаем группы наблюдений. Ведь и&nbsp;пол мы можем записать с&nbsp;помощью чисел&nbsp;— пусть <code>male = 0</code>, <code>female = 1</code>. Ведь&nbsp;не&nbsp;будем&nbsp;же мы складывать-вычитать девушек и&nbsp;парней?</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<p>Внимательный читатель мог заметить, что&nbsp;курс обучения — это&nbsp;не&nbsp;совсем категориальная переменная, ведь «второкурсник» в&nbsp;каком-то смысле «больше», чем&nbsp;«первокурсник». Но&nbsp;мы не&nbsp;можем сказать «на&nbsp;сколько» или «во&nbsp;сколько» больше! Что же делать?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Ранговые переменные
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Нельзя сказать, что&nbsp;«второкурсник» выражает бо́льшую выраженность признака «год обучения», чем&nbsp;«первокурсник».</li>
+<li>Вместе с&nbsp;тем «второкурсник» дольше учился и&nbsp;освоил больше дисциплин, чем «первокурсник». При&nbsp;этом «третьекурсник» учился дольше «второкурсника» — то&nbsp;есть существует <em>порядок</em> категорий.</li>
+<li>Такая переменная называется <strong>ранговой</strong>.</li>
+</ul>
+</div>
+</div>
+<p>Другой пример ранговой переменной — это студенческий рейтинг. Что делает рейтинг? Упорядочивает студентов. Можно&nbsp;ли сказать, что&nbsp;четвертый в&nbsp;рейтинге студент в&nbsp;два раза менее успешен, чем&nbsp;второй? Нет&nbsp;— тот&nbsp;же GPA может отличаться на&nbsp;десятые или&nbsp;сотые доли.</p>
+<p>Итого, классификацию переменных можно представить так (<a href="#fig-type-of-vars" class="quarto-xref">Рисунок&nbsp;<span>3.1</span></a>):</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-type-of-vars" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-type-of-vars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+<pre class="mermaid mermaid-js" data-label="fig-type-of-vars">flowchart TD
+  vars("Переменные")
+  quantitative("Количественные")
+  discrete("Дискретные")
+  continuous("Непрерывные")
+  rank("Ранговые")
+  nominal("Номинальные")
+  
+  vars --&gt; quantitative
+  vars --&gt; rank
+  vars --&gt; nominal
+  quantitative --&gt; discrete
+  quantitative --&gt; continuous
+</pre>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-type-of-vars-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.1: Классификация переменных
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="randvals-scales" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="randvals-scales"><span class="header-section-number">3.3</span> Шкалы</h2>
+<section id="randvals-scales-why" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="randvals-scales-why"><span class="header-section-number">3.3.1</span> Зачем нам знать виды шкал?</h3>
+<p>От&nbsp;того, в&nbsp;какой шкале измерена переменная, которую мы исследуем, будет зависеть:</p>
+<ul>
+<li>какие графики мы сможем нарисовать</li>
+<li>какие статистики на&nbsp;ней имеют смысл</li>
+<li>какие статистические модели дадут адекватный результат</li>
+</ul>
+<p>В общем, почти весь анализ определяется<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> тем, с&nbsp;какой шкалой мы работаем.</p>
+<p>Что&nbsp;же такое шкала?</p>
+<div id="def-scale" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 3.2</strong></span> <strong>Шкала (scale)</strong> — это набор допустимых значений переменной с&nbsp;ограничениями на&nbsp;допустимые операции над&nbsp;этими значениями.</p>
+</div>
+<p>Вновь посмотрим на&nbsp;признаки, которые мы можем измерять. Пол имеет два допустимых значения&nbsp;— <code>male</code> и&nbsp;<code>female</code> — и&nbsp;мы можем лишь сравнить значения, проверив, совпадают они или&nbsp;нет. В&nbsp;то&nbsp;же время, рассматривая переменную «время», которая может принимать значения от&nbsp;<span class="math inline">\(0\)</span> до&nbsp;<span class="math inline">\(+\infty\)</span>, мы уверенно можем утверждать, что&nbsp;если одна пара длится 120 минут, то&nbsp;две будут длиться 240 минут&nbsp;— мы можем считать сумму значений по&nbsp;этой переменной.</p>
+<p>Можно&nbsp;ли как-то систематизировать все возможные варианты допустимых значений и&nbsp;операций?</p>
+</section>
+<section id="randvals-scales-types" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="randvals-scales-types"><span class="header-section-number">3.3.2</span> Типы и&nbsp;виды шкал</h3>
+<p>Всего выделяют четыре вида шкал (<a href="#tbl-scales-types" class="quarto-xref">Таблица&nbsp;<span>3.1</span></a>).</p>
+<div id="tbl-scales-types" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-scales-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;3.1: Виды шкал изменения
+</figcaption>
+<div aria-describedby="tbl-scales-types-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Шкала</th>
+<th style="text-align: left;">Тип шкалы</th>
+<th style="text-align: left;">Тип данных</th>
+<th style="text-align: left;">Допустимые операции</th>
+<th style="text-align: left;">Ноль</th>
+<th style="text-align: left;">Допустимые преобразования</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Номинальная (номинативная, nominal scale)</td>
+<td style="text-align: left;">Неметрическая</td>
+<td style="text-align: left;"><del>Качественные</del> Категориальные</td>
+<td style="text-align: left;"><span class="math inline">\(=\)</span>, <span class="math inline">\(\neq\)</span></td>
+<td style="text-align: left;">Отсутствует</td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Порядковая (ранговая, ordinal scale)</td>
+<td style="text-align: left;">Неметрическая</td>
+<td style="text-align: left;"><del>Качественные</del> Категориальные&nbsp;(?) Ранговые</td>
+<td style="text-align: left;"><span class="math inline">\(=\)</span>, <span class="math inline">\(\neq\)</span>, <span class="math inline">\(&gt;\)</span>, <span class="math inline">\(&lt;\)</span></td>
+<td style="text-align: left;">Отсутствует</td>
+<td style="text-align: left;">Монотонное преобразование</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Интервальная (шкала разностей, interval scale)</td>
+<td style="text-align: left;">Метрическая</td>
+<td style="text-align: left;">Количественные</td>
+<td style="text-align: left;"><span class="math inline">\(=\)</span>, <span class="math inline">\(\neq\)</span>, <span class="math inline">\(&gt;\)</span>, <span class="math inline">\(&lt;\)</span>, <span class="math inline">\(+\)</span>, <span class="math inline">\(-\)</span></td>
+<td style="text-align: left;">Относительный</td>
+<td style="text-align: left;">Линейное преобразование</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Абсолютная (шкала отношений, ratio scale)</td>
+<td style="text-align: left;">Метрическая</td>
+<td style="text-align: left;">Количественные</td>
+<td style="text-align: left;"><span class="math inline">\(=\)</span>, <span class="math inline">\(\neq\)</span>, <span class="math inline">\(&gt;\)</span>, <span class="math inline">\(&lt;\)</span>, <span class="math inline">\(+\)</span>, <span class="math inline">\(-\)</span>, <span class="math inline">\(\times\)</span>, <span class="math inline">\(\div\)</span></td>
+<td style="text-align: left;">Абсолютный</td>
+<td style="text-align: left;">Преобразование подобия</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Пройдёмся по&nbsp;колонкам этой таблицы.</p>
+<ul>
+<li><strong>Тип шкалы</strong>&nbsp;— <em>метрическая</em> или&nbsp;<em>неметрическая</em>&nbsp;— определяется тем, одинаково расстояние между делениями шкалы или&nbsp;же нет. Иначе, есть&nbsp;ли на&nbsp;шкале цена деления.
+<ul>
+<li>Так, понятно, что&nbsp;на&nbsp;шкале времени реакции все секунды одинакового размера&nbsp;— метрическая шкала.</li>
+<li>А на&nbsp;шкале «используемая операционная система» вообще нет делений, не&nbsp;то&nbsp;что расстояний.</li>
+<li>Обратите внимание, что&nbsp;на&nbsp;ранговой шкале хотя и&nbsp;есть деления (например, шкала Ликерта), их размер неодинаковый: нельзя сказать<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, что&nbsp;<span class="math inline">\(6\)</span> на&nbsp;шкале Ликерта в&nbsp;два раза или&nbsp;на&nbsp;три больше, чем&nbsp;<span class="math inline">\(3\)</span>. Поэтому ранговая шкала — неметрическая.</li>
+</ul></li>
+<li><strong>Тип данных</strong>&nbsp;— количественные или&nbsp;категориальные&nbsp;— определяется тем, какие свойства чисел работают на&nbsp;этой шкале.
+<ul>
+<li>Чтобы не&nbsp;утонуть в математической части этого всего, соотнесём это с&nbsp;колонкой допустимые операции.
+<ul>
+<li>На&nbsp;<em>количественных</em> шкалах допустимы операции сложения, вычитания, умножения и&nbsp;деления.</li>
+<li>На&nbsp;<em>категориальных</em> шкалах шкалах допустимы только операции сравнения.</li>
+</ul></li>
+</ul></li>
+<li><strong>Ноль</strong>
+<ul>
+<li>На&nbsp;<em>номинальной</em> и&nbsp;<em>порядковой</em> шкалах нуля в&nbsp;математическом смысле нет вовсе.
+<ul>
+<li>Для номинальной шкалы это очевидно, потому&nbsp;что там вообще нет «чисел» — там только лейблы.</li>
+<li>Для порядковой шкалы, в&nbsp;определенной мере, тоже, потому&nbsp;что <span class="math inline">\(0\)</span> на&nbsp;ней будет обозначать только&nbsp;то, что&nbsp;ранг у&nbsp;этого наблюдения ниже, чем ранг у&nbsp;наблюдения с&nbsp;<span class="math inline">\(1\)</span>. Ничего другого этот ноль не&nbsp;обозначает.</li>
+</ul></li>
+<li>На&nbsp;<em>интервальной</em> и&nbsp;<em>абсолютной</em> шкалах ноль есть.
+<ul>
+<li>Классический пример интервальной шкалы — это температура в&nbsp;градусах Цельсия. Ноль на&nbsp;этой шкале&nbsp;— температуре замерзания воды&nbsp;— выбран произвольно. Ну, потому&nbsp;что это было достаточно удобно. Больше этот ноль ничем не обоснован.
+<ul>
+<li>Поскольку ноль относительный, на&nbsp;такой шкале могут быть отрицательные значения&nbsp;— с&nbsp;температурой по&nbsp;Цельсию нас это совершенно не&nbsp;удивляет.</li>
+</ul></li>
+<li>Классический пример абсолютной шкалы&nbsp;— это температура по&nbsp;Кельвину. Известно, что на&nbsp;этой шкале не&nbsp;бывает отрицательных значений, так как минимум этой шкалы&nbsp;— это минимально возможная температура во&nbsp;Вселенной. Ниже не&nbsp;бывает. Поэтому это абсолютный ноль.</li>
+</ul></li>
+</ul></li>
+<li><strong>Допустимые операции</strong>
+<ul>
+<li>Наличие <em>относительного</em> нуля даёт возможность складывать и&nbsp;вычитать.</li>
+<li>Наличие <em>абсолютного</em> нуля даёт возможность складывать, вычитать, делить и&nbsp;умножать.</li>
+<li>На&nbsp;<em>номинальной</em> и&nbsp;<em>порядковой</em> шкалах нуля нет, поэтому арифметические действия на&nbsp;них невозможны.</li>
+<li>На&nbsp;<em>номинальной</em> шкале допустимо только сравнение на&nbsp;[не]равенство&nbsp;— мы можем только проверить, одинаковы&nbsp;ли наблюдения [по этой переменной] или&nbsp;не&nbsp;одинаковые.</li>
+<li>На&nbsp;<em>порядковой</em> шкале, помимо сравнения на&nbsp;[не]равенство, допустимо также сравнение на&nbsp;больше-меньше, так&nbsp;как задан порядок.</li>
+</ul></li>
+<li><strong>Допустимые преобразования</strong>
+<ul>
+<li>Отсюда нам нужно попытаться понять, что такое монотонное преобразование. Это любое преобразование, сохраняющее порядок элементов.
+<ul>
+<li>Например, у&nbsp;нас есть шкала Ликерта от&nbsp;1 до&nbsp;5&nbsp;— <code>[1, 2, 3, 4, 5]</code>. Шкала Ликерта — порядковая, поэтому мы можем утверждать, что&nbsp;<code>1 &lt; 2 &lt; 3 &lt; 4 &lt; 5</code>.</li>
+<li>Пусть мы психометрик и&nbsp;собираемся вычислять психометрические штуки на&nbsp;таких данных. Для удобства нам надо сделать так, чтобы шкала начиналась с&nbsp;нуля.
+<ul>
+<li>Кажется, надо просто вычесть единицу из&nbsp;всех наблюдений&nbsp;— но&nbsp;законно&nbsp;ли это? Не сломаются ли закономерности наших данных?</li>
+</ul></li>
+<li>Да, законно, потому что вычитание единицы&nbsp;— это монотонное преобразование. И&nbsp;хотя значения переменной изменятся — <code>[0, 1, 2, 3, 4]</code> — порядок значений сохранится&nbsp;— <code>0 &lt; 1 &lt; 2 &lt; 3 &lt; 4</code>.</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>О термине «качественные данные»
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Почему-то номинальную и&nbsp;ранговую шкалы в&nbsp;литературе часто называют «качественными». Видимо, потому что качественные данные обычно рассматриваются как оппозиция количественным.</p>
+<p>Это в&nbsp;некоторой мере справедливо, поскольку есть два типа исследований&nbsp;— качественные и&nbsp;количественные. Они различаются методологией и&nbsp;используемыми методиками и,&nbsp;как&nbsp;следствие, собираемыми данными.</p>
+<p>В&nbsp;рамках качественных исследований чаще всего собираются тексты, поэтому во&nbsp;многом качественные данные обычно текстовые. Количественные данные — это, как&nbsp;правило, таблицы с&nbsp;цифрами из&nbsp;любой из&nbsp;четырёх шкал. Безусловно, анализ качественных и&nbsp;количественных данных также существенно различается.</p>
+<p>Итого, кажется, что&nbsp;называть «качественными» номинальную и&nbsp;ранговые шкалы&nbsp;— странно, потому&nbsp;что качественные данные&nbsp;— это неструктурированный текст. Лучше их именовать категориальными. Правда, например, рейтинг студентов (ранговая шкала) тоже не&nbsp;совсем категориальные данные. Такая переменная, конечно, делит наших респондентов на&nbsp;категории (группы), однако между этими группами определён порядок&nbsp;— больше-меньше&nbsp;— поэтому такие переменные называются ранговыми.</p>
+</div>
+</div>
+</section>
+<section id="randvals-scales-order" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="randvals-scales-order"><span class="header-section-number">3.3.3</span> Порядок шкал по&nbsp;мощности</h3>
+<p>Если&nbsp;взять за&nbsp;основу допустимые операции, можно упорядочить шкалы по&nbsp;мощности&nbsp;— более мощной является та&nbsp;шкала, на&nbsp;которой допустимо больше операций. Тогда шкалы можно упорядочить так:</p>
+<p><span class="math display">\[
+\text{номинальная} &lt; \text{порядковая} &lt; \text{интервальная} &lt; \text{абсолютная}
+\]</span></p>
+<p>Наименее мощная&nbsp;— номинальная, наиболее мощная&nbsp;— абсолютная. Что&nbsp;нам надо вынести из&nbsp;этой иерархии? То, что&nbsp;мы можем по&nbsp;ней двигаться только <em>влево</em>. Если&nbsp;переменная измерена в&nbsp;абсолютной шкале, то&nbsp;мы можем сделать её порядковой или&nbsp;номинальной. Если&nbsp;же переменная изначально номинальная, то&nbsp;перейти в&nbsp;порядковую или&nbsp;интервальную шкалу невозможно.</p>
+<p>Например, вот такой нехитрый пример (<a href="#tbl-scale-order" class="quarto-xref">Таблица&nbsp;<span>3.2</span></a>):</p>
+<div id="tbl-scale-order" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-scale-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;3.2: Одна и&nbsp;та&nbsp;же переменная, измеренная в&nbsp;разных шкалах
+</figcaption>
+<div aria-describedby="tbl-scale-order-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Возраст [абсолютная]</th>
+<th style="text-align: center;">Возраст [ранговая]</th>
+<th style="text-align: center;">Возраст [номинальная]</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">86</td>
+<td style="text-align: center;">пенсионер</td>
+<td style="text-align: center;">совершеннолетний</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">43</td>
+<td style="text-align: center;">взрослый</td>
+<td style="text-align: center;">совершеннолетний</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">38</td>
+<td style="text-align: center;">взрослый</td>
+<td style="text-align: center;">совершеннолетний</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">молодой</td>
+<td style="text-align: center;">совершеннолетний</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">подросток</td>
+<td style="text-align: center;">несовершеннолетний</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">ребёнок</td>
+<td style="text-align: center;">несовершеннолетний</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">ребёнок</td>
+<td style="text-align: center;">несовершеннолетний</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>В&nbsp;психологии чаще всего мы сталкиваемся с&nbsp;порядковыми шкалами. Это просто факт. Надо его принять.</p>
+</section>
+</section>
+<section id="randvals-randvals" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="randvals-randvals"><span class="header-section-number">3.4</span> Случайные величины</h2>
+<p>Ещё раз:</p>
+<ul>
+<li>Измерение&nbsp;— это&nbsp;<em>приписывание</em> признакам объектов изучаемой совокупности определенных значений на&nbsp;определенной <em>шкале</em>.</li>
+</ul>
+<p>Со шкалой разобрались. Теперь надо разобраться с&nbsp;приписыванием. Мы будем рассматривать этот вопрос только с&nbsp;точки зрения статистики&nbsp;— теорию измерений не&nbsp;трогаем.</p>
+<section id="randvals-randexp" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="randvals-randexp"><span class="header-section-number">3.4.1</span> Случайный эксперимент</h3>
+<p>Отвлечемся на&nbsp;любимый объект статистиков&nbsp;— игральный кубик.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../img/intro/dice.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="../img/intro/dice.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:20.0%"></a></p>
+</figure>
+</div>
+<p>Скажем просто:</p>
+<ul>
+<li>Бросание игрального кубика&nbsp;— это <em>случайный эксперимент</em>,</li>
+<li>Выпавшее число&nbsp;— это <em>случайная величина</em>.</li>
+</ul>
+<p>Теперь более строго.</p>
+<div id="def-randexp" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 3.3</strong></span> <strong>Случайный эксперимент (random experiment)</strong>&nbsp;— это математическая модель некоторого реального эксперимента, результат которого невозможно точно предсказать.</p>
+</div>
+<p>В&nbsp;каком смысле то, что&nbsp;мы называем сейчас экспериментом, случайно? В&nbsp;том, что результат такого эксперимента точно неизвестен. В частности, заранее неизвестно, какой стороной упадёт кубик при&nbsp;отдельном броске.</p>
+<div id="def-randval" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 3.4</strong></span> <strong>Случайная величина (random variable)</strong>&nbsp;— это некоторая переменная, значения которой представляют собой численные исходы некоторого случайного эксперимента.</p>
+</div>
+<p>Исход бросания кубика&nbsp;— выпавшее число.</p>
+<p>Из&nbsp;психологического поля можно привести следующие примеры:</p>
+<ul>
+<li>в&nbsp;опросных (психометрических) исследованиях:
+<ul>
+<li>ответ респондента на&nbsp;пункт опросника&nbsp;— это&nbsp;случайный эксперимент</li>
+<li>выбранный им балл на&nbsp;шкале Ликерта&nbsp;— это&nbsp;случайная величина</li>
+<li>в&nbsp;чём случайность?&nbsp;— неизвестно, какой балл выберет респондент</li>
+</ul></li>
+<li>в&nbsp;поведенческих экспериментах:
+<ul>
+<li>клик на&nbsp;стимул на&nbsp;экране в&nbsp;эксперименте зрительного поиска&nbsp;— это&nbsp;случайный эксперимент</li>
+<li>время реакции, которое фиксирует PsychoPy&nbsp;— случайная величина</li>
+<li>в&nbsp;чём случайность? — неизвестно, когда точно испытуемый кликнет по&nbsp;стимулу</li>
+</ul></li>
+<li>в&nbsp;нейроисследованиях:
+<ul>
+<li>запись ЭЭГ-активности в&nbsp;конкретный момент времени&nbsp;— случайный эксперимент</li>
+<li>амплитуда колебаний ЭЭГ&nbsp;— случайная величина</li>
+<li>в&nbsp;чём случайность?&nbsp;— неизвестно, что&nbsp;мы зафиксируем в конкретный момент (в&nbsp;частности, потому&nbsp;что существуют технические шумы)</li>
+</ul></li>
+<li>и т.&nbsp;д.</li>
+</ul>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Случайный эксперимент vs эксперимент как метод исследования
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Обратим внимание на&nbsp;то, что&nbsp;<em>случайный</em> эксперимент&nbsp;— это&nbsp;не&nbsp;то&nbsp;же самое, что&nbsp;<em>эксперимент как метод исследования</em>, изучаемый в&nbsp;рамках курса экспериментальной психологии. Случайный эксперимент происходит <em>в&nbsp;момент измерения</em> какой-либо переменной в&nbsp;рамках эксперимента.</p>
+<p>Посмотрим на&nbsp;примеры, приведённые выше. У&nbsp;нас есть поведенческий эксперимент, в&nbsp;котором существуют независимы и&nbsp;зависимые переменные, определённое количество проб на&nbsp;конкретное сочетание экспериментальных условий и&nbsp;другие аспекты дизайна эксперимента. Однако в&nbsp;процессе сбора данных в&nbsp;рамках этого исследования происходит множество случайный экспериментов, когда испытуемые проходят эксперимент. В&nbsp;каждой пробе осуществляется измерение зависимых переменных, и&nbsp;каждое такое измерение является случайным экспериментом, так&nbsp;как ответ испытуемого (координаты клика или&nbsp;время нажатия на&nbsp;клавишу) нельзя однозначно предсказать.</p>
+</div>
+</div>
+<p>Итого, мы постоянно имеем дело со&nbsp;случайными экспериментами в&nbsp;рамках любых исследований, но&nbsp;также, что&nbsp;более важно, по&nbsp;результатам этих случайных экспериментов [в&nbsp;рамках нашего эксперимента или&nbsp;заполнения опросника] мы собираем значения случайных величин. Вся статистика работает со&nbsp;случайными величинами.</p>
+</section>
+<section id="randvals-randval" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="randvals-randval"><span class="header-section-number">3.4.2</span> Случайная величина</h3>
+<p>Попробуем ещё такой заход. Вот мы тут говорим об&nbsp;измерениях признаков/переменных. Эти переменные и&nbsp;есть случайные величины, которые мы измеряем. Случайные — потому&nbsp;что мы никогда не&nbsp;знаем, что&nbsp;же мы получим в&nbsp;конкретном измерении.</p>
+<p><strong>Почему не&nbsp;знаем?</strong></p>
+<p>Если у&nbsp;нас «хардовое» измерение (типа ЭЭГ или PsychoPy)&nbsp;— всегда есть погрешность измерения и&nbsp;«шум» в данных. Мы не можем предусмотреть всё и&nbsp;сделать так, чтобы&nbsp;нашего испытуемого ничего не&nbsp;отвлекало, он занимался только экспериментальной задачей, не&nbsp;думал о&nbsp;коте, который остался дома, или&nbsp;испытывал блаженство от&nbsp;ЭЭГ-шной шапочки на&nbsp;себе.</p>
+<p>Если это опросник&nbsp;— всё, вроде бы, ещё понятнее. Что нам именно сейчас отметит именно этот респондент&nbsp;— известно только одному никому. В&nbsp;каком состоянии он пришёл, какие у&nbsp;него личностные черты и&nbsp;свойства, насколько он&nbsp;нам доверяет, насколько он готов отвечать честно и&nbsp;т.&nbsp;д.</p>
+<p>К вопросу, зачем нам статистика и&nbsp;анализ данных&nbsp;— чтобы отделить случайности от&nbsp;закономерностей, которые нас интересуют как исследователей, и&nbsp;получить ответы на&nbsp;исследовательские вопросы.</p>
+<p>Случайные величины бывают дискретные и непрерывные:</p>
+<ul>
+<li><strong>непрерывные</strong>&nbsp;— принимают любые значения (рост, возраст, время реакции и др.)</li>
+<li><strong>дискретные</strong>&nbsp;— могут принимать только определенные значения (пол, город проживания, балл по&nbsp;шкале Ликерта и&nbsp;др.)</li>
+</ul>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Переменные vs Шкалы vs Случайные величины
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Мы обозначили три понятия&nbsp;— переменные, шкалы и&nbsp;случайные величины&nbsp;— которые выглядят очень похоже друг на&nbsp;друга. Тем не менее, они не&nbsp;являются синонимами. Давайте разберемся в&nbsp;различиях между ними. Для&nbsp;этого рассмотрим следующие примеры.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Переменная</th>
+<th style="text-align: left;">Тип переменной</th>
+<th style="text-align: left;">Шкала</th>
+<th style="text-align: left;">Случайная величина</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Пол</td>
+<td style="text-align: left;">Номинальная</td>
+<td style="text-align: left;">Номинальная</td>
+<td style="text-align: left;">Дискретная</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Уровень образования</td>
+<td style="text-align: left;">Номинальная&nbsp;/ Ранговая</td>
+<td style="text-align: left;">Номинальная&nbsp;/ Порядковая</td>
+<td style="text-align: left;">Дискретная</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Балл по&nbsp;шкале Ликерта</td>
+<td style="text-align: left;">Ранговая</td>
+<td style="text-align: left;">Порядковая</td>
+<td style="text-align: left;">Дискретная</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Количество детей в&nbsp;семье</td>
+<td style="text-align: left;">Количественная дискретная</td>
+<td style="text-align: left;">Абсолютная</td>
+<td style="text-align: left;">Дискретная</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Температура по&nbsp;Цельсию</td>
+<td style="text-align: left;">Количественная непрерывная</td>
+<td style="text-align: left;">Интервальная</td>
+<td style="text-align: left;">Непрерывная</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Температура по&nbsp;Кельвину</td>
+<td style="text-align: left;">Количественная непрерывная</td>
+<td style="text-align: left;">Абсолютная</td>
+<td style="text-align: left;">Непрерывная</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Время реакции</td>
+<td style="text-align: left;">Количественная непрерывная</td>
+<td style="text-align: left;">Абсолютная</td>
+<td style="text-align: left;">Непрерывная</td>
+</tr>
+</tbody>
+</table>
+<p>Таким образом, можно наблюдать, что&nbsp;хотя эти понятия в&nbsp;некоторой мере пересекаются, всё&nbsp;же существуют различия между этими тремя терминами.</p>
+</div>
+</div>
+<p>Зачем нам различать дискретные и&nbsp;непрерывные случайные величины? Это различение оказывается критически важно, когда мы пытаемся математически описать случайные величины. Оказывается, что&nbsp;они по-разному ведут себя в&nbsp;отношении вероятности.</p>
+</section>
+<section id="randvals-prob" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="randvals-prob"><span class="header-section-number">3.4.3</span> Вероятность</h3>
+<p>Математически строгое введение понятия вероятности требует отдельного курса теории вероятности, которого у&nbsp;нас нет. Мы ограничимся во&nbsp;многом интуитивным пониманием вероятности, которого, в&nbsp;целом, для&nbsp;наших задач будет достаточно.</p>
+<p>Под&nbsp;<strong>вероятностью (probability, <span class="math inline">\(\mathbb{P}\)</span>)</strong> мы будем понимать меру возможности наступления некоторого события. <em>Событием</em> будем считать наблюдение (измерение) определённого значения случайной величины. Рассмотрим всю эту ситуацию на&nbsp;примерах дискретных и&nbsp;случайных величин.</p>
+</section>
+<section id="randvals-discrete" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="randvals-discrete"><span class="header-section-number">3.4.4</span> Дискретные случайные величины</h3>
+<p>С&nbsp;дискретными случайными величинами все достаточно просто:</p>
+<ul>
+<li>есть <em>ограниченный</em> набор значений, которые случайная величина может принимать,</li>
+<li>есть <em>вероятности</em>, с&nbsp;которыми случайная величина принимает эти значения.</li>
+</ul>
+<p>Давайте на игральном кубике. Есть&nbsp;кубик&nbsp;— у&nbsp;него шесть граней. Возможные значения случайной величины <span class="math inline">\(X\)</span>&nbsp;— <span class="math inline">\(\{1,2,3,4,5,6\}\)</span>. Вероятность того, что&nbsp;кубик упадет хотя&nbsp;бы какой-то из&nbsp;шести сторон — <span class="math inline">\(1\)</span>. Если&nbsp;кубик «честный», то&nbsp;каждая из&nbsp;граней выпадает равновероятно, то&nbsp;есть вероятность, с&nbsp;которой наша случайная величина принимает каждое из&nbsp;своих значений будет равна</p>
+<p><span class="math display">\[
+\mathbb{P}(X=1) = \mathbb{P}(X=2) = \mathbb{P}(X=3) = \mathbb{P}(X=4) = \mathbb{P}(X=5) = \mathbb{P}(X=6 ) = \frac{1}{6} \approx 0.167
+\]</span></p>
+<p>Но&nbsp;это мы рассчитали теоретически. Давайте проверим, будет&nbsp;ли это работать эмпирически. Подбросим кубик (на&nbsp;симуляции) 100 раз и&nbsp;посмотрим, сколько раз выпало та или&nbsp;иная грань (<a href="#tbl-dice-100" class="quarto-xref">Таблица&nbsp;<span>3.3</span></a>).</p>
+<div id="tbl-dice-100" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dice-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;3.3: Результаты симуляции 100 бросков игрального кубика
+</figcaption>
+<div aria-describedby="tbl-dice-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Значение</th>
+<th style="text-align: left;">1</th>
+<th style="text-align: left;">2</th>
+<th style="text-align: left;">3</th>
+<th style="text-align: left;">4</th>
+<th style="text-align: left;">5</th>
+<th style="text-align: left;">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Частота</td>
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">18</td>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Вероятность</td>
+<td style="text-align: left;">0.19</td>
+<td style="text-align: left;">0.15</td>
+<td style="text-align: left;">0.18</td>
+<td style="text-align: left;">0.11</td>
+<td style="text-align: left;">0.16</td>
+<td style="text-align: left;">0.21</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<p>Внимание, мы построили <strong>таблицу частот</strong>, она&nbsp;же частотная таблица. Это способ описания поведения дискретной случайной величины в&nbsp;эксперименте.</p>
+<p>Можем&nbsp;ли мы это каким-то образом визуализировать? Да.</p>
+<div id="fig-dice-100" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dice-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/dice-100-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Рисунок&nbsp;3.2: Визуализация частоты выпадения значений при&nbsp;100 бросках игрального кубика"><img src="prob-randvals_files/figure-html/dice-100-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dice-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.2: Визуализация частоты выпадения значений при&nbsp;100 бросках игрального кубика
+</figcaption>
+</figure>
+</div>
+<p>Вниманием&nbsp;— <strong>столбчатая диаграмма (barplot)</strong>. Как видите, по&nbsp;оси <span class="math inline">\(x\)</span> идут значения нашей случайной величины, по&nbsp;оси <span class="math inline">\(y\)</span>&nbsp;— частота, с&nbsp;которой случайная величина принимает данной значение. Изи.</p>
+<p>Но&nbsp;погодите, кубик должен падать одинаково часто на&nbsp;каждую из&nbsp;граней, а&nbsp;на&nbsp;графике частоты разные. Да, это правда. Как мы уже не&nbsp;раз упоминали, в&nbsp;данных всегда есть шум и&nbsp;ни&nbsp;один эксперимент не&nbsp;может пройти идеально. В&nbsp;том числе и&nbsp;симуляция. Поэтому те отклонения, которые мы видим на&nbsp;графике, это всего лишь шум&nbsp;— то, что нам нерелевантно.</p>
+<p>Чтобы убедиться, что кубик все-таки честный, давайте подкинем его 1000 раз.</p>
+<div id="tbl-dice-1000" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dice-1000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;3.4: Результаты симуляции 1000 бросков игрального кубика
+</figcaption>
+<div aria-describedby="tbl-dice-1000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Значение</th>
+<th style="text-align: left;">1</th>
+<th style="text-align: left;">2</th>
+<th style="text-align: left;">3</th>
+<th style="text-align: left;">4</th>
+<th style="text-align: left;">5</th>
+<th style="text-align: left;">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Частота</td>
+<td style="text-align: left;">170</td>
+<td style="text-align: left;">176</td>
+<td style="text-align: left;">171</td>
+<td style="text-align: left;">157</td>
+<td style="text-align: left;">162</td>
+<td style="text-align: left;">164</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Вероятность</td>
+<td style="text-align: left;">0.17</td>
+<td style="text-align: left;">0.176</td>
+<td style="text-align: left;">0.171</td>
+<td style="text-align: left;">0.157</td>
+<td style="text-align: left;">0.162</td>
+<td style="text-align: left;">0.164</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<div id="fig-dice-1000" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dice-1000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/dice-1000-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Рисунок&nbsp;3.3: Визуализация частоты выпадения значений при&nbsp;1000 бросках игрального кубика"><img src="prob-randvals_files/figure-html/dice-1000-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dice-1000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.3: Визуализация частоты выпадения значений при&nbsp;1000 бросках игрального кубика
+</figcaption>
+</figure>
+</div>
+<p>Хм… Больше бросков!</p>
+<div id="tbl-dice-100000" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dice-100000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;3.5: Результаты симуляции 100&nbsp;000 бросков игрального кубика
+</figcaption>
+<div aria-describedby="tbl-dice-100000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Значение</th>
+<th style="text-align: left;">1</th>
+<th style="text-align: left;">2</th>
+<th style="text-align: left;">3</th>
+<th style="text-align: left;">4</th>
+<th style="text-align: left;">5</th>
+<th style="text-align: left;">6</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Частота</td>
+<td style="text-align: left;">16685</td>
+<td style="text-align: left;">16818</td>
+<td style="text-align: left;">16656</td>
+<td style="text-align: left;">16536</td>
+<td style="text-align: left;">16774</td>
+<td style="text-align: left;">16531</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Вероятность</td>
+<td style="text-align: left;">0.167</td>
+<td style="text-align: left;">0.168</td>
+<td style="text-align: left;">0.167</td>
+<td style="text-align: left;">0.165</td>
+<td style="text-align: left;">0.168</td>
+<td style="text-align: left;">0.165</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+<div id="fig-dice-100000" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dice-100000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/dice-100000-plot-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Рисунок&nbsp;3.4: Визуализация частоты выпадения значений при&nbsp;100&nbsp;000 бросках игрального кубика"><img src="prob-randvals_files/figure-html/dice-100000-plot-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dice-100000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.4: Визуализация частоты выпадения значений при&nbsp;100&nbsp;000 бросках игрального кубика
+</figcaption>
+</figure>
+</div>
+<p>Ну, почти. Нивелировать шум полностью нам не&nbsp;удастся никогда, поэтому будем считать, что&nbsp;мы достаточно убеждены, что&nbsp;кубик честен.</p>
+<p>То, что мы сейчас с&nbsp;вами строили&nbsp;— в&nbsp;таблице или&nbsp;на&nbsp;графике&nbsp;— называется <strong>распределением случайной величины (distribution of a random variable, probability distribution)</strong>. Распределение&nbsp;— это некоторый закон, который полностью описывает поведение случайной величины.</p>
+<p>Итак, мы сейчас обсудили как строить <em>эмпирическое</em> распределение нашей дискретной переменной. А как нам построить теоретическое распределение нашей случайной величины? Для этого нам нужно взять две оси&nbsp;— <span class="math inline">\(x\)</span> и&nbsp;<span class="math inline">\(y\)</span>. По&nbsp;оси абсцисс расположить значения нашей случайной величины, по&nbsp;оси ординат&nbsp;— вероятности, с&nbsp;которыми наша случайная величина принимает данные значения.</p>
+<p>Выглядит это так:</p>
+<div id="fig-pmf-unif" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pmf-unif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/pnf-unif-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Рисунок&nbsp;3.5: Функция вероятности дискретного равномерного распределения"><img src="prob-randvals_files/figure-html/pnf-unif-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pmf-unif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.5: Функция вероятности дискретного равномерного распределения
+</figcaption>
+</figure>
+</div>
+<p>То, что изображено на рисунке, называется <strong>функцией вероятности (probability mass function, PMF)</strong> дискретного равномерного распределения.</p>
+<p>Для&nbsp;порядка также скажем, что&nbsp;дискретные случайные величины вовсе не&nbsp;обязательно распределены равномерно. Например, есть такое распределение:</p>
+<div id="fig-pmf-binom" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pmf-binom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/pnf-binom-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Рисунок&nbsp;3.6: Функция вероятности биномиального распределения"><img src="prob-randvals_files/figure-html/pnf-binom-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pmf-binom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.6: Функция вероятности биномиального распределения
+</figcaption>
+</figure>
+</div>
+<p>Вообще распределений существует <a href="https://www.math.wm.edu/~leemis/chart/UDR/UDR.html">довольно много</a>. Мы в&nbsp;рамках этого курса познакомимся далеко не&nbsp;со&nbsp;всеми&nbsp;— только с&nbsp;теми, которые нам пригодятся для&nbsp;решения наших задач.</p>
+</section>
+<section id="randvals-continuous" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="randvals-continuous"><span class="header-section-number">3.4.5</span> Непрерывные случайные величины</h3>
+<p>Окей, с&nbsp;дискретными разобрались. С&nbsp;непрерывными&nbsp;же всё то&nbsp;же самое?</p>
+<p>Не совсем. Есть один ключевой момент, который всё портит.</p>
+<p>Мы говорили, что дискретные случайные величины могут принимать только некоторые значения, например, целочисленные&nbsp;— <span class="math inline">\(1, 2, 3, -5, 0\)</span>… Их можно посчитать и&nbsp;сопоставить им вероятности, с&nbsp;которыми случайная величина принимает эти значения.</p>
+<p>Чуть выше мы разобрались с&nbsp;дискретным равномерным распределением. Давайте попробуем применить аналогичные размышления для&nbsp;<em>непрерывного равномерного распределения</em>.</p>
+<p>Пусть мы случайным образом выбираем 1000 чисел из&nbsp;отрезка <span class="math inline">\([0,1]\)</span>, считая что все числа могут попасться равновероятно. Займемся симуляцией и&nbsp;попробуем отобразить частоты, с&nbsp;которыми выпадают числа:</p>
+<div id="fig-unif-100" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unif-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unif-100-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Рисунок&nbsp;3.7: Визуализация частоты случайного выбора 100 чисел из&nbsp;отрезка [0, 1]"><img src="prob-randvals_files/figure-html/unif-100-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unif-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.7: Визуализация частоты случайного выбора 100 чисел из&nbsp;отрезка <span class="math inline">\([0, 1]\)</span>
+</figcaption>
+</figure>
+</div>
+<p>Хм… Обратим внимание на&nbsp;некоторую интересность: частота каждого значения&nbsp;— единица, то&nbsp;есть каждое значение выпало только один раз. Но может это артефакт малого количества случайных экспериментов по&nbsp;выбору чисел? Давайте извлечём 1000.</p>
+<div id="fig-unif-1000" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unif-1000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unif-1000-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Рисунок&nbsp;3.8: Визуализация частоты случайного выбора 1000 чисел из&nbsp;отрезка [0, 1]"><img src="prob-randvals_files/figure-html/unif-1000-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unif-1000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.8: Визуализация частоты случайного выбора 1000 чисел из&nbsp;отрезка <span class="math inline">\([0, 1]\)</span>
+</figcaption>
+</figure>
+</div>
+<p>Хм… Ну, может 10&nbsp;000 исправят ситуацию?</p>
+<div id="fig-unif-10000" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unif-10000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unif-10000-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Рисунок&nbsp;3.9: Визуализация частоты случайного выбора 10&nbsp;000 чисел из&nbsp;отрезка [0, 1]"><img src="prob-randvals_files/figure-html/unif-10000-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unif-10000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.9: Визуализация частоты случайного выбора 10&nbsp;000 чисел из&nbsp;отрезка <span class="math inline">\([0, 1]\)</span>
+</figcaption>
+</figure>
+</div>
+<p>Окак… Всё ещё наблюдаем, что&nbsp;каждое число встретилось в&nbsp;выборке всего один раз. Тогда таблица частот оказывается бессмысленной. Как&nbsp;же нам тогда описать распределение непрерывной случайной величины?</p>
+<p>Так, попробуем другой заход. Когда мы считали вероятность того, что на&nbsp;кубике выпадет определенное число, мы взяли все возможные исходы и&nbsp;поделили единицу на&nbsp;их количество&nbsp;— получили вероятность. Раз мы и сейчас предполагаем равную вероятность выпадения каждого из&nbsp;чисел, то попробуем сделаль тут так же.</p>
+<blockquote class="blockquote">
+<p>— Сколько всего чисел на отрезке <span class="math inline">\([0, 1]\)</span>?<br> — Бесконечность.</p>
+</blockquote>
+<p>Это что&nbsp;же, получается,</p>
+<p><span class="math display">\[
+\mathbb{P}(X = a) \overset{?}{=} \frac{1}{\infty}
+\]</span></p>
+<p>так что ли? Но это же какой-то сюр! Не совсем.</p>
+<p>Не&nbsp;вдаваясь в&nbsp;математические детали, перепишем выражение выше в&nbsp;более математически приличном виде:</p>
+<p><span class="math display">\[
+\mathbb{P}(X = a) = \lim_{n \to \infty} \frac{1}{n} = 0
+\]</span></p>
+<p>Эта запись означает следующее:</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важность</span>Ключевое свойство непрерывных случайных величин
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вероятность того, что непрерывная случайная величина принимает конкретное значение, равна нулю.</p>
+</div>
+</div>
+<p>Но&nbsp;как это? Ведь числа-то выпадают! Вероятность не&nbsp;может быть равна нулю!</p>
+<p>Это справедливо, но&nbsp;чтобы ответить на&nbsp;все вопросы предельно точно, нам придется умереть в&nbsp;математических океанах. Воспользуемся эвристикой. Будем понимать под&nbsp;«вероятность того, что непрерывная случайная величина принимает конкретное значение, равна нулю» следующее:</p>
+<ul>
+<li>Мы не&nbsp;можем ожидать, что беря числа из отрезка <span class="math inline">\([0, 1]\)</span> мы попадём в&nbsp;какое-то конкретное число, например, <span class="math inline">\(0.5\)</span>.</li>
+<li>Даже если попадём во&nbsp;что-то очень похожее, это будет <span class="math inline">\(0.50003\)</span>&nbsp;или <span class="math inline">\(0.4999999999\)</span>.</li>
+<li>Ровно <span class="math inline">\(0.5\)</span> никогда не&nbsp;выпадет. В&nbsp;этом смысле вероятность, действительно равна нулю.</li>
+</ul>
+<p>Вот такое странное поведение у&nbsp;этих непрерывных величин. И&nbsp;тем не&nbsp;менее, хочется все-таки как-то с&nbsp;ними работать, описывать их&nbsp;поведение.</p>
+<blockquote class="blockquote">
+<p>— Зачем? Если они такие странные, а&nbsp;самая используемая в&nbsp;психологии шкала&nbsp;— порядковая, то&nbsp;мож не будет возиться с&nbsp;этой ерундой? <br> — Весь замес в&nbsp;том, что тестирование статистических гипотез, которое есть сердце анализа данных, полностью основано на&nbsp;работе с&nbsp;непрерывными случайными величинами. Всё-таки придётся разбираться.</p>
+</blockquote>
+<p>Да, мы не можем работать с конкретными значениями непрерывных случайных величин&nbsp;— но <strong>мы можем работать с&nbsp;интервалами на&nbsp;множестве значений.</strong> Так, если нам надо визуализировать распределение непрерывной случайной величины, мы уже не&nbsp;можем использовать barplot&nbsp;— будет результат подобный рисунку <a href="#fig-unif-10000" class="quarto-xref"><span>3.9</span></a>. Вместо этого будем использовать <strong>гистограмму (histogram)</strong>:</p>
+<div id="fig-unifhist-10000" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unifhist-10000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unnamed-chunk-1-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Рисунок&nbsp;3.10: Визуализации распределения чисел, сгенерированных из&nbsp;непрерывного равномерного распределения на&nbsp;отрезке [0,1]."><img src="prob-randvals_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unifhist-10000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.10: Визуализации распределения чисел, сгенерированных из&nbsp;непрерывного равномерного распределения на&nbsp;отрезке <span class="math inline">\([0,1]\)</span>.
+</figcaption>
+</figure>
+</div>
+<p>Хм… В общем, мы получили нечто похожее на&nbsp;<a href="#fig-dice-100000" class="quarto-xref">Рисунок&nbsp;<span>3.4</span></a>. Похоже мы движемся в&nbsp;правильном направлении.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>В чем отличие гистограммы от столбиковой диаграммы?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>На столбиковой диаграмме по&nbsp;оси <span class="math inline">\(x\)</span> располагается дискретная переменная&nbsp;— каждый столбик соотносится с&nbsp;конкретным значением изучаемой переменной.</li>
+<li>На гистограмме&nbsp;же ось <span class="math inline">\(x\)</span> поделена на&nbsp;определенное количество отрезков (на&nbsp;рисунке их 30).
+<ul>
+<li>В&nbsp;границы каждого отрезка попадает сколько-то сгенерированных нами чисел&nbsp;— высота столбика отражает количество чисел, попавших в&nbsp;этот отрезок.</li>
+<li>При этом, в&nbsp;отличие от&nbsp;барплота, количество столбиков не&nbsp;является строго фиксированным (см. <a href="#fig-unifhist20-10000" class="quarto-xref"><span>3.11</span></a>).</li>
+</ul></li>
+</ul>
+<div id="fig-unifhist20-10000" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unifhist20-10000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Рисунок&nbsp;3.11: Визуализации распределения чисел, сгенерированных из&nbsp;непрерывного равномерного распределения на&nbsp;отрезке [0,1] (разбиение на&nbsp;20 столцов)."><img src="prob-randvals_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unifhist20-10000-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.11: Визуализации распределения чисел, сгенерированных из&nbsp;непрерывного равномерного распределения на&nbsp;отрезке <span class="math inline">\([0,1]\)</span> (разбиение на&nbsp;20 столцов).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Гистограмма обычно используется для&nbsp;отображения эмпирического распределения непрерывной случайной величины. А&nbsp;как&nbsp;же быть с&nbsp;теоретическим?</p>
+<p>Вновь мы не&nbsp;можем взять то, что&nbsp;было у&nbsp;дискретных величин&nbsp;— изобразить график функции вероятности невозможно, поскольку это будет прямая, совпадающая с&nbsp;осью <span class="math inline">\(x\)</span>. Возникает необходимость ввести какую-то иную характеристику, связанную с&nbsp;вероятностью, которую можно будет использоваться для&nbsp;описания поведения непрерывных случайных величин.</p>
+<p>Вспомним, как выглядел график для&nbsp;дискретного равномерного распределения&nbsp;— вот так <a href="#fig-pmf-unif" class="quarto-xref"><span>3.5</span></a>. Наверное, по&nbsp;аналогии нам&nbsp;бы хотелось, чтобы для&nbsp;рассматриваемого нами <em>непрерывного</em> равномерного распределения график выглядел как-то так (<a href="#fig-unifcont-draft" class="quarto-xref">Рисунок&nbsp;<span>3.12</span></a>):</p>
+<div id="fig-unifcont-draft" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unifcont-draft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Рисунок&nbsp;3.12: Схема графика непрерывного равномерного распределения на&nbsp;[0, 1]"><img src="prob-randvals_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unifcont-draft-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.12: Схема графика непрерывного равномерного распределения на&nbsp;<span class="math inline">\([0, 1]\)</span>
+</figcaption>
+</figure>
+</div>
+<p>Визуально действительно выглядит так, что&nbsp;все числа из&nbsp;отрезка <span class="math inline">\([0, 1]\)</span> выпадают равновероятно. Однако нечто, отображённое на&nbsp;оси <span class="math inline">\(y\)</span> не&nbsp;может быть вероятностью, так как для все значений непрерывной случайной величины вероятность равна нулю.</p>
+<p>Если&nbsp;же мы сравним рисунки <a href="#fig-unifcont-draft" class="quarto-xref"><span>3.12</span></a> и&nbsp;<a href="#fig-unifhist-10000" class="quarto-xref"><span>3.10</span></a>, то мы можем заметить, что <a href="#fig-unifcont-draft" class="quarto-xref"><span>3.12</span></a>&nbsp;— это некий идеал для&nbsp;<a href="#fig-unifhist-10000" class="quarto-xref"><span>3.10</span></a>. Действительно, если увеличить количество сгенерированных чисел, то гистограмма будет практически идеально ровной.</p>
+<p>Гистограмма нам показывает, сколько сгенерированных чисел лежит в&nbsp;определенном диапазоне отрезка, а&nbsp;поскольку мы сказали, что все числа выпадают равновероятно, то и в&nbsp;каждом выделенном диапазоне (столбике гистограммы) должно лежать одинаковое количество чисел. Иначе говоря, числе <em>одинаково плотно</em> распределены на&nbsp;всём отрезке.</p>
+</section>
+<section id="randvals-density" class="level3" data-number="3.4.6">
+<h3 data-number="3.4.6" class="anchored" data-anchor-id="randvals-density"><span class="header-section-number">3.4.6</span> Плотность вероятности</h3>
+<p>Идея плотности была взята на&nbsp;вооружение математиками, и&nbsp;они, сильно не заморачиваясь относительно названия, ввели понятие плотности вероятности. Мы не&nbsp;будем давать ей строгого математического определения, ибо&nbsp;оно довольно зубодробительно. Мы порисуем картинки.</p>
+<p>Собственно, для&nbsp;непрерывного равномерного распределния график плотности вероятности будет выглядеть именно так, как мы нарисовали&nbsp;— разве что надо ось <span class="math inline">\(y\)</span> подписать и&nbsp;значение поставить.</p>
+<div id="fig-unifcont-pdf" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unifcont-pdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Рисунок&nbsp;3.13: График функции плотности вероятности непрерывного равномерного распределения на&nbsp;[0, 1]"><img src="prob-randvals_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unifcont-pdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.13: График функции плотности вероятности непрерывного равномерного распределения на&nbsp;<span class="math inline">\([0, 1]\)</span>
+</figcaption>
+</figure>
+</div>
+<p>Полученный график называется <strong>графиком плотности вероятности (probability density function, PDF)</strong>. Нам надо уметь его читать.</p>
+<p>По оси <span class="math inline">\(x\)</span> здесь значения нашей случайной величины (как и&nbsp;в&nbsp;случае PMF), а&nbsp;вот по оси <span class="math inline">\(y\)</span>&nbsp;— эта самая загадочная плотность вероятности. А где&nbsp;же сама вероятность? Раз мы решили работать с&nbsp;интервалами значений, то&nbsp;нас будет интересовать вероятность попадания значений случайной величины в&nbsp;определенный интервал.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важность</span>Вероятность для&nbsp;непрерывных случайных величин
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Вероятность того, что&nbsp;значение непрерывной случайной величины попадёт в&nbsp;заданный интервал определяется как&nbsp;площадь под&nbsp;графиком функции плотности вероятности на&nbsp;этом интервале.</p>
+</div>
+</div>
+<p>Посмотрим на&nbsp;примере равномерного распределения. Какова вероятность, что&nbsp;случайно выбранное из&nbsp;отрезка <span class="math inline">\([0,1]\)</span> число попадёт в&nbsp;интервал <span class="math inline">\((0.25, 0.75)\)</span>? Интуитивно кажется, что&nbsp;должно быть <span class="math inline">\(0.5\)</span>, так как длина этого интервала&nbsp;— полочина длины отрезка. Нарисуем.</p>
+<div id="fig-unifcont-interval" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-unifcont-interval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Рисунок&nbsp;3.14: Вероятность попадания случайного числа из&nbsp;непрерывного равномерного распределения на&nbsp;[0,1] в&nbsp;интервал (0.25, 0.75)"><img src="prob-randvals_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unifcont-interval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.14: Вероятность попадания случайного числа из&nbsp;непрерывного равномерного распределения на&nbsp;<span class="math inline">\([0,1]\)</span> в&nbsp;интервал <span class="math inline">\((0.25, 0.75)\)</span>
+</figcaption>
+</figure>
+</div>
+<p>Воистину площадь полученного прямоугольника равна <span class="math inline">\(0.5\)</span>. Значит, схема работает.</p>
+<p>Работать с&nbsp;равномерным распределением довольно скучно. Посмотрим на&nbsp;другой пример, с&nbsp;которым позднее мы будем знакомиться гораздо подробнее. Пусть у&nbsp;нас есть такое распределения, что его функция плотности выглядит так:</p>
+<div id="fig-stnorm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stnorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Рисунок&nbsp;3.15: Функция плотности вероятности стандартного нормального распределения"><img src="prob-randvals_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stnorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.15: Функция плотности вероятности стандартного нормального распределения
+</figcaption>
+</figure>
+</div>
+<p>Чисто визуально кажется, что значения из&nbsp;«середины» распределения&nbsp;— скажем, от&nbsp;<span class="math inline">\(-2\)</span> до&nbsp;<span class="math inline">\(2\)</span>&nbsp;— будут встречаться с&nbsp;большей вероятностью, чем&nbsp;значения из&nbsp;крайних частей распределения. И действительно, если&nbsp;мы выберем интервал некоторой ширины, то&nbsp;сможем убедиться в&nbsp;этом.</p>
+<div id="fig-stnorm" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stnorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="prob-randvals_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Рисунок&nbsp;3.16: Функция плотности вероятности стандартного нормального распределения"><img src="prob-randvals_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stnorm-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;3.16: Функция плотности вероятности стандартного нормального распределения
+</figcaption>
+</figure>
+</div>
+<p>В&nbsp;данном случае был взят интервал шириной <span class="math inline">\(1\)</span>. Вероятность попадания значений случайной величины в&nbsp;диапазон <span class="math inline">\((-0.5, 0.5)\)</span> относительно велика — <span class="math inline">\(0.38\)</span>, а&nbsp;для&nbsp;диапазона <span class="math inline">\((2, 3)\)</span> — всего <span class="math inline">\(0.02\)</span>. Ровно это и&nbsp;отображает график плотности вероятности&nbsp;— значения в&nbsp;«середине» лежат <em>плотнее</em>, чем&nbsp;по&nbsp;краям.</p>
+<p>Так работают плотность вероятности, случайные величины и&nbsp;шкалы. К&nbsp;случайным величинам мы будем возвращаться далее постоянно&nbsp;— пока&nbsp;же знакомства достаточно.</p>
 
 
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Разумеется, с&nbsp;учетом поставленного исследовательского вопроса и&nbsp;выдвинутых гипотез.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Относительно шкалы Ликерта, активнейшим образом используемой в&nbsp;психометрике, делаются некоторые допущения о&nbsp;её <em>квазинепрерывности</em> и&nbsp;<em>псевдоинтервальности</em>. Однако это вопросы курса психометрики, и&nbsp;пока что мы в&nbsp;них погружаться не&nbsp;будем.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
@@ -341,184 +1331,184 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
       return codeEl.innerText;
     }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Скопировано!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Скопировано!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -526,198 +1516,203 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chpts/prob-sample.html" class="pagination-link" aria-label="Статистика в&nbsp;контексте исследования">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Статистика в&nbsp;контексте исследования</span></span>
+      <a href="../chpts/rpy-basics.html" class="pagination-link" aria-label="Основы R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Основы R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chpts/rpy-basics.html" class="pagination-link" aria-label="Основы R / Python">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Основы R / Python</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

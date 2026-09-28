@@ -18,32 +18,32 @@ book:
   date: today
   chapters:
     - index.qmd
-    - chpts/prob-sample.qmd
-    - chpts/prob-randvals.qmd
+    - chpts/intro-basics.qmd
     - chpts/rpy-basics.qmd
-    - chpts/rpy-data.qmd
-    - chpts/rpy-tidybase.qmd
-    - chpts/rpy-tidyadv.qmd
-    - chpts/rpy-strdt.qmd
-    - chpts/rpy-vis.qmd
-    - chpts/stats-desc.qmd
-    - chpts/stats-norm.qmd
-    - chpts/stats-cltci.qmd
-    - chpts/stats-hyptest.qmd
-    - chpts/andan-chisq.qmd
-    - chpts/stats-freqpval.qmd
-    - chpts/andan-cor.qmd
-    - chpts/andan-lm.qmd
-    - chpts/andan-lmx.qmd
-    - chpts/andan-owanova.qmd
-    - chpts/andan-twanova.qmd
-    - chpts/andan-rmanova.qmd
-    - chpts/andan-nonparam.qmd
-    - chpts/andan-glmlog.qmd
-    - chpts/andan-ml.qmd
-    - chpts/andan-efa.qmd
-    - chpts/andan-cfa.qmd
-    - chpts/andan-clust.qmd
+    - chpts/prob-randvals.qmd
+    # - chpts/rpy-data.qmd
+    # - chpts/rpy-tidybase.qmd
+    # - chpts/rpy-tidyadv.qmd
+    # - chpts/rpy-strdt.qmd
+    # - chpts/rpy-vis.qmd
+    # - chpts/stats-desc.qmd
+    # - chpts/stats-norm.qmd
+    # - chpts/stats-cltci.qmd
+    # - chpts/stats-hyptest.qmd
+    # - chpts/andan-chisq.qmd
+    # - chpts/stats-freqpval.qmd
+    # - chpts/andan-cor.qmd
+    # - chpts/andan-lm.qmd
+    # - chpts/andan-lmx.qmd
+    # - chpts/andan-owanova.qmd
+    # - chpts/andan-twanova.qmd
+    # - chpts/andan-rmanova.qmd
+    # - chpts/andan-nonparam.qmd
+    # - chpts/andan-glmlog.qmd
+    # - chpts/andan-ml.qmd
+    # - chpts/andan-efa.qmd
+    # - chpts/andan-cfa.qmd
+    # - chpts/andan-clust.qmd
     # - references.qmd
 
 # bibliography: references.bib
@@ -54,3 +54,4 @@ format:
   html:
     theme:
       - minty
+      - style/custom.scss
