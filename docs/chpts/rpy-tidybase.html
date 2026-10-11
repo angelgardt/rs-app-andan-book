@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Базовая предобработка данных – RS ANDAN // PSY&nbsp;HSE</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chpts/rpy-tidyadv.html" rel="next">
+<link href="../chpts/rpy-data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-84b129f27be8f528ae7b9875820b10cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ничего не найдено",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отмена",
+    "search-submit-button-title": "Отправить",
+    "search-label": "Поиск"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chpts/rpy-tidybase.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Базовая предобработка данных</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">RS ANDAN // PSY&nbsp;HSE</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/intro-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основания статистики</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Основы R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/prob-randvals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовое исследование данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-tidybase.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Базовая предобработка данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-tidyadv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Продвинутая предобработка данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-strdt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#tidy-why" id="toc-tidy-why" class="nav-link active" data-scroll-target="#tidy-why"><span class="header-section-number">5.1</span> Зачем предобрабатывать данные?</a></li>
+  <li><a href="#tidy-concept" id="toc-tidy-concept" class="nav-link" data-scroll-target="#tidy-concept"><span class="header-section-number">5.2</span> Опрятные данные</a></li>
+  <li><a href="#tidy-tidyverse" id="toc-tidy-tidyverse" class="nav-link" data-scroll-target="#tidy-tidyverse"><span class="header-section-number">5.3</span> Семейство пакетов <code>tidyverse</code></a></li>
+  <li><a href="#tidy-pipe" id="toc-tidy-pipe" class="nav-link" data-scroll-target="#tidy-pipe"><span class="header-section-number">5.4</span> Пайп</a></li>
+  <li><a href="#tidy-select" id="toc-tidy-select" class="nav-link" data-scroll-target="#tidy-select"><span class="header-section-number">5.5</span> Отбор столбцов: <code>select()</code></a></li>
+  <li><a href="#tidy-rename" id="toc-tidy-rename" class="nav-link" data-scroll-target="#tidy-rename"><span class="header-section-number">5.6</span> Переименование столбцов: <code>rename()</code></a></li>
+  <li><a href="#tidy-filter" id="toc-tidy-filter" class="nav-link" data-scroll-target="#tidy-filter"><span class="header-section-number">5.7</span> Отбор строк: <code>filter()</code> и <code>slice()</code></a>
+  <ul class="collapse">
+  <li><a href="#tidy-slice" id="toc-tidy-slice" class="nav-link" data-scroll-target="#tidy-slice"><span class="header-section-number">5.7.1</span> Отбор по номеру строки</a></li>
+  <li><a href="#tidy-filter-cond" id="toc-tidy-filter-cond" class="nav-link" data-scroll-target="#tidy-filter-cond"><span class="header-section-number">5.7.2</span> Отбор по условию</a></li>
+  <li><a href="#tidy-distinct" id="toc-tidy-distinct" class="nav-link" data-scroll-target="#tidy-distinct"><span class="header-section-number">5.7.3</span> Уникальные строки</a></li>
+  </ul></li>
+  <li><a href="#tidy-arrange" id="toc-tidy-arrange" class="nav-link" data-scroll-target="#tidy-arrange"><span class="header-section-number">5.8</span> Сортировка: <code>arrange()</code></a></li>
+  <li><a href="#tidy-mutate" id="toc-tidy-mutate" class="nav-link" data-scroll-target="#tidy-mutate"><span class="header-section-number">5.9</span> Создание и изменение переменных: <code>mutate()</code></a>
+  <ul class="collapse">
+  <li><a href="#tidy-ifelse" id="toc-tidy-ifelse" class="nav-link" data-scroll-target="#tidy-ifelse"><span class="header-section-number">5.9.1</span> Условные преобразования: <code>if_else()</code> и <code>case_when()</code></a></li>
+  </ul></li>
+  <li><a href="#tidy-summarise" id="toc-tidy-summarise" class="nav-link" data-scroll-target="#tidy-summarise"><span class="header-section-number">5.10</span> Агрегация данных</a>
+  <ul class="collapse">
+  <li><a href="#tidy-summarise-basic" id="toc-tidy-summarise-basic" class="nav-link" data-scroll-target="#tidy-summarise-basic"><span class="header-section-number">5.10.1</span> <code>summarise()</code>: сводка по всей таблице</a></li>
+  <li><a href="#tidy-group" id="toc-tidy-group" class="nav-link" data-scroll-target="#tidy-group"><span class="header-section-number">5.10.2</span> Агрегация по группам</a></li>
+  <li><a href="#tidy-count" id="toc-tidy-count" class="nav-link" data-scroll-target="#tidy-count"><span class="header-section-number">5.10.3</span> Подсчёт числа наблюдений: <code>count()</code></a></li>
+  </ul></li>
+  <li><a href="#tidy-together" id="toc-tidy-together" class="nav-link" data-scroll-target="#tidy-together"><span class="header-section-number">5.11</span> Собираем всё вместе</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="rpy-tidybase" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Базовая предобработка данных</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="intro">
+<p>Мы научились читать данные и разглядывать их. Теперь нужно привести их в такой вид, чтобы с ними было удобно работать: выбросить лишнее, дать переменным понятные имена, выделить нужные наблюдения, создать новые переменные и сосчитать по ним первые сводки. Всё это называется <strong>предобработкой данных</strong> — и это, как ни странно, самая трудоёмкая часть любого анализа.</p>
+</div>
+<section id="tidy-why" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="tidy-why"><span class="header-section-number">5.1</span> Зачем предобрабатывать данные?</h2>
+<p>Данные приходят к нам из самых разных источников — от экспериментальных программ, опросных платформ, электронных таблиц, баз данных. Каждый источник записывает данные по-своему. Одна и та же информация может быть записана десятком способов, и ни один из них заранее не будет удобен для вашего анализа.</p>
+<p>В прошлой главе мы столкнулись с этим на данных эксперимента <code>sharexp</code>: в таблице было 91 столбец, большая часть которых для анализа не нужна, имена столбцов вроде <code>mouse_main1.time_raw</code> писать неудобно, а в конце таблицы затесались служебные строки, которые вообще не относятся к пробам.</p>
+<p>Чтобы работать с любыми данными, независимо от того, откуда они пришли, их нужно привести к некоторому <em>стандартному</em> виду. Такой вид есть, и называется он <strong>опрятными данными</strong>.</p>
+</section>
+<section id="tidy-concept" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="tidy-concept"><span class="header-section-number">5.2</span> Опрятные данные</h2>
+<div id="def-tidy-data" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 5.1</strong></span> <strong>Опрятные данные (tidy data)</strong> — это таблица, в которой</p>
+<ol type="1">
+<li>каждая <strong>переменная</strong> образует отдельный <strong>столбец</strong>,</li>
+<li>каждое <strong>наблюдение</strong> образует отдельную <strong>строку</strong>,</li>
+<li>каждое <strong>значение</strong> находится в отдельной <strong>ячейке</strong>.</li>
+</ol>
+</div>
+<div id="fig-tidy-data" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-tidy-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../img/rpy-tidybase/tidy.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Рисунок&nbsp;5.1: Принципы опрятных данных"><img src="../img/rpy-tidybase/tidy.jpg" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-tidy-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;5.1: Принципы опрятных данных
+</figcaption>
+</figure>
+</div>
+<p>Звучит просто, но на практике нарушается постоянно. Например, в одной ячейке записаны сразу два значения (как в наших <code>pos1</code> — <code>"[-238, 202]"</code> — где в одной ячейке лежат обе координаты стимула), значения одной переменной «разъехались» по нескольким столбцам, а в одном столбце перемешаны разные переменные (как в нижней части наших файлов, где в первом столбце лежат <em>названия</em> переменных <code>age</code>, <code>date</code>, <code>session</code>, а во втором — <em>значения</em>).</p>
+<p>Понятие «наблюдение» определяется исследовательской задачей. В <code>sharexp</code> у нас одно наблюдение — одна проба одного испытуемого: время до клика и координаты клика в этой пробе, тип пробы и т. д. Если же мы сравниваем испытуемых друг с другом, то наблюдением станет испытуемый. Одни и те же данные можно «собрать» по-разному, и мы научимся это делать.</p>
+<p>Для приведения данных в опрятный вид и вообще для работы с данными в R существует целая экосистема пакетов.</p>
+</section>
+<section id="tidy-tidyverse" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="tidy-tidyverse"><span class="header-section-number">5.3</span> Семейство пакетов <code>tidyverse</code></h2>
+<p><strong><code>tidyverse</code></strong> — это набор пакетов, построенных на общей философии и общем синтаксисе. Он содержит инструменты для всех этапов работы с данными: от импорта до визуализации.</p>
+<p>Мы уже использовали <code>tidyverse</code> для чтения данных. Основные его пакеты:</p>
+<div id="tbl-tidyverse" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-tidyverse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;5.1: Основные пакеты <code>tidyverse</code>
+</figcaption>
+<div aria-describedby="tbl-tidyverse-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Пакет</th>
+<th style="text-align: left;">Для чего нужен</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>readr</code></td>
+<td style="text-align: left;">импорт данных из текстовых файлов</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tibble</code></td>
+<td style="text-align: left;">тибблы — современные датафреймы</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>dplyr</code></td>
+<td style="text-align: left;">преобразование таблиц: фильтрация, отбор столбцов, создание переменных, агрегация, объединение</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tidyr</code></td>
+<td style="text-align: left;">приведение данных к опрятному виду: смена формата, разделение и объединение столбцов, пропуски</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>stringr</code></td>
+<td style="text-align: left;">работа со строками</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>forcats</code></td>
+<td style="text-align: left;">работа с факторами</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>lubridate</code></td>
+<td style="text-align: left;">работа с датой и временем</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>purrr</code></td>
+<td style="text-align: left;">функциональное программирование</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>ggplot2</code></td>
+<td style="text-align: left;">визуализация данных</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Установить пакет нужно один раз, а подключать его к сессии — при каждом новом запуске R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)  <span class="co"># один раз</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)             <span class="co"># в начале каждого скрипта</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Данные первого испытуемого, как и в прошлой главе, загрузим в объект <code>d1</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/sharexp/raw/01.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="tidy-pipe" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="tidy-pipe"><span class="header-section-number">5.4</span> Пайп</h2>
+<p>Прежде чем знакомиться с преобразованиями данных, познакомимся с оператором, без которого <code>tidyverse</code>-код немыслим, — с <strong>пайпом (pipe)</strong>.</p>
+<p>Пайп передаёт то, что стоит слева от него, в функцию справа <strong>в качестве первого аргумента</strong>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">|&gt;</span> <span class="fu">sum</span>()</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(pi, <span class="dv">2</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pi <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+</div>
+<p>Выглядит как усложнение — зачем писать больше? Дело в цепочках преобразований. Допустим, нужно извлечь корень из каждого числа вектора, найти среднее и округлить результат. Без пайпа получится «матрёшка», которую читать надо изнутри наружу:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">mean</span>(<span class="fu">sqrt</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">16</span>))), <span class="dv">2</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.56</code></pre>
+</div>
+</div>
+<p>С пайпом то же самое читается слева направо и сверху вниз — в том порядке, в котором выполняется:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">16</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.56</code></pre>
+</div>
+</div>
+<p>Теперь это можно прочитать вслух: «возьми числа, извлеки корень, найди среднее, округли до двух знаков». Именно так мы и будем писать преобразования данных. С одной-двумя функциями разница не слишком заметна, но цепочки из десяти шагов без пайпа превращаются в нечитаемый кошмар.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Два вида пайпа
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Существует два пайпа:</p>
+<ul>
+<li><strong>нативный</strong> <code>|&gt;</code> — встроен в базовый R (начиная с версии 4.1);</li>
+<li><strong>магриттеровский</strong> <code>%&gt;%</code> — из пакета <code>magrittr</code>, подключается вместе с <code>tidyverse</code>.</li>
+</ul>
+<p>В большинстве случаев они взаимозаменимы, и мы будем использовать нативный. Но в чужом коде вы наверняка встретите <code>%&gt;%</code>. Вводятся оба сочетанием клавиш <code>Ctrl + Shift + M</code> (<code>⌘ + Shift + M</code>); какой именно пайп будет вставлен, определяется настройкой <code>Tools → Global Options → Code → Use native pipe operator</code>.</p>
+<div id="fig-native-pipe" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-native-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="../img/rpy-tidybase/native-pipe.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Рисунок&nbsp;5.2: Выбор используемого пайпа в настройках RStudio"><img src="../img/rpy-tidybase/native-pipe.png" class="img-fluid figure-img"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-native-pipe-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;5.2: Выбор используемого пайпа в настройках RStudio
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Если значение слева нужно передать не в первый аргумент, у нативного пайпа есть «заполнитель» <code>_</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">|&gt;</span> <span class="fu">round</span>(<span class="at">x =</span> pi, <span class="at">digits =</span> _)  <span class="co"># значение слева попадёт в аргумент digits</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.14</code></pre>
+</div>
+</div>
+</section>
+<section id="tidy-select" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="tidy-select"><span class="header-section-number">5.5</span> Отбор столбцов: <code>select()</code></h2>
+<p>Первое, что мы сделаем с нашей таблицей, — оставим только нужные столбцы. Для этого служит функция <code>select()</code>. Первый аргумент — таблица (поэтому её удобно передавать пайпом), далее — названия столбцов, которые мы хотим оставить:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize, mouse_main1.time_raw)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 458 × 4
+   numtrial trialtype setsize mouse_main1.time_raw
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;
+ 1        1 tray            8                 1.67
+ 2        2 tray            8                 1.13
+ 3        3 tray            8                 2.60
+ 4        4 tray            8                 2.61
+ 5        5 tray            8                 1.59
+ 6        6 tray            8                 1.14
+ 7        7 tray            8                 2.14
+ 8        8 tray            8                 1.63
+ 9        9 tray            8                 2.56
+10       10 tray            8                 2.02
+# ℹ 448 more rows</code></pre>
+</div>
+</div>
+<p>Названия пишутся без кавычек. Порядок столбцов в результате такой, как мы перечислили.</p>
+<p>Для нашего анализа понадобятся:</p>
+<ul>
+<li><code>numtrial</code> — номер пробы в исходном файле с координатами;</li>
+<li><code>trialtype</code> и <code>setsize</code> — экспериментальные условия;</li>
+<li><code>mouse_main1.time_raw</code>, <code>mouse_main1.x_raw</code>, <code>mouse_main1.y_raw</code> — время до первого клика и его координаты;</li>
+<li><code>mouse_main2.time_raw</code>, <code>mouse_main2.x_raw</code>, <code>mouse_main2.y_raw</code> — то же для второго клика.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>         mouse_main1.time_raw, mouse_main1.x_raw, mouse_main1.y_raw,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>         mouse_main2.time_raw, mouse_main2.x_raw, mouse_main2.y_raw)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 458 × 9
+   numtrial trialtype setsize mouse_main1.time_raw mouse_main1.x_raw
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;             &lt;dbl&gt;
+ 1        1 tray            8                 1.67              -227
+ 2        2 tray            8                 1.13               -69
+ 3        3 tray            8                 2.60                60
+ 4        4 tray            8                 2.61               199
+ 5        5 tray            8                 1.59              -241
+ 6        6 tray            8                 1.14               -51
+ 7        7 tray            8                 2.14                99
+ 8        8 tray            8                 1.63               213
+ 9        9 tray            8                 2.56              -201
+10       10 tray            8                 2.02               -70
+# ℹ 448 more rows
+# ℹ 4 more variables: mouse_main1.y_raw &lt;dbl&gt;, mouse_main2.time_raw &lt;dbl&gt;,
+#   mouse_main2.x_raw &lt;dbl&gt;, mouse_main2.y_raw &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Перечислять столбцы по одному утомительно. К счастью, у <code>select()</code> есть удобные «помощники»:</p>
+<div id="tbl-select-helpers" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-select-helpers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;5.2: Помощники для выбора столбцов
+</figcaption>
+<div aria-describedby="tbl-select-helpers-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Помощник</th>
+<th style="text-align: left;">Что делает</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>a:b</code></td>
+<td style="text-align: left;">все столбцы от <code>a</code> до <code>b</code> включительно</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>-a</code></td>
+<td style="text-align: left;">все столбцы, кроме <code>a</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>starts_with("mouse")</code></td>
+<td style="text-align: left;">столбцы, названия которых начинаются на <code>mouse</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ends_with("raw")</code></td>
+<td style="text-align: left;">столбцы, названия которых заканчиваются на <code>raw</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>contains("time")</code></td>
+<td style="text-align: left;">столбцы, в названиях которых есть <code>time</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>everything()</code></td>
+<td style="text-align: left;">все остальные столбцы</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"mouse_main1"</span>))   <span class="co"># все столбцы про первый клик</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 458 × 16
+   mouse_main1.leftButton_mean mouse_main1.leftButton_raw mouse_main1.leftButt…¹
+                         &lt;dbl&gt;                      &lt;dbl&gt;                  &lt;dbl&gt;
+ 1                           1                          1                      0
+ 2                           1                          1                      0
+ 3                           1                          1                      0
+ 4                           1                          1                      0
+ 5                           1                          1                      0
+ 6                           1                          1                      0
+ 7                           1                          1                      0
+ 8                           1                          1                      0
+ 9                           1                          1                      0
+10                           1                          1                      0
+# ℹ 448 more rows
+# ℹ abbreviated name: ¹​mouse_main1.leftButton_std
+# ℹ 13 more variables: mouse_main1.midButton_mean &lt;dbl&gt;,
+#   mouse_main1.midButton_raw &lt;dbl&gt;, mouse_main1.midButton_std &lt;dbl&gt;,
+#   mouse_main1.rightButton_mean &lt;dbl&gt;, mouse_main1.rightButton_raw &lt;dbl&gt;,
+#   mouse_main1.rightButton_std &lt;dbl&gt;, mouse_main1.time_mean &lt;dbl&gt;,
+#   mouse_main1.time_raw &lt;dbl&gt;, mouse_main1.time_std &lt;dbl&gt;, …</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">contains</span>(<span class="st">"time_raw"</span>))         <span class="co"># все столбцы со временем</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 458 × 2
+   mouse_main1.time_raw mouse_main2.time_raw
+                  &lt;dbl&gt;                &lt;dbl&gt;
+ 1                 1.67                1.28 
+ 2                 1.13                1.06 
+ 3                 2.60                0.963
+ 4                 2.61                0.863
+ 5                 1.59                0.931
+ 6                 1.14                0.896
+ 7                 2.14                0.879
+ 8                 1.63                0.947
+ 9                 2.56                1.65 
+10                 2.02                0.970
+# ℹ 448 more rows</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span> <span class="fu">select</span>(numtrial, <span class="fu">ends_with</span>(<span class="st">"_raw"</span>))  <span class="co"># номер пробы + все столбцы на _raw</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 458 × 13
+   numtrial mouse_main1.leftButt…¹ mouse_main1.midButto…² mouse_main1.rightBut…³
+      &lt;dbl&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;
+ 1        1                      1                      0                      0
+ 2        2                      1                      0                      0
+ 3        3                      1                      0                      0
+ 4        4                      1                      0                      0
+ 5        5                      1                      0                      0
+ 6        6                      1                      0                      0
+ 7        7                      1                      0                      0
+ 8        8                      1                      0                      0
+ 9        9                      1                      0                      0
+10       10                      1                      0                      0
+# ℹ 448 more rows
+# ℹ abbreviated names: ¹​mouse_main1.leftButton_raw, ²​mouse_main1.midButton_raw,
+#   ³​mouse_main1.rightButton_raw
+# ℹ 9 more variables: mouse_main1.time_raw &lt;dbl&gt;, mouse_main1.x_raw &lt;dbl&gt;,
+#   mouse_main1.y_raw &lt;dbl&gt;, mouse_main2.leftButton_raw &lt;dbl&gt;,
+#   mouse_main2.midButton_raw &lt;dbl&gt;, mouse_main2.rightButton_raw &lt;dbl&gt;,
+#   mouse_main2.time_raw &lt;dbl&gt;, mouse_main2.x_raw &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Помощники можно комбинировать. Например, чтобы получить время и координаты обоих кликов, но без служебных столбцов со средними и стандартными отклонениями (<code>_mean</code>, <code>_std</code>), которые тоже пишет PsychoPy:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">"mouse"</span>) <span class="sc">&amp;</span> <span class="fu">ends_with</span>(<span class="st">"_raw"</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 458 × 15
+   numtrial trialtype setsize mouse_main1.leftButton_raw mouse_main1.midButton…¹
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;                      &lt;dbl&gt;                   &lt;dbl&gt;
+ 1        1 tray            8                          1                       0
+ 2        2 tray            8                          1                       0
+ 3        3 tray            8                          1                       0
+ 4        4 tray            8                          1                       0
+ 5        5 tray            8                          1                       0
+ 6        6 tray            8                          1                       0
+ 7        7 tray            8                          1                       0
+ 8        8 tray            8                          1                       0
+ 9        9 tray            8                          1                       0
+10       10 tray            8                          1                       0
+# ℹ 448 more rows
+# ℹ abbreviated name: ¹​mouse_main1.midButton_raw
+# ℹ 10 more variables: mouse_main1.rightButton_raw &lt;dbl&gt;,
+#   mouse_main1.time_raw &lt;dbl&gt;, mouse_main1.x_raw &lt;dbl&gt;,
+#   mouse_main1.y_raw &lt;dbl&gt;, mouse_main2.leftButton_raw &lt;dbl&gt;,
+#   mouse_main2.midButton_raw &lt;dbl&gt;, mouse_main2.rightButton_raw &lt;dbl&gt;,
+#   mouse_main2.time_raw &lt;dbl&gt;, mouse_main2.x_raw &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Но в этом наборе ещё остались лишние столбцы: кнопки мыши (<code>leftButton_raw</code> и т. д.). Их можно убрать, добавив минус перед нужным помощником:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">"mouse"</span>) <span class="sc">&amp;</span> <span class="fu">ends_with</span>(<span class="st">"_raw"</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">contains</span>(<span class="st">"Button"</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 458 × 9
+   numtrial trialtype setsize mouse_main1.time_raw mouse_main1.x_raw
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;                &lt;dbl&gt;             &lt;dbl&gt;
+ 1        1 tray            8                 1.67              -227
+ 2        2 tray            8                 1.13               -69
+ 3        3 tray            8                 2.60                60
+ 4        4 tray            8                 2.61               199
+ 5        5 tray            8                 1.59              -241
+ 6        6 tray            8                 1.14               -51
+ 7        7 tray            8                 2.14                99
+ 8        8 tray            8                 1.63               213
+ 9        9 tray            8                 2.56              -201
+10       10 tray            8                 2.02               -70
+# ℹ 448 more rows
+# ℹ 4 more variables: mouse_main1.y_raw &lt;dbl&gt;, mouse_main2.time_raw &lt;dbl&gt;,
+#   mouse_main2.x_raw &lt;dbl&gt;, mouse_main2.y_raw &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>Теперь у нас ровно те девять столбцов, которые нам нужны.</p>
+</section>
+<section id="tidy-rename" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="tidy-rename"><span class="header-section-number">5.6</span> Переименование столбцов: <code>rename()</code></h2>
+<p>Названия <code>mouse_main1.time_raw</code> писать неудобно. Переименуем столбцы с помощью функции <code>rename()</code>, которой нужно сказать <code>новое_имя = старое_имя</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">"mouse"</span>) <span class="sc">&amp;</span> <span class="fu">ends_with</span>(<span class="st">"_raw"</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">contains</span>(<span class="st">"Button"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">time1 =</span> mouse_main1.time_raw,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">click1x =</span> mouse_main1.x_raw,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">click1y =</span> mouse_main1.y_raw,</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">time2 =</span> mouse_main2.time_raw,</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">click2x =</span> mouse_main2.x_raw,</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">click2y =</span> mouse_main2.y_raw)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 458 × 9
+   numtrial trialtype setsize time1 click1x click1y time2 click2x click2y
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1        1 tray            8  1.67    -227     202 1.28       14    -351
+ 2        2 tray            8  1.13     -69     231 1.06      -44    -392
+ 3        3 tray            8  2.60      60     195 0.963      17    -361
+ 4        4 tray            8  2.61     199     213 0.863     -26    -356
+ 5        5 tray            8  1.59    -241      43 0.931     -25    -397
+ 6        6 tray            8  1.14     -51      59 0.896      10    -383
+ 7        7 tray            8  2.14      99      62 0.879     -29    -372
+ 8        8 tray            8  1.63     213      46 0.947     -27    -353
+ 9        9 tray            8  2.56    -201    -123 1.65      -25    -385
+10       10 tray            8  2.02     -70     -82 0.970     -19    -394
+# ℹ 448 more rows</code></pre>
+</div>
+</div>
+<p>Так будут называться наши переменные на протяжении всей дальнейшей работы:</p>
+<ul>
+<li><code>time1</code> — время до первого клика (с),</li>
+<li><code>click1x</code>, <code>click1y</code> — координаты первого клика (пиксели),</li>
+<li><code>time2</code>, <code>click2x</code>, <code>click2y</code> — то же для второго клика.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Совет
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Названия переменных лучше делать короткими, без пробелов и русских букв, в едином стиле. Названия с пробелами и специальными символами приходится заключать в обратные кавычки (<code>`like this`</code>) каждый раз, когда вы к ним обращаетесь.</p>
+</div>
+</div>
+<p>Когда нужно переименовать <em>все</em> столбцы разом, можно воспользоваться функцией <code>set_names()</code>, передав вектор новых имён в том же порядке. Если нужно применить к именам какую-то функцию (например, перевести в нижний регистр), на помощь придёт <code>rename_with()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(trialtype, setsize) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename_with</span>(toupper)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 458 × 2
+   TRIALTYPE SETSIZE
+   &lt;chr&gt;       &lt;dbl&gt;
+ 1 tray            8
+ 2 tray            8
+ 3 tray            8
+ 4 tray            8
+ 5 tray            8
+ 6 tray            8
+ 7 tray            8
+ 8 tray            8
+ 9 tray            8
+10 tray            8
+# ℹ 448 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="tidy-filter" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="tidy-filter"><span class="header-section-number">5.7</span> Отбор строк: <code>filter()</code> и <code>slice()</code></h2>
+<p>Столбцы мы отобрали. Теперь отберём строки. Два основных инструмента:</p>
+<ul>
+<li><code>slice()</code> отбирает строки <strong>по номеру</strong>;</li>
+<li><code>filter()</code> отбирает строки <strong>по условию</strong>.</li>
+</ul>
+<section id="tidy-slice" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="tidy-slice"><span class="header-section-number">5.7.1</span> Отбор по номеру строки</h3>
+<p>Мы знаем, что проб было 450, а лишние строки находятся в конце. Отрежем их с помощью <code>slice()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize, <span class="at">time1 =</span> mouse_main1.time_raw) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">450</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>(<span class="dv">3</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  numtrial trialtype setsize time1
+     &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+1      448 both           16  1.36
+2      449 both           16  1.70
+3      450 both           16  1.30</code></pre>
+</div>
+</div>
+<p>(Заодно мы переименовали столбец прямо внутри <code>select()</code> — так тоже можно.)</p>
+<p>Такое решение работает, но у него есть недостаток: мы прописали в код число <code>450</code>. Если в какой-то файл попадёт другое число проб, код тихо вернёт неверный результат. Всегда лучше формулировать <strong>условие</strong>, а не номера строк.</p>
+<p>Вспомогательные функции для отбора по номеру: <code>slice_head(n = 5)</code> — первые 5 строк, <code>slice_tail(n = 5)</code> — последние 5 строк, <code>slice_sample(n = 5)</code> — пять случайных строк.</p>
+</section>
+<section id="tidy-filter-cond" class="level3" data-number="5.7.2">
+<h3 data-number="5.7.2" class="anchored" data-anchor-id="tidy-filter-cond"><span class="header-section-number">5.7.2</span> Отбор по условию</h3>
+<p>Функция <code>filter()</code> оставляет только те строки, для которых условие истинно. Условия записываются через операторы сравнения, которые мы изучали в <a href="../chpts/rpy-basics.html#r-logic">основах R</a>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="ot">&lt;-</span> d1 <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">time1 =</span> mouse_main1.time_raw)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(time1 <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 37 × 4
+   numtrial trialtype setsize time1
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1      153 tray           12  3.02
+ 2      164 tray           12  3.03
+ 3      166 tray           12  3.50
+ 4      168 tray           12  3.78
+ 5      171 tray           12  3.05
+ 6      194 tray           12  3.00
+ 7      203 dots           12  3.49
+ 8      211 dots           12  3.34
+ 9      212 dots           12  3.03
+10      229 dots           12  3.05
+# ℹ 27 more rows</code></pre>
+</div>
+</div>
+<p>Оставили пробы, в которых время до клика превышало 3 секунды. Условия можно комбинировать с помощью логических операторов:</p>
+<ul>
+<li><code>&amp;</code> — «и» (нужно, чтобы выполнялись оба условия),</li>
+<li><code>|</code> — «или» (достаточно одного),</li>
+<li><code>!</code> — «не».</li>
+</ul>
+<p>Если условия перечислены через запятую, они объединяются через «и».</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(trialtype <span class="sc">==</span> <span class="st">"tray"</span>, setsize <span class="sc">==</span> <span class="dv">16</span>)         <span class="co"># оба условия</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 50 × 4
+   numtrial trialtype setsize time1
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1      301 tray           16  1.09
+ 2      302 tray           16  1.00
+ 3      303 tray           16  1.99
+ 4      304 tray           16  1.32
+ 5      305 tray           16  1.13
+ 6      306 tray           16  2.84
+ 7      307 tray           16  1.50
+ 8      308 tray           16  3.62
+ 9      309 tray           16  1.87
+10      310 tray           16  3.13
+# ℹ 40 more rows</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(trialtype <span class="sc">==</span> <span class="st">"tray"</span> <span class="sc">|</span> trialtype <span class="sc">==</span> <span class="st">"dots"</span>)  <span class="co"># одно из двух</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 300 × 4
+   numtrial trialtype setsize time1
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1        1 tray            8  1.67
+ 2        2 tray            8  1.13
+ 3        3 tray            8  2.60
+ 4        4 tray            8  2.61
+ 5        5 tray            8  1.59
+ 6        6 tray            8  1.14
+ 7        7 tray            8  2.14
+ 8        8 tray            8  1.63
+ 9        9 tray            8  2.56
+10       10 tray            8  2.02
+# ℹ 290 more rows</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(trialtype <span class="sc">!=</span> <span class="st">"both"</span>)                        <span class="co"># всё, кроме both</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 300 × 4
+   numtrial trialtype setsize time1
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1        1 tray            8  1.67
+ 2        2 tray            8  1.13
+ 3        3 tray            8  2.60
+ 4        4 tray            8  2.61
+ 5        5 tray            8  1.59
+ 6        6 tray            8  1.14
+ 7        7 tray            8  2.14
+ 8        8 tray            8  1.63
+ 9        9 tray            8  2.56
+10       10 tray            8  2.02
+# ℹ 290 more rows</code></pre>
+</div>
+</div>
+<p>Для проверки на принадлежность набору значений удобен оператор <code>%in%</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(setsize <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">16</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 300 × 4
+   numtrial trialtype setsize time1
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1      151 tray           12  1.52
+ 2      152 tray           12  1.92
+ 3      153 tray           12  3.02
+ 4      154 tray           12  1.50
+ 5      155 tray           12  1.28
+ 6      156 tray           12  1.22
+ 7      157 tray           12  1.35
+ 8      158 tray           12  1.78
+ 9      159 tray           12  1.69
+10      160 tray           12  1.13
+# ℹ 290 more rows</code></pre>
+</div>
+</div>
+<p>А для попадания в интервал — функция <code>between()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">between</span>(time1, <span class="dv">1</span>, <span class="fl">1.5</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 202 × 4
+   numtrial trialtype setsize time1
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1        2 tray            8  1.13
+ 2        6 tray            8  1.14
+ 3       11 tray            8  1.08
+ 4       12 tray            8  1.50
+ 5       13 tray            8  1.36
+ 6       20 tray            8  1.45
+ 7       21 tray            8  1.31
+ 8       22 tray            8  1.45
+ 9       23 tray            8  1.46
+10       30 tray            8  1.38
+# ℹ 192 more rows</code></pre>
+</div>
+</div>
+<p>Теперь вернёмся к служебным строкам в конце файла. Мы знаем, что у них нет номера пробы — там <code>NA</code>. Значит, настоящие пробы — это те строки, где номер пробы <strong>не</strong> пропущен:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(numtrial)) <span class="sc">|&gt;</span> <span class="fu">nrow</span>()</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 450</code></pre>
+</div>
+</div>
+<p>Ровно 450 строк. И никаких магических чисел в коде. Обратите внимание: сравнивать с <code>NA</code> оператором <code>==</code> бессмысленно (<code>x == NA</code> всегда даёт <code>NA</code>) — для проверки на пропуск используется только <code>is.na()</code>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важность
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В <code>tidyverse</code> внутри <code>filter()</code> и <code>select()</code> названия столбцов пишутся без кавычек, а значения текстовых переменных — <strong>в кавычках</strong>. Если перепутать, получите либо ошибку «объект не найден», либо (что хуже) молча неверный результат.</p>
+</div>
+</div>
+</section>
+<section id="tidy-distinct" class="level3" data-number="5.7.3">
+<h3 data-number="5.7.3" class="anchored" data-anchor-id="tidy-distinct"><span class="header-section-number">5.7.3</span> Уникальные строки</h3>
+<p>Функция <code>distinct()</code> оставляет только уникальные комбинации значений. Это удобный способ посмотреть, какие значения вообще встречаются:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(numtrial)) <span class="sc">|&gt;</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(trialtype, setsize)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 2
+  trialtype setsize
+  &lt;chr&gt;       &lt;dbl&gt;
+1 tray            8
+2 dots            8
+3 both            8
+4 tray           12
+5 dots           12
+6 both           12
+7 tray           16
+8 dots           16
+9 both           16</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="tidy-arrange" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="tidy-arrange"><span class="header-section-number">5.8</span> Сортировка: <code>arrange()</code></h2>
+<p>Функция <code>arrange()</code> сортирует таблицу по значениям одного или нескольких столбцов. По умолчанию — по возрастанию; чтобы отсортировать по убыванию, нужно обернуть столбец в <code>desc()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(numtrial)) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 450 × 4
+   numtrial trialtype setsize time1
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1      197 tray           12 0.738
+ 2      257 both           12 0.756
+ 3      411 both           16 0.794
+ 4      325 tray           16 0.837
+ 5       46 tray            8 0.842
+ 6      146 both            8 0.891
+ 7      125 both            8 0.895
+ 8      113 both            8 0.912
+ 9      372 dots           16 0.919
+10       80 dots            8 0.926
+# ℹ 440 more rows</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(numtrial)) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(<span class="fu">desc</span>(time1))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 450 × 4
+   numtrial trialtype setsize time1
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1      378 dots           16  5.82
+ 2      366 dots           16  4.94
+ 3      312 tray           16  4.59
+ 4      318 tray           16  4.52
+ 5      381 dots           16  4.49
+ 6      377 dots           16  4.47
+ 7      358 dots           16  4.04
+ 8      314 tray           16  4.00
+ 9      328 tray           16  3.94
+10      319 tray           16  3.87
+# ℹ 440 more rows</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>d1_small <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(numtrial)) <span class="sc">|&gt;</span> <span class="fu">arrange</span>(trialtype, <span class="fu">desc</span>(time1))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 450 × 4
+   numtrial trialtype setsize time1
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;
+ 1      300 both           12  3.40
+ 2      409 both           16  3.27
+ 3      428 both           16  3.09
+ 4      404 both           16  2.70
+ 5      440 both           16  2.62
+ 6      435 both           16  2.55
+ 7      104 both            8  2.46
+ 8      284 both           12  2.34
+ 9      269 both           12  2.32
+10      266 both           12  2.29
+# ℹ 440 more rows</code></pre>
+</div>
+</div>
+<p>В последнем примере таблица сначала упорядочена по типу пробы, а внутри каждого типа — по убыванию времени. В отличие от <code>sort()</code> из базового R, <code>arrange()</code> работает с целыми таблицами и переставляет строки целиком, не разрывая наблюдения.</p>
+</section>
+<section id="tidy-mutate" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="tidy-mutate"><span class="header-section-number">5.9</span> Создание и изменение переменных: <code>mutate()</code></h2>
+<p>Часто нужных переменных в данных нет, но их можно получить из имеющихся. Для этого есть <code>mutate()</code>: слева от знака <code>=</code> — имя новой (или изменяемой) переменной, справа — как её вычислить. Подготовим «чистые» данные, на которых будем тренироваться:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="ot">&lt;-</span> d1 <span class="sc">|&gt;</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(numtrial)) <span class="sc">|&gt;</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">"mouse"</span>) <span class="sc">&amp;</span> <span class="fu">ends_with</span>(<span class="st">"_raw"</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">contains</span>(<span class="st">"Button"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">time1 =</span> mouse_main1.time_raw,</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">click1x =</span> mouse_main1.x_raw,</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">click1y =</span> mouse_main1.y_raw,</span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">time2 =</span> mouse_main2.time_raw,</span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">click2x =</span> mouse_main2.x_raw,</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">click2y =</span> mouse_main2.y_raw)</span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>d1_clean</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 450 × 9
+   numtrial trialtype setsize time1 click1x click1y time2 click2x click2y
+      &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1        1 tray            8  1.67    -227     202 1.28       14    -351
+ 2        2 tray            8  1.13     -69     231 1.06      -44    -392
+ 3        3 tray            8  2.60      60     195 0.963      17    -361
+ 4        4 tray            8  2.61     199     213 0.863     -26    -356
+ 5        5 tray            8  1.59    -241      43 0.931     -25    -397
+ 6        6 tray            8  1.14     -51      59 0.896      10    -383
+ 7        7 tray            8  2.14      99      62 0.879     -29    -372
+ 8        8 tray            8  1.63     213      46 0.947     -27    -353
+ 9        9 tray            8  2.56    -201    -123 1.65      -25    -385
+10       10 tray            8  2.02     -70     -82 0.970     -19    -394
+# ℹ 440 more rows</code></pre>
+</div>
+</div>
+<p>Это та же цепочка, что и выше, только в логическом порядке: отобрали строки, отобрали столбцы, переименовали. Каждая строка — один шаг, и всё прекрасно читается.</p>
+<p>Теперь создадим новые переменные:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span>,                       <span class="co"># константа: id испытуемого</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">time1_ms =</span> time1 <span class="sc">*</span> <span class="dv">1000</span>,      <span class="co"># время в миллисекундах</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">fast =</span> time1 <span class="sc">&lt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>          <span class="co"># логическая: быстрая ли проба</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, numtrial, time1, time1_ms, fast)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 450 × 5
+      id numtrial time1 time1_ms fast 
+   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;lgl&gt;
+ 1     1        1  1.67    1672. FALSE
+ 2     1        2  1.13    1126. FALSE
+ 3     1        3  2.60    2595. FALSE
+ 4     1        4  2.61    2609. FALSE
+ 5     1        5  1.59    1593. FALSE
+ 6     1        6  1.14    1143. FALSE
+ 7     1        7  2.14    2145. FALSE
+ 8     1        8  1.63    1628. FALSE
+ 9     1        9  2.56    2557. FALSE
+10     1       10  2.02    2023. FALSE
+# ℹ 440 more rows</code></pre>
+</div>
+</div>
+<p>Новые переменные добавляются справа. Если в <code>mutate()</code> указать имя уже существующего столбца, он будет перезаписан.</p>
+<section id="tidy-ifelse" class="level3" data-number="5.9.1">
+<h3 data-number="5.9.1" class="anchored" data-anchor-id="tidy-ifelse"><span class="header-section-number">5.9.1</span> Условные преобразования: <code>if_else()</code> и <code>case_when()</code></h3>
+<p>Часто новая переменная зависит от условия. Для условия с двумя исходами подходит <code>if_else()</code> (в базовом R — <code>ifelse()</code>): первый аргумент — условие, второй — значение, если оно истинно, третий — если ложно.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">speed =</span> <span class="fu">if_else</span>(time1 <span class="sc">&lt;</span> <span class="fl">1.5</span>, <span class="st">"быстро"</span>, <span class="st">"медленно"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, time1, speed)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 450 × 3
+   numtrial time1 speed   
+      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   
+ 1        1  1.67 медленно
+ 2        2  1.13 быстро  
+ 3        3  2.60 медленно
+ 4        4  2.61 медленно
+ 5        5  1.59 медленно
+ 6        6  1.14 быстро  
+ 7        7  2.14 медленно
+ 8        8  1.63 медленно
+ 9        9  2.56 медленно
+10       10  2.02 медленно
+# ℹ 440 more rows</code></pre>
+</div>
+</div>
+<p>Когда исходов больше двух, используется <code>case_when()</code>: набор правил вида <code>условие ~ значение</code>, которые проверяются по очереди сверху вниз; для каждой строки срабатывает первое подошедшее правило.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">platform_icon =</span> <span class="fu">case_when</span>(trialtype <span class="sc">==</span> <span class="st">"tray"</span> <span class="sc">~</span> <span class="st">"iOS"</span>,</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>                                   trialtype <span class="sc">==</span> <span class="st">"dots"</span> <span class="sc">~</span> <span class="st">"Android"</span>,</span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>                                   trialtype <span class="sc">==</span> <span class="st">"both"</span> <span class="sc">~</span> <span class="st">"обе"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(trialtype, platform_icon)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  trialtype platform_icon     n
+  &lt;chr&gt;     &lt;chr&gt;         &lt;int&gt;
+1 both      обе             150
+2 dots      Android         150
+3 tray      iOS             150</code></pre>
+</div>
+</div>
+<p>Мы только что <strong>перекодировали</strong> переменную: вместо внутренних обозначений PsychoPy (<code>tray</code>, <code>dots</code>) получили понятные названия иконок. Подробнее о перекодировании категориальных переменных (в том числе в числа) поговорим в главе про <a href="../chpts/rpy-tidyadv.html">продвинутую предобработку</a>.</p>
+<p>Для числовых данных <code>case_when()</code> удобен ещё и для разбиения на категории:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time_cat =</span> <span class="fu">case_when</span>(time1 <span class="sc">&lt;</span> <span class="dv">1</span> <span class="sc">~</span> <span class="st">"&lt; 1 с"</span>,</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>                              time1 <span class="sc">&lt;</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"1–2 с"</span>,</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">.default =</span> <span class="st">"≥ 2 с"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(time_cat)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  time_cat     n
+  &lt;chr&gt;    &lt;int&gt;
+1 1–2 с      317
+2 &lt; 1 с       25
+3 ≥ 2 с      108</code></pre>
+</div>
+</div>
+<p>Последнее правило с <code>.default</code> срабатывает для всех, кто не подошёл под предыдущие. Заметьте, что правило <code>time1 &lt; 2</code> не нужно дополнять условием <code>time1 &gt;= 1</code> — до него доходят только те строки, которые не подошли под первое правило.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Предупреждение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Разбиение числовой переменной на категории — это всегда потеря информации. Граница в 1 или 2 секунды здесь выбрана произвольно, исключительно в целях демонстрации. На практике так следует поступать, только если есть содержательные основания.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="tidy-summarise" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="tidy-summarise"><span class="header-section-number">5.10</span> Агрегация данных</h2>
+<p>До сих пор мы работали на уровне отдельных проб. Но анализ редко ограничивается отдельными наблюдениями: обычно нам нужны сводные показатели — например, среднее время поиска в разных условиях. Процесс вычисления сводных показателей по многим наблюдениям называется <strong>агрегацией</strong>.</p>
+<section id="tidy-summarise-basic" class="level3" data-number="5.10.1">
+<h3 data-number="5.10.1" class="anchored" data-anchor-id="tidy-summarise-basic"><span class="header-section-number">5.10.1</span> <code>summarise()</code>: сводка по всей таблице</h3>
+<p>Функция <code>summarise()</code> сворачивает таблицу в одну строку со сводными показателями:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),                       <span class="co"># число строк</span></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_time =</span> <span class="fu">mean</span>(time1),       <span class="co"># среднее время</span></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_time =</span> <span class="fu">sd</span>(time1),           <span class="co"># стандартное отклонение</span></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_time =</span> <span class="fu">median</span>(time1))   <span class="co"># медиана</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+      n mean_time sd_time median_time
+  &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;
+1   450      1.72   0.749        1.49</code></pre>
+</div>
+</div>
+<p>Функция <code>n()</code> считает количество наблюдений (строк).</p>
+</section>
+<section id="tidy-group" class="level3" data-number="5.10.2">
+<h3 data-number="5.10.2" class="anchored" data-anchor-id="tidy-group"><span class="header-section-number">5.10.2</span> Агрегация по группам</h3>
+<p>Гораздо интереснее посчитать то же самое <strong>по группам</strong>: отдельно для каждого типа пробы или для каждого размера набора стимулов. Для этого нужно <em>сгруппировать</em> данные. Это можно сделать двумя способами.</p>
+<p>Первый — функция <code>group_by()</code>, которая «запоминает» группировку, а <code>summarise()</code> затем применяется к каждой группе по отдельности:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trialtype) <span class="sc">|&gt;</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_time =</span> <span class="fu">mean</span>(time1),</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_time =</span> <span class="fu">sd</span>(time1))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  trialtype     n mean_time sd_time
+  &lt;chr&gt;     &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 both        150      1.46   0.466
+2 dots        150      1.88   0.832
+3 tray        150      1.81   0.826</code></pre>
+</div>
+</div>
+<p>Второй — аргумент <code>.by</code> прямо внутри <code>summarise()</code> (и <code>mutate()</code>, и <code>filter()</code>):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_time =</span> <span class="fu">mean</span>(time1),</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_time =</span> <span class="fu">sd</span>(time1),</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.by =</span> trialtype)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  trialtype     n mean_time sd_time
+  &lt;chr&gt;     &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 tray        150      1.81   0.826
+2 dots        150      1.88   0.832
+3 both        150      1.46   0.466</code></pre>
+</div>
+</div>
+<p>Результат тот же, но группировка действует только внутри этой функции. С <code>group_by()</code> она «залипает» на таблице — обычно вы это заметите по подписи <code># A tibble: ... Groups: ...</code> в выводе, а чтобы её снять, нужно вызвать <code>ungroup()</code>. Поэтому для разовых действий удобнее <code>.by</code>.</p>
+<p>Группировать можно по нескольким переменным сразу:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_time =</span> <span class="fu">mean</span>(time1),</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">.by =</span> <span class="fu">c</span>(trialtype, setsize)) <span class="sc">|&gt;</span></span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(trialtype, setsize)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 4
+  trialtype setsize     n mean_time
+  &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
+1 both            8    50      1.28
+2 both           12    50      1.48
+3 both           16    50      1.63
+4 dots            8    50      1.58
+5 dots           12    50      1.88
+6 dots           16    50      2.18
+7 tray            8    50      1.56
+8 tray           12    50      1.77
+9 tray           16    50      2.12</code></pre>
+</div>
+</div>
+<p>Девять групп — по числу сочетаний условий. В каждой по 50 проб. Заметно, что при увеличении числа стимулов в пробе время поиска растёт — как и можно было ожидать.</p>
+</section>
+<section id="tidy-count" class="level3" data-number="5.10.3">
+<h3 data-number="5.10.3" class="anchored" data-anchor-id="tidy-count"><span class="header-section-number">5.10.3</span> Подсчёт числа наблюдений: <code>count()</code></h3>
+<p>Для подсчёта частот есть специальный «ярлык» — <code>count()</code>. Это то же самое, что <code>group_by()</code> + <code>summarise(n = n())</code>, но короче:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span> <span class="fu">count</span>(trialtype)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  trialtype     n
+  &lt;chr&gt;     &lt;int&gt;
+1 both        150
+2 dots        150
+3 tray        150</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>d1_clean <span class="sc">|&gt;</span> <span class="fu">count</span>(trialtype, setsize)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  trialtype setsize     n
+  &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt;
+1 both            8    50
+2 both           12    50
+3 both           16    50
+4 dots            8    50
+5 dots           12    50
+6 dots           16    50
+7 tray            8    50
+8 tray           12    50
+9 tray           16    50</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Заметка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Теперь вместо <code>table()</code> из базового R мы можем получать такие же таблицы частот, но в формате тибблов, с которыми удобно работать дальше.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="tidy-together" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="tidy-together"><span class="header-section-number">5.11</span> Собираем всё вместе</h2>
+<p>Мы научились выполнять отдельные операции. Настоящая сила <code>tidyverse</code> — в том, что их можно соединять в одну цепочку. Вот полная предобработка данных одного испытуемого от «сырых» данных от PsychoPy до агрегированной сводки. Обратите внимание, как цепочка читается как рецепт:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"data/sharexp/raw/01.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(numtrial)) <span class="sc">|&gt;</span>                                  <span class="co"># убираем служебные строки</span></span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize,</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>         <span class="fu">starts_with</span>(<span class="st">"mouse"</span>) <span class="sc">&amp;</span> <span class="fu">ends_with</span>(<span class="st">"_raw"</span>) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">contains</span>(<span class="st">"Button"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">time1 =</span> mouse_main1.time_raw,</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">click1x =</span> mouse_main1.x_raw,</span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">click1y =</span> mouse_main1.y_raw,</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">time2 =</span> mouse_main2.time_raw,</span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">click2x =</span> mouse_main2.x_raw,</span>
+<span id="cb81-10"><a href="#cb81-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">click2y =</span> mouse_main2.y_raw) <span class="sc">|&gt;</span></span>
+<span id="cb81-11"><a href="#cb81-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(trialtype <span class="sc">!=</span> <span class="st">"both"</span>) <span class="sc">|&gt;</span>                               <span class="co"># пробы с двумя целями анализируем отдельно</span></span>
+<span id="cb81-12"><a href="#cb81-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>                                            <span class="co"># идентификатор испытуемого</span></span>
+<span id="cb81-13"><a href="#cb81-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_time =</span> <span class="fu">mean</span>(time1),</span>
+<span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_time =</span> <span class="fu">sd</span>(time1),</span>
+<span id="cb81-15"><a href="#cb81-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">.by =</span> <span class="fu">c</span>(id, trialtype, setsize))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+     id trialtype setsize mean_time sd_time
+  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1     1 tray            8      1.56   0.453
+2     1 dots            8      1.58   0.464
+3     1 tray           12      1.77   0.739
+4     1 dots           12      1.88   0.643
+5     1 tray           16      2.12   1.08 
+6     1 dots           16      2.18   1.14 </code></pre>
+</div>
+</div>
+<p>Мы исключили пробы типа <code>both</code>, потому что в них две целевые иконки, и анализ таких проб отличается от анализа проб с одной целью. Из 450 проб осталось 300.</p>
+<p>Результат мы получили для одного испытуемого. Но в нашем распоряжении двадцать — и пока что этот код придётся копировать двадцать раз, меняя имя файла. Не очень-то красиво. В главе про <a href="../chpts/rpy-tidyadv.html">продвинутую предобработку</a> мы научимся читать и предобрабатывать все файлы сразу.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Итоги
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Опрятные данные</strong>: переменная — столбец, наблюдение — строка, значение — ячейка. К такому виду нужно привести данные перед анализом.</li>
+<li><strong>Пайп</strong> <code>|&gt;</code> передаёт результат слева в первый аргумент функции справа и превращает вложенные вызовы в читаемую цепочку.</li>
+<li>Основные глаголы <code>dplyr</code>:
+<ul>
+<li><code>select()</code> — отбор столбцов;</li>
+<li><code>rename()</code> — переименование;</li>
+<li><code>filter()</code> и <code>slice()</code> — отбор строк по условию и по номеру;</li>
+<li><code>arrange()</code> — сортировка;</li>
+<li><code>mutate()</code> — создание и изменение переменных (<code>if_else()</code> и <code>case_when()</code> — для условных преобразований);</li>
+<li><code>summarise()</code> с <code>group_by()</code> или <code>.by</code> — агрегация; <code>count()</code> — подсчёт частот.</li>
+</ul></li>
+<li>Лучше формулировать <strong>условия</strong>, а не номера строк, и проверять результат каждого шага.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chpts/rpy-data.html" class="pagination-link" aria-label="Базовое исследование данных">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовое исследование данных</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chpts/rpy-tidyadv.html" class="pagination-link" aria-label="Продвинутая предобработка данных">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Продвинутая предобработка данных</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

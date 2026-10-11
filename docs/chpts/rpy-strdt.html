@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Предобработка данных. Строки. Дата и время – RS ANDAN // PSY&nbsp;HSE</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chpts/rpy-tidyadv.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-84b129f27be8f528ae7b9875820b10cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ничего не найдено",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отмена",
+    "search-submit-button-title": "Отправить",
+    "search-label": "Поиск"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chpts/rpy-strdt.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">RS ANDAN // PSY&nbsp;HSE</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/intro-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основания статистики</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Основы R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/prob-randvals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовое исследование данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-tidybase.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Базовая предобработка данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-tidyadv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Продвинутая предобработка данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-strdt.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#strdt-strings" id="toc-strdt-strings" class="nav-link active" data-scroll-target="#strdt-strings"><span class="header-section-number">7.1</span> Строки</a>
+  <ul class="collapse">
+  <li><a href="#strdt-strings-type" id="toc-strdt-strings-type" class="nav-link" data-scroll-target="#strdt-strings-type"><span class="header-section-number">7.1.1</span> Строка как тип данных</a></li>
+  <li><a href="#strdt-stringr" id="toc-strdt-stringr" class="nav-link" data-scroll-target="#strdt-stringr"><span class="header-section-number">7.1.2</span> Пакет <code>stringr</code></a></li>
+  <li><a href="#strdt-basic" id="toc-strdt-basic" class="nav-link" data-scroll-target="#strdt-basic"><span class="header-section-number">7.1.3</span> Длина, регистр, подстроки</a></li>
+  <li><a href="#strdt-concat" id="toc-strdt-concat" class="nav-link" data-scroll-target="#strdt-concat"><span class="header-section-number">7.1.4</span> Склеивание и разделение</a></li>
+  <li><a href="#strdt-search" id="toc-strdt-search" class="nav-link" data-scroll-target="#strdt-search"><span class="header-section-number">7.1.5</span> Поиск и замена</a></li>
+  </ul></li>
+  <li><a href="#strdt-regex" id="toc-strdt-regex" class="nav-link" data-scroll-target="#strdt-regex"><span class="header-section-number">7.2</span> Регулярные выражения</a>
+  <ul class="collapse">
+  <li><a href="#strdt-regex-meta" id="toc-strdt-regex-meta" class="nav-link" data-scroll-target="#strdt-regex-meta"><span class="header-section-number">7.2.1</span> Метасимволы</a></li>
+  <li><a href="#strdt-regex-quant" id="toc-strdt-regex-quant" class="nav-link" data-scroll-target="#strdt-regex-quant"><span class="header-section-number">7.2.2</span> Квантификаторы</a></li>
+  <li><a href="#strdt-regex-build" id="toc-strdt-regex-build" class="nav-link" data-scroll-target="#strdt-regex-build"><span class="header-section-number">7.2.3</span> Строим регулярное выражение шаг за шагом</a></li>
+  </ul></li>
+  <li><a href="#strdt-tidy" id="toc-strdt-tidy" class="nav-link" data-scroll-target="#strdt-tidy"><span class="header-section-number">7.3</span> Разделение значений: строки внутри данных</a></li>
+  <li><a href="#strdt-datetime" id="toc-strdt-datetime" class="nav-link" data-scroll-target="#strdt-datetime"><span class="header-section-number">7.4</span> Дата и время</a>
+  <ul class="collapse">
+  <li><a href="#strdt-dt-why" id="toc-strdt-dt-why" class="nav-link" data-scroll-target="#strdt-dt-why"><span class="header-section-number">7.4.1</span> Почему дата и время — особый тип данных</a></li>
+  <li><a href="#strdt-dt-formats" id="toc-strdt-dt-formats" class="nav-link" data-scroll-target="#strdt-dt-formats"><span class="header-section-number">7.4.2</span> Форматы даты и времени</a></li>
+  <li><a href="#strdt-dt-parse" id="toc-strdt-dt-parse" class="nav-link" data-scroll-target="#strdt-dt-parse"><span class="header-section-number">7.4.3</span> Читаем даты из <code>sharexp</code></a></li>
+  <li><a href="#strdt-dt-components" id="toc-strdt-dt-components" class="nav-link" data-scroll-target="#strdt-dt-components"><span class="header-section-number">7.4.4</span> Извлекаем компоненты даты и времени</a></li>
+  <li><a href="#strdt-dt-arith" id="toc-strdt-dt-arith" class="nav-link" data-scroll-target="#strdt-dt-arith"><span class="header-section-number">7.4.5</span> Вычисления с датами</a></li>
+  <li><a href="#strdt-dt-tz" id="toc-strdt-dt-tz" class="nav-link" data-scroll-target="#strdt-dt-tz"><span class="header-section-number">7.4.6</span> Часовые пояса</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="rpy-strdt" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="intro">
+<p>Числа и логические значения обрабатывать просто: у них есть чёткие правила арифметики. С текстом и со временем сложнее. Названия файлов, ответы на открытые вопросы, имена стимулов, даты прохождения опроса — всё это данные, которые нужно уметь «разбирать на части», проверять на соответствие шаблону и приводить к единому виду. Здесь нам поможет два пакета из <code>tidyverse</code>: <code>stringr</code> для строк и <code>lubridate</code> для даты и времени.</p>
+</div>
+<section id="strdt-strings" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="strdt-strings"><span class="header-section-number">7.1</span> Строки</h2>
+<section id="strdt-strings-type" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="strdt-strings-type"><span class="header-section-number">7.1.1</span> Строка как тип данных</h3>
+<p>С типом <code>character</code> мы познакомились в <a href="../chpts/rpy-basics.html#r-datatypes-character">основах R</a>. Напомним главное: строка — это последовательность символов, заключённая в кавычки, а <strong>строковый вектор (character vector)</strong> — вектор, элементами которого являются строки.</p>
+<p>Строки можно заключать как в двойные, так и в одинарные кавычки:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">"tray1.png"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="st">'dots2.png'</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(s1, s2)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tray1.png" "dots2.png"</code></pre>
+</div>
+</div>
+<p>Если внутри строки нужны кавычки, то можно заключить строку в кавычки другого вида:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="st">'Испытуемый сказал: "Я ничего не нашёл"'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>s3</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Испытуемый сказал: \"Я ничего не нашёл\""</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(s3)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Испытуемый сказал: "Я ничего не нашёл"</code></pre>
+</div>
+</div>
+<p>Обратите внимание на разницу между выводом <code>s3</code> и <code>cat(s3)</code>. В первом случае R показывает строку «как она записана в коде» — и поэтому внутренние кавычки экранируются обратным слэшем (<code>\"</code>). Во втором — выводит именно текст, как он есть.</p>
+<p>Если в строке нужны кавычки того же вида, их экранируют обратным слэшем <code>\</code>: <code>"Он сказал: \"Привет\""</code>. Символ <code>\</code> в R — служебный: например, <code>\n</code> означает перевод строки, а <code>\t</code> — табуляцию.</p>
+</section>
+<section id="strdt-stringr" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="strdt-stringr"><span class="header-section-number">7.1.2</span> Пакет <code>stringr</code></h3>
+<p>Для работы со строками существует два основных пакета: <code>stringr</code> (входит в <code>tidyverse</code>) и более мощный <code>stringi</code> (устанавливается отдельно). Мы будем пользоваться первым. Все его функции начинаются с <code>str_</code>, что облегчает поиск нужной функции в подсказках RStudio: достаточно набрать <code>str_</code> и нажать <code>Tab</code>.</p>
+<p>Строки в данных нам встречались давно. Например, путь к файлу и его имя:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="st">"data/sharexp/raw"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>files[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data/sharexp/raw/01.csv" "data/sharexp/raw/02.csv"
+[3] "data/sharexp/raw/03.csv"</code></pre>
+</div>
+</div>
+</section>
+<section id="strdt-basic" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="strdt-basic"><span class="header-section-number">7.1.3</span> Длина, регистр, подстроки</h3>
+<p>Количество символов в строке возвращает <code>str_length()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(files[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 23 23 23</code></pre>
+</div>
+</div>
+<p>Привести строку к верхнему или нижнему регистру можно функциями <code>str_to_upper()</code> и <code>str_to_lower()</code>, а сделать заглавной первую букву — <code>str_to_sentence()</code> или <code>str_to_title()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_upper</span>(<span class="st">"tray1.png"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "TRAY1.PNG"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_title</span>(<span class="st">"search time by set size"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Search Time By Set Size"</code></pre>
+</div>
+</div>
+<p>Приведение к единому регистру — обязательный шаг при работе с ответами респондентов: «Москва», «москва» и «МОСКВА» для R — три разных значения, а для нас — одно.</p>
+<p>Выделить часть строки по позициям символов можно с помощью <code>str_sub()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(<span class="st">"sharexp"</span>, <span class="at">start =</span> <span class="dv">1</span>, <span class="at">end =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "share"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(<span class="st">"sharexp"</span>, <span class="at">start =</span> <span class="sc">-</span><span class="dv">3</span>)          <span class="co"># отрицательные значения --- с конца строки</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "exp"</code></pre>
+</div>
+</div>
+<p>Часто лишние пробелы в начале и в конце строки (особенно в данных, набранных руками) мешают сопоставлению. Убрать их можно функцией <code>str_trim()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_trim</span>(<span class="st">"   Android "</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Android"</code></pre>
+</div>
+</div>
+</section>
+<section id="strdt-concat" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="strdt-concat"><span class="header-section-number">7.1.4</span> Склеивание и разделение</h3>
+<p>Склеить строки можно с помощью <code>str_c()</code> (в базовом R — <code>paste()</code> и <code>paste0()</code>). Аргумент <code>sep</code> задаёт разделитель, который будет поставлен между склеиваемыми строками. Функция векторизована, поэтому склеивает вектора поэлементно (вспомните recycling):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">"id"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">sep =</span> <span class="st">"_"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "id_1" "id_2" "id_3"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">"trial"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">collapse =</span> <span class="st">", "</span>)   <span class="co"># collapse склеивает элементы вектора в одну строку</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "trial1, trial2, trial3"</code></pre>
+</div>
+</div>
+<p>Если нужно «дополнить» числа нулями слева, чтобы они имели одинаковую длину (как в именах наших файлов <code>01.csv</code>, …, <code>20.csv</code>), поможет <code>str_pad()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_pad</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">pad =</span> <span class="st">"0"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12"</code></pre>
+</div>
+</div>
+<p>Разделить строку по символу можно функцией <code>str_split()</code>. Она возвращает <strong>список</strong>: для каждой исходной строки — вектор её частей.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_split</span>(<span class="st">"tray1.png"</span>, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "tray1" "png"  </code></pre>
+</div>
+</div>
+<p>(Точка перед <code>png</code> записана как <code>"\\."</code> — об этой странности чуть позже, в разделе про регулярные выражения.)</p>
+<p>Если вам нужен не список, а таблица, то разделять и склеивать можно прямо в таблицах — с помощью функций <code>separate_wider_delim()</code> и <code>unite()</code> из <code>tidyr</code>. Мы воспользуемся ими уже скоро.</p>
+</section>
+<section id="strdt-search" class="level3" data-number="7.1.5">
+<h3 data-number="7.1.5" class="anchored" data-anchor-id="strdt-search"><span class="header-section-number">7.1.5</span> Поиск и замена</h3>
+<p>Самая частая задача — найти в строках некий фрагмент. Рассмотрим на примере реальных данных. В файлах PsychoPy в столбцах <code>stim1</code>, <code>stim2</code>, … записаны названия графических файлов со стимулами, которые предъявлялись в пробе. Посмотрим на стимулы первой пробы первого испытуемого:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/sharexp/raw/01.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>stim <span class="ot">&lt;-</span> d1[<span class="dv">1</span>, <span class="fu">paste0</span>(<span class="st">"stim"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)] <span class="sc">|&gt;</span> <span class="fu">unlist</span>(<span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>stim</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tray1.png" "01.png"    "02.png"    "03.png"    "04.png"    "05.png"   
+[7] "06.png"    "07.png"   </code></pre>
+</div>
+</div>
+<p>В пробе 8 стимулов (<code>setsize = 8</code>). Все они называются по-разному: один содержит <code>tray</code>, остальные — просто числа. Судя по названиям, <code>tray1.png</code> — это иконка Outgoing Tray, то есть целевой стимул, а числа — дистракторы.</p>
+<p>Функция <code>str_detect()</code> проверяет, есть ли в строке заданный фрагмент (шаблон), и возвращает вектор из <code>TRUE</code> и <code>FALSE</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(stim, <span class="st">"tray"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+</div>
+</div>
+<p>Эту функцию удобно использовать внутри <code>filter()</code> и <code>mutate()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">stim =</span> stim) <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(stim, <span class="st">"tray"</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  stim     
+  &lt;chr&gt;    
+1 tray1.png</code></pre>
+</div>
+</div>
+<p>Чтобы <strong>посчитать</strong> число вхождений шаблона в строку, есть <code>str_count()</code>, чтобы <strong>извлечь</strong> сам шаблон — <code>str_extract()</code>, чтобы <strong>заменить</strong> его — <code>str_replace()</code>, чтобы <strong>удалить</strong> — <code>str_remove()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_count</span>(stim, <span class="st">"</span><span class="sc">\\</span><span class="st">d"</span>)                  <span class="co"># сколько цифр в каждой строке</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 2 2 2 2 2 2</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(stim, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>)               <span class="co"># достаём числа из названий</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1"  "01" "02" "03" "04" "05" "06" "07"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(stim, <span class="st">"</span><span class="sc">\\</span><span class="st">.png$"</span>, <span class="st">".jpg"</span>)    <span class="co"># меняем расширение</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tray1.jpg" "01.jpg"    "02.jpg"    "03.jpg"    "04.jpg"    "05.jpg"   
+[7] "06.jpg"    "07.jpg"   </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_remove</span>(stim, <span class="st">"</span><span class="sc">\\</span><span class="st">.png$"</span>)             <span class="co"># убираем расширение</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tray1" "01"    "02"    "03"    "04"    "05"    "06"    "07"   </code></pre>
+</div>
+</div>
+<p>Все эти функции принимают в качестве шаблона не просто текст, а <strong>регулярное выражение</strong> — и именно оно скрывается за странными символами <code>\\d+</code> и <code>\\.png$</code>. Разберёмся.</p>
+</section>
+</section>
+<section id="strdt-regex" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="strdt-regex"><span class="header-section-number">7.2</span> Регулярные выражения</h2>
+<div id="def-regex" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 7.1</strong></span> <strong>Регулярное выражение (regular expression, regex)</strong> — это текстовый шаблон, который описывает множество строк. Он состоит из обычных символов, которые обозначают самих себя, и <em>метасимволов</em>, которые обозначают «что-то особенное».</p>
+</div>
+<p>Регулярное выражение — язык для описания паттернов в тексте. Он существует практически во всех языках программирования. Выучить его целиком невозможно, да и не нужно. Мы разберём минимально необходимое.</p>
+<p>Чтобы на практике увидеть, что находит шаблон, воспользуемся функцией <code>str_view()</code>: она выводит строки и подсвечивает найденные фрагменты. Возьмём вектор дат, записанных в разных форматах (в том числе с ошибками, которые мы хотим научиться находить):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"21.92.2001"</span>, <span class="st">"19.11.12"</span>, <span class="st">"16.o1.2001"</span>, <span class="st">"01.04.1994"</span>, <span class="st">"5-3-2011"</span>, <span class="st">"6/04/1999"</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>dates</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "21.92.2001" "19.11.12"   "16.o1.2001" "01.04.1994" "5-3-2011"  
+[6] "6/04/1999" </code></pre>
+</div>
+</div>
+<section id="strdt-regex-meta" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="strdt-regex-meta"><span class="header-section-number">7.2.1</span> Метасимволы</h3>
+<p>Метасимволы — это символы, у которых есть особое значение:</p>
+<div id="tbl-regex-meta" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regex-meta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;7.1: Основные метасимволы
+</figcaption>
+<div aria-describedby="tbl-regex-meta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Метасимвол</th>
+<th style="text-align: left;">Что означает</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>.</code></td>
+<td style="text-align: left;">любой символ</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>^</code></td>
+<td style="text-align: left;">начало строки</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>$</code></td>
+<td style="text-align: left;">конец строки</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>\\d</code></td>
+<td style="text-align: left;">любая цифра (<code>\\D</code> — любой символ, кроме цифры)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>\\s</code></td>
+<td style="text-align: left;">пробельный символ (<code>\\S</code> — любой, кроме пробельного)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>\\w</code></td>
+<td style="text-align: left;">буква, цифра или знак подчёркивания (<code>\\W</code> — любой, кроме них)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>[abc]</code></td>
+<td style="text-align: left;">любой из перечисленных символов (<code>[0-9]</code> — любая цифра, <code>[a-z]</code> — любая строчная латинская буква)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>[^abc]</code></td>
+<td style="text-align: left;">любой символ, кроме перечисленных</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>(...)</code></td>
+<td style="text-align: left;">группировка (внутри скобок можно перечислять варианты через вертикальную черту: <code>(tray|dots)</code> — «tray» или «dots»)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(dates, <span class="st">"."</span>)    <span class="co"># любой символ --- подсвечивается всё</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] │ &lt;2&gt;&lt;1&gt;&lt;.&gt;&lt;9&gt;&lt;2&gt;&lt;.&gt;&lt;2&gt;&lt;0&gt;&lt;0&gt;&lt;1&gt;
+[2] │ &lt;1&gt;&lt;9&gt;&lt;.&gt;&lt;1&gt;&lt;1&gt;&lt;.&gt;&lt;1&gt;&lt;2&gt;
+[3] │ &lt;1&gt;&lt;6&gt;&lt;.&gt;&lt;o&gt;&lt;1&gt;&lt;.&gt;&lt;2&gt;&lt;0&gt;&lt;0&gt;&lt;1&gt;
+[4] │ &lt;0&gt;&lt;1&gt;&lt;.&gt;&lt;0&gt;&lt;4&gt;&lt;.&gt;&lt;1&gt;&lt;9&gt;&lt;9&gt;&lt;4&gt;
+[5] │ &lt;5&gt;&lt;-&gt;&lt;3&gt;&lt;-&gt;&lt;2&gt;&lt;0&gt;&lt;1&gt;&lt;1&gt;
+[6] │ &lt;6&gt;&lt;/&gt;&lt;0&gt;&lt;4&gt;&lt;/&gt;&lt;1&gt;&lt;9&gt;&lt;9&gt;&lt;9&gt;</code></pre>
+</div>
+</div>
+<p>Точка — это <em>любой символ</em>, поэтому она нашла всё. Чтобы найти именно <strong>точку</strong>, нужно «лишить» её особого смысла — <strong>экранировать</strong> обратным слэшем. А поскольку обратный слэш в R-строке сам служебный, его приходится удваивать:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(dates, <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>)  <span class="co"># именно точка</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] │ 21&lt;.&gt;92&lt;.&gt;2001
+[2] │ 19&lt;.&gt;11&lt;.&gt;12
+[3] │ 16&lt;.&gt;o1&lt;.&gt;2001
+[4] │ 01&lt;.&gt;04&lt;.&gt;1994</code></pre>
+</div>
+</div>
+<p>Это то самое «странное» <code>\\.</code> из примеров выше. Чтобы найти строки, которые <em>начинаются</em> с нуля, или <em>заканчиваются</em> на девятку, используют <code>^</code> и <code>$</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(dates, <span class="st">"^0"</span>)   <span class="co"># начинается с нуля</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[4] │ &lt;0&gt;1.04.1994</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(dates, <span class="st">"9$"</span>)   <span class="co"># заканчивается на девятку</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[6] │ 6/04/199&lt;9&gt;</code></pre>
+</div>
+</div>
+<p>Для классов символов (цифры, пробелы, буквы) используют обозначения с обратным слэшем:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(dates, <span class="st">"</span><span class="sc">\\</span><span class="st">d"</span>)  <span class="co"># цифры</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] │ &lt;2&gt;&lt;1&gt;.&lt;9&gt;&lt;2&gt;.&lt;2&gt;&lt;0&gt;&lt;0&gt;&lt;1&gt;
+[2] │ &lt;1&gt;&lt;9&gt;.&lt;1&gt;&lt;1&gt;.&lt;1&gt;&lt;2&gt;
+[3] │ &lt;1&gt;&lt;6&gt;.o&lt;1&gt;.&lt;2&gt;&lt;0&gt;&lt;0&gt;&lt;1&gt;
+[4] │ &lt;0&gt;&lt;1&gt;.&lt;0&gt;&lt;4&gt;.&lt;1&gt;&lt;9&gt;&lt;9&gt;&lt;4&gt;
+[5] │ &lt;5&gt;-&lt;3&gt;-&lt;2&gt;&lt;0&gt;&lt;1&gt;&lt;1&gt;
+[6] │ &lt;6&gt;/&lt;0&gt;&lt;4&gt;/&lt;1&gt;&lt;9&gt;&lt;9&gt;&lt;9&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(dates, <span class="st">"</span><span class="sc">\\</span><span class="st">D"</span>)  <span class="co"># всё, кроме цифр</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] │ 21&lt;.&gt;92&lt;.&gt;2001
+[2] │ 19&lt;.&gt;11&lt;.&gt;12
+[3] │ 16&lt;.&gt;&lt;o&gt;1&lt;.&gt;2001
+[4] │ 01&lt;.&gt;04&lt;.&gt;1994
+[5] │ 5&lt;-&gt;3&lt;-&gt;2011
+[6] │ 6&lt;/&gt;04&lt;/&gt;1999</code></pre>
+</div>
+</div>
+</section>
+<section id="strdt-regex-quant" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="strdt-regex-quant"><span class="header-section-number">7.2.2</span> Квантификаторы</h3>
+<p>Часто нужно указать, сколько раз повторяется символ или группа символов. Для этого используются <strong>квантификаторы</strong>:</p>
+<div id="tbl-regex-quant" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regex-quant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;7.2: Квантификаторы
+</figcaption>
+<div aria-describedby="tbl-regex-quant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Квантификатор</th>
+<th style="text-align: left;">Сколько раз</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>?</code></td>
+<td style="text-align: left;">ноль или один</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>*</code></td>
+<td style="text-align: left;">ноль или более</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>+</code></td>
+<td style="text-align: left;">один или более</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>{n}</code></td>
+<td style="text-align: left;">ровно <code>n</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>{n,}</code></td>
+<td style="text-align: left;">не менее <code>n</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>{n,m}</code></td>
+<td style="text-align: left;">от <code>n</code> до <code>m</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(dates, <span class="st">"</span><span class="sc">\\</span><span class="st">d{2}"</span>)   <span class="co"># ровно две цифры подряд</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] │ &lt;21&gt;.&lt;92&gt;.&lt;20&gt;&lt;01&gt;
+[2] │ &lt;19&gt;.&lt;11&gt;.&lt;12&gt;
+[3] │ &lt;16&gt;.o1.&lt;20&gt;&lt;01&gt;
+[4] │ &lt;01&gt;.&lt;04&gt;.&lt;19&gt;&lt;94&gt;
+[5] │ 5-3-&lt;20&gt;&lt;11&gt;
+[6] │ 6/&lt;04&gt;/&lt;19&gt;&lt;99&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(dates, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>)     <span class="co"># одна или более цифр подряд</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] │ &lt;21&gt;.&lt;92&gt;.&lt;2001&gt;
+[2] │ &lt;19&gt;.&lt;11&gt;.&lt;12&gt;
+[3] │ &lt;16&gt;.o&lt;1&gt;.&lt;2001&gt;
+[4] │ &lt;01&gt;.&lt;04&gt;.&lt;1994&gt;
+[5] │ &lt;5&gt;-&lt;3&gt;-&lt;2011&gt;
+[6] │ &lt;6&gt;/&lt;04&gt;/&lt;1999&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="strdt-regex-build" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="strdt-regex-build"><span class="header-section-number">7.2.3</span> Строим регулярное выражение шаг за шагом</h3>
+<p>Теперь решим практическую задачу: из вектора <code>dates</code> отобрать корректные даты в формате <code>дд.мм.гггг</code>. Строить регулярное выражение лучше постепенно, проверяя каждый шаг. Для проверки будем использовать <code>str_detect()</code>.</p>
+<p><strong>Шаг 1.</strong> В дате должны быть точки.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(dates, <span class="st">"</span><span class="sc">\\</span><span class="st">."</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE</code></pre>
+</div>
+</div>
+<p>Отсеялись даты с другими разделителями (<code>5-3-2011</code>, <code>6/04/1999</code>).</p>
+<p><strong>Шаг 2.</strong> Между точками — только цифры, а во всей строке нет ничего лишнего. Для этого зафиксируем начало и конец строки.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(dates, <span class="st">"^</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d+</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d+$"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
+</div>
+</div>
+<p>Отсеялась дата <code>16.o1.2001</code> — в ней вместо нуля закралась латинская буква «o».</p>
+<p><strong>Шаг 3.</strong> Уточним: две цифры в дне, две в месяце, четыре в году.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(dates, <span class="st">"^</span><span class="sc">\\</span><span class="st">d{2}</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d{2}</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d{4}$"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+</div>
+</div>
+<p>Отсеялась дата <code>19.11.12</code> — в ней двузначный год.</p>
+<p><strong>Шаг 4.</strong> Но ведь <code>21.92.2001</code> соответствует нашему шаблону, хотя месяца 92 не бывает. Ограничим допустимые цифры: в дне первая цифра от 0 до 3, в месяце — 0 или 1.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(dates, <span class="st">"^[0-3]</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">.[01]</span><span class="sc">\\</span><span class="st">d</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d{4}$"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+</div>
+</div>
+<p>Теперь остаётся единственная корректная дата. Можно сделать шаблон ещё строже — чтобы он не пропускал, например, 39 число или 19-й месяц:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(dates, <span class="st">"^(0[1-9]|[12]</span><span class="sc">\\</span><span class="st">d|3[01])</span><span class="sc">\\</span><span class="st">.(0[1-9]|1[0-2])</span><span class="sc">\\</span><span class="st">.</span><span class="sc">\\</span><span class="st">d{4}$"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+</div>
+</div>
+<p>Здесь <code>(0[1-9]|[12]\\d|3[01])</code> читается так: «ноль и цифра от 1 до 9, или 1 или 2 и любая цифра, или 3 и 0 или 1» — то есть число от 01 до 31.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Совет
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Регулярные выражения читаются и пишутся тяжело даже опытными программистами. Тестируйте их на небольших примерах, стройте постепенно, а за подсказкой обращайтесь к справочнику — в RStudio он открывается через <code>Help → Cheat Sheets → String Manipulation with stringr</code>. Сервисы вроде <a href="https://regex101.com/">regex101.com</a> показывают, что именно находит шаблон.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="strdt-tidy" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="strdt-tidy"><span class="header-section-number">7.3</span> Разделение значений: строки внутри данных</h2>
+<p>Теперь вернёмся к реальным данным. Помните, что в <a href="../chpts/rpy-tidybase.html#tidy-concept">главе про опрятные данные</a> мы заметили, что в <code>sharexp</code> в одной ячейке иногда лежат два значения? Посмотрим на позиции стимулов в пробе:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>pos1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "[-238, 202]" "[-213, 226]" "[-234, 217]" "[-247, 218]" "[-243, 209]"</code></pre>
+</div>
+</div>
+<p>Каждая позиция — строка вида <code>"[-238, 202]"</code>, внутри которой записаны две координаты: <code>x</code> и <code>y</code>. Это нарушение третьего принципа опрятных данных. Расщепим эту строку на два числовых столбца.</p>
+<p>Сначала уберём квадратные скобки. Они в регулярных выражениях имеют особое значение (границы класса символов), поэтому их нужно экранировать, а внутри класса <code>[...]</code> — перечислить:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>pos <span class="ot">&lt;-</span> d1<span class="sc">$</span>pos1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str_remove_all</span>(pos, <span class="st">"[</span><span class="sc">\\</span><span class="st">[</span><span class="sc">\\</span><span class="st">]]"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "-238, 202" "-213, 226" "-234, 217" "-247, 218" "-243, 209"</code></pre>
+</div>
+</div>
+<p>Теперь разделим по запятой и пробелу. Для таблиц это удобнее делать функцией <code>separate_wider_delim()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">pos1 =</span> d1<span class="sc">$</span>pos1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pos1 =</span> <span class="fu">str_remove_all</span>(pos1, <span class="st">"[</span><span class="sc">\\</span><span class="st">[</span><span class="sc">\\</span><span class="st">]]"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(pos1, <span class="at">delim =</span> <span class="st">", "</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"pos1x"</span>, <span class="st">"pos1y"</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  pos1x pos1y
+  &lt;chr&gt; &lt;chr&gt;
+1 -238  202  
+2 -213  226  
+3 -234  217  
+4 -247  218  
+5 -243  209  </code></pre>
+</div>
+</div>
+<p>Разделилось, но столбцы по-прежнему текстовые (<code>&lt;chr&gt;</code>). Превратим их в числа:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">pos1 =</span> d1<span class="sc">$</span>pos1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]) <span class="sc">|&gt;</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pos1 =</span> <span class="fu">str_remove_all</span>(pos1, <span class="st">"[</span><span class="sc">\\</span><span class="st">[</span><span class="sc">\\</span><span class="st">]]"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(pos1, <span class="at">delim =</span> <span class="st">", "</span>, <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"pos1x"</span>, <span class="st">"pos1y"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), as.numeric))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  pos1x pos1y
+  &lt;dbl&gt; &lt;dbl&gt;
+1  -238   202
+2  -213   226
+3  -234   217
+4  -247   218
+5  -243   209</code></pre>
+</div>
+</div>
+<p>Вот теперь данные опрятные. Если же нужно просто «выдернуть» числа из строки, можно воспользоваться <code>str_extract_all()</code> с шаблоном «необязательный минус и одна или более цифр»:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract_all</span>(pos, <span class="st">"-?</span><span class="sc">\\</span><span class="st">d+"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "-238" "202" 
+
+[[2]]
+[1] "-213" "226" 
+
+[[3]]
+[1] "-234" "217" 
+
+[[4]]
+[1] "-247" "218" 
+
+[[5]]
+[1] "-243" "209" </code></pre>
+</div>
+</div>
+<p>Или <code>parse_number()</code> из <code>readr</code> — она извлекает первое число из текста (мы уже использовали её для идентификатора испытуемого).</p>
+<p>Противоположная операция — склеивание нескольких столбцов в один — называется <code>unite()</code>. Например, сделаем «подпись» условия из типа пробы и количества стимулов:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">trialtype =</span> <span class="fu">c</span>(<span class="st">"tray"</span>, <span class="st">"dots"</span>), <span class="at">setsize =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">16</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">"condition"</span>, trialtype, setsize, <span class="at">sep =</span> <span class="st">"_"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 1
+  condition
+  &lt;chr&gt;    
+1 tray_8   
+2 dots_16  </code></pre>
+</div>
+</div>
+</section>
+<section id="strdt-datetime" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="strdt-datetime"><span class="header-section-number">7.4</span> Дата и время</h2>
+<section id="strdt-dt-why" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="strdt-dt-why"><span class="header-section-number">7.4.1</span> Почему дата и время — особый тип данных</h3>
+<p>Казалось бы, дату можно хранить как обычную строку или как три числа. Но у времени есть много неочевидных особенностей, которые делают наивные вычисления опасными:</p>
+<ul>
+<li>год не всегда равен 365 дням (бывают високосные годы);</li>
+<li>сутки не всегда состоят из 24 часов (переходы на зимнее и летнее время; хотя в России эти переходы отменены, остальной мир продолжает их использовать);</li>
+<li>в месяцах разное число дней;</li>
+<li>одно и то же время в разных часовых поясах записывается по-разному;</li>
+<li>даты записывают в десятке разных форматов.</li>
+</ul>
+<p>Чтобы не вспоминать правила календаря каждый раз, мы пользуемся специальными типами данных, а в R за работу с ними отвечает пакет <strong><code>lubridate</code></strong> (он входит в <code>tidyverse</code>).</p>
+<p>Получить текущую дату и текущий момент времени можно так:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">today</span>()   <span class="co"># текущая дата</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">now</span>()     <span class="co"># текущий момент времени</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="strdt-dt-formats" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="strdt-dt-formats"><span class="header-section-number">7.4.2</span> Форматы даты и времени</h3>
+<p>Даты в мире записывают по-разному:</p>
+<div id="tbl-date-formats" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-date-formats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;7.3: Распространённые форматы даты
+</figcaption>
+<div aria-describedby="tbl-date-formats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Формат</th>
+<th style="text-align: left;">Пример</th>
+<th style="text-align: left;">Где используется</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>гггг-мм-дд</code></td>
+<td style="text-align: left;"><code>2019-01-14</code></td>
+<td style="text-align: left;">международный стандарт ISO 8601, базы данных</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>дд.мм.гггг</code>, <code>дд/мм/гггг</code></td>
+<td style="text-align: left;"><code>14.01.2019</code></td>
+<td style="text-align: left;">Россия, Европа</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>мм/дд/гггг</code></td>
+<td style="text-align: left;"><code>01/14/2019</code></td>
+<td style="text-align: left;">США</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Unix-время</td>
+<td style="text-align: left;"><code>1547462280</code></td>
+<td style="text-align: left;">число секунд, прошедших с 1 января 1970 года; базы данных, логи</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Опасность в том, что запись <code>02/03/2019</code> в Европе означает 2 марта, а в США — 3 февраля. Без дополнительной информации определить формат невозможно.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важность
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если у вас есть возможность выбирать формат записи дат при сборе данных, выбирайте <code>гггг-мм-дд</code>. Он однозначен, и при сортировке строк в алфавитном порядке даты оказываются в хронологическом порядке.</p>
+</div>
+</div>
+</section>
+<section id="strdt-dt-parse" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="strdt-dt-parse"><span class="header-section-number">7.4.3</span> Читаем даты из <code>sharexp</code></h3>
+<p>В служебной информации каждого файла PsychoPy записывает дату и время начала сессии. Мы достали эти значения в <a href="../chpts/rpy-tidyadv.html">прошлой главе</a>, и они сохранены в подготовленном датасете <code>share_clean.csv</code>. Прочитаем его и выберем по одной дате на испытуемого:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>share <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/sharexp/share_clean.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>sessions <span class="ot">&lt;-</span> share <span class="sc">|&gt;</span></span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>(id, date)</span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a>sessions</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 2
+      id date            
+   &lt;dbl&gt; &lt;chr&gt;           
+ 1     1 2019_Jan_14_1038
+ 2     2 2019_01_14_1051 
+ 3     3 2019_01_14_1144 
+ 4     4 2019_May_13_1503
+ 5     5 2019_01_14_1246 
+ 6     6 2019_02_01_1426 
+ 7     7 2019_Feb_02_2310
+ 8     8 2019_Feb_03_1140
+ 9     9 2019_Feb_03_1315
+10    10 2019_02_01_1426 
+11    11 2019_May_13_1124
+12    12 2019_May_13_1200
+13    13 2019_May_13_1211
+14    14 2019_May_13_1220
+15    15 2019_May_13_1251
+16    16 2019_May_13_1251
+17    17 2019_May_13_1301
+18    18 2019_May_13_1304
+19    19 2019_May_14_1117
+20    20 2019_May_16_1032</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Заметка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если у вас нет файла <code>share_clean.csv</code>, его можно получить, выполнив код из главы про <a href="../chpts/rpy-tidyadv.html">продвинутую предобработку</a> и сохранив результат, либо запустив скрипт <code>scripts/sharexp-prepare.R</code> из репозитория учебника.</p>
+</div>
+</div>
+<p>Столбец <code>date</code> — это текст. Его формат такой: <code>год_месяц_день_часыминуты</code>. Но при этом посмотрите: в одних случаях месяц записан словом (<code>Jan</code>, <code>May</code>), в других — числом (<code>01</code>, <code>02</code>). Так бывает, когда данные собирали на разных компьютерах с разными настройками. Если оставить даты как есть, то отсортировать сессии по времени не получится: сравнивать <code>"2019_Jan_14_1038"</code> и <code>"2019_01_14_1051"</code> как строки бессмысленно.</p>
+<p>Давайте приведём к единому виду. Сначала посмотрим, какие варианты вообще встречаются, с помощью регулярных выражений:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>sessions <span class="sc">|&gt;</span></span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month_as_word =</span> <span class="fu">str_detect</span>(date, <span class="st">"^</span><span class="sc">\\</span><span class="st">d{4}_[A-Za-z]{3}_"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(month_as_word)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  month_as_word     n
+  &lt;lgl&gt;         &lt;int&gt;
+1 FALSE             5
+2 TRUE             15</code></pre>
+</div>
+</div>
+<p>В 15 файлах из 20 месяц записан словом, а в пяти — числом. Заменим названия месяцев числами. В R есть встроенный вектор <code>month.abb</code> с английскими сокращёнными названиями месяцев (<code>"Jan"</code>, <code>"Feb"</code>, …). Воспользуемся им, чтобы построить «словарь» для замены:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>month.abb</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>dict <span class="ot">&lt;-</span> <span class="fu">set_names</span>(<span class="fu">str_pad</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>, <span class="dv">2</span>, <span class="at">pad =</span> <span class="st">"0"</span>), month.abb)   <span class="co"># "Jan" = "01", "Feb" = "02", ...</span></span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>dict[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Jan  Feb  Mar 
+"01" "02" "03" </code></pre>
+</div>
+</div>
+<p>Функция <code>str_replace_all()</code> умеет принимать именованный вектор в качестве словаря «что на что заменить»:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>sessions <span class="ot">&lt;-</span> sessions <span class="sc">|&gt;</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date_chr =</span> <span class="fu">str_replace_all</span>(date, dict))</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>sessions</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 3
+      id date             date_chr       
+   &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;          
+ 1     1 2019_Jan_14_1038 2019_01_14_1038
+ 2     2 2019_01_14_1051  2019_01_14_1051
+ 3     3 2019_01_14_1144  2019_01_14_1144
+ 4     4 2019_May_13_1503 2019_05_13_1503
+ 5     5 2019_01_14_1246  2019_01_14_1246
+ 6     6 2019_02_01_1426  2019_02_01_1426
+ 7     7 2019_Feb_02_2310 2019_02_02_2310
+ 8     8 2019_Feb_03_1140 2019_02_03_1140
+ 9     9 2019_Feb_03_1315 2019_02_03_1315
+10    10 2019_02_01_1426  2019_02_01_1426
+11    11 2019_May_13_1124 2019_05_13_1124
+12    12 2019_May_13_1200 2019_05_13_1200
+13    13 2019_May_13_1211 2019_05_13_1211
+14    14 2019_May_13_1220 2019_05_13_1220
+15    15 2019_May_13_1251 2019_05_13_1251
+16    16 2019_May_13_1251 2019_05_13_1251
+17    17 2019_May_13_1301 2019_05_13_1301
+18    18 2019_May_13_1304 2019_05_13_1304
+19    19 2019_May_14_1117 2019_05_14_1117
+20    20 2019_May_16_1032 2019_05_16_1032</code></pre>
+</div>
+</div>
+<p>Теперь все даты записаны в едином формате <code>гггг_мм_дд_ччмм</code>. Осталось превратить строки в настоящие даты и время. В <code>lubridate</code> для этого есть набор функций, названия которых описывают порядок элементов в строке: <code>ymd()</code> (<em>year-month-day</em>), <code>dmy()</code>, <code>mdy()</code>, а если есть время, то добавляется <code>_hms</code>, <code>_hm</code> и т. д. Наша строка содержит год, месяц, день, часы и минуты, поэтому нам подойдёт <code>ymd_hm()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>sessions <span class="ot">&lt;-</span> sessions <span class="sc">|&gt;</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">session_start =</span> <span class="fu">ymd_hm</span>(date_chr))</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a>sessions <span class="sc">|&gt;</span> <span class="fu">select</span>(id, date, session_start)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 3
+      id date             session_start      
+   &lt;dbl&gt; &lt;chr&gt;            &lt;dttm&gt;             
+ 1     1 2019_Jan_14_1038 2019-01-14 10:38:00
+ 2     2 2019_01_14_1051  2019-01-14 10:51:00
+ 3     3 2019_01_14_1144  2019-01-14 11:44:00
+ 4     4 2019_May_13_1503 2019-05-13 15:03:00
+ 5     5 2019_01_14_1246  2019-01-14 12:46:00
+ 6     6 2019_02_01_1426  2019-02-01 14:26:00
+ 7     7 2019_Feb_02_2310 2019-02-02 23:10:00
+ 8     8 2019_Feb_03_1140 2019-02-03 11:40:00
+ 9     9 2019_Feb_03_1315 2019-02-03 13:15:00
+10    10 2019_02_01_1426  2019-02-01 14:26:00
+11    11 2019_May_13_1124 2019-05-13 11:24:00
+12    12 2019_May_13_1200 2019-05-13 12:00:00
+13    13 2019_May_13_1211 2019-05-13 12:11:00
+14    14 2019_May_13_1220 2019-05-13 12:20:00
+15    15 2019_May_13_1251 2019-05-13 12:51:00
+16    16 2019_May_13_1251 2019-05-13 12:51:00
+17    17 2019_May_13_1301 2019-05-13 13:01:00
+18    18 2019_May_13_1304 2019-05-13 13:04:00
+19    19 2019_May_14_1117 2019-05-14 11:17:00
+20    20 2019_May_16_1032 2019-05-16 10:32:00</code></pre>
+</div>
+</div>
+<p>Тип нового столбца — <code>&lt;dttm&gt;</code> (<em>date-time</em>). Это настоящий момент времени, с которым можно производить вычисления. Функции <code>ymd_hm()</code> безразличны разделители между элементами — главное, чтобы был известен порядок.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Предупреждение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Разбор названий месяцев (<code>Jan</code>, <code>May</code> и т. д.) в <code>lubridate</code> зависит от языковых настроек операционной системы, и на устройстве с другой локалью он может не сработать. Поэтому мы сначала заменили названия месяцев числами. Этот приём заодно показывает, что с помощью строковых функций можно подготовить к разбору даже весьма неудобные форматы.</p>
+<p>Если бы нам встретились даты в <em>разных</em> порядках (например, где-то <code>дд.мм.гггг</code>, а где-то <code>мм.дд.гггг</code>), то сам по себе код не смог бы их различить. В таком случае нужно разбираться, откуда пришли данные. В наших данных порядок <code>год_месяц_день</code> однозначно следует из записей со словами (<code>2019_Jan_14</code>: после слова может идти только день) и из дат с числом больше 12 на втором месте. Для дат вроде <code>2019_02_01_1426</code> теоретически возможно и «1 февраля», и «2 января», но раз все остальные даты записаны в порядке «год — месяц — день», разумно предположить то же самое и здесь. Это допущение, и о нём стоит помнить.</p>
+<p>Ещё одно наблюдение: у испытуемых 6 и 10, а также 15 и 16 время начала сессии совпадает до минуты. Возможно, их тестировали параллельно на разных компьютерах, но это стоит уточнить у экспериментатора, а не принимать молча. Здесь мы в очередной раз убеждаемся, что на данные нужно <strong>смотреть</strong>.</p>
+</div>
+</div>
+</section>
+<section id="strdt-dt-components" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="strdt-dt-components"><span class="header-section-number">7.4.4</span> Извлекаем компоненты даты и времени</h3>
+<p>Из настоящей даты можно достать любой компонент с помощью функций с говорящими названиями:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>sessions <span class="sc">|&gt;</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">year</span>(session_start),</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">month =</span> <span class="fu">month</span>(session_start),</span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">day =</span> <span class="fu">day</span>(session_start),</span>
+<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">hour =</span> <span class="fu">hour</span>(session_start),</span>
+<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">minute =</span> <span class="fu">minute</span>(session_start),</span>
+<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">weekday =</span> <span class="fu">wday</span>(session_start, <span class="at">label =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, session_start, year, month, day, hour, minute, weekday) <span class="sc">|&gt;</span></span>
+<span id="cb96-9"><a href="#cb96-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">6</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 8
+     id session_start        year month   day  hour minute weekday
+  &lt;dbl&gt; &lt;dttm&gt;              &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt; &lt;ord&gt;  
+1     1 2019-01-14 10:38:00  2019     1    14    10     38 Mon    
+2     2 2019-01-14 10:51:00  2019     1    14    10     51 Mon    
+3     3 2019-01-14 11:44:00  2019     1    14    11     44 Mon    
+4     4 2019-05-13 15:03:00  2019     5    13    15      3 Mon    
+5     5 2019-01-14 12:46:00  2019     1    14    12     46 Mon    
+6     6 2019-02-01 14:26:00  2019     2     1    14     26 Fri    </code></pre>
+</div>
+</div>
+<p>Аргумент <code>label = TRUE</code> заставляет <code>wday()</code> возвращать название дня недели, а не его номер (язык названия зависит от настроек системы).</p>
+<p>Это уже можно использовать для описания выборки: например, посмотреть, в какие месяцы проходили сессии:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>sessions <span class="sc">|&gt;</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">month =</span> <span class="fu">month</span>(session_start, <span class="at">label =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(month)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  month     n
+  &lt;ord&gt; &lt;int&gt;
+1 Jan       4
+2 Feb       5
+3 May      11</code></pre>
+</div>
+</div>
+</section>
+<section id="strdt-dt-arith" class="level3" data-number="7.4.5">
+<h3 data-number="7.4.5" class="anchored" data-anchor-id="strdt-dt-arith"><span class="header-section-number">7.4.5</span> Вычисления с датами</h3>
+<p>С датами можно производить арифметику. Разность двух дат — это промежуток времени, и для его вычисления лучше использовать <code>difftime()</code> с явным указанием единиц измерения:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>first_session <span class="ot">&lt;-</span> <span class="fu">min</span>(sessions<span class="sc">$</span>session_start)</span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>last_session <span class="ot">&lt;-</span> <span class="fu">max</span>(sessions<span class="sc">$</span>session_start)</span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a>first_session</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2019-01-14 10:38:00 UTC"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>last_session</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2019-05-16 10:32:00 UTC"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">difftime</span>(last_session, first_session, <span class="at">units =</span> <span class="st">"days"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 121.9958 days</code></pre>
+</div>
+</div>
+<p>Между первой и последней сессией прошло около 122 дней — примерно четыре месяца. Чтобы получить это значение как обычное число, а не особый объект, заверните результат в <code>as.numeric()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">difftime</span>(last_session, first_session, <span class="at">units =</span> <span class="st">"days"</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 121.9958</code></pre>
+</div>
+</div>
+<p>К дате можно прибавлять промежутки времени с помощью функций <code>days()</code>, <code>hours()</code>, <code>minutes()</code> и др.:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>first_session <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">7</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2019-01-21 10:38:00 UTC"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a>first_session <span class="sc">+</span> <span class="fu">hours</span>(<span class="dv">3</span>) <span class="sc">+</span> <span class="fu">minutes</span>(<span class="dv">30</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2019-01-14 14:08:00 UTC"</code></pre>
+</div>
+</div>
+<p>Если же нужно превратить дату обратно в текст определённого формата (например, чтобы подписать график или записать в отчёт), используют <code>format()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span>(first_session, <span class="st">"%d.%m.%Y %H:%M"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "14.01.2019 10:38"</code></pre>
+</div>
+</div>
+<p>В шаблоне <code>%d</code> — день, <code>%m</code> — месяц, <code>%Y</code> — год из четырёх цифр, <code>%H</code> — часы, <code>%M</code> — минуты.</p>
+</section>
+<section id="strdt-dt-tz" class="level3" data-number="7.4.6">
+<h3 data-number="7.4.6" class="anchored" data-anchor-id="strdt-dt-tz"><span class="header-section-number">7.4.6</span> Часовые пояса</h3>
+<p>Момент времени имеет смысл только вместе с часовым поясом. По умолчанию <code>lubridate</code> считает, что время записано в UTC (всемирное координированное время, примерно «время по Гринвичу»). Если известно, что сессии проходили по московскому времени, это нужно указать:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd_hm</span>(<span class="st">"2019_01_14_1038"</span>, <span class="at">tz =</span> <span class="st">"Europe/Moscow"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2019-01-14 10:38:00 MSK"</code></pre>
+</div>
+</div>
+<p>Для наших данных это несущественно: все даты мы используем только для сопоставления друг с другом. Но если вы анализируете данные, собранные в разных часовых поясах (например, в онлайн-исследовании), о часовых поясах забывать нельзя — иначе «ночные» ответы окажутся дневными, а порядок событий исказится.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Итоги
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Строки</strong> обрабатываются функциями <code>stringr</code> (<code>str_*</code>): длина — <code>str_length()</code>, регистр — <code>str_to_lower()</code> / <code>str_to_upper()</code>, подстрока — <code>str_sub()</code>, склейка — <code>str_c()</code>, поиск — <code>str_detect()</code>, <code>str_extract()</code>, замена — <code>str_replace()</code>, <code>str_remove()</code>, разделение — <code>str_split()</code> и <code>separate_wider_delim()</code>.</li>
+<li><strong>Регулярные выражения</strong> — язык для описания шаблонов в тексте. Метасимволы (<code>.</code>, <code>^</code>, <code>$</code>, <code>\\d</code>, <code>[...]</code>) и квантификаторы (<code>?</code>, <code>+</code>, <code>*</code>, <code>{n}</code>) позволяют искать и проверять строки. Строить выражение нужно <strong>постепенно</strong>, проверяя каждый шаг.</li>
+<li>Если в ячейке больше одного значения, данные не опрятные: значения нужно <strong>расщепить</strong> (<code>separate_wider_delim()</code>) и привести к числовому типу.</li>
+<li><strong>Дата и время</strong> — особый тип данных. Для их чтения служат <code>ymd()</code>, <code>dmy()</code>, <code>ymd_hm()</code> и родственные функции из <code>lubridate</code>, для извлечения компонентов — <code>year()</code>, <code>month()</code>, <code>wday()</code>, <code>hour()</code> и др., для вычисления разности — <code>difftime()</code>.</li>
+<li>Формат записи даты нужно <strong>выяснять</strong>, а не угадывать: <code>02/03/2019</code> может быть и второе марта, и третье февраля.</li>
+</ul>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chpts/rpy-tidyadv.html" class="pagination-link" aria-label="Продвинутая предобработка данных">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Продвинутая предобработка данных</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

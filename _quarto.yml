@@ -1,6 +1,7 @@
 project:
   type: book
   output-dir: docs
+  execute-dir: project
   preview:
     port: 7035
 
@@ -21,15 +22,17 @@ book:
     - chpts/intro-basics.qmd
     - chpts/rpy-basics.qmd
     - chpts/prob-randvals.qmd
-    # - chpts/rpy-data.qmd
-    # - chpts/rpy-tidybase.qmd
-    # - chpts/rpy-tidyadv.qmd
-    # - chpts/rpy-strdt.qmd
+    # - chpts/rpy-randvals.qmd
+    - chpts/rpy-data.qmd
+    - chpts/rpy-tidybase.qmd
+    - chpts/rpy-tidyadv.qmd
+    - chpts/rpy-strdt.qmd
     # - chpts/rpy-vis.qmd
     # - chpts/stats-desc.qmd
     # - chpts/stats-norm.qmd
     # - chpts/stats-cltci.qmd
     # - chpts/stats-hyptest.qmd
+    # - chpts/andan-ttest.qmd
     # - chpts/andan-chisq.qmd
     # - chpts/stats-freqpval.qmd
     # - chpts/andan-cor.qmd
@@ -44,6 +47,8 @@ book:
     # - chpts/andan-efa.qmd
     # - chpts/andan-cfa.qmd
     # - chpts/andan-clust.qmd
+    # - chpts/repro-crisis.qmd
+    # - chpts/project-intro.qmd
     # - references.qmd
 
 # bibliography: references.bib
