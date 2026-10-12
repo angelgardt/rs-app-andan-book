@@ -175,6 +175,24 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовое исследование данных</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-tidybase.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Базовая предобработка данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-tidyadv.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Продвинутая предобработка данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-strdt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -736,11 +754,11 @@ window.Quarto = {
 <li>есть <em>ограниченный</em> набор значений, которые случайная величина может принимать,</li>
 <li>есть <em>вероятности</em>, с&nbsp;которыми случайная величина принимает эти значения.</li>
 </ul>
-<p>Давайте на игральном кубике. Есть&nbsp;кубик&nbsp;— у&nbsp;него шесть граней. Возможные значения случайной величины <span class="math inline">\(X\)</span>&nbsp;— <span class="math inline">\(\{1,2,3,4,5,6\}\)</span>. Вероятность того, что&nbsp;кубик упадет хотя&nbsp;бы какой-то из&nbsp;шести сторон — <span class="math inline">\(1\)</span>. Если&nbsp;кубик «честный», то&nbsp;каждая из&nbsp;граней выпадает равновероятно, то&nbsp;есть вероятность, с&nbsp;которой наша случайная величина принимает каждое из&nbsp;своих значений будет равна</p>
+<p>Давайте на&nbsp;игральном кубике. Есть&nbsp;кубик&nbsp;— у&nbsp;него шесть граней. Возможные значения случайной величины <span class="math inline">\(X\)</span>&nbsp;— <span class="math inline">\(\{1,2,3,4,5,6\}\)</span>. Вероятность того, что&nbsp;кубик упадет хотя&nbsp;бы какой-то из&nbsp;шести сторон — <span class="math inline">\(1\)</span>. Если&nbsp;кубик «честный», то&nbsp;каждая из&nbsp;граней выпадает равновероятно, то&nbsp;есть вероятность, с&nbsp;которой наша случайная величина принимает каждое из&nbsp;своих значений будет равна</p>
 <p><span class="math display">\[
 \mathbb{P}(X=1) = \mathbb{P}(X=2) = \mathbb{P}(X=3) = \mathbb{P}(X=4) = \mathbb{P}(X=5) = \mathbb{P}(X=6 ) = \frac{1}{6} \approx 0.167
 \]</span></p>
-<p>Но&nbsp;это мы рассчитали теоретически. Давайте проверим, будет&nbsp;ли это работать эмпирически. Подбросим кубик (на&nbsp;симуляции) 100 раз и&nbsp;посмотрим, сколько раз выпало та или&nbsp;иная грань (<a href="#tbl-dice-100" class="quarto-xref">Таблица&nbsp;<span>3.3</span></a>).</p>
+<p>Но&nbsp;это мы рассчитали теоретически. Давайте проверим, будет&nbsp;ли это работать эмпирически. Подбросим кубик (на&nbsp;симуляции) 100 раз и&nbsp;посмотрим, сколько раз выпала та или&nbsp;иная грань (<a href="#tbl-dice-100" class="quarto-xref">Таблица&nbsp;<span>3.3</span></a>).</p>
 <div id="tbl-dice-100" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-dice-100-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

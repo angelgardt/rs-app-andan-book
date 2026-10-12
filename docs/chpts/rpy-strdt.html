@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Предобработка данных. Строки. Дата и время – RS ANDAN // PSY&nbsp;HSE</title>
+<title>6&nbsp; Предобработка данных. Строки. Дата и время – RS ANDAN // PSY&nbsp;HSE</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chpts/rpy-tidyadv.html" rel="prev">
+<link href="../chpts/rpy-tidy.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chpts/rpy-strdt.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chpts/rpy-strdt.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Строки. Дата и время</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
@@ -176,20 +176,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chpts/rpy-tidybase.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Базовая предобработка данных</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/rpy-tidyadv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Продвинутая предобработка данных</span></span></a>
+  <a href="../chpts/rpy-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Предобработка данных</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chpts/rpy-strdt.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Строки. Дата и время</span></span></a>
   </div>
 </li>
     </ul>
@@ -202,29 +196,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#strdt-strings" id="toc-strdt-strings" class="nav-link active" data-scroll-target="#strdt-strings"><span class="header-section-number">7.1</span> Строки</a>
+  <li><a href="#strdt-strings" id="toc-strdt-strings" class="nav-link active" data-scroll-target="#strdt-strings"><span class="header-section-number">6.1</span> Строки</a>
   <ul class="collapse">
-  <li><a href="#strdt-strings-type" id="toc-strdt-strings-type" class="nav-link" data-scroll-target="#strdt-strings-type"><span class="header-section-number">7.1.1</span> Строка как тип данных</a></li>
-  <li><a href="#strdt-stringr" id="toc-strdt-stringr" class="nav-link" data-scroll-target="#strdt-stringr"><span class="header-section-number">7.1.2</span> Пакет <code>stringr</code></a></li>
-  <li><a href="#strdt-basic" id="toc-strdt-basic" class="nav-link" data-scroll-target="#strdt-basic"><span class="header-section-number">7.1.3</span> Длина, регистр, подстроки</a></li>
-  <li><a href="#strdt-concat" id="toc-strdt-concat" class="nav-link" data-scroll-target="#strdt-concat"><span class="header-section-number">7.1.4</span> Склеивание и разделение</a></li>
-  <li><a href="#strdt-search" id="toc-strdt-search" class="nav-link" data-scroll-target="#strdt-search"><span class="header-section-number">7.1.5</span> Поиск и замена</a></li>
+  <li><a href="#strdt-strings-type" id="toc-strdt-strings-type" class="nav-link" data-scroll-target="#strdt-strings-type"><span class="header-section-number">6.1.1</span> Строка как тип данных</a></li>
+  <li><a href="#strdt-stringr" id="toc-strdt-stringr" class="nav-link" data-scroll-target="#strdt-stringr"><span class="header-section-number">6.1.2</span> Пакет <code>stringr</code></a></li>
+  <li><a href="#strdt-basic" id="toc-strdt-basic" class="nav-link" data-scroll-target="#strdt-basic"><span class="header-section-number">6.1.3</span> Длина, регистр, подстроки</a></li>
+  <li><a href="#strdt-concat" id="toc-strdt-concat" class="nav-link" data-scroll-target="#strdt-concat"><span class="header-section-number">6.1.4</span> Склеивание и разделение</a></li>
+  <li><a href="#strdt-search" id="toc-strdt-search" class="nav-link" data-scroll-target="#strdt-search"><span class="header-section-number">6.1.5</span> Поиск и замена</a></li>
   </ul></li>
-  <li><a href="#strdt-regex" id="toc-strdt-regex" class="nav-link" data-scroll-target="#strdt-regex"><span class="header-section-number">7.2</span> Регулярные выражения</a>
+  <li><a href="#strdt-regex" id="toc-strdt-regex" class="nav-link" data-scroll-target="#strdt-regex"><span class="header-section-number">6.2</span> Регулярные выражения</a>
   <ul class="collapse">
-  <li><a href="#strdt-regex-meta" id="toc-strdt-regex-meta" class="nav-link" data-scroll-target="#strdt-regex-meta"><span class="header-section-number">7.2.1</span> Метасимволы</a></li>
-  <li><a href="#strdt-regex-quant" id="toc-strdt-regex-quant" class="nav-link" data-scroll-target="#strdt-regex-quant"><span class="header-section-number">7.2.2</span> Квантификаторы</a></li>
-  <li><a href="#strdt-regex-build" id="toc-strdt-regex-build" class="nav-link" data-scroll-target="#strdt-regex-build"><span class="header-section-number">7.2.3</span> Строим регулярное выражение шаг за шагом</a></li>
+  <li><a href="#strdt-regex-meta" id="toc-strdt-regex-meta" class="nav-link" data-scroll-target="#strdt-regex-meta"><span class="header-section-number">6.2.1</span> Метасимволы</a></li>
+  <li><a href="#strdt-regex-quant" id="toc-strdt-regex-quant" class="nav-link" data-scroll-target="#strdt-regex-quant"><span class="header-section-number">6.2.2</span> Квантификаторы</a></li>
+  <li><a href="#strdt-regex-build" id="toc-strdt-regex-build" class="nav-link" data-scroll-target="#strdt-regex-build"><span class="header-section-number">6.2.3</span> Строим регулярное выражение шаг за шагом</a></li>
   </ul></li>
-  <li><a href="#strdt-tidy" id="toc-strdt-tidy" class="nav-link" data-scroll-target="#strdt-tidy"><span class="header-section-number">7.3</span> Разделение значений: строки внутри данных</a></li>
-  <li><a href="#strdt-datetime" id="toc-strdt-datetime" class="nav-link" data-scroll-target="#strdt-datetime"><span class="header-section-number">7.4</span> Дата и время</a>
+  <li><a href="#strdt-tidy" id="toc-strdt-tidy" class="nav-link" data-scroll-target="#strdt-tidy"><span class="header-section-number">6.3</span> Разделение значений: строки внутри данных</a></li>
+  <li><a href="#strdt-datetime" id="toc-strdt-datetime" class="nav-link" data-scroll-target="#strdt-datetime"><span class="header-section-number">6.4</span> Дата и время</a>
   <ul class="collapse">
-  <li><a href="#strdt-dt-why" id="toc-strdt-dt-why" class="nav-link" data-scroll-target="#strdt-dt-why"><span class="header-section-number">7.4.1</span> Почему дата и время — особый тип данных</a></li>
-  <li><a href="#strdt-dt-formats" id="toc-strdt-dt-formats" class="nav-link" data-scroll-target="#strdt-dt-formats"><span class="header-section-number">7.4.2</span> Форматы даты и времени</a></li>
-  <li><a href="#strdt-dt-parse" id="toc-strdt-dt-parse" class="nav-link" data-scroll-target="#strdt-dt-parse"><span class="header-section-number">7.4.3</span> Читаем даты из <code>sharexp</code></a></li>
-  <li><a href="#strdt-dt-components" id="toc-strdt-dt-components" class="nav-link" data-scroll-target="#strdt-dt-components"><span class="header-section-number">7.4.4</span> Извлекаем компоненты даты и времени</a></li>
-  <li><a href="#strdt-dt-arith" id="toc-strdt-dt-arith" class="nav-link" data-scroll-target="#strdt-dt-arith"><span class="header-section-number">7.4.5</span> Вычисления с датами</a></li>
-  <li><a href="#strdt-dt-tz" id="toc-strdt-dt-tz" class="nav-link" data-scroll-target="#strdt-dt-tz"><span class="header-section-number">7.4.6</span> Часовые пояса</a></li>
+  <li><a href="#strdt-dt-why" id="toc-strdt-dt-why" class="nav-link" data-scroll-target="#strdt-dt-why"><span class="header-section-number">6.4.1</span> Почему дата и время — особый тип данных</a></li>
+  <li><a href="#strdt-dt-formats" id="toc-strdt-dt-formats" class="nav-link" data-scroll-target="#strdt-dt-formats"><span class="header-section-number">6.4.2</span> Форматы даты и времени</a></li>
+  <li><a href="#strdt-dt-parse" id="toc-strdt-dt-parse" class="nav-link" data-scroll-target="#strdt-dt-parse"><span class="header-section-number">6.4.3</span> Читаем даты из <code>sharexp</code></a></li>
+  <li><a href="#strdt-dt-components" id="toc-strdt-dt-components" class="nav-link" data-scroll-target="#strdt-dt-components"><span class="header-section-number">6.4.4</span> Извлекаем компоненты даты и времени</a></li>
+  <li><a href="#strdt-dt-arith" id="toc-strdt-dt-arith" class="nav-link" data-scroll-target="#strdt-dt-arith"><span class="header-section-number">6.4.5</span> Вычисления с датами</a></li>
+  <li><a href="#strdt-dt-tz" id="toc-strdt-dt-tz" class="nav-link" data-scroll-target="#strdt-dt-tz"><span class="header-section-number">6.4.6</span> Часовые пояса</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -234,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="rpy-strdt" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></span></h1>
+<h1 class="title"><span id="rpy-strdt" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></span></h1>
 </div>
 
 
@@ -254,10 +248,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="intro">
 <p>Числа и логические значения обрабатывать просто: у них есть чёткие правила арифметики. С текстом и со временем сложнее. Названия файлов, ответы на открытые вопросы, имена стимулов, даты прохождения опроса — всё это данные, которые нужно уметь «разбирать на части», проверять на соответствие шаблону и приводить к единому виду. Здесь нам поможет два пакета из <code>tidyverse</code>: <code>stringr</code> для строк и <code>lubridate</code> для даты и времени.</p>
 </div>
-<section id="strdt-strings" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="strdt-strings"><span class="header-section-number">7.1</span> Строки</h2>
-<section id="strdt-strings-type" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="strdt-strings-type"><span class="header-section-number">7.1.1</span> Строка как тип данных</h3>
+<section id="strdt-strings" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="strdt-strings"><span class="header-section-number">6.1</span> Строки</h2>
+<section id="strdt-strings-type" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="strdt-strings-type"><span class="header-section-number">6.1.1</span> Строка как тип данных</h3>
 <p>С типом <code>character</code> мы познакомились в <a href="../chpts/rpy-basics.html#r-datatypes-character">основах R</a>. Напомним главное: строка — это последовательность символов, заключённая в кавычки, а <strong>строковый вектор (character vector)</strong> — вектор, элементами которого являются строки.</p>
 <p>Строки можно заключать как в двойные, так и в одинарные кавычки:</p>
 <div class="cell">
@@ -283,8 +277,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Обратите внимание на разницу между выводом <code>s3</code> и <code>cat(s3)</code>. В первом случае R показывает строку «как она записана в коде» — и поэтому внутренние кавычки экранируются обратным слэшем (<code>\"</code>). Во втором — выводит именно текст, как он есть.</p>
 <p>Если в строке нужны кавычки того же вида, их экранируют обратным слэшем <code>\</code>: <code>"Он сказал: \"Привет\""</code>. Символ <code>\</code> в R — служебный: например, <code>\n</code> означает перевод строки, а <code>\t</code> — табуляцию.</p>
 </section>
-<section id="strdt-stringr" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="strdt-stringr"><span class="header-section-number">7.1.2</span> Пакет <code>stringr</code></h3>
+<section id="strdt-stringr" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="strdt-stringr"><span class="header-section-number">6.1.2</span> Пакет <code>stringr</code></h3>
 <p>Для работы со строками существует два основных пакета: <code>stringr</code> (входит в <code>tidyverse</code>) и более мощный <code>stringi</code> (устанавливается отдельно). Мы будем пользоваться первым. Все его функции начинаются с <code>str_</code>, что облегчает поиск нужной функции в подсказках RStudio: достаточно набрать <code>str_</code> и нажать <code>Tab</code>.</p>
 <p>Строки в данных нам встречались давно. Например, путь к файлу и его имя:</p>
 <div class="cell">
@@ -296,8 +290,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="strdt-basic" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="strdt-basic"><span class="header-section-number">7.1.3</span> Длина, регистр, подстроки</h3>
+<section id="strdt-basic" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="strdt-basic"><span class="header-section-number">6.1.3</span> Длина, регистр, подстроки</h3>
 <p>Количество символов в строке возвращает <code>str_length()</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(files[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
@@ -336,8 +330,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="strdt-concat" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="strdt-concat"><span class="header-section-number">7.1.4</span> Склеивание и разделение</h3>
+<section id="strdt-concat" class="level3" data-number="6.1.4">
+<h3 data-number="6.1.4" class="anchored" data-anchor-id="strdt-concat"><span class="header-section-number">6.1.4</span> Склеивание и разделение</h3>
 <p>Склеить строки можно с помощью <code>str_c()</code> (в базовом R — <code>paste()</code> и <code>paste0()</code>). Аргумент <code>sep</code> задаёт разделитель, который будет поставлен между склеиваемыми строками. Функция векторизована, поэтому склеивает вектора поэлементно (вспомните recycling):</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">"id"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">sep =</span> <span class="st">"_"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
@@ -367,8 +361,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>(Точка перед <code>png</code> записана как <code>"\\."</code> — об этой странности чуть позже, в разделе про регулярные выражения.)</p>
 <p>Если вам нужен не список, а таблица, то разделять и склеивать можно прямо в таблицах — с помощью функций <code>separate_wider_delim()</code> и <code>unite()</code> из <code>tidyr</code>. Мы воспользуемся ими уже скоро.</p>
 </section>
-<section id="strdt-search" class="level3" data-number="7.1.5">
-<h3 data-number="7.1.5" class="anchored" data-anchor-id="strdt-search"><span class="header-section-number">7.1.5</span> Поиск и замена</h3>
+<section id="strdt-search" class="level3" data-number="6.1.5">
+<h3 data-number="6.1.5" class="anchored" data-anchor-id="strdt-search"><span class="header-section-number">6.1.5</span> Поиск и замена</h3>
 <p>Самая частая задача — найти в строках некий фрагмент. Рассмотрим на примере реальных данных. В файлах PsychoPy в столбцах <code>stim1</code>, <code>stim2</code>, … записаны названия графических файлов со стимулами, которые предъявлялись в пробе. Посмотрим на стимулы первой пробы первого испытуемого:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/sharexp/raw/01.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
@@ -422,10 +416,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Все эти функции принимают в качестве шаблона не просто текст, а <strong>регулярное выражение</strong> — и именно оно скрывается за странными символами <code>\\d+</code> и <code>\\.png$</code>. Разберёмся.</p>
 </section>
 </section>
-<section id="strdt-regex" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="strdt-regex"><span class="header-section-number">7.2</span> Регулярные выражения</h2>
+<section id="strdt-regex" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="strdt-regex"><span class="header-section-number">6.2</span> Регулярные выражения</h2>
 <div id="def-regex" class="theorem definition">
-<p><span class="theorem-title"><strong>Определение 7.1</strong></span> <strong>Регулярное выражение (regular expression, regex)</strong> — это текстовый шаблон, который описывает множество строк. Он состоит из обычных символов, которые обозначают самих себя, и <em>метасимволов</em>, которые обозначают «что-то особенное».</p>
+<p><span class="theorem-title"><strong>Определение 6.1</strong></span> <strong>Регулярное выражение (regular expression, regex)</strong> — это текстовый шаблон, который описывает множество строк. Он состоит из обычных символов, которые обозначают самих себя, и <em>метасимволов</em>, которые обозначают «что-то особенное».</p>
 </div>
 <p>Регулярное выражение — язык для описания паттернов в тексте. Он существует практически во всех языках программирования. Выучить его целиком невозможно, да и не нужно. Мы разберём минимально необходимое.</p>
 <p>Чтобы на практике увидеть, что находит шаблон, воспользуемся функцией <code>str_view()</code>: она выводит строки и подсвечивает найденные фрагменты. Возьмём вектор дат, записанных в разных форматах (в том числе с ошибками, которые мы хотим научиться находить):</p>
@@ -437,13 +431,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 [6] "6/04/1999" </code></pre>
 </div>
 </div>
-<section id="strdt-regex-meta" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="strdt-regex-meta"><span class="header-section-number">7.2.1</span> Метасимволы</h3>
+<section id="strdt-regex-meta" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="strdt-regex-meta"><span class="header-section-number">6.2.1</span> Метасимволы</h3>
 <p>Метасимволы — это символы, у которых есть особое значение:</p>
 <div id="tbl-regex-meta" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regex-meta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;7.1: Основные метасимволы
+Таблица&nbsp;6.1: Основные метасимволы
 </figcaption>
 <div aria-describedby="tbl-regex-meta-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -553,13 +547,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="strdt-regex-quant" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="strdt-regex-quant"><span class="header-section-number">7.2.2</span> Квантификаторы</h3>
+<section id="strdt-regex-quant" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="strdt-regex-quant"><span class="header-section-number">6.2.2</span> Квантификаторы</h3>
 <p>Часто нужно указать, сколько раз повторяется символ или группа символов. Для этого используются <strong>квантификаторы</strong>:</p>
 <div id="tbl-regex-quant" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regex-quant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;7.2: Квантификаторы
+Таблица&nbsp;6.2: Квантификаторы
 </figcaption>
 <div aria-describedby="tbl-regex-quant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -620,8 +614,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="strdt-regex-build" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="strdt-regex-build"><span class="header-section-number">7.2.3</span> Строим регулярное выражение шаг за шагом</h3>
+<section id="strdt-regex-build" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="strdt-regex-build"><span class="header-section-number">6.2.3</span> Строим регулярное выражение шаг за шагом</h3>
 <p>Теперь решим практическую задачу: из вектора <code>dates</code> отобрать корректные даты в формате <code>дд.мм.гггг</code>. Строить регулярное выражение лучше постепенно, проверяя каждый шаг. Для проверки будем использовать <code>str_detect()</code>.</p>
 <p><strong>Шаг 1.</strong> В дате должны быть точки.</p>
 <div class="cell">
@@ -677,9 +671,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="strdt-tidy" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="strdt-tidy"><span class="header-section-number">7.3</span> Разделение значений: строки внутри данных</h2>
-<p>Теперь вернёмся к реальным данным. Помните, что в <a href="../chpts/rpy-tidybase.html#tidy-concept">главе про опрятные данные</a> мы заметили, что в <code>sharexp</code> в одной ячейке иногда лежат два значения? Посмотрим на позиции стимулов в пробе:</p>
+<section id="strdt-tidy" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="strdt-tidy"><span class="header-section-number">6.3</span> Разделение значений: строки внутри данных</h2>
+<p>Теперь вернёмся к реальным данным. Помните, что в <a href="rpy-tidybase.qmd#tidy-concept">главе про опрятные данные</a> мы заметили, что в <code>sharexp</code> в одной ячейке иногда лежат два значения? Посмотрим на позиции стимулов в пробе:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>pos1[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -762,10 +756,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="strdt-datetime" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="strdt-datetime"><span class="header-section-number">7.4</span> Дата и время</h2>
-<section id="strdt-dt-why" class="level3" data-number="7.4.1">
-<h3 data-number="7.4.1" class="anchored" data-anchor-id="strdt-dt-why"><span class="header-section-number">7.4.1</span> Почему дата и время — особый тип данных</h3>
+<section id="strdt-datetime" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="strdt-datetime"><span class="header-section-number">6.4</span> Дата и время</h2>
+<section id="strdt-dt-why" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="strdt-dt-why"><span class="header-section-number">6.4.1</span> Почему дата и время — особый тип данных</h3>
 <p>Казалось бы, дату можно хранить как обычную строку или как три числа. Но у времени есть много неочевидных особенностей, которые делают наивные вычисления опасными:</p>
 <ul>
 <li>год не всегда равен 365 дням (бывают високосные годы);</li>
@@ -781,13 +775,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">now</span>()     <span class="co"># текущий момент времени</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="strdt-dt-formats" class="level3" data-number="7.4.2">
-<h3 data-number="7.4.2" class="anchored" data-anchor-id="strdt-dt-formats"><span class="header-section-number">7.4.2</span> Форматы даты и времени</h3>
+<section id="strdt-dt-formats" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="strdt-dt-formats"><span class="header-section-number">6.4.2</span> Форматы даты и времени</h3>
 <p>Даты в мире записывают по-разному:</p>
 <div id="tbl-date-formats" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-date-formats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Таблица&nbsp;7.3: Распространённые форматы даты
+Таблица&nbsp;6.3: Распространённые форматы даты
 </figcaption>
 <div aria-describedby="tbl-date-formats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
@@ -844,9 +838,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="strdt-dt-parse" class="level3" data-number="7.4.3">
-<h3 data-number="7.4.3" class="anchored" data-anchor-id="strdt-dt-parse"><span class="header-section-number">7.4.3</span> Читаем даты из <code>sharexp</code></h3>
-<p>В служебной информации каждого файла PsychoPy записывает дату и время начала сессии. Мы достали эти значения в <a href="../chpts/rpy-tidyadv.html">прошлой главе</a>, и они сохранены в подготовленном датасете <code>share_clean.csv</code>. Прочитаем его и выберем по одной дате на испытуемого:</p>
+<section id="strdt-dt-parse" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="strdt-dt-parse"><span class="header-section-number">6.4.3</span> Читаем даты из <code>sharexp</code></h3>
+<p>В служебной информации каждого файла PsychoPy записывает дату и время начала сессии. Мы достали эти значения в <a href="rpy-tidyadv.qmd">прошлой главе</a>, и они сохранены в подготовленном датасете <code>share_clean.csv</code>. Прочитаем его и выберем по одной дате на испытуемого:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>share <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/sharexp/share_clean.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -890,7 +884,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Если у вас нет файла <code>share_clean.csv</code>, его можно получить, выполнив код из главы про <a href="../chpts/rpy-tidyadv.html">продвинутую предобработку</a> и сохранив результат, либо запустив скрипт <code>scripts/sharexp-prepare.R</code> из репозитория учебника.</p>
+<p>Если у вас нет файла <code>share_clean.csv</code>, его можно получить, выполнив код из главы про <a href="rpy-tidyadv.qmd">продвинутую предобработку</a> и сохранив результат, либо запустив скрипт <code>scripts/sharexp-prepare.R</code> из репозитория учебника.</p>
 </div>
 </div>
 <p>Столбец <code>date</code> — это текст. Его формат такой: <code>год_месяц_день_часыминуты</code>. Но при этом посмотрите: в одних случаях месяц записан словом (<code>Jan</code>, <code>May</code>), в других — числом (<code>01</code>, <code>02</code>). Так бывает, когда данные собирали на разных компьютерах с разными настройками. Если оставить даты как есть, то отсортировать сессии по времени не получится: сравнивать <code>"2019_Jan_14_1038"</code> и <code>"2019_01_14_1051"</code> как строки бессмысленно.</p>
@@ -1001,8 +995,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="strdt-dt-components" class="level3" data-number="7.4.4">
-<h3 data-number="7.4.4" class="anchored" data-anchor-id="strdt-dt-components"><span class="header-section-number">7.4.4</span> Извлекаем компоненты даты и времени</h3>
+<section id="strdt-dt-components" class="level3" data-number="6.4.4">
+<h3 data-number="6.4.4" class="anchored" data-anchor-id="strdt-dt-components"><span class="header-section-number">6.4.4</span> Извлекаем компоненты даты и времени</h3>
 <p>Из настоящей даты можно достать любой компонент с помощью функций с говорящими названиями:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>sessions <span class="sc">|&gt;</span></span>
@@ -1042,8 +1036,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="strdt-dt-arith" class="level3" data-number="7.4.5">
-<h3 data-number="7.4.5" class="anchored" data-anchor-id="strdt-dt-arith"><span class="header-section-number">7.4.5</span> Вычисления с датами</h3>
+<section id="strdt-dt-arith" class="level3" data-number="6.4.5">
+<h3 data-number="6.4.5" class="anchored" data-anchor-id="strdt-dt-arith"><span class="header-section-number">6.4.5</span> Вычисления с датами</h3>
 <p>С датами можно производить арифметику. Разность двух дат — это промежуток времени, и для его вычисления лучше использовать <code>difftime()</code> с явным указанием единиц измерения:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>first_session <span class="ot">&lt;-</span> <span class="fu">min</span>(sessions<span class="sc">$</span>session_start)</span>
@@ -1089,8 +1083,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>В шаблоне <code>%d</code> — день, <code>%m</code> — месяц, <code>%Y</code> — год из четырёх цифр, <code>%H</code> — часы, <code>%M</code> — минуты.</p>
 </section>
-<section id="strdt-dt-tz" class="level3" data-number="7.4.6">
-<h3 data-number="7.4.6" class="anchored" data-anchor-id="strdt-dt-tz"><span class="header-section-number">7.4.6</span> Часовые пояса</h3>
+<section id="strdt-dt-tz" class="level3" data-number="6.4.6">
+<h3 data-number="6.4.6" class="anchored" data-anchor-id="strdt-dt-tz"><span class="header-section-number">6.4.6</span> Часовые пояса</h3>
 <p>Момент времени имеет смысл только вместе с часовым поясом. По умолчанию <code>lubridate</code> считает, что время записано в UTC (всемирное координированное время, примерно «время по Гринвичу»). Если известно, что сессии проходили по московскому времени, это нужно указать:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd_hm</span>(<span class="st">"2019_01_14_1038"</span>, <span class="at">tz =</span> <span class="st">"Europe/Moscow"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1526,8 +1520,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chpts/rpy-tidyadv.html" class="pagination-link" aria-label="Продвинутая предобработка данных">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Продвинутая предобработка данных</span></span>
+      <a href="../chpts/rpy-tidy.html" class="pagination-link" aria-label="Предобработка данных">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Предобработка данных</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

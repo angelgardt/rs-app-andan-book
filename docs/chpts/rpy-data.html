@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chpts/rpy-tidybase.html" rel="next">
+<link href="../chpts/rpy-tidy.html" rel="next">
 <link href="../chpts/prob-randvals.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -209,20 +209,14 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chpts/rpy-tidybase.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Базовая предобработка данных</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../chpts/rpy-tidyadv.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Продвинутая предобработка данных</span></span></a>
+  <a href="../chpts/rpy-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Предобработка данных</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chpts/rpy-strdt.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Предобработка данных. Строки. Дата и время</span></span></a>
   </div>
 </li>
     </ul>
@@ -235,36 +229,41 @@ window.Quarto = {
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#data-sharexp" id="toc-data-sharexp" class="nav-link active" data-scroll-target="#data-sharexp"><span class="header-section-number">4.1</span> Наши данные: эксперимент <code>sharexp</code></a></li>
-  <li><a href="#data-formats" id="toc-data-formats" class="nav-link" data-scroll-target="#data-formats"><span class="header-section-number">4.2</span> Форматы файлов с данными</a>
+  <li><a href="#data-pkgs" id="toc-data-pkgs" class="nav-link active" data-scroll-target="#data-pkgs"><span class="header-section-number">4.1</span> Дополнительные пакеты</a>
   <ul class="collapse">
-  <li><a href="#data-decimal" id="toc-data-decimal" class="nav-link" data-scroll-target="#data-decimal"><span class="header-section-number">4.2.1</span> Десятичные разделители и «русский» CSV</a></li>
-  <li><a href="#data-markup" id="toc-data-markup" class="nav-link" data-scroll-target="#data-markup"><span class="header-section-number">4.2.2</span> Форматы с особой разметкой</a></li>
+  <li><a href="#data-pkgs-install" id="toc-data-pkgs-install" class="nav-link" data-scroll-target="#data-pkgs-install"><span class="header-section-number">4.1.1</span> Установка пакетов</a></li>
+  <li><a href="#data-pkgs-library" id="toc-data-pkgs-library" class="nav-link" data-scroll-target="#data-pkgs-library"><span class="header-section-number">4.1.2</span> Подключение пакетов</a></li>
   </ul></li>
-  <li><a href="#data-workspace" id="toc-data-workspace" class="nav-link" data-scroll-target="#data-workspace"><span class="header-section-number">4.3</span> Организация рабочего пространства</a>
+  <li><a href="#data-sharexp" id="toc-data-sharexp" class="nav-link" data-scroll-target="#data-sharexp"><span class="header-section-number">4.2</span> Наши данные: эксперимент <code>sharexp</code></a></li>
+  <li><a href="#data-formats" id="toc-data-formats" class="nav-link" data-scroll-target="#data-formats"><span class="header-section-number">4.3</span> Форматы файлов с данными</a>
   <ul class="collapse">
-  <li><a href="#data-wd" id="toc-data-wd" class="nav-link" data-scroll-target="#data-wd"><span class="header-section-number">4.3.1</span> Рабочая директория</a></li>
-  <li><a href="#data-path" id="toc-data-path" class="nav-link" data-scroll-target="#data-path"><span class="header-section-number">4.3.2</span> Путь к файлу</a></li>
-  <li><a href="#data-projects" id="toc-data-projects" class="nav-link" data-scroll-target="#data-projects"><span class="header-section-number">4.3.3</span> RStudio Projects</a></li>
+  <li><a href="#data-decimal" id="toc-data-decimal" class="nav-link" data-scroll-target="#data-decimal"><span class="header-section-number">4.3.1</span> Десятичные разделители и «русский» CSV</a></li>
+  <li><a href="#data-markup" id="toc-data-markup" class="nav-link" data-scroll-target="#data-markup"><span class="header-section-number">4.3.2</span> Форматы с особой разметкой</a></li>
   </ul></li>
-  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import"><span class="header-section-number">4.4</span> Импорт данных</a>
+  <li><a href="#data-workspace" id="toc-data-workspace" class="nav-link" data-scroll-target="#data-workspace"><span class="header-section-number">4.4</span> Организация рабочего пространства</a>
   <ul class="collapse">
-  <li><a href="#data-import-text" id="toc-data-import-text" class="nav-link" data-scroll-target="#data-import-text"><span class="header-section-number">4.4.1</span> Текстовые форматы</a></li>
-  <li><a href="#data-import-excel" id="toc-data-import-excel" class="nav-link" data-scroll-target="#data-import-excel"><span class="header-section-number">4.4.2</span> Табличные форматы</a></li>
-  <li><a href="#data-tibble" id="toc-data-tibble" class="nav-link" data-scroll-target="#data-tibble"><span class="header-section-number">4.4.3</span> Тибблы</a></li>
+  <li><a href="#data-wd" id="toc-data-wd" class="nav-link" data-scroll-target="#data-wd"><span class="header-section-number">4.4.1</span> Рабочая директория</a></li>
+  <li><a href="#data-path" id="toc-data-path" class="nav-link" data-scroll-target="#data-path"><span class="header-section-number">4.4.2</span> Путь к файлу</a></li>
+  <li><a href="#data-projects" id="toc-data-projects" class="nav-link" data-scroll-target="#data-projects"><span class="header-section-number">4.4.3</span> RStudio Projects</a></li>
   </ul></li>
-  <li><a href="#data-explore" id="toc-data-explore" class="nav-link" data-scroll-target="#data-explore"><span class="header-section-number">4.5</span> Первое знакомство с данными</a>
+  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import"><span class="header-section-number">4.5</span> Импорт данных</a>
   <ul class="collapse">
-  <li><a href="#data-explore-size" id="toc-data-explore-size" class="nav-link" data-scroll-target="#data-explore-size"><span class="header-section-number">4.5.1</span> Размер таблицы</a></li>
-  <li><a href="#data-explore-headtail" id="toc-data-explore-headtail" class="nav-link" data-scroll-target="#data-explore-headtail"><span class="header-section-number">4.5.2</span> Начало и конец таблицы</a></li>
-  <li><a href="#data-explore-structure" id="toc-data-explore-structure" class="nav-link" data-scroll-target="#data-explore-structure"><span class="header-section-number">4.5.3</span> Структура данных</a></li>
-  <li><a href="#data-explore-summary" id="toc-data-explore-summary" class="nav-link" data-scroll-target="#data-explore-summary"><span class="header-section-number">4.5.4</span> Описательная сводка</a></li>
-  <li><a href="#data-explore-categorical" id="toc-data-explore-categorical" class="nav-link" data-scroll-target="#data-explore-categorical"><span class="header-section-number">4.5.5</span> Категориальные переменные</a></li>
-  <li><a href="#data-explore-na" id="toc-data-explore-na" class="nav-link" data-scroll-target="#data-explore-na"><span class="header-section-number">4.5.6</span> Пропущенные значения</a></li>
-  <li><a href="#data-explore-sort" id="toc-data-explore-sort" class="nav-link" data-scroll-target="#data-explore-sort"><span class="header-section-number">4.5.7</span> Сортировка</a></li>
-  <li><a href="#data-explore-view" id="toc-data-explore-view" class="nav-link" data-scroll-target="#data-explore-view"><span class="header-section-number">4.5.8</span> Просмотр в таблице</a></li>
+  <li><a href="#data-import-text" id="toc-data-import-text" class="nav-link" data-scroll-target="#data-import-text"><span class="header-section-number">4.5.1</span> Текстовые форматы</a></li>
+  <li><a href="#data-import-excel" id="toc-data-import-excel" class="nav-link" data-scroll-target="#data-import-excel"><span class="header-section-number">4.5.2</span> Табличные форматы</a></li>
+  <li><a href="#data-tibble" id="toc-data-tibble" class="nav-link" data-scroll-target="#data-tibble"><span class="header-section-number">4.5.3</span> Тибблы</a></li>
   </ul></li>
-  <li><a href="#data-files" id="toc-data-files" class="nav-link" data-scroll-target="#data-files"><span class="header-section-number">4.6</span> Список файлов</a></li>
+  <li><a href="#data-explore" id="toc-data-explore" class="nav-link" data-scroll-target="#data-explore"><span class="header-section-number">4.6</span> Первое знакомство с данными</a>
+  <ul class="collapse">
+  <li><a href="#data-explore-size" id="toc-data-explore-size" class="nav-link" data-scroll-target="#data-explore-size"><span class="header-section-number">4.6.1</span> Размер таблицы</a></li>
+  <li><a href="#data-explore-headtail" id="toc-data-explore-headtail" class="nav-link" data-scroll-target="#data-explore-headtail"><span class="header-section-number">4.6.2</span> Начало и конец таблицы</a></li>
+  <li><a href="#data-explore-structure" id="toc-data-explore-structure" class="nav-link" data-scroll-target="#data-explore-structure"><span class="header-section-number">4.6.3</span> Структура данных</a></li>
+  <li><a href="#data-explore-summary" id="toc-data-explore-summary" class="nav-link" data-scroll-target="#data-explore-summary"><span class="header-section-number">4.6.4</span> Описательная сводка</a></li>
+  <li><a href="#data-explore-categorical" id="toc-data-explore-categorical" class="nav-link" data-scroll-target="#data-explore-categorical"><span class="header-section-number">4.6.5</span> Категориальные переменные</a></li>
+  <li><a href="#data-explore-na" id="toc-data-explore-na" class="nav-link" data-scroll-target="#data-explore-na"><span class="header-section-number">4.6.6</span> Пропущенные значения</a></li>
+  <li><a href="#data-explore-sort" id="toc-data-explore-sort" class="nav-link" data-scroll-target="#data-explore-sort"><span class="header-section-number">4.6.7</span> Сортировка</a></li>
+  <li><a href="#data-explore-view" id="toc-data-explore-view" class="nav-link" data-scroll-target="#data-explore-view"><span class="header-section-number">4.6.8</span> Просмотр в таблице</a></li>
+  </ul></li>
+  <li><a href="#data-files" id="toc-data-files" class="nav-link" data-scroll-target="#data-files"><span class="header-section-number">4.7</span> Список файлов</a></li>
   </ul>
 </nav>
     </div>
@@ -291,70 +290,390 @@ window.Quarto = {
 
 
 <div class="intro">
-<p>В <a href="../chpts/rpy-basics.html">прошлых главах</a> мы создавали данные сами — набирали векторы руками или генерировали случайные числа. В реальной жизни данные приходят откуда-то снаружи: из экспериментальной программы, из онлайн-опросника, из таблицы, которую коллега выгрузил из какой-то системы. Наша задача — научиться забирать такие данные в R и понимать, что именно мы забрали.</p>
+<p>Изучая <a href="../chpts/rpy-basics.html">базовый R</a>, мы создавали данные сами, однако в&nbsp;реальной жизни данные приходят к&nbsp;нам откуда-то снаружи: из&nbsp;программы, где мы кодили эксперимент, от&nbsp;платформы онлайн-опросника, из&nbsp;таблицы, которую коллега выгрузил из&nbsp;какой-то системы. Наша задача — научиться грузить такие данные в&nbsp;R и&nbsp;понимать, что&nbsp;именно мы забрали.</p>
 </div>
-<section id="data-sharexp" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="data-sharexp"><span class="header-section-number">4.1</span> Наши данные: эксперимент <code>sharexp</code></h2>
-<p>Начиная с этой главы мы будем работать с данными реального эксперимента.</p>
-<blockquote class="blockquote">
-<p>В исследовании изучался зрительный поиск иконок «поделиться» (share), которые используются в смартфонах на разных платформах. Испытуемые искали иконку iOS или иконку Android среди дистракторов — других иконок, нарисованных одинаково для обеих платформ. Нас интересует, какая иконка узнаётся быстрее и точнее.</p>
-</blockquote>
-<p>Структура эксперимента такая:</p>
-<ul>
-<li>в каждой пробе на экране предъявлялось 8, 12 или 16 стимулов (<code>setsize</code>);</li>
-<li>целевой стимул мог быть иконкой iOS (<code>tray</code>), иконкой Android (<code>dots</code>) или в пробе присутствовали обе иконки сразу (<code>both</code>) — это тип пробы (<code>trialtype</code>);</li>
-<li>испытуемый должен был найти иконку и кликнуть по ней мышью;</li>
-<li>всего каждый из 20 испытуемых прошёл 450 проб;</li>
-<li>кроме того, мы знаем, смартфоном какой платформы пользуется испытуемый — iOS или Android. Эту переменную исследователь не назначал испытуемым, он только фиксировал её.</li>
-</ul>
-<p>Время до клика и координаты клика записывала экспериментальная программа PsychoPy, поэтому устроены данные так, как удобно ей, а не нам. В этом и состоит основная трудность: <strong>данные почти никогда не приходят в том виде, в котором с ними удобно работать</strong>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="data-pkgs" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="data-pkgs"><span class="header-section-number">4.1</span> Дополнительные пакеты</h2>
+<p>Хотя возможности базового R велики, синтаксис его бывает не&nbsp;всегда прост. Хотелось&nbsp;бы писать код на&nbsp;более понятном и удобном диалекте, да и расширить базовые возможности для анализа данных тоже было бы неплохо — для&nbsp;этого существуют дополнительные пакеты.</p>
+<p>По своей сути пакет являются просто набором функций. Аналогично и базовый R состоит из набора пакетов (<code>base</code>, <code>stats</code>, <code>utils</code> и др.). Первым пакетом, с которым мы познакомимся, будет <a href="https://tidyverse.org/"><code>tidyverse</code></a>.</p>
+<section id="data-pkgs-install" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="data-pkgs-install"><span class="header-section-number">4.1.1</span> Установка пакетов</h3>
+<p>Чтобы иметь доступ к функциям пакета, его надо скачать. Делается это с помощью команды <code>install.packages()</code>, которой нужно передать название пакета как строку (в кавычках):</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.package</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Команда начнет устанавливать пакеты и зависимости — это занимает некоторое время. Обычно всё проходит достаточно успешно.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Зависимости">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Заметка
+<span class="screen-reader-only">Совет</span>Зависимости
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Полное описание всех файлов и переменных находится в кодбуке — файле <code>sharexp_codebook</code> в папке <code>data/sharexp</code> <a href="https://github.com/angelgardt/rs-app-andan-book/tree/master/data/sharexp">репозитория учебника</a>. Привычка заглядывать в кодбук перед работой с данными — одна из самых полезных.</p>
+<p>Обычно, зависимости — другие пакеты, которые необходимы данному для работы — ставятся вместе с пакетом. Но иногда — нет. Есть способ указать, что все зависимости тоже необходимо скачать:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.package</span>(<span class="st">"tidyverse"</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Это может помочь, если пакет, кажется, установился, но всё равно не работает.</p>
 </div>
 </div>
-<p>Данные лежат в нескольких файлах:</p>
-<ul>
-<li>папка <code>raw</code> — 20 файлов <code>01.csv</code>, …, <code>20.csv</code>, по одному на каждого испытуемого, прямо с выхода PsychoPy;</li>
-<li><code>share_platform.csv</code> — платформа смартфона каждого испытуемого;</li>
-<li><code>targetpositions.xlsx</code> — координаты целевых стимулов в каждой пробе.</li>
-</ul>
-<p>Три разных файла, и, как видим, как минимум в двух разных форматах. Начнём с того, какие они вообще бывают.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Зеркала">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Зеркала
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Иногда бывает, что <a href="https://cloud.r-project.org/">главный репозиторий</a>, откуда по умолчанию скачиваются и ставятся пакеты, недоступен, из-за чего процесс установки падает.</p>
+<p>Тогда можно задать зеркало, с которого <code>install.packages()</code> будет скачивать пакеты. Список зеркал можно найти <a href="https://cran.r-project.org/mirrors.html">здесь</a>. Ссылка на зеркало необходимо указать как строку в аргумент <code>repos</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">## пример с одним из зеркал</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.package</span>(<span class="st">"tidyverse"</span>, <span class="at">repos =</span> <span class="st">"https://mirrors.bfsu.edu.cn/CRAN/"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Если выбранное вами зеркало так же не работает, попробуйте ещё несколько. Обычно за 2–3 попытки находится функционирующее.</p>
+</div>
+</div>
 </section>
-<section id="data-formats" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="data-formats"><span class="header-section-number">4.2</span> Форматы файлов с данными</h2>
-<div id="def-file-format" class="theorem definition">
-<p><span class="theorem-title"><strong>Определение 4.1</strong></span> <strong>Формат файла (file format)</strong> — способ, которым данные записаны в файле. От формата зависит, чем и как этот файл можно прочитать.</p>
+<section id="data-pkgs-library" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="data-pkgs-library"><span class="header-section-number">4.1.2</span> Подключение пакетов</h3>
+<p>Когда пакет скачан, его необходимо подключить к текущей сессии работы в R, прописав</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<p>Для нас важно различать два больших класса форматов.</p>
-<p><strong>Текстовые форматы</strong> — это обычный текст, который можно открыть в любом текстовом редакторе (хоть в блокноте) и увидеть данные «невооружённым глазом». Значения в таких файлах отделены друг от друга специальным символом — <em>разделителем (delimiter)</em>.</p>
+</div>
+<p>Рекомендуется прописывать все подключения пакетов в начале скрипта, чтобы было сразу видно, какие пакеты используются. Если функция <code>library(tidyverse)</code> вернула в консоль такой же результат, как выше, значит все установилось корректно.</p>
+</section>
+</section>
+<section id="data-sharexp" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="data-sharexp"><span class="header-section-number">4.2</span> Наши данные: эксперимент <code>sharexp</code></h2>
+<p>Ближайшие несколько глав мы будем работать с&nbsp;данными реального эксперимента. Ниже представлено их описание.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="SHAREXP | Codebook">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>SHAREXP | Codebook
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<section id="sharexp-codebook-description" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="sharexp-codebook-description">Описание эксперимента</h3>
+<p>В&nbsp;исследовании изучался зрительный поиск иконок различных платформ смартфонов.</p>
+<blockquote class="blockquote">
+<p>Цель исследования: выяснить, какая иконка «поделиться» (share) обознается лучше — быстрее и точнее.</p>
+</blockquote>
+<p>Испытуемым необходимо было искать иконки поделиться (share) iOS и&nbsp;Android среди дистракторов — других иконок, которые для обеих платформ отрисованы одинаково.</p>
+<p><strong>Независимые переменные исследования</strong>:</p>
 <ul>
-<li><strong>CSV (Comma-Separated Values)</strong> — значения разделены запятыми. Расширение <code>.csv</code>.</li>
-<li><strong>TSV (Tab-Separated Values)</strong> — значения разделены знаком табуляции. Расширение <code>.tsv</code>.</li>
+<li>тип иконки — иконка iOS (Outgoing Tray) и&nbsp;иконка Android (Three Dots)</li>
+<li>количество стимулов в&nbsp;пробе — 8, 12, 16</li>
+<li>используемая платформа смартфона — iOS или&nbsp;Android</li>
+</ul>
+<p>Последняя переменная является квазиэкспериментальной.</p>
+<p>В&nbsp;дизайн эксперимента были включены пробы с&nbsp;одним целевым стимулом (Outgoing Tray <em>или</em>&nbsp;Three Dots) и с&nbsp;двумя целевыми стимулами (<em>и</em>&nbsp;Outgoing Tray, <em>и</em>&nbsp;Three Dots)</p>
+<p><strong>Зависимые переменные исследования</strong>:</p>
+<ul>
+<li>время поиска целевого стимула (время реакции) — от&nbsp;начала пробы до&nbsp;клика испытуемого</li>
+<li>точность поиска целевого стимула — рассчитываемая через координаты клика</li>
+</ul>
+</section>
+<section id="датасеты" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="датасеты">Датасеты</h3>
+<section id="sharexp-codebook-raw" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sharexp-codebook-raw"><code>sharexp_raw.zip</code></h4>
+<p><a href="https://github.com/angelgardt/rs-app-andan-book/raw/refs/heads/master/data/sharexp/sharexp_raw.zip">Архив</a> содержит аутпуты PsychoPy для&nbsp;каждого испытуемого. Все аутпуты генерируется программно и&nbsp;имеют одинаковую структуру.</p>
+<blockquote class="blockquote">
+<p>Скачать архив можно <a href="https://github.com/angelgardt/rs-app-andan-book/raw/refs/heads/master/data/sharexp/sharexp_raw.zip">по&nbsp;ссылке</a>.</p>
+</blockquote>
+<p>Датасет содержит следующие переменные:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Переменная</th>
+<th style="text-align: left;">Значения</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>stim1</code>—<code>stim16</code></td>
+<td style="text-align: left;">Строка</td>
+<td style="text-align: left;">Название графического файла со&nbsp;стимулом</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>pos1</code>—<code>pos16</code></td>
+<td style="text-align: left;">Пара числовых значений</td>
+<td style="text-align: left;">Позиция стимула на&nbsp;экране</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>size1</code>—<code>size16</code></td>
+<td style="text-align: left;">Пара числовых значений</td>
+<td style="text-align: left;">Размер стимула</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>ok</code></td>
+<td style="text-align: left;">Строка</td>
+<td style="text-align: left;">Название графического файла с&nbsp;кнопкой <code>OK</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>posok</code></td>
+<td style="text-align: left;">Пара числовых значений</td>
+<td style="text-align: left;">Позиция кнопки <code>OK</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sizeok</code></td>
+<td style="text-align: left;">Пара числовых значений</td>
+<td style="text-align: left;">Размер кнопки <code>OK</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>numtrial</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Номер пробы</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>setsize</code></td>
+<td style="text-align: left;">Число (<code>8</code>, <code>12</code>, <code>16</code>)</td>
+<td style="text-align: left;">Количество стимулов в&nbsp;пробе</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>trialtype</code></td>
+<td style="text-align: left;"><code>tray</code> — Outgoing Tray<br><code>dots</code> — Three Dots<br><code>both</code> — два целевых стимула</td>
+<td style="text-align: left;">Тип пробы (целевой стимул)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>mouse_main1.time_raw</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Время до&nbsp;первого клика (сек)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>mouse_main1.x_raw</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Горизонтальная координата первого клика (px)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>mouse_main1.y_raw</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Вертикальная координата первого клика (px)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>mouse_main2.time_raw</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Время до&nbsp;второго клика (сек)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>mouse_main2.x_raw</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Горизонтальная координата второго клика (px)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>mouse_main2.y_raw</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Вертикальная координата второго клика (px)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>order</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Порядок предъявления проб в&nbsp;конкретной сессии</td>
+</tr>
+</tbody>
+</table>
+<p>Переменные, отсутствующие в&nbsp;списке, не&nbsp;являются существенными для&nbsp;анализа и&nbsp;несут, скорее, техническую информацию.</p>
+<blockquote class="blockquote">
+<p><strong>NB!</strong> В&nbsp;последних строках каждого файла записана социально-демографическая информация об&nbsp;испытуемом и&nbsp;техническая информация о&nbsp;сессии эксперимента.</p>
+</blockquote>
+</section>
+<section id="sharexp-codebook-targets" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sharexp-codebook-targets"><code>targetpositions.xlsx</code></h4>
+<p>Датасет содержит информацию о&nbsp;координатах целевых стимулов и&nbsp;диапазонах координат, в&nbsp;пределах которых клик считается корректным. У&nbsp;колонок, относящихся к&nbsp;тренировочной серии, в&nbsp;названии содержится аффикс <code>tr</code>.</p>
+<blockquote class="blockquote">
+<p>Скачать файл можно <a href="https://github.com/angelgardt/rs-app-andan-book/raw/refs/heads/master/data/sharexp/targetpositions.xlsx">по&nbsp;ссылке</a>.</p>
+</blockquote>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Переменная</th>
+<th style="text-align: left;">Значения</th>
+<th style="text-align: left;">Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>posx1</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Позиция первого целевого стимула по&nbsp;горизонтальной оси</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>posy1</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Позиция первого целевого стимула по&nbsp;вертикальной оси</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>posxmin1</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Минимальная координата клика по&nbsp;горизонтальной оси для&nbsp;первого целевого стимула</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>posxmax1</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Максимальная координата клика по&nbsp;горизонтальной оси для&nbsp;первого целевого стимула</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>posymin1</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Минимальная координата клика по&nbsp;вертикальной оси для&nbsp;первого целевого стимула</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>posymax1</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Максимальная координата клика по&nbsp;вертикальной оси для&nbsp;первого целевого стимула</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>posx2</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Позиция второго целевого стимула по&nbsp;горизонтальной оси</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>posy2</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Позиция второго целевого стимула по&nbsp;вертикальной оси</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>posxmin2</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Минимальная координата клика по&nbsp;горизонтальной оси для&nbsp;второго целевого стимула</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>posxmax2</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Максимальная координата клика по&nbsp;горизонтальной оси для&nbsp;второго целевого стимула</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>posymin2</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Минимальная координата клика по&nbsp;вертикальной оси для&nbsp;второго целевого стимула</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>posymax2</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Максимальная координата клика по&nbsp;вертикальной оси для&nbsp;второго целевого стимула</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>numtrial</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Номер пробы</td>
+</tr>
+</tbody>
+</table>
+<p>Значения в&nbsp;колонках <code>numtrial</code> из <code>sharexp_raw</code> и <code>numtrial</code> из <code>targetpositions</code> заданию одни и&nbsp;те&nbsp;же экспериментальные пробы.</p>
+</section>
+<section id="sharexp-codebook-platform" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sharexp-codebook-platform"><code>share_platform.csv</code></h4>
+<p>Датасет содержит информацию об&nbsp;используемой респондентом платформе.</p>
+<blockquote class="blockquote">
+<p>Данные расположены <a href="https://raw.githubusercontent.com/angelgardt/rs-app-andan-book/refs/heads/master/data/sharexp/share_platform.csv">по&nbsp;ссылке</a>, но&nbsp;<strong>скачивать их в&nbsp;виде файла не&nbsp;нужно</strong>. Мы вопспользуемся далее другим способом.</p>
+</blockquote>
+<p>Датасет содержит следующие переменные:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Переменная</th>
+<th style="text-align: left;">Значения</th>
+<th style="text-align: left;">Описание</th>
+<th style="text-align: left;">Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>id</code></td>
+<td style="text-align: left;">Число</td>
+<td style="text-align: left;">Идентификатор испытуемого</td>
+<td style="text-align: left;">Совпадает с&nbsp;названием файла в&nbsp;<code>sharexp_raw.zip</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>platform</code></td>
+<td style="text-align: left;"><code>ios</code> — iOS<br><code>andr</code> — Androind</td>
+<td style="text-align: left;">Платформа смартфона испытуемого</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</div>
+</div>
+<!---
+> В исследовании изучался зрительный поиск иконок «поделиться» (share), которые используются в смартфонах на разных платформах. Испытуемые искали иконку iOS или иконку Android среди дистракторов --- других иконок, нарисованных одинаково для обеих платформ. Нас интересует, какая иконка узнаётся быстрее и точнее.
+
+Структура эксперимента такая:
+
+- в каждой пробе на экране предъявлялось 8, 12 или 16 стимулов (`setsize`);
+- целевой стимул мог быть иконкой iOS (`tray`), иконкой Android (`dots`) или в пробе присутствовали обе иконки сразу (`both`) --- это тип пробы (`trialtype`);
+- испытуемый должен был найти иконку и кликнуть по ней мышью;
+- всего каждый из 20 испытуемых прошёл 450 проб;
+- кроме того, мы знаем, смартфоном какой платформы пользуется испытуемый --- iOS или Android. Эту переменную исследователь не назначал испытуемым, он только фиксировал её.
+
+Время до клика и координаты клика записывала экспериментальная программа PsychoPy, поэтому устроены данные так, как удобно ей, а не нам. В этом и состоит основная трудность: **данные почти никогда не приходят в том виде, в котором с ними удобно работать**.
+
+:::{.callout-note}
+Полное описание всех файлов и переменных находится в кодбуке --- файле `sharexp_codebook` в папке `data/sharexp` [репозитория учебника](https://github.com/angelgardt/rs-app-andan-book/tree/master/data/sharexp). Привычка заглядывать в кодбук перед работой с данными --- одна из самых полезных.
+:::
+--->
+<p>Данные в&nbsp;архиве <code>sharexp_raw.zip</code> лежат в нескольких файлах: <code>01.csv</code>, …, <code>20.csv</code>, по одному на&nbsp;каждого испытуемого, аутпуты PsychoPy. Ближайшей нашей задачей будет объединить их в&nbsp;один, чтобы мы могли работать с&nbsp;данными всех испытуемых. Кроме того, <code>targetpositions.xlsx</code> — это Excel-файл, и видимо, его придется обрабатывать как-то специфически.</p>
+<p>Ну, ладно. Нам&nbsp;бы хоть один файл сейчас прочитать, и&nbsp;чтобы это осуществить, надо разобраться, какие форматы файлов данных существуют.</p>
+</section>
+<section id="data-formats" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="data-formats"><span class="header-section-number">4.3</span> Форматы файлов с данными</h2>
+<div id="def-file-format" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 4.1</strong></span> <strong>Формат файла (file format)</strong> — способ, которым данные записаны в&nbsp;файле. От формата зависит, чем и&nbsp;как этот файл можно прочитать.</p>
+</div>
+<p>Для&nbsp;нас важно различать два больших класса форматов.</p>
+<p><strong>Текстовые форматы</strong> — это обычный текст, который можно открыть в любом текстовом редакторе (хоть в&nbsp;блокноте) и увидеть данные «невооружённым глазом». Значения в&nbsp;таких файлах отделены друг от&nbsp;друга специальным символом — <em>разделителем (delimiter)</em>.</p>
+<ul>
+<li><strong>CSV (Comma-Separated Values)</strong> — значения разделены запятыми (<code>,</code>). Расширение <code>.csv</code>.</li>
+<li><strong>TSV (Tab-Separated Values)</strong> — значения разделены знаком табуляции (<code>\t</code>). Расширение <code>.tsv</code>.</li>
 <li><strong>TXT</strong> — просто текст. Разделителем может быть что угодно: пробел, точка с запятой, вертикальная черта.</li>
 </ul>
 <p><strong>Бинарные форматы</strong> — файлы, внутри которых лежат не текст, а закодированные данные. Блокнотом такой файл открыть бессмысленно — увидите «кракозябры». Чтобы открыть, нужна программа, которая понимает этот формат.</p>
 <ul>
 <li><strong>Excel</strong> — <code>.xlsx</code> (и устаревший <code>.xls</code>). Внутри может быть несколько листов.</li>
-<li><strong>SPSS</strong> — <code>.sav</code>. В психологии встречается часто, потому что SPSS давно и широко используется. Такие файлы хранят не только числа, но и подписи к переменным и значениям.</li>
+<li><strong>SPSS</strong> — <code>.sav</code>. Встречается всё реже, но&nbsp;ещё может вам попасться, так как SPSS широко использовался многими исседователями некоторое время назад. Такие файлы хранят не&nbsp;только числа, но&nbsp;и&nbsp;подписи к&nbsp;переменным и&nbsp;значениям.</li>
 <li><strong>R</strong> — <code>.rds</code> и <code>.RData</code>. Объекты R, сохранённые «как есть».</li>
 </ul>
-<p>Посмотрим, как выглядит один и тот же фрагмент данных в текстовом формате. Вот первые несколько строк файла <code>share_platform.csv</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">readLines</span>(<span class="st">"data/sharexp/share_platform.csv"</span>, <span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "id platform" "1 ios"       "2 ios"       "3 ios"       "4 andr"     </code></pre>
-</div>
-</div>
-<p>Каждая строка файла — это строка таблицы, а значения внутри строки разделены… пробелом. Хотя файл называется <code>.csv</code>, разделитель в нём не запятая. Так бывает довольно часто.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -368,8 +687,8 @@ window.Quarto = {
 <p>Расширение — это просто часть имени файла. Оно <em>подсказывает</em>, как устроено содержимое, но не <em>гарантирует</em> этого. В файлах с расширением <code>.csv</code> разделителем может оказаться и запятая, и точка с запятой, и пробел. Поэтому прежде чем читать файл, его полезно открыть и посмотреть глазами.</p>
 </div>
 </div>
-<section id="data-decimal" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="data-decimal"><span class="header-section-number">4.2.1</span> Десятичные разделители и «русский» CSV</h3>
+<section id="data-decimal" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="data-decimal"><span class="header-section-number">4.3.1</span> Десятичные разделители и «русский» CSV</h3>
 <p>Отдельная неприятность — десятичный разделитель. В англоязычных странах дробная часть отделяется точкой (<code>3.14</code>), в России — запятой (<code>3,14</code>). Если на русскоязычном компьютере сохранить таблицу из Excel в CSV, получится файл, где:</p>
 <ul>
 <li>десятичным разделителем будет запятая;</li>
@@ -377,48 +696,63 @@ window.Quarto = {
 </ul>
 <p>Поэтому в функциях для чтения данных два «CSV»: стандартный и «европейский».</p>
 </section>
-<section id="data-markup" class="level3" data-number="4.2.2">
-<h3 data-number="4.2.2" class="anchored" data-anchor-id="data-markup"><span class="header-section-number">4.2.2</span> Форматы с особой разметкой</h3>
+<section id="data-markup" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="data-markup"><span class="header-section-number">4.3.2</span> Форматы с особой разметкой</h3>
 <p>Реже, главным образом при работе с данными из интернета, встречаются форматы <strong>JSON</strong> и <strong>XML</strong>. Они хранят данные в виде вложенной структуры (чем-то похожей на списки в R). Для чтения JSON пригодится пакет <code>jsonlite</code>, для XML — пакет <code>xml2</code>. В нашем курсе они нам не понадобятся, но знать о них полезно: если вам когда-нибудь придёт файл с расширением <code>.json</code>, это не повод паниковать.</p>
 </section>
 </section>
-<section id="data-workspace" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="data-workspace"><span class="header-section-number">4.3</span> Организация рабочего пространства</h2>
+<section id="data-workspace" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="data-workspace"><span class="header-section-number">4.4</span> Организация рабочего пространства</h2>
 <p>Прежде чем читать файл, нужно сказать R, где он находится. И здесь нас ждёт один из главных источников ошибок у начинающих.</p>
-<section id="data-wd" class="level3" data-number="4.3.1">
-<h3 data-number="4.3.1" class="anchored" data-anchor-id="data-wd"><span class="header-section-number">4.3.1</span> Рабочая директория</h3>
+<section id="data-wd" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="data-wd"><span class="header-section-number">4.4.1</span> Рабочая директория</h3>
 <div id="def-wd" class="theorem definition">
-<p><span class="theorem-title"><strong>Определение 4.2</strong></span> <strong>Рабочая директория (working directory)</strong> — папка, в которую по умолчанию «смотрит» R, когда ищет файлы или сохраняет их.</p>
+<p><span class="theorem-title"><strong>Определение 4.2</strong></span> <strong>Рабочая директория (working directory)</strong> — папка, в&nbsp;которую по умолчанию «смотрит» R, когда ищет файлы или&nbsp;сохраняет их.</p>
 </div>
 <p>Узнать, какая папка сейчас является рабочей, можно командой:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Изменить рабочую директорию можно командой <code>setwd()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/student/Documents/andan"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/student/Documents/andan"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Однако пользоваться <code>setwd()</code> в скриптах <strong>не стоит</strong>. Путь, который вы вписали, существует только на вашем компьютере. Стоит отправить скрипт коллеге (или преподавателю на проверку), и код сломается: у него нет папки <code>/Users/student/Documents/andan</code>. Мы будем решать эту проблему другим способом — с помощью проектов, о которых чуть ниже.</p>
+<p>Однако пользоваться <code>setwd()</code> в&nbsp;скриптах <strong>не стоит</strong>. Путь, который вы вписали, существует только на&nbsp;вашем компьютере. Стоит отправить скрипт коллеге (или&nbsp;преподавателю на&nbsp;проверку), и&nbsp;код сломается: у&nbsp;коллеги и преподавателя нет папки <code>/Users/student/Documents/andan</code>. Мы будем решать эту проблему другим способом — с помощью проектов, о&nbsp;которых чуть ниже.</p>
 </section>
-<section id="data-path" class="level3" data-number="4.3.2">
-<h3 data-number="4.3.2" class="anchored" data-anchor-id="data-path"><span class="header-section-number">4.3.2</span> Путь к файлу</h3>
+<section id="data-path" class="level3" data-number="4.4.2">
+<h3 data-number="4.4.2" class="anchored" data-anchor-id="data-path"><span class="header-section-number">4.4.2</span> Путь к файлу</h3>
 <div id="def-path" class="theorem definition">
 <p><span class="theorem-title"><strong>Определение 4.3</strong></span> <strong>Путь к файлу (file path)</strong> — адрес, по которому в файловой системе находится файл.</p>
 </div>
 <p>Пути бывают двух видов.</p>
 <ul>
-<li><strong>Абсолютный путь</strong> описывает расположение файла от «корня» файловой системы: <code>/Users/student/Documents/andan/data/sharexp/raw/01.csv</code> (на Windows — что-то вроде <code>C:/Users/student/Documents/andan/data/sharexp/raw/01.csv</code>).</li>
+<li><strong>Абсолютный путь</strong> описывает расположение файла от «корня» файловой системы:
+<ul>
+<li>на&nbsp;UNIX-подобных системах (Linux, macOS) — нечто типа <code>/Users/student/Documents/andan/data/sharexp/raw/01.csv</code></li>
+<li>на&nbsp;Windows — что-то вроде <code>C:/Users/student/Documents/andan/data/sharexp/raw/01.csv</code>).</li>
+</ul></li>
 <li><strong>Относительный путь</strong> описывает расположение файла от рабочей директории: <code>data/sharexp/raw/01.csv</code>.</li>
 </ul>
-<p>Относительные пути короче и, главное, не зависят от компьютера. Если у вас и у вашего коллеги одинаково устроена <em>внутренняя</em> структура папок, то один и тот же относительный путь сработает у обоих.</p>
-<p>Две полезные вещи про пути:</p>
+<p>Относительные пути короче и, главное, не зависят от компьютера. Если у&nbsp;вас и&nbsp;у&nbsp;вашего коллеги одинаково устроена <em>внутренняя</em> структура папок, то&nbsp;один и&nbsp;тот&nbsp;же относительный путь сработает у&nbsp;обоих.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Полезные вещи про пути">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Полезные вещи про пути
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li>Внутри пути папки разделяются прямым слэшем <code>/</code>. Обратный слэш <code>\</code> (стандартный в Windows) в R нужно удваивать <code>\\</code>, так как для R он служебный символ. Проще всегда писать <code>/</code> — R поймёт это на любой операционной системе.</li>
+<li>Внутри пути папки разделяются прямым слэшем <code>/</code>. Обратный слэш <code>\</code> (стандартный в Windows) в R нужно удваивать <code>\\</code>, так как для R он служебный символ. Проще всегда писать <code>/</code> — R поймёт это на&nbsp;любой операционной системе.</li>
 <li><code>..</code> означает «подняться на один уровень вверх». Путь <code>../data/file.csv</code> означает «выйти из текущей папки и найти в соседней папке <code>data</code> файл <code>file.csv</code>».</li>
 </ul>
+</div>
+</div>
 </section>
-<section id="data-projects" class="level3" data-number="4.3.3">
-<h3 data-number="4.3.3" class="anchored" data-anchor-id="data-projects"><span class="header-section-number">4.3.3</span> RStudio Projects</h3>
+<section id="data-projects" class="level3" data-number="4.4.3">
+<h3 data-number="4.4.3" class="anchored" data-anchor-id="data-projects"><span class="header-section-number">4.4.3</span> RStudio Projects</h3>
 <p>Чтобы не мучиться с рабочей директорией и путями, в RStudio есть <strong>проекты (projects)</strong>.</p>
 <div id="def-project" class="theorem definition">
 <p><span class="theorem-title"><strong>Определение 4.4</strong></span> <strong>Проект RStudio</strong> — это папка, которую RStudio «запоминает» как единое рабочее пространство для одного исследования или задачи. При открытии проекта рабочая директория автоматически устанавливается в эту папку.</p>
@@ -430,7 +764,7 @@ window.Quarto = {
 <li>все файлы одного исследования лежат вместе: данные, скрипты, результаты;</li>
 <li>чтобы код воспроизвёлся на другом компьютере, достаточно отправить коллеге всю папку проекта целиком.</li>
 </ul>
-<p>Как создать проект?</p>
+<p><strong>Как создать проект?</strong></p>
 <ol type="1">
 <li>В правом верхнем углу RStudio нажмите на <code>Project: (None)</code> и выберите <code>New Project…</code>.</li>
 </ol>
@@ -512,18 +846,18 @@ window.Quarto = {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Исходные («сырые») данные — неприкосновенны. Не правьте их руками в Excel и не пересохраняйте поверх исходных файлов. Всё, что мы делаем с данными, должно делаться <em>кодом</em> и сохраняться в <em>новые</em> файлы. Тогда любой желающий (включая вас через полгода) сможет воспроизвести путь от сырых данных до результата.</p>
+<p>Исходные («сырые») данные — неприкосновенны. Не&nbsp;правьте их руками в&nbsp;Excel и&nbsp;не&nbsp;пересохраняйте поверх исходных файлов. Всё, что мы делаем с&nbsp;данными, должно делаться <em>кодом</em> и&nbsp;сохраняться в <em>новые</em> файлы. Тогда любой желающий (включая вас через полгода) сможет воспроизвести путь от сырых данных до&nbsp;результата.</p>
 </div>
 </div>
-<p>В нашем курсе мы будем исходить из того, что вы работаете внутри проекта, в корне которого находится папка <code>data</code>, а в ней — папка <code>sharexp</code> с файлами эксперимента. Поэтому во всех примерах пути будут начинаться с <code>data/sharexp/</code>. Данные эксперимента можно скачать из <a href="https://github.com/angelgardt/rs-app-andan-book/tree/master/data/sharexp">репозитория учебника</a>.</p>
+<p>В нашем курсе мы будем исходить из того, что вы работаете внутри проекта, в корне которого находится папка <code>data</code>, а в ней — папка <code>sharexp</code> с файлами эксперимента. Поэтому во всех примерах пути будут начинаться с <code>data/sharexp/</code>.</p>
 </section>
 </section>
-<section id="data-import" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="data-import"><span class="header-section-number">4.4</span> Импорт данных</h2>
+<section id="data-import" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="data-import"><span class="header-section-number">4.5</span> Импорт данных</h2>
 <p>Теперь, когда мы знаем, где лежат файлы и как на них сослаться, можно их читать.</p>
-<section id="data-import-text" class="level3" data-number="4.4.1">
-<h3 data-number="4.4.1" class="anchored" data-anchor-id="data-import-text"><span class="header-section-number">4.4.1</span> Текстовые форматы</h3>
-<p>Для чтения текстовых файлов мы будем использовать функции пакета <code>readr</code> (он входит в <code>tidyverse</code>). Их имена начинаются с <code>read_</code>:</p>
+<section id="data-import-text" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="data-import-text"><span class="header-section-number">4.5.1</span> Текстовые форматы</h3>
+<p>Для чтения текстовых файлов мы будем использовать функции пакета <code>readr</code> (он входит в <code>tidyverse</code>). Их&nbsp;имена начинаются с <code>read_</code>:</p>
 <div id="tbl-readr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-readr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -563,11 +897,80 @@ window.Quarto = {
 </div>
 </figure>
 </div>
-<p>В базовом R тоже есть функции для чтения данных — <code>read.csv()</code>, <code>read.table()</code> и другие, с точкой вместо нижнего подчёркивания. Они делают примерно то же самое, но хуже угадывают типы данных и медленнее работают, поэтому мы предпочитаем <code>readr</code>.</p>
-<p>Прочитаем файл с платформами. Мы уже выяснили, что разделитель в нём — пробел, так что нужна функция <code>read_delim()</code>:</p>
+<p>В базовом R тоже есть функции для чтения данных — <code>read.csv()</code>, <code>read.table()</code> и другие, с точкой вместо нижнего подчёркивания. Они делают примерно то же самое, но хуже угадывают типы данных и&nbsp;медленнее работают, поэтому мы предпочитаем <code>readr</code>.</p>
+<p>Прочитаем файл с платформами. В <a href="#sharexp-codebook-platform">кодбуке</a> было сказано не&nbsp;скачивать данные как файл, потому что R умеет читать их прямо из интернета. Воспользуемся данной фичей и посмотрии, как она работает.</p>
+<p>Судя по&nbsp;<a href="https://raw.githubusercontent.com/angelgardt/rs-app-andan-book/refs/heads/master/data/sharexp/share_platform.csv">ссылке на&nbsp;данные</a>, она ведет к&nbsp;csv-файлу, так как заканчивается на <code>.csv</code>. Что&nbsp;ж, прочитаем данные предназначенной для этого функцией:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>platform <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/sharexp/share_platform.csv"</span>, <span class="at">delim =</span> <span class="st">" "</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>platform</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## читаем данные прямо по ссылке из интернета</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/angelgardt/rs-app-andan-book/refs/heads/master/data/sharexp/share_platform.csv"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 20 Columns: 1
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): id platform
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 1
+   `id platform`
+   &lt;chr&gt;        
+ 1 1 ios        
+ 2 2 ios        
+ 3 3 ios        
+ 4 4 andr       
+ 5 5 ios        
+ 6 6 andr       
+ 7 7 andr       
+ 8 8 andr       
+ 9 9 ios        
+10 10 andr      
+11 11 andr      
+12 12 andr      
+13 13 ios       
+14 14 ios       
+15 15 andr      
+16 16 andr      
+17 17 ios       
+18 18 andr      
+19 19 ios       
+20 20 ios       </code></pre>
+</div>
+</div>
+<p>Ну, в общем-то что-то прочиталось, однако если мы внимательно присмотримся к тому, что получилось, мы обнаружим некоторую проблему. Кодбук обещал нам две переменные в этих данных — <code>id</code> и <code>platform</code>, однако <code>read_csv()</code> нам сообщила, что <code>Rows: 20 Columns: 1</code>. Двадцать строк — это разумно, но вот одна колонка — что-то не так.</p>
+<p>Заметим, что ошибок не было — файл прочитан. Сделаем важный вывод: <strong>всегда проверяйте результат импорта</strong>, даже если на первый взгляд всё отработало успешно.</p>
+<p>Чаще всего проблема в&nbsp;разделителе. Вероятно, в этом csv-файле разделитель не запятая, а что-то иное. В&nbsp;принципе, в&nbsp;нашем случае датасет небольшой, его можно изучить и прямо в консоли, и открыть в&nbsp;текстовом редакторе, чтобы посмотреть, каков разделитель. Но всё же укажем функцию, которая может быть полезна при работе с данными с большим количеством строк.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">readLines</span>(<span class="st">"https://raw.githubusercontent.com/angelgardt/rs-app-andan-book/refs/heads/master/data/sharexp/share_platform.csv"</span>, <span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "id platform" "1 ios"       "2 ios"       "3 ios"       "4 andr"     
+ [6] "5 ios"       "6 andr"      "7 andr"      "8 andr"      "9 ios"      </code></pre>
+</div>
+</div>
+<p><code>readLines()</code> читает строки файла «как есть», и возвращает строковый вектор. Мы вызвали 10 строк (<code>n = 10</code>), и видим, что</p>
+<ul>
+<li>первая строка — это <code>"id platform"</code>, то есть названия колонок, что логично</li>
+<li>вторая — это <code>"1 ios"</code>, то есть платформа для первого испытуемого</li>
+<li>вторая — это <code>"2 ios"</code>, то есть платформа для второго испытуемого</li>
+<li>и т.д.</li>
+</ul>
+<p>Можем прямо отсюда скопировать символ, которые разделяет колонки, то есть стоит между, например, <code>1</code> и <code>ios</code>. В случае файла <code>share_platform.csv</code> это пробел. Разделитель, прямо скажем, весьма нетипичный, но такой уж дан файл, придется его грузить.</p>
+<p>Для загрузки файла с произвольным разделителем нужна функция <code>read_delim()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>platform <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"data/sharexp/share_platform.csv"</span>, <span class="at">delim =</span> <span class="st">" "</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 20 Columns: 2
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: " "
+chr (1): platform
+dbl (1): id
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>platform</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 2
       id platform
@@ -597,7 +1000,7 @@ window.Quarto = {
 <p>Посмотрим на результат внимательно. Функция сама определила, что в файле две колонки: <code>id</code> (число, <code>&lt;dbl&gt;</code>) и <code>platform</code> (текст, <code>&lt;chr&gt;</code>).</p>
 <p>Теперь прочитаем данные первого испытуемого. Это обычный CSV:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/sharexp/raw/01.csv"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/sharexp/raw/01.csv"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 458 Columns: 91
 ── Column specification ────────────────────────────────────────────────────────
@@ -610,13 +1013,37 @@ dbl (38): numtrial, setsize, trialtypenum, sernum, n, mouse_main1.leftButton...
 </div>
 </div>
 <p>Функция <code>read_csv()</code> не просто прочитала файл, но и отчиталась: сколько строк и столбцов она нашла, какой разделитель использовала, и как определила типы столбцов. Эти сообщения полезно читать — они первыми сообщают, если что-то пошло не так.</p>
-<p>Что произойдёт, если выбрать «не ту» функцию? Попробуем прочитать наш файл с пробелами как обычный CSV:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"data/sharexp/share_platform.csv"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 20 × 1
+<!---
+Что произойдёт, если выбрать «не ту» функцию? Попробуем прочитать наш файл с пробелами как обычный CSV:
+
+
+::: {.cell}
+
+```{.r .cell-code}
+read_csv("data/sharexp/share_platform.csv")
+```
+
+::: {.cell-output .cell-output-stderr}
+
+```
+Rows: 20 Columns: 1
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): id platform
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+
+:::
+
+::: {.cell-output .cell-output-stdout}
+
+```
+# A tibble: 20 × 1
    `id platform`
-   &lt;chr&gt;        
+   <chr>        
  1 1 ios        
  2 2 ios        
  3 3 ios        
@@ -636,28 +1063,34 @@ dbl (38): numtrial, setsize, trialtypenum, sernum, n, mouse_main1.leftButton...
 17 17 ios       
 18 18 andr      
 19 19 ios       
-20 20 ios       </code></pre>
-</div>
-</div>
-<p>Ошибки нет, но результат бесполезен: R увидел одну-единственную колонку с названием <code>id platform</code> и в ней строки вида <code>1 ios</code>. Это опасная ситуация — код отработал, а данные прочитаны неправильно. Поэтому <strong>всегда проверяйте результат импорта</strong>.</p>
+20 20 ios       
+```
+
+
+:::
+:::
+
+
+Ошибки нет, но результат бесполезен: R увидел одну-единственную колонку с названием `id platform` и в ней строки вида `1 ios`. Это опасная ситуация --- код отработал, а данные прочитаны неправильно.
+--->
 </section>
-<section id="data-import-excel" class="level3" data-number="4.4.2">
-<h3 data-number="4.4.2" class="anchored" data-anchor-id="data-import-excel"><span class="header-section-number">4.4.2</span> Табличные форматы</h3>
+<section id="data-import-excel" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="data-import-excel"><span class="header-section-number">4.5.2</span> Табличные форматы</h3>
 <p>Файлы Excel читаются функциями пакета <code>readxl</code>. Он устанавливается вместе с <code>tidyverse</code>, но не подключается автоматически, поэтому подключим его отдельно (либо будем обращаться к функциям через <code>::</code>).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Основные функции — <code>read_xlsx()</code> для файлов <code>.xlsx</code> и <code>read_xls()</code> для устаревших <code>.xls</code> (<code>read_excel()</code> сама определяет формат по расширению). Посмотрим, какие листы есть в файле с координатами целевых стимулов:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheets</span>(<span class="st">"data/sharexp/targetpositions.xlsx"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheets</span>(<span class="st">"data/sharexp/targetpositions.xlsx"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "poses"     "poses (2)"</code></pre>
 </div>
 </div>
 <p>В файле два листа. По умолчанию <code>read_xlsx()</code> читает первый, но можно указать другой через аргумент <code>sheet</code>. Также можно пропустить лишние строки в начале файла (<code>skip</code>), указать диапазон ячеек (<code>range</code>) и т. д.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>targets <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/sharexp/targetpositions.xlsx"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>targets</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>targets <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">"data/sharexp/targetpositions.xlsx"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>targets</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 459 × 26
    posx1tr posy1tr posxmin1tr posxmax1tr posymin1tr posymax1tr posx2tr posy2tr
@@ -692,15 +1125,15 @@ dbl (38): numtrial, setsize, trialtypenum, sernum, n, mouse_main1.leftButton...
 <div class="callout-body-container callout-body">
 <p>Файлы SPSS (<code>.sav</code>) читаются функцией <code>read_sav()</code> из пакета <code>haven</code>. Он тоже устанавливается вместе с <code>tidyverse</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"data/some_spss_file.sav"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"data/some_spss_file.sav"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Особенность: <code>haven</code> сохраняет подписи к переменным и значениям (value labels), и категориальные переменные при этом читаются как специальный тип <code>haven_labelled</code>. Чаще всего их удобно сразу перевести в обычные факторы функцией <code>as_factor()</code>.</p>
 </div>
 </div>
 </section>
-<section id="data-tibble" class="level3" data-number="4.4.3">
-<h3 data-number="4.4.3" class="anchored" data-anchor-id="data-tibble"><span class="header-section-number">4.4.3</span> Тибблы</h3>
+<section id="data-tibble" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="data-tibble"><span class="header-section-number">4.5.3</span> Тибблы</h3>
 <p>Заметили, что результат вывелся не так, как выводился датафрейм в <a href="../chpts/rpy-basics.html#dataframes">прошлой главе</a>? Функции <code>tidyverse</code> читают данные в особый объект — <strong>тиббл (tibble)</strong>.</p>
 <p>С точки зрения пользователя тиббл — это почти тот же датафрейм, но с рядом удобных отличий:</p>
 <ul>
@@ -711,34 +1144,34 @@ dbl (38): numtrial, setsize, trialtypenum, sernum, n, mouse_main1.leftButton...
 <p>Всё, что мы умели делать с датафреймами (<code>$</code>, индексация и т. д.), работает и с тибблами.</p>
 </section>
 </section>
-<section id="data-explore" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="data-explore"><span class="header-section-number">4.5</span> Первое знакомство с данными</h2>
+<section id="data-explore" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="data-explore"><span class="header-section-number">4.6</span> Первое знакомство с данными</h2>
 <p>Данные загружены. Теперь самое важное действие, которое нужно сделать <strong>до</strong> любых преобразований и вычислений: <strong>посмотреть на данные глазами</strong>. Мы должны понять, что у нас есть, прежде чем решать, что с этим делать.</p>
 <p>Работать будем с данными первого испытуемого — объектом <code>d1</code>.</p>
-<section id="data-explore-size" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="data-explore-size"><span class="header-section-number">4.5.1</span> Размер таблицы</h3>
+<section id="data-explore-size" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="data-explore-size"><span class="header-section-number">4.6.1</span> Размер таблицы</h3>
 <p>Сколько у нас строк и столбцов?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(d1)   <span class="co"># число строк</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(d1)   <span class="co"># число строк</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 458</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(d1)   <span class="co"># число столбцов</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(d1)   <span class="co"># число столбцов</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 91</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d1)    <span class="co"># оба сразу</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(d1)    <span class="co"># оба сразу</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 458  91</code></pre>
 </div>
 </div>
 <p>Строк 458, столбцов 91. Помним, что в эксперименте было 450 проб. Откуда 8 лишних строк? Выясним.</p>
 </section>
-<section id="data-explore-headtail" class="level3" data-number="4.5.2">
-<h3 data-number="4.5.2" class="anchored" data-anchor-id="data-explore-headtail"><span class="header-section-number">4.5.2</span> Начало и конец таблицы</h3>
+<section id="data-explore-headtail" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="data-explore-headtail"><span class="header-section-number">4.6.2</span> Начало и конец таблицы</h3>
 <p>Функции <code>head()</code> и <code>tail()</code> показывают первые и последние строки таблицы. Количество строк можно задать аргументом <code>n</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d1, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(d1, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 91
   stim1     stim2 stim3 stim4 stim5 stim6 stim7 stim8 stim9 stim10 stim11 stim12
@@ -757,7 +1190,7 @@ dbl (38): numtrial, setsize, trialtypenum, sernum, n, mouse_main1.leftButton...
 </div>
 <p>Столбцов много, и тиббл показывает только то, что влезло на экран. Ограничим вывод несколькими важными столбцами. Для этого воспользуемся индексацией по именам:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>d1[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">"numtrial"</span>, <span class="st">"trialtype"</span>, <span class="st">"setsize"</span>, <span class="st">"mouse_main1.time_raw"</span>)]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>d1[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">"numtrial"</span>, <span class="st">"trialtype"</span>, <span class="st">"setsize"</span>, <span class="st">"mouse_main1.time_raw"</span>)]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   numtrial trialtype setsize mouse_main1.time_raw
@@ -770,7 +1203,7 @@ dbl (38): numtrial, setsize, trialtypenum, sernum, n, mouse_main1.leftButton...
 <p>Это и есть наши интересные переменные: номер пробы (<code>numtrial</code>), тип пробы (<code>trialtype</code>), количество стимулов (<code>setsize</code>) и время до первого клика (<code>mouse_main1.time_raw</code>).</p>
 <p>А теперь посмотрим на конец таблицы:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(d1[, <span class="fu">c</span>(<span class="st">"stim1"</span>, <span class="st">"stim2"</span>, <span class="st">"numtrial"</span>, <span class="st">"trialtype"</span>, <span class="st">"mouse_main1.time_raw"</span>)], <span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(d1[, <span class="fu">c</span>(<span class="st">"stim1"</span>, <span class="st">"stim2"</span>, <span class="st">"numtrial"</span>, <span class="st">"trialtype"</span>, <span class="st">"mouse_main1.time_raw"</span>)], <span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 5
    stim1       stim2              numtrial trialtype mouse_main1.time_raw
@@ -802,12 +1235,12 @@ dbl (38): numtrial, setsize, trialtypenum, sernum, n, mouse_main1.leftButton...
 </div>
 </div>
 </section>
-<section id="data-explore-structure" class="level3" data-number="4.5.3">
-<h3 data-number="4.5.3" class="anchored" data-anchor-id="data-explore-structure"><span class="header-section-number">4.5.3</span> Структура данных</h3>
+<section id="data-explore-structure" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="data-explore-structure"><span class="header-section-number">4.6.3</span> Структура данных</h3>
 <p>Функция <code>str()</code> показывает структуру объекта: размер, названия столбцов, их типы и первые значения. Для широкой таблицы вывод получится очень длинным, поэтому возьмём лишь часть столбцов:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d1[, <span class="fu">c</span>(<span class="st">"numtrial"</span>, <span class="st">"trialtype"</span>, <span class="st">"setsize"</span>,</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>           <span class="st">"mouse_main1.time_raw"</span>, <span class="st">"mouse_main1.x_raw"</span>, <span class="st">"mouse_main1.y_raw"</span>)])</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(d1[, <span class="fu">c</span>(<span class="st">"numtrial"</span>, <span class="st">"trialtype"</span>, <span class="st">"setsize"</span>,</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>           <span class="st">"mouse_main1.time_raw"</span>, <span class="st">"mouse_main1.x_raw"</span>, <span class="st">"mouse_main1.y_raw"</span>)])</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [458 × 6] (S3: tbl_df/tbl/data.frame)
  $ numtrial            : num [1:458] 1 2 3 4 5 6 7 8 9 10 ...
@@ -820,9 +1253,9 @@ dbl (38): numtrial, setsize, trialtypenum, sernum, n, mouse_main1.leftButton...
 </div>
 <p>Аналогичную, но более компактную сводку даёт функция <code>glimpse()</code> из <code>tidyverse</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize, mouse_main1.time_raw) <span class="sc">|&gt;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(numtrial, trialtype, setsize, mouse_main1.time_raw) <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 458
 Columns: 4
@@ -832,19 +1265,19 @@ $ setsize              &lt;dbl&gt; 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 
 $ mouse_main1.time_raw &lt;dbl&gt; 1.671903, 1.126054, 2.595399, 2.609391, 1.592684,…</code></pre>
 </div>
 </div>
-<p>Здесь мы воспользовались функцией <code>select()</code> и оператором <code>|&gt;</code> (пайп) — о них поговорим в <a href="../chpts/rpy-tidybase.html">следующей главе</a>. Пока достаточно знать, что <code>select()</code> выбирает нужные столбцы, а пайп передаёт результат в следующую функцию.</p>
+<p>Здесь мы воспользовались функцией <code>select()</code> и оператором <code>|&gt;</code> (пайп) — о них поговорим в <a href="rpy-tidybase.qmd">следующей главе</a>. Пока достаточно знать, что <code>select()</code> выбирает нужные столбцы, а пайп передаёт результат в следующую функцию.</p>
 <p>Обратим внимание на типы: <code>numtrial</code> и <code>setsize</code> — числа (<code>&lt;dbl&gt;</code>), <code>trialtype</code> — текст (<code>&lt;chr&gt;</code>). С числами всё нормально, а вот <code>trialtype</code> — это номинальная переменная с тремя значениями, и со временем мы научимся записывать её иначе, чем «текст».</p>
 </section>
-<section id="data-explore-summary" class="level3" data-number="4.5.4">
-<h3 data-number="4.5.4" class="anchored" data-anchor-id="data-explore-summary"><span class="header-section-number">4.5.4</span> Описательная сводка</h3>
+<section id="data-explore-summary" class="level3" data-number="4.6.4">
+<h3 data-number="4.6.4" class="anchored" data-anchor-id="data-explore-summary"><span class="header-section-number">4.6.4</span> Описательная сводка</h3>
 <p>Функция <code>summary()</code> для числовых переменных выдаёт минимум, максимум, квартили, среднее и количество пропусков, а для текстовых — только длину и тип:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(d1<span class="sc">$</span>mouse_main1.time_raw)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(d1<span class="sc">$</span>mouse_main1.time_raw)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.     NAs 
  0.7378  1.2219  1.4935  1.7201  1.9780  5.8210       8 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(d1<span class="sc">$</span>trialtype)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(d1<span class="sc">$</span>trialtype)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Length  N.unique   N.blank Min.nchar Max.nchar       NAs 
       458         3         0         4         4         8 </code></pre>
@@ -853,23 +1286,23 @@ $ mouse_main1.time_raw &lt;dbl&gt; 1.671903, 1.126054, 2.595399, 2.609391, 1.592
 <p>Время до клика лежит в пределах от 0.74 до 5.82 секунд, при этом среднее (1.72) выше медианы (1.49) — похоже, что есть небольшое число очень долгих проб, которые «тянут» среднее вверх. К вопросу о том, как с этим быть, мы вернёмся, когда будем говорить об описательных статистиках.</p>
 <p>Обратите внимание на <code>NA's: 8</code> в первой сводке — восемь пропущенных значений во времени до клика. Это ровно те 8 лишних строк из конца файла.</p>
 </section>
-<section id="data-explore-categorical" class="level3" data-number="4.5.5">
-<h3 data-number="4.5.5" class="anchored" data-anchor-id="data-explore-categorical"><span class="header-section-number">4.5.5</span> Категориальные переменные</h3>
+<section id="data-explore-categorical" class="level3" data-number="4.6.5">
+<h3 data-number="4.6.5" class="anchored" data-anchor-id="data-explore-categorical"><span class="header-section-number">4.6.5</span> Категориальные переменные</h3>
 <p>Для номинальных переменных полезно знать, какие значения встречаются и сколько раз. Для этого есть две функции.</p>
 <p><code>unique()</code> возвращает все различные значения:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d1<span class="sc">$</span>trialtype)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d1<span class="sc">$</span>trialtype)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "tray" "dots" "both" NA    </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d1<span class="sc">$</span>setsize)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d1<span class="sc">$</span>setsize)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  8 12 16 NA</code></pre>
 </div>
 </div>
 <p>Здесь заметно, что в <code>trialtype</code> есть пропуск <code>NA</code> (откуда он, мы уже знаем). <code>table()</code> строит <strong>таблицу частот</strong>: сколько раз встретилось каждое значение:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d1<span class="sc">$</span>trialtype)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d1<span class="sc">$</span>trialtype)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 both dots tray 
@@ -878,7 +1311,7 @@ both dots tray
 </div>
 <p>Функция умеет считать и сочетания значений двух переменных — такая таблица называется <strong>таблицей сопряжённости</strong>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d1<span class="sc">$</span>trialtype, d1<span class="sc">$</span>setsize)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(d1<span class="sc">$</span>trialtype, d1<span class="sc">$</span>setsize)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      
         8 12 16
@@ -889,20 +1322,20 @@ both dots tray
 </div>
 <p>Каждое сочетание типа пробы и числа стимулов встретилось 50 раз — так и задумывалось в дизайне эксперимента: <span class="math inline">\(3 \times 3 \times 50 = 450\)</span>. Хороший знак. Если бы мы увидели здесь что-то неожиданное (скажем, 49 вместо 50), это был бы повод задуматься, не потерялась ли часть данных.</p>
 </section>
-<section id="data-explore-na" class="level3" data-number="4.5.6">
-<h3 data-number="4.5.6" class="anchored" data-anchor-id="data-explore-na"><span class="header-section-number">4.5.6</span> Пропущенные значения</h3>
+<section id="data-explore-na" class="level3" data-number="4.6.6">
+<h3 data-number="4.6.6" class="anchored" data-anchor-id="data-explore-na"><span class="header-section-number">4.6.6</span> Пропущенные значения</h3>
 <p>Мы уже видели, что в данных есть пропуски. Выясним, сколько их и где. Функция <code>is.na()</code> возвращает вектор из <code>TRUE</code> и <code>FALSE</code>: <code>TRUE</code> там, где значение пропущено. Поскольку <code>TRUE</code> при вычислениях превращается в <code>1</code>, а <code>FALSE</code> — в <code>0</code>, то сумма этого вектора — количество пропусков:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(d1<span class="sc">$</span>mouse_main1.time_raw))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(d1<span class="sc">$</span>mouse_main1.time_raw))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8</code></pre>
 </div>
 </div>
 <p>Пропусков в одной переменной мы теперь считать умеем. А как посчитать пропуски в каждом столбце сразу? Для этого можно применить <code>is.na()</code> ко всей таблице сразу — получится таблица из <code>TRUE</code> и <code>FALSE</code> — и просуммировать её по столбцам функцией <code>colSums()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>na_by_col <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">is.na</span>(d1))</span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>na_by_col[<span class="fu">c</span>(<span class="st">"numtrial"</span>, <span class="st">"trialtype"</span>, <span class="st">"setsize"</span>,</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"mouse_main1.time_raw"</span>, <span class="st">"mouse_main1.x_raw"</span>, <span class="st">"mouse_main1.y_raw"</span>)]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>na_by_col <span class="ot">&lt;-</span> <span class="fu">colSums</span>(<span class="fu">is.na</span>(d1))</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>na_by_col[<span class="fu">c</span>(<span class="st">"numtrial"</span>, <span class="st">"trialtype"</span>, <span class="st">"setsize"</span>,</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"mouse_main1.time_raw"</span>, <span class="st">"mouse_main1.x_raw"</span>, <span class="st">"mouse_main1.y_raw"</span>)]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            numtrial            trialtype              setsize 
                    8                    8                    8 
@@ -910,41 +1343,41 @@ mouse_main1.time_raw    mouse_main1.x_raw    mouse_main1.y_raw
                    8                    8                    8 </code></pre>
 </div>
 </div>
-<p>В этих столбцах по 8 пропусков — в точности по числу служебных строк. Теперь понятно, что пропуски в данных не случайны — они имеют техническое происхождение. Это важный вывод. Как мы с ними поступим, зависит от того, откуда они взялись, и мы подробно разберём это в главе про <a href="../chpts/rpy-tidyadv.html">продвинутую предобработку</a>.</p>
+<p>В этих столбцах по 8 пропусков — в точности по числу служебных строк. Теперь понятно, что пропуски в данных не случайны — они имеют техническое происхождение. Это важный вывод. Как мы с ними поступим, зависит от того, откуда они взялись, и мы подробно разберём это в главе про <a href="rpy-tidyadv.qmd">продвинутую предобработку</a>.</p>
 </section>
-<section id="data-explore-sort" class="level3" data-number="4.5.7">
-<h3 data-number="4.5.7" class="anchored" data-anchor-id="data-explore-sort"><span class="header-section-number">4.5.7</span> Сортировка</h3>
+<section id="data-explore-sort" class="level3" data-number="4.6.7">
+<h3 data-number="4.6.7" class="anchored" data-anchor-id="data-explore-sort"><span class="header-section-number">4.6.7</span> Сортировка</h3>
 <p>Наконец, часто нужно упорядочить значения. Функция <code>sort()</code> сортирует вектор по возрастанию (по убыванию — с аргументом <code>decreasing = TRUE</code>), а <code>order()</code> возвращает позиции элементов в отсортированном порядке. Найдём пять самых быстрых проб:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(d1<span class="sc">$</span>mouse_main1.time_raw)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(d1<span class="sc">$</span>mouse_main1.time_raw)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7377776 0.7559674 0.7943522 0.8371950 0.8415626</code></pre>
 </div>
 </div>
 <p>Заметьте, что <code>NA</code> при сортировке по умолчанию отбрасываются — они не попали ни в начало, ни в конец.</p>
 </section>
-<section id="data-explore-view" class="level3" data-number="4.5.8">
-<h3 data-number="4.5.8" class="anchored" data-anchor-id="data-explore-view"><span class="header-section-number">4.5.8</span> Просмотр в таблице</h3>
+<section id="data-explore-view" class="level3" data-number="4.6.8">
+<h3 data-number="4.6.8" class="anchored" data-anchor-id="data-explore-view"><span class="header-section-number">4.6.8</span> Просмотр в таблице</h3>
 <p>Если нужно просто «полистать» данные, как в Excel, воспользуйтесь функцией <code>View(d1)</code> (с заглавной буквы) или кликните по объекту в окне <code>Environment</code>. В RStudio откроется вкладка с таблицей. Это удобно для знакомства, но не для анализа: «посмотреть руками» — не воспроизводимо.</p>
 </section>
 </section>
-<section id="data-files" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="data-files"><span class="header-section-number">4.6</span> Список файлов</h2>
+<section id="data-files" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="data-files"><span class="header-section-number">4.7</span> Список файлов</h2>
 <p>Мы изучили данные первого испытуемого. Но файлов-то двадцать! Чтобы прочитать их все, нужно сначала узнать их имена. Функция <code>dir()</code> (она же <code>list.files()</code>) возвращает имена файлов в папке:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="st">"data/sharexp/raw"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>files[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> <span class="fu">dir</span>(<span class="st">"data/sharexp/raw"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>files[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data/sharexp/raw/01.csv" "data/sharexp/raw/02.csv"
 [3] "data/sharexp/raw/03.csv"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(files)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(files)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20</code></pre>
 </div>
 </div>
 <p>Аргумент <code>full.names = TRUE</code> возвращает не только имена файлов, но и путь к ним — что нам и нужно, чтобы потом их прочитать. Двадцать файлов, как и ожидалось.</p>
-<p>Как прочитать их все и собрать в одну таблицу — вопрос, к которому мы вернёмся в главе про <a href="../chpts/rpy-tidyadv.html">продвинутую предобработку</a>. Сначала нужно научиться обращаться с данными одного испытуемого: убирать лишнее, переименовывать, преобразовывать. Этим займёмся дальше.</p>
+<p>Как прочитать их все и собрать в одну таблицу — вопрос, к которому мы вернёмся в главе про <a href="rpy-tidyadv.qmd">продвинутую предобработку</a>. Сначала нужно научиться обращаться с данными одного испытуемого: убирать лишнее, переименовывать, преобразовывать. Этим займёмся дальше.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1377,8 +1810,8 @@ mouse_main1.time_raw    mouse_main1.x_raw    mouse_main1.y_raw
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chpts/rpy-tidybase.html" class="pagination-link" aria-label="Базовая предобработка данных">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Базовая предобработка данных</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chpts/rpy-tidy.html" class="pagination-link" aria-label="Предобработка данных">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Предобработка данных</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

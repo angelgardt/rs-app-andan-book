@@ -1,4 +1,4 @@
-# Предобработка данных. Строки. Дата и время {#rpy-strdt}
+# Строки. Дата и время {#rpy-strdt}
 
 ```{r opts, echo=FALSE, eval=TRUE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, warning = FALSE, message = FALSE, error = FALSE)

@@ -24,8 +24,8 @@ book:
     - chpts/prob-randvals.qmd
     # - chpts/rpy-randvals.qmd
     - chpts/rpy-data.qmd
-    - chpts/rpy-tidybase.qmd
-    - chpts/rpy-tidyadv.qmd
+    - chpts/rpy-tidy.qmd
+    # - chpts/rpy-tidyadv.qmd
     - chpts/rpy-strdt.qmd
     # - chpts/rpy-vis.qmd
     # - chpts/stats-desc.qmd
