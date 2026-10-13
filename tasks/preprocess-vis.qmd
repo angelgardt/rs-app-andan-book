@@ -1,4 +1,5 @@
 ---
+# output-file: "task_preproc-vis-solutions"
 execute: 
   include: false
 ---
@@ -274,6 +275,7 @@ dm_small |> filter(cut == "Good", color == "D") |> nrow()
 :::
 
 **12.** Отберите камни массой от 1 до 1,5 карата включительно, цвета D, E или F, которые ещё не проданы. Отсортируйте их по убыванию цены.
+
 - Сколько таких камней?
 - Какой `id` у самого дорогого из них?
 
@@ -418,6 +420,7 @@ dm_small |> group_by(cut, color, clarity) |>
 
 - Как меняется медианная цена при переходе от худшей чистоты к лучшей?
 - ★ Верно ли, что камни с лучшей чистотой в среднем дешевле? Почему?
+
 <!---
 Подсказка: посмотрите на массу.
 --->
@@ -475,15 +478,53 @@ dm_small |> filter(!is.na(sale_price)) |>
 :::
 
 
-<!---
-**19.** У бриллиантов какого цвета наибольшая вариативность глубины (`depth`)? Посчитайте две меры разброса: стандартное отклонение и межквартильный размах. Совпадают ли выводы?
---->
 
-<!---
-**20.** Возьмите первую тысячу строк очищенной таблицы и удалите бриллианты с чистотой IF. Разделите оставшиеся камни на категории `low`, `medium` и `high` по отклонению цены от средней на одно стандартное отклонение: `low` — цена ниже `среднее − SD`, `high` — выше `среднее + SD`, `medium` — всё остальное. Для каждой категории укажите число наблюдений, минимальную и максимальную цену.
+**19.** ★ У бриллиантов какого цвета наибольшая вариативность глубины (`depth`)? Посчитайте две меры разброса: стандартное отклонение и межквартильный размах. Совпадают ли выводы?
+
+```{r}
+dm |> group_by(color) |>
+  summarise(sd_depth = sd(depth), iqr_depth = IQR(depth)) |>
+  arrange(desc(sd_depth))
+```
+
+:::{.callout-note appearance="minimal" collapse="true" title="Подсказки"}
+- `sd()` / `var()`
+- `IQR()`
+- `group_by()`
+- `summarise()` / `summarize()`
+- `summarise(..., .by = ...)` / `summarize(..., .by = ...)`
+- `arrange(dec())`
+:::
+
+
+**20.** ★ Возьмите первую тысячу строк очищенной таблицы и удалите бриллианты с чистотой IF. Разделите оставшиеся камни на категории `low`, `medium` и `high` по отклонению цены от средней на одно стандартное отклонение: `low` — цена ниже `среднее − SD`, `high` — выше `среднее + SD`, `medium` — всё остальное. Для каждой категории укажите число наблюдений, минимальную и максимальную цену.
 - Подсказка: `case_when()`.
-- ★ Одна из категорий окажется пустой. Почему? Что можно сказать о форме распределения цены? Повторите разбиение для `log(price)` и сравните.
---->
+- Одна из категорий окажется пустой. Почему? Что можно сказать о форме распределения цены? Повторите разбиение для `log(price)` и сравните.
+
+```{r}
+dm |> slice_head(n = 1000) |>
+  filter(clarity != "IF") |>
+  mutate(price_cat = case_when(
+    price < mean(price) - sd(price) ~ "low",
+    price > mean(price) + sd(price) ~ "high",
+    .default = "medium"),
+    price_cat = factor(price_cat, levels = c("low", "medium", "high"))) |>
+  group_by(price_cat) |>
+  summarise(n = n(), min_price = min(price), max_price = max(price))
+```
+
+:::{.callout-note appearance="minimal" collapse="true" title="Подсказки"}
+- `slice_head()`
+- `filter()`
+- `mutate()`
+- `case_when()`
+- `mean()`, `sd()`
+- `group_by()`
+- `summarise()` / `summarize()`
+- `summarise(..., .by = ...)` / `summarize(..., .by = ...)`
+- `min()`, `max()`
+:::
+
 
 
 ## Часть 4. Работа со строками
@@ -679,61 +720,230 @@ dm |> filter(is.na(datetime_sold)) |>
 
 Загрузите справочники `color_scale.csv`, `clarity_scale.csv`, `labs.csv` и таблицу оценок `diamonds_appraisals.csv`.
 
-**36.** Присоедините к данным группу цвета из `color_scale.csv` с помощью `left_join()`. Сколько камней в каждой группе? Есть ли в справочнике цвета, которых нет в данных? Подсказка: `anti_join()`.
+```{r}
+color_scale <- read_csv(file.path(path, "color_scale.csv"))
+clarity_scale <- read_csv(file.path(path, "clarity_scale.csv"))
+labs <- read_csv(file.path(path, "labs.csv"))
+appr <- read_csv(file.path(path, "diamonds_appraisals.csv"))
+```
+
+**36.** Присоедините к данным группу цвета из `color_scale.csv`.
+
+- Сколько камней в каждой группе?
+- Есть ли в справочнике цвета, которых нет в данных?
+
+```{r}
+dm <- dm |> left_join(color_scale, by = "color")
+dm |> count(color_group)
+color_scale |> anti_join(dm |> mutate(color = as.character(color)), by = "color")
+```
+
+:::{.callout-note appearance="minimal" collapse="true" title="Подсказки"}
+- `left_join()`
+- `anti_join()`
+:::
 
 **37.** Присоедините справочник чистоты с помощью `left_join()`, `inner_join()`, `right_join()` и `full_join()` и сравните число строк в результатах. Объясните, почему оно различается. Какие уровни чистоты из справочника не встречаются в данных?
 
-**38.** Присоедините справочник лабораторий. Ключевые столбцы в двух таблицах называются по-разному (`lab` и `lab_code`), используйте `join_by()`.
-- ★ Попробуйте выполнить это объединение для исходной, неочищенной таблицы (до задания 21). У скольких строк не нашлось пары и почему?
+```{r}
+dmc <- dm |> mutate(clarity = as.character(clarity))
+c(left = nrow(left_join(dmc, clarity_scale, by = "clarity")),
+  inner = nrow(inner_join(dmc, clarity_scale, by = "clarity")),
+  right = nrow(right_join(dmc, clarity_scale, by = "clarity")),
+  full = nrow(full_join(dmc, clarity_scale, by = "clarity")))
+```
+
+**38.** ★ Присоедините справочник лабораторий. Ключевые столбцы в двух таблицах называются по-разному (`lab` и `lab_code`), используйте `join_by()`.
+
+- ★ Попробуйте выполнить это объединение для исходных данных. У скольких строк не нашлось пары и почему?
 - Какая лаборатория есть в справочнике, но не встречается в данных?
 
-**39.** С помощью `semi_join()` оставьте только камни, для которых есть экспертные оценки. С помощью `anti_join()` найдите камни без оценок. ★ Есть ли в таблице оценок камни, которых нет в очищенных данных? Откуда они взялись?
+```{r}
+raw |> left_join(labs, by = join_by(lab == lab_code)) |> filter(is.na(lab_name)) |> nrow()
+dm <- dm |> left_join(labs, by = join_by(lab == lab_code))
+sum(is.na(dm$lab_name.y))
+labs |> anti_join(dm, by = join_by(lab_code == lab))
+```
+
+**39.** ★ С помощью `semi_join()` оставьте только камни, для которых есть экспертные оценки. С помощью `anti_join()` найдите камни без оценок. Есть ли в таблице оценок камни, которых нет в очищенных данных? Откуда они взялись?
+
+```{r}
+dm |> semi_join(appr, by = "id") |> nrow()
+dm |> anti_join(appr, by = "id") |> nrow()
+appr |> anti_join(dm, by = "id") |> nrow()  # попали в ошибочные строки из задания 30
+```
+
 
 ## Часть 7. Широкий и длинный формат
 
-**40.** Таблица `diamonds_appraisals.csv` записана в широком формате. Переведите её в длинный формат со столбцами `id`, `appraiser` (`A`, `B` или `C`) и `estimate`. Подсказки: `pivot_longer()`, аргументы `names_prefix` и `values_drop_na`. Сколько строк получилось?
+**40.** Таблица `diamonds_appraisals.csv` записана в широком формате. Переведите её в длинный формат со столбцами `id`, `appraiser` (`A`, `B` или `C`) и `estimate`. Сколько строк получилось?
+
+```{r}
+appr_long <- appr |>
+  pivot_longer(starts_with("appraiser_"), names_to = "appraiser", values_to = "estimate",
+               names_prefix = "appraiser_", values_drop_na = TRUE)
+nrow(appr_long)
+```
+
+:::{.callout-note appearance="minimal" collapse="true" title="Подсказки"}
+- `pivot_longer()`
+- `names_prefix`
+- `values_drop_na`
+:::
+
 
 **41.** Присоедините к длинной таблице оценок прайсовую цену и посчитайте для каждого эксперта среднее отклонение оценки от цены в процентах и стандартное отклонение этого отклонения. Кто из экспертов систематически занижает оценку, кто завышает, а чьи оценки наименее стабильны?
 
-**42.** Постройте сводную таблицу медианной цены: в строках огранка, в столбцах цвет. Подсказка: `pivot_wider()`.
+```{r}
+appr_long |> inner_join(select(dm, id, price), by = "id") |>
+  mutate(dev_pct = (estimate - price) / price * 100) |>
+  group_by(appraiser) |>
+  summarise(mean_dev = mean(dev_pct), sd_dev = sd(dev_pct), n = n())
+```
+
+
+**42.** Постройте сводную таблицу медианной цены: в строках огранка, в столбцах цвет.
+
+```{r}
+pivot_cc <- dm |> group_by(cut, color) |>
+  summarise(median_price = median(price), .groups = "drop") |>
+  pivot_wider(names_from = color, values_from = median_price)
+pivot_cc
+```
+
+:::{.callout-note appearance="minimal" collapse="true" title="Подсказки"}
+- `pivot_wider()`
+:::
+
 
 **43.** Постройте сводную таблицу числа продаж: в строках год, в столбцах квартал (`Q1`–`Q4`). Отсутствующие сочетания заполните нулями. Подсказка: аргумент `values_fill`.
 
+```{r}
+dm |> filter(!is.na(datetime_sold)) |>
+  count(year = year(datetime_sold), quarter = str_c("Q", quarter(datetime_sold))) |>
+  pivot_wider(names_from = quarter, values_from = n, values_fill = 0)
+```
+
+
 **44.** Переведите таблицу из задания 43 обратно в длинный формат.
+
+```{r}
+pivot_cc |> pivot_longer(-cut, names_to = "color", values_to = "median_price")
+```
+
 
 ## Часть 8. Визуализация
 
-Каждый график оформите: подпишите оси по-русски, добавьте заголовок и, где нужно, легенду с понятным названием. После каждого графика сформулируйте 1–2 вывода.
+> Рекомендация: лформите каждый график --- подпишите оси по-русски, добавьте заголовок и, где нужно, легенду с понятным названием. После каждого графика сформулируйте 1–2 вывода.
+
+```{r}
+dir.create("plots/diamonds-ext", showWarnings = FALSE, recursive = TRUE)
+sv <- \(name) ggsave(file.path("plots/diamonds-ext", name), width = 7, height = 4.5, dpi = 100)
+```
 
 **45.** Визуализируйте частоту бриллиантов разного качества огранки.
 
+```{r}
+ggplot(dm, aes(cut)) + geom_bar()
+sv("45.png")
+```
+
 **46.** Добавьте к этому графику разбивку по чистоте (`clarity`). Сравните три варианта расположения столбцов: `position = "stack"`, `"dodge"` и `"fill"`. Какой вариант лучше подходит для сравнения структуры чистоты между огранками?
+
+```{r}
+ggplot(dm, aes(cut, fill = clarity)) + geom_bar(position = "fill")
+sv("46.png")
+```
 
 **47.** Для бриллиантов с чистотой IF визуализируйте связь между глубиной (`depth`) и ценой. Добавьте линию тренда (`geom_smooth()`). Какие выводы можно сделать?
 
+```{r}
+dm |> filter(clarity == "IF") |>
+  ggplot(aes(depth, price)) + geom_point(alpha = .3) + geom_smooth()
+sv("47.png")
+```
+
 **48.** Постройте ящики с усами для длины камня (`length_mm`) в зависимости от цвета и огранки: цвет по оси X, огранка цветом заливки. Перед построением исключите камни с нулевыми размерами.
+
+```{r}
+dm |> filter(length_mm > 0) |>
+  ggplot(aes(color, length_mm, fill = cut)) + geom_boxplot()
+sv("48.png")
+```
 
 **49.** Постройте гистограмму цены. Затем постройте её же с логарифмической шкалой по оси X (`scale_x_log10()`) и с разбивкой по огранке на отдельные панели (`facet_wrap()`). Как меняется вид распределения после логарифмирования?
 
+```{r}
+ggplot(dm, aes(price)) + geom_histogram(bins = 50) + scale_x_log10() + facet_wrap(~cut)
+sv("49.png")
+```
+
 **50.** Постройте линейный график числа поступивших камней по месяцам отдельно для каждой лаборатории. Подсказка: `floor_date(..., "month")`. Есть ли сезонность?
+
+```{r}
+dm |> count(month = floor_date(date_received, "month"), lab) |>
+  ggplot(aes(month, n, color = lab)) + geom_line()
+sv("50.png")
+```
 
 **51.** Сравните распределения длительности экспертизы (из задания 31) в разных лабораториях. Используйте скрипичную диаграмму (`geom_violin()`) с наложенными узкими ящиками с усами.
 
+```{r}
+ggplot(dm, aes(lab, exam_days)) + geom_violin() + geom_boxplot(width = .1)
+sv("51.png")
+```
+
 **52.** Постройте тепловую карту числа продаж: по оси X час продажи, по оси Y день недели. Подсказка: `geom_tile()`. Есть ли «горячие» часы или дни?
+
+```{r}
+dm |> filter(!is.na(datetime_sold)) |>
+  count(wday = wday(datetime_sold, label = TRUE, week_start = 1), hour = hour(datetime_sold)) |>
+  ggplot(aes(hour, wday, fill = n)) + geom_tile()
+sv("52.png")
+```
 
 **53.** Визуализируйте связь экспертных оценок (задание 41) с прайсовой ценой: диаграмма рассеяния, цвет точек — эксперт. Добавьте пунктирную линию `y = x` (`geom_abline()`) и логарифмические шкалы по обеим осям. Согласуется ли картинка с выводами задания 42?
 
-**54.** Воспроизведите график по описанию:
-- по оси X чистота от худшей к лучшей, по оси Y медианная цена за карат;
-- для каждой группы цвета (из `color_scale.csv`) своя линия с точками своего цвета;
-- для каждого качества огранки своя панель, все панели в один ряд;
-- подписи осей и легенды на русском, заголовок «Медианная цена за карат по чистоте, огранке и группе цвета»;
-- тема `theme_minimal()`, подписи оси X повёрнуты на 90°, легенда под графиком.
+```{r}
+appr_long |> inner_join(select(dm, id, price), by = "id") |>
+  ggplot(aes(price, estimate, color = appraiser)) +
+  geom_point(alpha = .3) + geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  scale_x_log10() + scale_y_log10()
+sv("53.png")
+```
+
+**54.** ★ Воспроизведите график ниже.
 
 Что этот график говорит о связи чистоты и цены?
+
+```{r}
+#| include: true
+#| echo: false
+
+pd <- position_dodge(.4)
+dm |> group_by(cut, clarity, color_group) |>
+  # summarise(med_ppc = median(price_per_carat), .groups = "drop") |>
+  ggplot(aes(clarity, price_per_carat, color = color_group, group = color_group)) +
+  stat_summary(geom = "point", fun = mean, position = pd) + 
+  stat_summary(geom = "errorbar", fun.data = mean_cl_boot, position = pd) +
+  facet_wrap(~cut, nrow = 1) +
+  labs(x = "Чистота",
+       y = "Цена за карат, $",
+       color = "Группа цвета",
+       title = "Средняя цена за карат по чистоте, огранке и группе цвета",
+       caption = "отображен 95% доверительный интервал") +
+  scale_color_manual(values = c("salmon", "royalblue")) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, vjust = .5), legend.position = "bottom")
+sv("55.png")
+```
 
 ## Часть 9. Итоговое задание
 
 **55.** ★ Соберите в один скрипт весь путь от сырого файла до очищенного датасета: удаление дубликатов и ошибочных записей, факторы, переименование, очистка строк, извлечение информации из комментария, преобразование дат, новые переменные и присоединение справочников. Сохраните результат в `diamonds_clean.csv` с помощью `write_csv()`.
 
 Используя очищенные данные, ответьте на вопрос: **продаются ли камни с флуоресценцией быстрее или медленнее и с большей или меньшей скидкой?** Подкрепите ответ таблицей и одним графиком.
+
+```{r}
+
+```
