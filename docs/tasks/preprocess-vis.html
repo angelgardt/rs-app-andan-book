@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Задание | Предобработка и визуализация данных – RS ANDAN // PSY&nbsp;HSE</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chpts/rpy-strdt.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-84b129f27be8f528ae7b9875820b10cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ничего не найдено",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отмена",
+    "search-submit-button-title": "Отправить",
+    "search-label": "Поиск"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tasks/preprocess-vis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">RS ANDAN // PSY&nbsp;HSE</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/intro-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основания статистики</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Основы R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/prob-randvals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовое исследование данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Предобработка данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-strdt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Строки. Дата и время</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tasks/preprocess-vis.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#данные" id="toc-данные" class="nav-link active" data-scroll-target="#данные"><span class="header-section-number">7.1</span> Данные</a>
+  <ul class="collapse">
+  <li><a href="#diamonds-ext-codebook" id="toc-diamonds-ext-codebook" class="nav-link" data-scroll-target="#diamonds-ext-codebook"><span class="header-section-number">7.1.1</span> <code>diamonds_ext.csv</code> — основная таблица</a></li>
+  <li><a href="#diamonds-appraisals-codebook" id="toc-diamonds-appraisals-codebook" class="nav-link" data-scroll-target="#diamonds-appraisals-codebook"><span class="header-section-number">7.1.2</span> <code>diamonds_appraisals.csv</code> — независимые оценки</a></li>
+  <li><a href="#diamonds-codes-codebook" id="toc-diamonds-codes-codebook" class="nav-link" data-scroll-target="#diamonds-codes-codebook"><span class="header-section-number">7.1.3</span> Справочники</a></li>
+  </ul></li>
+  <li><a href="#часть-1.-импорт-и-первое-знакомство-с-данными" id="toc-часть-1.-импорт-и-первое-знакомство-с-данными" class="nav-link" data-scroll-target="#часть-1.-импорт-и-первое-знакомство-с-данными"><span class="header-section-number">7.2</span> Часть 1. Импорт и первое знакомство с данными</a></li>
+  <li><a href="#часть-2.-выбор-переименование-фильтрация-и-сортировка" id="toc-часть-2.-выбор-переименование-фильтрация-и-сортировка" class="nav-link" data-scroll-target="#часть-2.-выбор-переименование-фильтрация-и-сортировка"><span class="header-section-number">7.3</span> Часть 2. Выбор, переименование, фильтрация и сортировка</a></li>
+  <li><a href="#часть-3.-новые-переменные-группировка-и-агрегация" id="toc-часть-3.-новые-переменные-группировка-и-агрегация" class="nav-link" data-scroll-target="#часть-3.-новые-переменные-группировка-и-агрегация"><span class="header-section-number">7.4</span> Часть 3. Новые переменные, группировка и агрегация</a></li>
+  <li><a href="#часть-4.-работа-со-строками" id="toc-часть-4.-работа-со-строками" class="nav-link" data-scroll-target="#часть-4.-работа-со-строками"><span class="header-section-number">7.5</span> Часть 4. Работа со строками</a></li>
+  <li><a href="#часть-5.-работа-с-датами-и-временем" id="toc-часть-5.-работа-с-датами-и-временем" class="nav-link" data-scroll-target="#часть-5.-работа-с-датами-и-временем"><span class="header-section-number">7.6</span> Часть 5. Работа с датами и временем</a></li>
+  <li><a href="#часть-6.-объединение-таблиц" id="toc-часть-6.-объединение-таблиц" class="nav-link" data-scroll-target="#часть-6.-объединение-таблиц"><span class="header-section-number">7.7</span> Часть 6. Объединение таблиц</a></li>
+  <li><a href="#часть-7.-широкий-и-длинный-формат" id="toc-часть-7.-широкий-и-длинный-формат" class="nav-link" data-scroll-target="#часть-7.-широкий-и-длинный-формат"><span class="header-section-number">7.8</span> Часть 7. Широкий и длинный формат</a></li>
+  <li><a href="#часть-8.-визуализация" id="toc-часть-8.-визуализация" class="nav-link" data-scroll-target="#часть-8.-визуализация"><span class="header-section-number">7.9</span> Часть 8. Визуализация</a></li>
+  <li><a href="#часть-9.-итоговое-задание" id="toc-часть-9.-итоговое-задание" class="nav-link" data-scroll-target="#часть-9.-итоговое-задание"><span class="header-section-number">7.10</span> Часть 9. Итоговое задание</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>Задания для тренировки навыков предобработки и визуализации данных в <code>tidyverse</code>: импорт, первичное исследование, <code>select()</code> / <code>rename()</code> / <code>filter()</code> / <code>arrange()</code> / <code>mutate()</code>, группировка и агрегация, работа со строками (<code>stringr</code>) и датами (<code>lubridate</code>), объединение таблиц (<code>*_join()</code>), изменение формата (<code>pivot_*()</code>) и <code>ggplot2</code>.</p>
+</blockquote>
+<div class="callout callout-style-simple callout-important">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Задания идут по порядку: каждый следующий блок работает с таблицей, полученной в предыдущих. Поэтому сохраняйте промежуточные результаты в объекты, а не просто печатайте их в консоль.</p>
+</div>
+</div>
+</div>
+<p>Задания со звёздочкой (★) сложнее остальных.</p>
+<section id="данные" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="данные"><span class="header-section-number">7.1</span> Данные</h2>
+<p>Данные являют собой<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, выгрузку из учётной системы ювелирной компании. Каждый камень поступает в компанию, проходит геммологическую экспертизу в одной из лабораторий, получает сертификат и выставляется на продажу. Часть камней уже продана, часть ещё ждёт покупателя. Выгрузка сделана 30 июня 2026 года.</p>
+<p>Как и любая реальная выгрузка, данные «грязные»: в них есть дубликаты, ошибки ввода, разные форматы дат и непоследовательное написание текстовых значений.</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Данные в виде ZIP-архива можно скачать <a href="https://github.com/angelgardt/rs-app-andan-book/raw/refs/heads/master/data/diamonds-ext.zip">по ссылке</a>.</p>
+<p>Ниже приведены ссылки, по которым каждый файл можно прочитать напрямую.</p>
+</div>
+</div>
+</div>
+<section id="diamonds-ext-codebook" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="diamonds-ext-codebook"><span class="header-section-number">7.1.1</span> <code>diamonds_ext.csv</code> — основная таблица</h3>
+<p><a href="https://github.com/angelgardt/rs-app-andan-book/raw/refs/heads/master/data/diamonds-ext/diamonds_ext.csv">Ссылка</a> на файл.</p>
+<div class="callout callout-style-simple callout-important callout-titled" title="Размер файла">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важность</span>Размер файла
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Файл весит ~14 MB. Если железу вашей машины тяжело обрабатывать такие объемы, возьмите сокращенный файл <a href="https://github.com/angelgardt/rs-app-andan-book/raw/refs/heads/master/data/diamonds-ext/diamonds_ext_small.csv">по ссылке</a>.</p>
+</div>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Переменная</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>идентификатор камня, <code>DM-00001</code> и т. д.</td>
+</tr>
+<tr class="even">
+<td><code>carat</code></td>
+<td>масса, караты</td>
+</tr>
+<tr class="odd">
+<td><code>cut</code></td>
+<td>качество огранки: Fair &lt; Good &lt; Very Good &lt; Premium &lt; Ideal</td>
+</tr>
+<tr class="even">
+<td><code>color_clarity</code></td>
+<td>переменная, объединяющая две характеристики: <strong>цвет</strong> — от D (лучший, бесцветный) до J (худший) — и <strong>чистоту</strong> — I1 (худшая) &lt; SI2 &lt; SI1 &lt; VS2 &lt; VS1 &lt; VVS2 &lt; VVS1 &lt; IF (лучшая); формат записи соответствует названию столбца</td>
+</tr>
+<tr class="odd">
+<td><code>depth</code></td>
+<td>общая глубина в процентах: <code>z / mean(x, y)</code></td>
+</tr>
+<tr class="even">
+<td><code>table</code></td>
+<td>ширина площадки относительно самой широкой точки, %</td>
+</tr>
+<tr class="odd">
+<td><code>price</code></td>
+<td>прайсовая (выставочная) цена, долл. США</td>
+</tr>
+<tr class="even">
+<td><code>x</code>, <code>y</code>, <code>z</code></td>
+<td>длина, ширина и высота камня, мм</td>
+</tr>
+<tr class="odd">
+<td><code>lab</code></td>
+<td>код лаборатории, проводившей экспертизу</td>
+</tr>
+<tr class="even">
+<td><code>recv_date</code></td>
+<td>дата поступления образца (формат <code>ГГГГ-ММ-ДД</code>)</td>
+</tr>
+<tr class="odd">
+<td><code>exam_date</code></td>
+<td>дата завершения экспертизы (формат <code>ДД.ММ.ГГГГ</code>)</td>
+</tr>
+<tr class="even">
+<td><code>sale_dttm</code></td>
+<td>дата и время продажи (формат <code>ДД/ММ/ГГГГ ЧЧ:ММ</code>); пусто — камень не продан</td>
+</tr>
+<tr class="odd">
+<td><code>sale_price</code></td>
+<td>фактическая цена продажи, долл. США; пусто — камень не продан</td>
+</tr>
+<tr class="even">
+<td><code>comment</code></td>
+<td>заключение геммолога: номер сертификата, флуоресценция, происхождение, замечания о дефектах</td>
+</tr>
+</tbody>
+</table>
+<p>Пример значения <code>comment</code>:</p>
+<blockquote class="blockquote">
+<p>Сертификат IGI № 5942822580. Флуоресценция: нет. Происхождение: Россия, Якутия. Видимых дефектов нет.</p>
+</blockquote>
+</section>
+<section id="diamonds-appraisals-codebook" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="diamonds-appraisals-codebook"><span class="header-section-number">7.1.2</span> <code>diamonds_appraisals.csv</code> — независимые оценки</h3>
+<p>Для 1500 камней компания заказала оценку у трёх независимых экспертов. Каждая строка соответствует камню, столбцы <code>appraiser_A</code>, <code>appraiser_B</code> и <code>appraiser_C</code> содержат оценочную стоимость в долларах. Если эксперт камень не оценивал, ячейка пустая.</p>
+</section>
+<section id="diamonds-codes-codebook" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="diamonds-codes-codebook"><span class="header-section-number">7.1.3</span> Справочники</h3>
+<ul>
+<li><code>color_scale.csv</code> — группы цвета: <code>color</code>, <code>color_group</code>.
+<ul>
+<li><a href="https://github.com/angelgardt/rs-app-andan-book/blob/master/data/diamonds-ext/color_scale.csv">Ссылка</a> на файл.</li>
+</ul></li>
+<li><code>clarity_scale.csv</code> — шкала чистоты: <code>clarity</code>, <code>clarity_rank</code> (1 — лучшая), <code>clarity_desc</code>.
+<ul>
+<li><a href="https://raw.githubusercontent.com/angelgardt/rs-app-andan-book/refs/heads/master/data/diamonds-ext/clarity_scale.csv">Ссылка</a> на файл.</li>
+</ul></li>
+<li><code>labs.csv</code> — лаборатории: <code>lab_code</code>, <code>lab_name</code>, <code>lab_country</code>.
+<ul>
+<li><a href="https://raw.githubusercontent.com/angelgardt/rs-app-andan-book/refs/heads/master/data/diamonds-ext/labs.csv">Ссылка</a> на файл.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="часть-1.-импорт-и-первое-знакомство-с-данными" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="часть-1.-импорт-и-первое-знакомство-с-данными"><span class="header-section-number">7.2</span> Часть 1. Импорт и первое знакомство с данными</h2>
+<p><strong>1.</strong> Загрузите файл <code>diamonds_ext.csv</code>. Посмотрите, какие типы были назначены колонкам. Обратите внимание на столбцы <code>recv_date</code>, <code>exam_date</code> и <code>sale_dttm</code>?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>read_csv()</code></li>
+<li>форматы дат</li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> Сколько в таблице переменных и сколько наблюдений?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>nrow()</code></li>
+<li><code>ncol()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>3.</strong> Определите тип каждой переменной. Соответствует ли тип переменной её содержанию?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>class()</code></li>
+<li><code>typeof()</code></li>
+<li><code>sapply()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>4.</strong> Пропущенные значения.</p>
+<ul>
+<li>Найдите пропущенные значения: сколько их в каждой переменной и в каких переменных они есть.</li>
+<li>Проверьте, что пропуски в <code>sale_dttm</code> и <code>sale_price</code> приходятся на одни и те же строки. Как это объяснить по смыслу данных?</li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>is.na()</code></li>
+<li><code>sum()</code></li>
+<li><code>sapply()</code> / <code>apply()</code></li>
+<li><code>colSums()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>5.</strong> Пропусков в размерах камней быть не должно, но возможны некорректные значения. Найдите бриллианты, у которых хотя бы один из размеров <code>x</code>, <code>y</code>, <code>z</code> равен нулю. Сколько их?</p>
+<p><strong>6.</strong> При выгрузке строки могли задублироваться.</p>
+<ul>
+<li>Сколько в таблице полностью повторяющихся строк?</li>
+<li>Сколько значений <code>id</code> встречается больше одного раза?</li>
+<li>Удалите дубликаты и дальше работайте с очищенной таблицей.</li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>duplicated()</code></li>
+<li><code>distinct()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<!---
+> ✔ Контрольная точка: после удаления дубликатов должно остаться 53 940 строк.
+> ✔ Контрольная точка: после удаления дубликатов должно остаться 10 000 строк.
+--->
+<p><strong>7.</strong> В переменной <code>color_clarity</code> объединены две разные по смыслу переменные — цвет и чистота (см. <a href="#diamonds-ext-codebook">кодбук</a>). Разделите переменную на отдельные колонки — <code>color</code> и <code>clarity</code>. Можно разделить исходную колонку на две, можно создать новые колонки на основе исходной, оставив <code>color_clarity</code> в датасете. Проверьте, что кодировка цвета и чистоты сохранена.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>separate()</code></li>
+<li><code>str_extract()</code></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="часть-2.-выбор-переименование-фильтрация-и-сортировка" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="часть-2.-выбор-переименование-фильтрация-и-сортировка"><span class="header-section-number">7.3</span> Часть 2. Выбор, переименование, фильтрация и сортировка</h2>
+<p><strong>8.</strong> Переименуйте переменные с помощью <code>rename()</code>:</p>
+<ul>
+<li><code>recv_date</code> → <code>date_received</code>, <code>exam_date</code> → <code>date_examined</code>, <code>sale_dttm</code> → <code>datetime_sold</code>;</li>
+<li><code>x</code>, <code>y</code>, <code>z</code> → <code>length_mm</code>, <code>width_mm</code>, <code>height_mm</code>.</li>
+</ul>
+<p>Сохраните результат, перезаписав датафрейм. Почему <code>z</code> не стоит называть <code>depth_mm</code>?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>rename()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>9.</strong> Выберите <code>id</code>, три характеристики качества и все столбцы с датами.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>select()</code></li>
+<li><code>starts_with()</code></li>
+<li><code>ends_with()</code></li>
+<li><code>contains()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>10.</strong> Переставьте столбец <code>price</code> так, чтобы он стоял прямо перед <code>sale_price</code>.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>relocate()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>11.</strong> Сколько бриллиантов имеют огранку Good и цвет D?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>filter()</code></li>
+<li><code>nrow()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>12.</strong> Отберите камни массой от 1 до 1,5 карата включительно, цвета D, E или F, которые ещё не проданы. Отсортируйте их по убыванию цены.</p>
+<ul>
+<li>Сколько таких камней?</li>
+<li>Какой <code>id</code> у самого дорогого из них?</li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>filter()</code></li>
+<li><code>between()</code>, <code>%in%</code></li>
+<li><code>is.na()</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>13.</strong> Найдите 10 самых крупных камней по массе. Затем найдите 10 самых дешёвых камней по цене за карат.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>slice()</code></li>
+<li><code>slice_max()</code></li>
+<li><code>slice_min()</code>.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>14.0</strong> Фиксим <code>cut</code>, <code>color</code> и <code>clarity</code></p>
+<div class="callout callout-style-default callout-important callout-titled" title="Кастомный порядок в строках">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важность</span>Кастомный порядок в строках
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Значения переменных <code>cut</code>, <code>color</code> и <code>clarity</code> упорядочены по смыслу (см. <a href="#diamonds-ext-codebook">кодбук</a>). Однако строкоый тип данных (<code>character</code>) этот порядок не содержат.</p>
+<ul>
+<li>Изучите справку по функции <code>factor()</code>.</li>
+<li>Измените тип данных у переменных <code>cut</code>, <code>color</code> и <code>clarity</code> с <code>character</code> на <code>ordered factor</code> с соответствующим порядком категорий. Сохраните результат, перезаписав датафрейм.</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Скрип изменения типов данных для указанных переменных</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## код необходимо адаптировать под названия объектов, которые вы используете</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>dm <span class="ot">&lt;-</span> dm <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cut =</span> <span class="fu">factor</span>(cut, <span class="at">ordered =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Fair"</span>, <span class="st">"Good"</span>, <span class="st">"Very Good"</span>, <span class="st">"Premium"</span>, <span class="st">"Ideal"</span>)),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="fu">factor</span>(color, <span class="at">ordered =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"D"</span>, <span class="st">"E"</span>, <span class="st">"F"</span>, <span class="st">"G"</span>, <span class="st">"H"</span>, <span class="st">"I"</span>, <span class="st">"J"</span>, <span class="st">"K"</span>)),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">clarity =</span> <span class="fu">factor</span>(clarity, <span class="at">ordere =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"I1"</span>, <span class="st">"SI2"</span>, <span class="st">"SI1"</span>, <span class="st">"VS2"</span>, <span class="st">"VS1"</span>, <span class="st">"VVS2"</span>, <span class="st">"VVS1"</span>, <span class="st">"IF"</span>))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</div>
+</div>
+<p><strong>14.</strong> Отсортируйте таблицу по качеству огранки от лучшей к худшей, а внутри каждой огранки по возрастанию цены. Затем повторите сортировку, предварительно превратив <code>cut</code> в строку. Различаются ли результаты? Почему?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>arrange()</code></li>
+<li><code>arrange(col1, col2)</code></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="часть-3.-новые-переменные-группировка-и-агрегация" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="часть-3.-новые-переменные-группировка-и-агрегация"><span class="header-section-number">7.4</span> Часть 3. Новые переменные, группировка и агрегация</h2>
+<p><strong>15.</strong> Бриллиантов с какой огранкой больше всего? Выведите для каждой огранки число камней и долю в процентах, отсортировав по убыванию.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>count()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarize()</code> / <code>summarise()</code></li>
+<li><code>summarize(..., .by = ...)</code> / <code>summarise(..., .by = ...)</code></li>
+<li><code>n()</code></li>
+<li><code>arrange()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>16.</strong> Найдите сочетание <code>cut</code>, <code>color</code> и <code>clarity</code> с наименьшей средней ценой. Сколько камней в этой группе? Почему, сравнивая групповые средние, полезно смотреть и на размер групп?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>group_by()</code></li>
+<li><code>summarize()</code> / <code>summarise()</code></li>
+<li><code>summarize(..., .by = ...)</code> / <code>summarise(..., .by = ...)</code></li>
+<li><code>arrange()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>17.</strong> Создайте две новые переменные: цену за карат <code>price_per_carat</code>. Посчитайте по каждому уровню чистоты медианную цену, медианную цену за карат и медианную массу.</p>
+<ul>
+<li>Как меняется медианная цена при переходе от худшей чистоты к лучшей?</li>
+<li>★ Верно ли, что камни с лучшей чистотой в среднем дешевле? Почему?</li>
+</ul>
+<!---
+Подсказка: посмотрите на массу.
+--->
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>mutate()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarize()</code> / <code>summarise()</code></li>
+<li><code>summarize(..., .by = ...)</code> / <code>summarise(..., .by = ...)</code></li>
+<li><code>median()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>18.</strong> Для проданных камней посчитайте скидку в процентах: <code>(sale_price − price) / price × 100</code>. Для каждой огранки выведите среднее и медиану <code>price</code> и <code>sale_price</code>.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>pivot_longer()</code> / <code>pivot_wider()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarise()</code> / <code>summarize()</code></li>
+<li><code>summarise(..., .by = ...)</code> / <code>summarize(..., .by = ...)</code></li>
+<li><code>across()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>19.</strong> ★ У бриллиантов какого цвета наибольшая вариативность глубины (<code>depth</code>)? Посчитайте две меры разброса: стандартное отклонение и межквартильный размах. Совпадают ли выводы?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>sd()</code> / <code>var()</code></li>
+<li><code>IQR()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarise()</code> / <code>summarize()</code></li>
+<li><code>summarise(..., .by = ...)</code> / <code>summarize(..., .by = ...)</code></li>
+<li><code>arrange(dec())</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>20.</strong> ★ Возьмите первую тысячу строк очищенной таблицы и удалите бриллианты с чистотой IF. Разделите оставшиеся камни на категории <code>low</code>, <code>medium</code> и <code>high</code> по отклонению цены от средней на одно стандартное отклонение: <code>low</code> — цена ниже <code>среднее − SD</code>, <code>high</code> — выше <code>среднее + SD</code>, <code>medium</code> — всё остальное. Для каждой категории укажите число наблюдений, минимальную и максимальную цену. - Подсказка: <code>case_when()</code>. - Одна из категорий окажется пустой. Почему? Что можно сказать о форме распределения цены? Повторите разбиение для <code>log(price)</code> и сравните.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>slice_head()</code></li>
+<li><code>filter()</code></li>
+<li><code>mutate()</code></li>
+<li><code>case_when()</code></li>
+<li><code>mean()</code>, <code>sd()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarise()</code> / <code>summarize()</code></li>
+<li><code>summarise(..., .by = ...)</code> / <code>summarize(..., .by = ...)</code></li>
+<li><code>min()</code>, <code>max()</code></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="часть-4.-работа-со-строками" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="часть-4.-работа-со-строками"><span class="header-section-number">7.5</span> Часть 4. Работа со строками</h2>
+<p><strong>21.</strong> Посмотрите на уникальные значения <code>lab</code>. Сколько их? Совпадают ли они с кодами из файла <code>labs.csv</code>?</p>
+<ul>
+<li>Приведите коды лабораторий к единому виду.</li>
+<li>Сколько уникальных значений осталось?</li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>str_to_upper()</code></li>
+<li><code>str_trim()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>22</strong> Извлеките из <code>comment</code> номер сертификата (10 цифр подряд) в новую переменную <code>cert_number</code>.</p>
+<ul>
+<li>У скольких камней номер извлечь не удалось? Почему?</li>
+<li>Проверьте, что все номера уникальны.</li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>str_extract()</code>, <code>\\d{10}</code>.</p>
+</div>
+</div>
+</div>
+<p><strong>23.</strong> В начале комментария указана лаборатория, выдавшая сертификат. Извлеките её код и сравните с переменной <code>lab</code>. Совпадают ли значения во всех строках?</p>
+<p><strong>24.</strong> ★ Создайте логическую переменную <code>has_defect</code>, равную <code>TRUE</code>, если в заключении отмечены какие-либо дефекты, то есть в комментарии нет фразы «Видимых дефектов нет».</p>
+<ul>
+<li>Посчитайте долю камней с дефектами для каждого уровня чистоты. Есть ли закономерность?</li>
+<li>★ Какое замечание встречается чаще всего: скол, включение, оттенок, царапина, натурал или рекомендация переогранки?</li>
+</ul>
+<!---
+**25.** Извлеките из комментария уровень флуоресценции в переменную `fluorescence`. Внимание: слово «флуоресценция» записано по-разному (с заглавной и строчной буквы, через «у» и через «ю»), поэтому найдите все варианты написания. Подсказки: `str_to_lower()`, классы символов `[ую]`, `str_match()` или `str_extract()` с последующей очисткой. Превратите результат в упорядоченный фактор `нет < слабая < средняя < сильная` и посчитайте частоты.
+--->
+<!---
+**26.** Извлеките из комментария страну происхождения. Для российских камней указан ещё и регион («Россия, Якутия»): разделите происхождение на две переменные, `origin_country` и `origin_region`. Подсказка: `separate_wider_delim()` с аргументом `too_few`.
+- Сколько камней из каждой страны?
+- У скольких камней происхождение не указано, хотя комментарий есть?
+--->
+<!-- **27.** Сформируйте для каждого камня краткое название лота вида `1.01 ct, Ideal, J/SI2`. Подсказка: `str_c()` или `str_glue()`. Масса всегда должна выводиться с двумя знаками после точки. -->
+</section>
+<section id="часть-5.-работа-с-датами-и-временем" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="часть-5.-работа-с-датами-и-временем"><span class="header-section-number">7.6</span> Часть 5. Работа с датами и временем</h2>
+<p><strong>28.</strong> Преобразуйте <code>date_examined</code> в дату, а <code>datetime_sold</code> в дату-время. Проверьте, что после преобразования новые пропуски не появились: число <code>NA</code> должно совпадать с тем, что было до преобразования.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>lubridate::dmy()</code> <code>lubridate::dmy_hm()</code></p>
+</div>
+</div>
+</div>
+<p><strong>29.</strong> Найдите записи, у которых дата экспертизы раньше даты поступления. Это ошибки ввода. Сколько их? Удалите их из данных.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>filter()</code></p>
+</div>
+</div>
+</div>
+<!---
+> ✔ Контрольная точка: после удаления ошибочных записей должно остаться 53 820 строк.
+-->
+<p><strong>30.</strong> Посчитайте длительность экспертизы в днях: от поступления до экспертизы. Посчитайте среднюю и медианную длительность для каждой лаборатории. Где экспертиза идёт дольше всего?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>filter()</code></p>
+</div>
+</div>
+</div>
+<p><strong>31.</strong> ★ Посчитайте, сколько дней прошло от экспертизы до продажи (<code>days_to_sale</code>).</p>
+<ul>
+<li>Связано ли время до продажи с ценой?</li>
+<li>Разбейте камни на четыре ценовые группы и сравните медианное время до продажи.</li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Чтобы вычесть дату из даты-времени, приведите их к одному типу через <code>as_date()</code>.</li>
+<li>Для разбиения на группы можно использовать <code>ntile()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>32.</strong> Извлеките компоненты дат: - в какие месяцы поступает больше всего камней? - в какой день недели больше всего продаж? - в какое время суток покупают чаще: до 13:00, с 13:00 до 17:00 или после 17:00?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>month(..., label = TRUE)</code></li>
+<li><code>wday(..., label = TRUE, week_start = 1)</code></li>
+<li><code>hour()</code></li>
+<li><code>case_when()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>33.</strong> ★ Посчитайте выручку (сумму <code>sale_price</code>) и число продаж по кварталам. Почему значение за последний квартал заметно меньше остальных?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>floor_date(..., "quarter")</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>34.</strong> ★ Сколько камней находилось на складе на 1 января 2025 года, то есть уже поступили, но ещё не были проданы?</p>
+<p><strong>35.</strong> Сколько дней непроданные камни ждут покупателя на дату выгрузки (30 июня 2026 года), если отсчитывать от даты экспертизы? Найдите медиану и максимум.</p>
+</section>
+<section id="часть-6.-объединение-таблиц" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="часть-6.-объединение-таблиц"><span class="header-section-number">7.7</span> Часть 6. Объединение таблиц</h2>
+<p>Загрузите справочники <code>color_scale.csv</code>, <code>clarity_scale.csv</code>, <code>labs.csv</code> и таблицу оценок <code>diamonds_appraisals.csv</code>.</p>
+<p><strong>36.</strong> Присоедините к данным группу цвета из <code>color_scale.csv</code>.</p>
+<ul>
+<li>Сколько камней в каждой группе?</li>
+<li>Есть ли в справочнике цвета, которых нет в данных?</li>
+</ul>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>left_join()</code></li>
+<li><code>anti_join()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>37.</strong> Присоедините справочник чистоты с помощью <code>left_join()</code>, <code>inner_join()</code>, <code>right_join()</code> и <code>full_join()</code> и сравните число строк в результатах. Объясните, почему оно различается. Какие уровни чистоты из справочника не встречаются в данных?</p>
+<p><strong>38.</strong> ★ Присоедините справочник лабораторий. Ключевые столбцы в двух таблицах называются по-разному (<code>lab</code> и <code>lab_code</code>), используйте <code>join_by()</code>.</p>
+<ul>
+<li>★ Попробуйте выполнить это объединение для исходных данных. У скольких строк не нашлось пары и почему?</li>
+<li>Какая лаборатория есть в справочнике, но не встречается в данных?</li>
+</ul>
+<p><strong>39.</strong> ★ С помощью <code>semi_join()</code> оставьте только камни, для которых есть экспертные оценки. С помощью <code>anti_join()</code> найдите камни без оценок. Есть ли в таблице оценок камни, которых нет в очищенных данных? Откуда они взялись?</p>
+</section>
+<section id="часть-7.-широкий-и-длинный-формат" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="часть-7.-широкий-и-длинный-формат"><span class="header-section-number">7.8</span> Часть 7. Широкий и длинный формат</h2>
+<p><strong>40.</strong> Таблица <code>diamonds_appraisals.csv</code> записана в широком формате. Переведите её в длинный формат со столбцами <code>id</code>, <code>appraiser</code> (<code>A</code>, <code>B</code> или <code>C</code>) и <code>estimate</code>. Сколько строк получилось?</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>pivot_longer()</code></li>
+<li><code>names_prefix</code></li>
+<li><code>values_drop_na</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>41.</strong> Присоедините к длинной таблице оценок прайсовую цену и посчитайте для каждого эксперта среднее отклонение оценки от цены в процентах и стандартное отклонение этого отклонения. Кто из экспертов систематически занижает оценку, кто завышает, а чьи оценки наименее стабильны?</p>
+<p><strong>42.</strong> Постройте сводную таблицу медианной цены: в строках огранка, в столбцах цвет.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Подсказки
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>pivot_wider()</code></li>
+</ul>
+</div>
+</div>
+</div>
+<p><strong>43.</strong> Постройте сводную таблицу числа продаж: в строках год, в столбцах квартал (<code>Q1</code>–<code>Q4</code>). Отсутствующие сочетания заполните нулями. Подсказка: аргумент <code>values_fill</code>.</p>
+<p><strong>44.</strong> Переведите таблицу из задания 43 обратно в длинный формат.</p>
+</section>
+<section id="часть-8.-визуализация" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="часть-8.-визуализация"><span class="header-section-number">7.9</span> Часть 8. Визуализация</h2>
+<blockquote class="blockquote">
+<p>Рекомендация: лформите каждый график — подпишите оси по-русски, добавьте заголовок и, где нужно, легенду с понятным названием. После каждого графика сформулируйте 1–2 вывода.</p>
+</blockquote>
+<p><strong>45.</strong> Визуализируйте частоту бриллиантов разного качества огранки.</p>
+<p><strong>46.</strong> Добавьте к этому графику разбивку по чистоте (<code>clarity</code>). Сравните три варианта расположения столбцов: <code>position = "stack"</code>, <code>"dodge"</code> и <code>"fill"</code>. Какой вариант лучше подходит для сравнения структуры чистоты между огранками?</p>
+<p><strong>47.</strong> Для бриллиантов с чистотой IF визуализируйте связь между глубиной (<code>depth</code>) и ценой. Добавьте линию тренда (<code>geom_smooth()</code>). Какие выводы можно сделать?</p>
+<p><strong>48.</strong> Постройте ящики с усами для длины камня (<code>length_mm</code>) в зависимости от цвета и огранки: цвет по оси X, огранка цветом заливки. Перед построением исключите камни с нулевыми размерами.</p>
+<p><strong>49.</strong> Постройте гистограмму цены. Затем постройте её же с логарифмической шкалой по оси X (<code>scale_x_log10()</code>) и с разбивкой по огранке на отдельные панели (<code>facet_wrap()</code>). Как меняется вид распределения после логарифмирования?</p>
+<p><strong>50.</strong> Постройте линейный график числа поступивших камней по месяцам отдельно для каждой лаборатории. Подсказка: <code>floor_date(..., "month")</code>. Есть ли сезонность?</p>
+<p><strong>51.</strong> Сравните распределения длительности экспертизы (из задания 31) в разных лабораториях. Используйте скрипичную диаграмму (<code>geom_violin()</code>) с наложенными узкими ящиками с усами.</p>
+<p><strong>52.</strong> Постройте тепловую карту числа продаж: по оси X час продажи, по оси Y день недели. Подсказка: <code>geom_tile()</code>. Есть ли «горячие» часы или дни?</p>
+<p><strong>53.</strong> Визуализируйте связь экспертных оценок (задание 41) с прайсовой ценой: диаграмма рассеяния, цвет точек — эксперт. Добавьте пунктирную линию <code>y = x</code> (<code>geom_abline()</code>) и логарифмические шкалы по обеим осям. Согласуется ли картинка с выводами задания 42?</p>
+<p><strong>54.</strong> ★ Воспроизведите график ниже.</p>
+<p>Что этот график говорит о связи чистоты и цены?</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="preprocess-vis_files/figure-html/unnamed-chunk-55-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="preprocess-vis_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="часть-9.-итоговое-задание" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="часть-9.-итоговое-задание"><span class="header-section-number">7.10</span> Часть 9. Итоговое задание</h2>
+<p><strong>55.</strong> ★ Соберите в один скрипт весь путь от сырого файла до очищенного датасета: удаление дубликатов и ошибочных записей, факторы, переименование, очистка строк, извлечение информации из комментария, преобразование дат, новые переменные и присоединение справочников. Сохраните результат в <code>diamonds_clean.csv</code> с помощью <code>write_csv()</code>.</p>
+<p>Используя очищенные данные, ответьте на вопрос: <strong>продаются ли камни с флуоресценцией быстрее или медленнее и с большей или меньшей скидкой?</strong> Подкрепите ответ таблицей и одним графиком.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>В основе лежит датасет <code>ggplot2::diamonds</code>: характеристики и цены почти 54 тысяч бриллиантов. Исходный датасет изменен модифицирован в соответствии с задачами курса.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chpts/rpy-strdt.html" class="pagination-link" aria-label="Строки. Дата и время">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Строки. Дата и время</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
