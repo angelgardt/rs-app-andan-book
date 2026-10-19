@@ -27,7 +27,7 @@ book:
     - chpts/rpy-tidy.qmd
     # - chpts/rpy-tidyadv.qmd
     - chpts/rpy-strdt.qmd
-    # - chpts/rpy-vis.qmd
+    - chpts/rpy-vis.qmd
     - tasks/preprocess-vis.qmd
     # - chpts/stats-desc.qmd
     # - chpts/stats-norm.qmd

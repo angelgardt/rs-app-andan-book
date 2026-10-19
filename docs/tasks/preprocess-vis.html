@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Задание | Предобработка и визуализация данных – RS ANDAN // PSY&nbsp;HSE</title>
+<title>8&nbsp; Задание | Предобработка и визуализация данных – RS ANDAN // PSY&nbsp;HSE</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chpts/rpy-strdt.html" rel="prev">
+<link href="../chpts/rpy-vis.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tasks/preprocess-vis.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tasks/preprocess-vis.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
@@ -191,8 +191,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Визуализация данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../tasks/preprocess-vis.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></span></a>
   </div>
 </li>
     </ul>
@@ -205,21 +211,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Содержание</h2>
    
   <ul>
-  <li><a href="#данные" id="toc-данные" class="nav-link active" data-scroll-target="#данные"><span class="header-section-number">7.1</span> Данные</a>
+  <li><a href="#данные" id="toc-данные" class="nav-link active" data-scroll-target="#данные"><span class="header-section-number">8.1</span> Данные</a>
   <ul class="collapse">
-  <li><a href="#diamonds-ext-codebook" id="toc-diamonds-ext-codebook" class="nav-link" data-scroll-target="#diamonds-ext-codebook"><span class="header-section-number">7.1.1</span> <code>diamonds_ext.csv</code> — основная таблица</a></li>
-  <li><a href="#diamonds-appraisals-codebook" id="toc-diamonds-appraisals-codebook" class="nav-link" data-scroll-target="#diamonds-appraisals-codebook"><span class="header-section-number">7.1.2</span> <code>diamonds_appraisals.csv</code> — независимые оценки</a></li>
-  <li><a href="#diamonds-codes-codebook" id="toc-diamonds-codes-codebook" class="nav-link" data-scroll-target="#diamonds-codes-codebook"><span class="header-section-number">7.1.3</span> Справочники</a></li>
+  <li><a href="#diamonds-ext-codebook" id="toc-diamonds-ext-codebook" class="nav-link" data-scroll-target="#diamonds-ext-codebook"><span class="header-section-number">8.1.1</span> <code>diamonds_ext.csv</code> — основная таблица</a></li>
+  <li><a href="#diamonds-appraisals-codebook" id="toc-diamonds-appraisals-codebook" class="nav-link" data-scroll-target="#diamonds-appraisals-codebook"><span class="header-section-number">8.1.2</span> <code>diamonds_appraisals.csv</code> — независимые оценки</a></li>
+  <li><a href="#diamonds-codes-codebook" id="toc-diamonds-codes-codebook" class="nav-link" data-scroll-target="#diamonds-codes-codebook"><span class="header-section-number">8.1.3</span> Справочники</a></li>
   </ul></li>
-  <li><a href="#часть-1.-импорт-и-первое-знакомство-с-данными" id="toc-часть-1.-импорт-и-первое-знакомство-с-данными" class="nav-link" data-scroll-target="#часть-1.-импорт-и-первое-знакомство-с-данными"><span class="header-section-number">7.2</span> Часть 1. Импорт и первое знакомство с данными</a></li>
-  <li><a href="#часть-2.-выбор-переименование-фильтрация-и-сортировка" id="toc-часть-2.-выбор-переименование-фильтрация-и-сортировка" class="nav-link" data-scroll-target="#часть-2.-выбор-переименование-фильтрация-и-сортировка"><span class="header-section-number">7.3</span> Часть 2. Выбор, переименование, фильтрация и сортировка</a></li>
-  <li><a href="#часть-3.-новые-переменные-группировка-и-агрегация" id="toc-часть-3.-новые-переменные-группировка-и-агрегация" class="nav-link" data-scroll-target="#часть-3.-новые-переменные-группировка-и-агрегация"><span class="header-section-number">7.4</span> Часть 3. Новые переменные, группировка и агрегация</a></li>
-  <li><a href="#часть-4.-работа-со-строками" id="toc-часть-4.-работа-со-строками" class="nav-link" data-scroll-target="#часть-4.-работа-со-строками"><span class="header-section-number">7.5</span> Часть 4. Работа со строками</a></li>
-  <li><a href="#часть-5.-работа-с-датами-и-временем" id="toc-часть-5.-работа-с-датами-и-временем" class="nav-link" data-scroll-target="#часть-5.-работа-с-датами-и-временем"><span class="header-section-number">7.6</span> Часть 5. Работа с датами и временем</a></li>
-  <li><a href="#часть-6.-объединение-таблиц" id="toc-часть-6.-объединение-таблиц" class="nav-link" data-scroll-target="#часть-6.-объединение-таблиц"><span class="header-section-number">7.7</span> Часть 6. Объединение таблиц</a></li>
-  <li><a href="#часть-7.-широкий-и-длинный-формат" id="toc-часть-7.-широкий-и-длинный-формат" class="nav-link" data-scroll-target="#часть-7.-широкий-и-длинный-формат"><span class="header-section-number">7.8</span> Часть 7. Широкий и длинный формат</a></li>
-  <li><a href="#часть-8.-визуализация" id="toc-часть-8.-визуализация" class="nav-link" data-scroll-target="#часть-8.-визуализация"><span class="header-section-number">7.9</span> Часть 8. Визуализация</a></li>
-  <li><a href="#часть-9.-итоговое-задание" id="toc-часть-9.-итоговое-задание" class="nav-link" data-scroll-target="#часть-9.-итоговое-задание"><span class="header-section-number">7.10</span> Часть 9. Итоговое задание</a></li>
+  <li><a href="#часть-1.-импорт-и-первое-знакомство-с-данными" id="toc-часть-1.-импорт-и-первое-знакомство-с-данными" class="nav-link" data-scroll-target="#часть-1.-импорт-и-первое-знакомство-с-данными"><span class="header-section-number">8.2</span> Часть 1. Импорт и первое знакомство с данными</a></li>
+  <li><a href="#часть-2.-выбор-переименование-фильтрация-и-сортировка" id="toc-часть-2.-выбор-переименование-фильтрация-и-сортировка" class="nav-link" data-scroll-target="#часть-2.-выбор-переименование-фильтрация-и-сортировка"><span class="header-section-number">8.3</span> Часть 2. Выбор, переименование, фильтрация и сортировка</a></li>
+  <li><a href="#часть-3.-новые-переменные-группировка-и-агрегация" id="toc-часть-3.-новые-переменные-группировка-и-агрегация" class="nav-link" data-scroll-target="#часть-3.-новые-переменные-группировка-и-агрегация"><span class="header-section-number">8.4</span> Часть 3. Новые переменные, группировка и агрегация</a></li>
+  <li><a href="#часть-4.-работа-со-строками" id="toc-часть-4.-работа-со-строками" class="nav-link" data-scroll-target="#часть-4.-работа-со-строками"><span class="header-section-number">8.5</span> Часть 4. Работа со строками</a></li>
+  <li><a href="#часть-5.-работа-с-датами-и-временем" id="toc-часть-5.-работа-с-датами-и-временем" class="nav-link" data-scroll-target="#часть-5.-работа-с-датами-и-временем"><span class="header-section-number">8.6</span> Часть 5. Работа с датами и временем</a></li>
+  <li><a href="#часть-6.-объединение-таблиц" id="toc-часть-6.-объединение-таблиц" class="nav-link" data-scroll-target="#часть-6.-объединение-таблиц"><span class="header-section-number">8.7</span> Часть 6. Объединение таблиц</a></li>
+  <li><a href="#часть-7.-широкий-и-длинный-формат" id="toc-часть-7.-широкий-и-длинный-формат" class="nav-link" data-scroll-target="#часть-7.-широкий-и-длинный-формат"><span class="header-section-number">8.8</span> Часть 7. Широкий и длинный формат</a></li>
+  <li><a href="#часть-8.-визуализация" id="toc-часть-8.-визуализация" class="nav-link" data-scroll-target="#часть-8.-визуализация"><span class="header-section-number">8.9</span> Часть 8. Визуализация</a></li>
+  <li><a href="#часть-9.-итоговое-задание" id="toc-часть-9.-итоговое-задание" class="nav-link" data-scroll-target="#часть-9.-итоговое-задание"><span class="header-section-number">8.10</span> Часть 9. Итоговое задание</a></li>
   </ul>
 </nav>
     </div>
@@ -228,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></h1>
 </div>
 
 
@@ -259,8 +265,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Задания со звёздочкой (★) сложнее остальных.</p>
-<section id="данные" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="данные"><span class="header-section-number">7.1</span> Данные</h2>
+<section id="данные" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="данные"><span class="header-section-number">8.1</span> Данные</h2>
 <p>Данные являют собой<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, выгрузку из учётной системы ювелирной компании. Каждый камень поступает в компанию, проходит геммологическую экспертизу в одной из лабораторий, получает сертификат и выставляется на продажу. Часть камней уже продана, часть ещё ждёт покупателя. Выгрузка сделана 30 июня 2026 года.</p>
 <p>Как и любая реальная выгрузка, данные «грязные»: в них есть дубликаты, ошибки ввода, разные форматы дат и непоследовательное написание текстовых значений.</p>
 <div class="callout callout-style-simple callout-tip no-icon">
@@ -274,8 +280,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="diamonds-ext-codebook" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="diamonds-ext-codebook"><span class="header-section-number">7.1.1</span> <code>diamonds_ext.csv</code> — основная таблица</h3>
+<section id="diamonds-ext-codebook" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="diamonds-ext-codebook"><span class="header-section-number">8.1.1</span> <code>diamonds_ext.csv</code> — основная таблица</h3>
 <p><a href="https://github.com/angelgardt/rs-app-andan-book/raw/refs/heads/master/data/diamonds-ext/diamonds_ext.csv">Ссылка</a> на файл.</p>
 <div class="callout callout-style-simple callout-important callout-titled" title="Размер файла">
 <div class="callout-header d-flex align-content-center">
@@ -365,12 +371,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Сертификат IGI № 5942822580. Флуоресценция: нет. Происхождение: Россия, Якутия. Видимых дефектов нет.</p>
 </blockquote>
 </section>
-<section id="diamonds-appraisals-codebook" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="diamonds-appraisals-codebook"><span class="header-section-number">7.1.2</span> <code>diamonds_appraisals.csv</code> — независимые оценки</h3>
+<section id="diamonds-appraisals-codebook" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="diamonds-appraisals-codebook"><span class="header-section-number">8.1.2</span> <code>diamonds_appraisals.csv</code> — независимые оценки</h3>
 <p>Для 1500 камней компания заказала оценку у трёх независимых экспертов. Каждая строка соответствует камню, столбцы <code>appraiser_A</code>, <code>appraiser_B</code> и <code>appraiser_C</code> содержат оценочную стоимость в долларах. Если эксперт камень не оценивал, ячейка пустая.</p>
 </section>
-<section id="diamonds-codes-codebook" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="diamonds-codes-codebook"><span class="header-section-number">7.1.3</span> Справочники</h3>
+<section id="diamonds-codes-codebook" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="diamonds-codes-codebook"><span class="header-section-number">8.1.3</span> Справочники</h3>
 <ul>
 <li><code>color_scale.csv</code> — группы цвета: <code>color</code>, <code>color_group</code>.
 <ul>
@@ -387,8 +393,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="часть-1.-импорт-и-первое-знакомство-с-данными" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="часть-1.-импорт-и-первое-знакомство-с-данными"><span class="header-section-number">7.2</span> Часть 1. Импорт и первое знакомство с данными</h2>
+<section id="часть-1.-импорт-и-первое-знакомство-с-данными" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="часть-1.-импорт-и-первое-знакомство-с-данными"><span class="header-section-number">8.2</span> Часть 1. Импорт и первое знакомство с данными</h2>
 <p><strong>1.</strong> Загрузите файл <code>diamonds_ext.csv</code>. Посмотрите, какие типы были назначены колонкам. Обратите внимание на столбцы <code>recv_date</code>, <code>exam_date</code> и <code>sale_dttm</code>?</p>
 <div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -527,8 +533,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="часть-2.-выбор-переименование-фильтрация-и-сортировка" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="часть-2.-выбор-переименование-фильтрация-и-сортировка"><span class="header-section-number">7.3</span> Часть 2. Выбор, переименование, фильтрация и сортировка</h2>
+<section id="часть-2.-выбор-переименование-фильтрация-и-сортировка" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="часть-2.-выбор-переименование-фильтрация-и-сортировка"><span class="header-section-number">8.3</span> Часть 2. Выбор, переименование, фильтрация и сортировка</h2>
 <p><strong>8.</strong> Переименуйте переменные с помощью <code>rename()</code>:</p>
 <ul>
 <li><code>recv_date</code> → <code>date_received</code>, <code>exam_date</code> → <code>date_examined</code>, <code>sale_dttm</code> → <code>datetime_sold</code>;</li>
@@ -714,8 +720,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="часть-3.-новые-переменные-группировка-и-агрегация" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="часть-3.-новые-переменные-группировка-и-агрегация"><span class="header-section-number">7.4</span> Часть 3. Новые переменные, группировка и агрегация</h2>
+<section id="часть-3.-новые-переменные-группировка-и-агрегация" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="часть-3.-новые-переменные-группировка-и-агрегация"><span class="header-section-number">8.4</span> Часть 3. Новые переменные, группировка и агрегация</h2>
 <p><strong>15.</strong> Бриллиантов с какой огранкой больше всего? Выведите для каждой огранки число камней и долю в процентах, отсортировав по убыванию.</p>
 <div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
@@ -867,8 +873,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="часть-4.-работа-со-строками" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="часть-4.-работа-со-строками"><span class="header-section-number">7.5</span> Часть 4. Работа со строками</h2>
+<section id="часть-4.-работа-со-строками" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="часть-4.-работа-со-строками"><span class="header-section-number">8.5</span> Часть 4. Работа со строками</h2>
 <p><strong>21.</strong> Посмотрите на уникальные значения <code>lab</code>. Сколько их? Совпадают ли они с кодами из файла <code>labs.csv</code>?</p>
 <ul>
 <li>Приведите коды лабораторий к единому виду.</li>
@@ -930,8 +936,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 --->
 <!-- **27.** Сформируйте для каждого камня краткое название лота вида `1.01 ct, Ideal, J/SI2`. Подсказка: `str_c()` или `str_glue()`. Масса всегда должна выводиться с двумя знаками после точки. -->
 </section>
-<section id="часть-5.-работа-с-датами-и-временем" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="часть-5.-работа-с-датами-и-временем"><span class="header-section-number">7.6</span> Часть 5. Работа с датами и временем</h2>
+<section id="часть-5.-работа-с-датами-и-временем" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="часть-5.-работа-с-датами-и-временем"><span class="header-section-number">8.6</span> Часть 5. Работа с датами и временем</h2>
 <p><strong>28.</strong> Преобразуйте <code>date_examined</code> в дату, а <code>datetime_sold</code> в дату-время. Проверьте, что после преобразования новые пропуски не появились: число <code>NA</code> должно совпадать с тем, что было до преобразования.</p>
 <div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
@@ -1054,8 +1060,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>34.</strong> ★ Сколько камней находилось на складе на 1 января 2025 года, то есть уже поступили, но ещё не были проданы?</p>
 <p><strong>35.</strong> Сколько дней непроданные камни ждут покупателя на дату выгрузки (30 июня 2026 года), если отсчитывать от даты экспертизы? Найдите медиану и максимум.</p>
 </section>
-<section id="часть-6.-объединение-таблиц" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="часть-6.-объединение-таблиц"><span class="header-section-number">7.7</span> Часть 6. Объединение таблиц</h2>
+<section id="часть-6.-объединение-таблиц" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="часть-6.-объединение-таблиц"><span class="header-section-number">8.7</span> Часть 6. Объединение таблиц</h2>
 <p>Загрузите справочники <code>color_scale.csv</code>, <code>clarity_scale.csv</code>, <code>labs.csv</code> и таблицу оценок <code>diamonds_appraisals.csv</code>.</p>
 <p><strong>36.</strong> Присоедините к данным группу цвета из <code>color_scale.csv</code>.</p>
 <ul>
@@ -1089,8 +1095,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>39.</strong> ★ С помощью <code>semi_join()</code> оставьте только камни, для которых есть экспертные оценки. С помощью <code>anti_join()</code> найдите камни без оценок. Есть ли в таблице оценок камни, которых нет в очищенных данных? Откуда они взялись?</p>
 </section>
-<section id="часть-7.-широкий-и-длинный-формат" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="часть-7.-широкий-и-длинный-формат"><span class="header-section-number">7.8</span> Часть 7. Широкий и длинный формат</h2>
+<section id="часть-7.-широкий-и-длинный-формат" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="часть-7.-широкий-и-длинный-формат"><span class="header-section-number">8.8</span> Часть 7. Широкий и длинный формат</h2>
 <p><strong>40.</strong> Таблица <code>diamonds_appraisals.csv</code> записана в широком формате. Переведите её в длинный формат со столбцами <code>id</code>, <code>appraiser</code> (<code>A</code>, <code>B</code> или <code>C</code>) и <code>estimate</code>. Сколько строк получилось?</p>
 <div class="callout callout-style-simple callout-note no-icon callout-titled" title="Подсказки">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
@@ -1135,8 +1141,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>43.</strong> Постройте сводную таблицу числа продаж: в строках год, в столбцах квартал (<code>Q1</code>–<code>Q4</code>). Отсутствующие сочетания заполните нулями. Подсказка: аргумент <code>values_fill</code>.</p>
 <p><strong>44.</strong> Переведите таблицу из задания 43 обратно в длинный формат.</p>
 </section>
-<section id="часть-8.-визуализация" class="level2" data-number="7.9">
-<h2 data-number="7.9" class="anchored" data-anchor-id="часть-8.-визуализация"><span class="header-section-number">7.9</span> Часть 8. Визуализация</h2>
+<section id="часть-8.-визуализация" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="часть-8.-визуализация"><span class="header-section-number">8.9</span> Часть 8. Визуализация</h2>
 <blockquote class="blockquote">
 <p>Рекомендация: лформите каждый график — подпишите оси по-русски, добавьте заголовок и, где нужно, легенду с понятным названием. После каждого графика сформулируйте 1–2 вывода.</p>
 </blockquote>
@@ -1161,8 +1167,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="часть-9.-итоговое-задание" class="level2" data-number="7.10">
-<h2 data-number="7.10" class="anchored" data-anchor-id="часть-9.-итоговое-задание"><span class="header-section-number">7.10</span> Часть 9. Итоговое задание</h2>
+<section id="часть-9.-итоговое-задание" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="часть-9.-итоговое-задание"><span class="header-section-number">8.10</span> Часть 9. Итоговое задание</h2>
 <p><strong>55.</strong> ★ Соберите в один скрипт весь путь от сырого файла до очищенного датасета: удаление дубликатов и ошибочных записей, факторы, переименование, очистка строк, извлечение информации из комментария, преобразование дат, новые переменные и присоединение справочников. Сохраните результат в <code>diamonds_clean.csv</code> с помощью <code>write_csv()</code>.</p>
 <p>Используя очищенные данные, ответьте на вопрос: <strong>продаются ли камни с флуоресценцией быстрее или медленнее и с большей или меньшей скидкой?</strong> Подкрепите ответ таблицей и одним графиком.</p>
 
@@ -1578,8 +1584,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chpts/rpy-strdt.html" class="pagination-link" aria-label="Строки. Дата и время">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Строки. Дата и время</span></span>
+      <a href="../chpts/rpy-vis.html" class="pagination-link" aria-label="Визуализация данных">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Визуализация данных</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
