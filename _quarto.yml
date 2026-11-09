@@ -29,9 +29,9 @@ book:
     - chpts/rpy-strdt.qmd
     - chpts/rpy-vis.qmd
     - tasks/preprocess-vis.qmd
-    # - chpts/stats-desc.qmd
-    # - chpts/stats-norm.qmd
-    # - chpts/stats-cltci.qmd
+    - chpts/stats-desc.qmd
+    - chpts/stats-norm.qmd
+    - chpts/stats-cltci.qmd
     # - chpts/stats-hyptest.qmd
     # - chpts/andan-ttest.qmd
     # - chpts/andan-chisq.qmd

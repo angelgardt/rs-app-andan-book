@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Описательные статистики – RS ANDAN // PSY&nbsp;HSE</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chpts/stats-norm.html" rel="next">
+<link href="../tasks/preprocess-vis.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-84b129f27be8f528ae7b9875820b10cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ничего не найдено",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отмена",
+    "search-submit-button-title": "Отправить",
+    "search-label": "Поиск"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chpts/stats-desc.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Описательные статистики</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">RS ANDAN // PSY&nbsp;HSE</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/intro-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основания статистики</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Основы R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/prob-randvals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовое исследование данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Предобработка данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-strdt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Строки. Дата и время</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Визуализация данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tasks/preprocess-vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/stats-desc.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Описательные статистики</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/stats-norm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Нормальное распределение</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#desc-kinds" id="toc-desc-kinds" class="nav-link active" data-scroll-target="#desc-kinds"><span class="header-section-number">9.1</span> Описательная статистика и статистика вывода</a></li>
+  <li><a href="#desc-central" id="toc-desc-central" class="nav-link" data-scroll-target="#desc-central"><span class="header-section-number">9.2</span> Меры центральной тенденции</a>
+  <ul class="collapse">
+  <li><a href="#desc-mode" id="toc-desc-mode" class="nav-link" data-scroll-target="#desc-mode"><span class="header-section-number">9.2.1</span> Мода</a></li>
+  <li><a href="#desc-median" id="toc-desc-median" class="nav-link" data-scroll-target="#desc-median"><span class="header-section-number">9.2.2</span> Медиана</a></li>
+  <li><a href="#desc-mean" id="toc-desc-mean" class="nav-link" data-scroll-target="#desc-mean"><span class="header-section-number">9.2.3</span> Среднее арифметическое</a></li>
+  <li><a href="#desc-mean-vs-median" id="toc-desc-mean-vs-median" class="nav-link" data-scroll-target="#desc-mean-vs-median"><span class="header-section-number">9.2.4</span> Среднее, медиана и форма распределения</a></li>
+  <li><a href="#sec-desc-bimodal" id="toc-sec-desc-bimodal" class="nav-link" data-scroll-target="#sec-desc-bimodal"><span class="header-section-number">9.2.5</span> Бимодальные распределения</a></li>
+  </ul></li>
+  <li><a href="#desc-variability" id="toc-desc-variability" class="nav-link" data-scroll-target="#desc-variability"><span class="header-section-number">9.3</span> Меры разброса</a>
+  <ul class="collapse">
+  <li><a href="#desc-range" id="toc-desc-range" class="nav-link" data-scroll-target="#desc-range"><span class="header-section-number">9.3.1</span> Минимум, максимум, размах</a></li>
+  <li><a href="#desc-variance" id="toc-desc-variance" class="nav-link" data-scroll-target="#desc-variance"><span class="header-section-number">9.3.2</span> Дисперсия</a></li>
+  <li><a href="#desc-sd" id="toc-desc-sd" class="nav-link" data-scroll-target="#desc-sd"><span class="header-section-number">9.3.3</span> Стандартное отклонение</a></li>
+  <li><a href="#desc-quantiles" id="toc-desc-quantiles" class="nav-link" data-scroll-target="#desc-quantiles"><span class="header-section-number">9.3.4</span> Квантили, квартили и межквартильный размах</a></li>
+  <li><a href="#desc-boxplot" id="toc-desc-boxplot" class="nav-link" data-scroll-target="#desc-boxplot"><span class="header-section-number">9.3.5</span> Ящик с усами</a></li>
+  <li><a href="#desc-variability-choice" id="toc-desc-variability-choice" class="nav-link" data-scroll-target="#desc-variability-choice"><span class="header-section-number">9.3.6</span> Как выбрать меру разброса</a></li>
+  </ul></li>
+  <li><a href="#desc-shape" id="toc-desc-shape" class="nav-link" data-scroll-target="#desc-shape"><span class="header-section-number">9.4</span> Форма распределения</a>
+  <ul class="collapse">
+  <li><a href="#desc-skewness" id="toc-desc-skewness" class="nav-link" data-scroll-target="#desc-skewness"><span class="header-section-number">9.4.1</span> Асимметрия</a></li>
+  <li><a href="#desc-kurtosis" id="toc-desc-kurtosis" class="nav-link" data-scroll-target="#desc-kurtosis"><span class="header-section-number">9.4.2</span> Эксцесс</a></li>
+  </ul></li>
+  <li><a href="#desc-outliers" id="toc-desc-outliers" class="nav-link" data-scroll-target="#desc-outliers"><span class="header-section-number">9.5</span> Выбросы</a>
+  <ul class="collapse">
+  <li><a href="#desc-outliers-iqr" id="toc-desc-outliers-iqr" class="nav-link" data-scroll-target="#desc-outliers-iqr"><span class="header-section-number">9.5.1</span> Правило 1.5 IQR</a></li>
+  <li><a href="#desc-outliers-sd" id="toc-desc-outliers-sd" class="nav-link" data-scroll-target="#desc-outliers-sd"><span class="header-section-number">9.5.2</span> Правило <span class="math inline">\(N \sigma\)</span></a></li>
+  <li><a href="#desc-outliers-what" id="toc-desc-outliers-what" class="nav-link" data-scroll-target="#desc-outliers-what"><span class="header-section-number">9.5.3</span> Что делать с выбросами</a></li>
+  </ul></li>
+  <li><a href="#desc-r" id="toc-desc-r" class="nav-link" data-scroll-target="#desc-r"><span class="header-section-number">9.6</span> Описательные статистики в R</a>
+  <ul class="collapse">
+  <li><a href="#desc-r-summary" id="toc-desc-r-summary" class="nav-link" data-scroll-target="#desc-r-summary"><span class="header-section-number">9.6.1</span> Быстрые сводки</a></li>
+  <li><a href="#desc-r-groups" id="toc-desc-r-groups" class="nav-link" data-scroll-target="#desc-r-groups"><span class="header-section-number">9.6.2</span> Статистики по группам</a></li>
+  <li><a href="#desc-reporting" id="toc-desc-reporting" class="nav-link" data-scroll-target="#desc-reporting"><span class="header-section-number">9.6.3</span> Как представлять описательные статистики в тексте</a></li>
+  </ul></li>
+  <li><a href="#sec-desc-estimates" id="toc-sec-desc-estimates" class="nav-link" data-scroll-target="#sec-desc-estimates"><span class="header-section-number">9.7</span> Статистики как оценки параметров</a>
+  <ul class="collapse">
+  <li><a href="#desc-estimator-properties" id="toc-desc-estimator-properties" class="nav-link" data-scroll-target="#desc-estimator-properties"><span class="header-section-number">9.7.1</span> Свойства хороших оценок</a></li>
+  </ul></li>
+  <li><a href="#desc-summary" id="toc-desc-summary" class="nav-link" data-scroll-target="#desc-summary"><span class="header-section-number">9.8</span> Итоги</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="stats-desc" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Описательные статистики</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="intro">
+<p>Допустим, мы собрали данные и привели их в порядок. Что дальше? Смотреть на 9000 строк таблицы бессмысленно — нужно сжать данные до нескольких чисел, которые описывают их главные особенности. Такие числа называются <strong>описательными статистиками</strong>. Они отвечают на три простых вопроса: <em>где</em> находится центр распределения, <em>насколько</em> значения разбросаны вокруг него и <em>какую форму</em> имеет распределение. А ещё они помогают заметить значения, которые не вписываются в общую картину, — выбросы.</p>
+</div>
+<section id="desc-kinds" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="desc-kinds"><span class="header-section-number">9.1</span> Описательная статистика и статистика вывода</h2>
+<p>Статистика как набор методов делится на два больших раздела.</p>
+<p><strong>Описательная статистика (descriptive statistics)</strong> занимается обработкой, наглядным представлением и описанием имеющихся данных. Её задача — ёмко описать то, что у нас есть, составить общее представление о данных и обнаружить особенности, которые могут повлиять на дальнейший анализ. Числа, которые для этого используются, называются <strong>описательными статистиками</strong>.</p>
+<p><strong>Статистика вывода (inferential statistics)</strong> позволяет делать выводы о генеральной совокупности на основании выборки: проверять статистические гипотезы и строить статистические модели. К ней мы перейдём в следующих главах.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Замечание о машинном обучении">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Заметка</span>Замечание о машинном обучении
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Одни и те же статистические модели можно рассматривать по-разному. Если нас интересует <em>объяснение</em>: какие факторы связаны с признаком и как, — мы смотрим на модель с точки зрения статистики вывода. Если важно хорошо <em>предсказывать</em> одни переменные по другим, мы смотрим на ту же модель с точки зрения машинного обучения. Модели одни и те же, но критерии того, какую из них считать хорошей, отличаются. Подробнее — в главе про <a href="andan-ml.qmd">машинное обучение</a>.</p>
+</div>
+</div>
+<p>В этой главе мы будем описывать данные эксперимента <code>sharexp</code>. Сначала, как и всегда, посмотрим, что нам предстоит описывать:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(share)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 9,000
+Columns: 11
+$ id        &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ age       &lt;dbl&gt; 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, 19, …
+$ platform  &lt;chr&gt; "ios", "ios", "ios", "ios", "ios", "ios", "ios", "ios", "ios…
+$ date      &lt;chr&gt; "2019_Jan_14_1038", "2019_Jan_14_1038", "2019_Jan_14_1038", …
+$ numtrial  &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1…
+$ trialtype &lt;chr&gt; "tray", "tray", "tray", "tray", "tray", "tray", "tray", "tra…
+$ setsize   &lt;dbl&gt; 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, …
+$ time1     &lt;dbl&gt; 1.671903, 1.126054, 2.595399, 2.609391, 1.592684, 1.143263, …
+$ click1x   &lt;dbl&gt; -227, -69, 60, 199, -241, -51, 99, 213, -201, -70, 72, 222, …
+$ click1y   &lt;dbl&gt; 202, 231, 195, 213, 43, 59, 62, 46, -123, -82, -95, -55, -22…
+$ correct   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, …</code></pre>
+</div>
+</div>
+</section>
+<section id="desc-central" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="desc-central"><span class="header-section-number">9.2</span> Меры центральной тенденции</h2>
+<p>Допустим, нужно описать распределение переменной <strong>одним числом</strong>. Естественное решение — взять значение, которое лежит <em>в центре</em> распределения. Что считать центром, зависит от шкалы, в которой измерена переменная (о шкалах мы говорили <a href="../chpts/prob-randvals.html#randvals-scales">в главе об измерении</a>).</p>
+<div id="tbl-central-scales" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-central-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;9.1: Меры центральной тенденции и шкалы
+</figcaption>
+<div aria-describedby="tbl-central-scales-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Шкала</th>
+<th style="text-align: left;">Подходящая мера центральной тенденции</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Номинальная</td>
+<td style="text-align: left;">Мода</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Порядковая</td>
+<td style="text-align: left;">Медиана (и мода)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Интервальная</td>
+<td style="text-align: left;">Среднее арифметическое (и медиана)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Абсолютная</td>
+<td style="text-align: left;">Среднее арифметическое (и медиана, мода и др.)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Меры «накапливаются» по мере роста мощности шкалы: для интервальной шкалы можно использовать и среднее, и медиану, и моду. Разберём все три.</p>
+<section id="desc-mode" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="desc-mode"><span class="header-section-number">9.2.1</span> Мода</h3>
+<div id="def-mode" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 9.1</strong></span> <strong>Мода (mode)</strong> дискретной переменной — наиболее часто встречающееся значение переменной.</p>
+</div>
+<p>Мода — единственная мера центральной тенденции, которая применима к номинальной шкале. В <code>sharexp</code> номинальные переменные — тип пробы и платформа. Моду можно найти, построив таблицу частот:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>share <span class="sc">|&gt;</span> <span class="fu">count</span>(trialtype, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  trialtype     n
+  &lt;chr&gt;     &lt;int&gt;
+1 both       3000
+2 dots       3000
+3 tray       3000</code></pre>
+</div>
+</div>
+<p>Здесь у нас три значения с одинаковой частотой, то есть мода неоднозначна: эксперимент был спланирован так, чтобы типы проб предъявлялись одинаково часто. Для настоящего примера возьмём переменную «правильность ответа»:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>share <span class="sc">|&gt;</span> <span class="fu">count</span>(correct, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  correct     n   prop
+  &lt;lgl&gt;   &lt;int&gt;  &lt;dbl&gt;
+1 TRUE     8868 0.985 
+2 FALSE     132 0.0147</code></pre>
+</div>
+</div>
+<p>Модой является значение <code>TRUE</code>: испытуемые чаще отвечают правильно.</p>
+<p>В R нет стандартной функции для моды (функция <code>mode()</code> возвращает совсем другое — тип данных). Моду легко получить из таблицы частот:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(x)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x
+1 2 3 4 6 
+2 2 4 2 1 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(<span class="fu">which.max</span>(<span class="fu">table</span>(x)))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "3"</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Предупреждение
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Если в данных несколько значений с одинаковой максимальной частотой, <code>which.max()</code> вернёт только первое. Распределение с несколькими «пиками» (<strong>бимодальное</strong> или <strong>полимодальное</strong>) — повод остановиться и подумать, о чём оно говорит (см. <a href="#sec-desc-bimodal" class="quarto-xref"><span>Раздел 9.2.5</span></a>).</p>
+</div>
+</div>
+<p><strong>Для непрерывных переменных моду, как правило, не считают.</strong> Вероятность того, что непрерывная величина примет конкретное значение, равна нулю, поэтому в реальных данных почти каждое значение уникально, и таблица частот теряет смысл. Формально модой непрерывной величины называют значение, при котором плотность вероятности достигает локального максимума, — то есть вершину пика на графике плотности. Но на практике для непрерывных переменных вместо моды используют другие меры.</p>
+</section>
+<section id="desc-median" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="desc-median"><span class="header-section-number">9.2.2</span> Медиана</h3>
+<p>Начиная с порядковой шкалы значения можно упорядочить. Тогда становится возможным найти значение, которое лежит ровно посередине.</p>
+<div id="def-median" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 9.2</strong></span> <strong>Медиана (median)</strong> — значение, которое находится в середине упорядоченного по возрастанию ряда наблюдений. Половина наблюдений меньше медианы, половина — больше.</p>
+</div>
+<p>Возьмём ряд из 11 наблюдений и упорядочим его:</p>
+<p><span class="math display">\[
+\begin{bmatrix} 1 &amp; 3 &amp; 4 &amp; 6 &amp; 3 &amp; 2 &amp; 3 &amp; 3 &amp; 2 &amp; 4 &amp; 1 \end{bmatrix}
+\;\rightarrow\;
+\begin{bmatrix} 1 &amp; 1 &amp; 2 &amp; 2 &amp; 3 &amp; \mathbf{3} &amp; 3 &amp; 3 &amp; 4 &amp; 4 &amp; 6 \end{bmatrix}
+\]</span></p>
+<p>Шестое по счёту значение — медиана; она равна 3. Если число наблюдений нечётное, то в середине находится ровно одно значение. Если чётное — «середина» попадает между двумя значениями, и в качестве медианы берётся их среднее:</p>
+<p><span class="math display">\[
+\begin{bmatrix} 3 &amp; 7 &amp; 8 &amp; 9 &amp; 10 &amp; | &amp; 14 &amp; 16 &amp; 18 &amp; 25 &amp; 30 \end{bmatrix}
+\quad \text{median} = \frac{10 + 14}{2} = 12
+\]</span></p>
+<p>Формально, для упорядоченного ряда <span class="math inline">\(x_{(1)} \le x_{(2)} \le \dots \le x_{(n)}\)</span>:</p>
+<p><span class="math display">\[
+\text{median} =
+\begin{cases}
+x_{\left(\frac{n+1}{2}\right)}, &amp; \text{если } n \text{ нечётное} \\[6pt]
+\dfrac{x_{\left(\frac{n}{2}\right)} + x_{\left(\frac{n}{2} + 1\right)}}{2}, &amp; \text{если } n \text{ чётное}
+\end{cases}
+\]</span></p>
+<p>В R медиана считается функцией <code>median()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">30</span>, <span class="dv">3</span>, <span class="dv">25</span>, <span class="dv">8</span>, <span class="dv">18</span>, <span class="dv">7</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 12</code></pre>
+</div>
+</div>
+<p>Для времени первого клика в <code>sharexp</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(share<span class="sc">$</span>time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.296365</code></pre>
+</div>
+</div>
+<p>Важное свойство медианы: она зависит только от <strong>порядка</strong> значений, но не от их величины. Если самое большое значение ряда заменить на гигантское, медиана не изменится.</p>
+</section>
+<section id="desc-mean" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="desc-mean"><span class="header-section-number">9.2.3</span> Среднее арифметическое</h3>
+<div id="def-mean" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 9.3</strong></span> <strong>Среднее арифметическое (arithmetic mean)</strong> — сумма значений, делённая на их количество:</p>
+<p><span class="math display">\[
+\bar x = \frac{\sum_{i=1}^{n} x_i}{n},
+\]</span></p>
+<p>где <span class="math inline">\(x_i\)</span> — значения наблюдений, <span class="math inline">\(n\)</span> — число наблюдений.</p>
+</div>
+<p>Среднее требует сложения значений, а потому применимо только на интервальной и абсолютной шкалах.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(share<span class="sc">$</span>time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.52008</code></pre>
+</div>
+</div>
+<p><strong>Свойства среднего.</strong> Они понадобятся нам при работе со стандартизацией и линейными моделями.</p>
+<ol type="1">
+<li><em>Если к каждому значению прибавить константу, среднее увеличится на неё же.</em> <span class="math inline">\(\bar{(x + c)} = \bar x + c\)</span></li>
+<li><em>Если каждое значение умножить на константу, среднее умножится на неё же.</em> <span class="math inline">\(\bar{(x \cdot c)} = c \cdot \bar x\)</span></li>
+<li><em>Сумма отклонений от среднего равна нулю.</em> <span class="math inline">\(\sum_{i=1}^n (x_i - \bar x) = 0\)</span></li>
+</ol>
+<p>Проверим на данных:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> share<span class="sc">$</span>time1</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(x), <span class="fu">mean</span>(x <span class="sc">+</span> <span class="dv">10</span>), <span class="fu">mean</span>(x <span class="sc">*</span> <span class="dv">1000</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]    1.52008   11.52008 1520.08012</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x <span class="sc">-</span> <span class="fu">mean</span>(x))  <span class="co"># ноль с точностью до ошибок вычислений</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.566658e-13</code></pre>
+</div>
+</div>
+<p>Результат последней команды не равен нулю в точности только из-за особенностей хранения дробных чисел в компьютере.</p>
+<p>Третье свойство означает, что среднее — это точка равновесия распределения: если представить значения как грузики на линейке, то среднее будет той точкой, в которой линейка удержится в равновесии. Поэтому на среднее сильно влияют значения, удалённые от центра.</p>
+<section id="desc-other-means" class="level4" data-number="9.2.3.1">
+<h4 data-number="9.2.3.1" class="anchored" data-anchor-id="desc-other-means"><span class="header-section-number">9.2.3.1</span> Другие виды средних</h4>
+<p>Среднее арифметическое — самое употребительное, но не единственное. <strong>Взвешенное среднее (weighted mean)</strong> используется, когда вклад наблюдений в итог неодинаков, — например, итоговая оценка за курс, в которой тест весит меньше, чем экзамен:</p>
+<p><span class="math display">\[
+\bar x_w = \frac{\sum_{i=1}^n w_i x_i}{\sum_{i=1}^n w_i}
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>marks <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">test =</span> <span class="dv">7</span>, <span class="at">essay =</span> <span class="dv">8</span>, <span class="at">exam =</span> <span class="dv">6</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>weights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">6</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">weighted.mean</span>(marks, weights)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.7</code></pre>
+</div>
+</div>
+<p>Взвешенное среднее также нужно, когда нужно усреднить средние по группам разного размера. Реже встречаются <strong>геометрическое</strong> (применяется к приростам и отношениям, считается через произведение), <strong>гармоническое</strong> (усредняет скорости и отношения) и <strong>квадратичное</strong> (корень из среднего квадрата; оно встретится нам при расчёте ошибок предсказаний).</p>
+</section>
+</section>
+<section id="desc-mean-vs-median" class="level3" data-number="9.2.4">
+<h3 data-number="9.2.4" class="anchored" data-anchor-id="desc-mean-vs-median"><span class="header-section-number">9.2.4</span> Среднее, медиана и форма распределения</h3>
+<p>Раз у интервальных данных есть и среднее, и медиана, нужно понимать, чем они отличаются. Решающее слово здесь за <strong>формой распределения</strong>.</p>
+<p>На симметричном распределении среднее и медиана (и мода) совпадают или очень близки. На асимметричном среднее и медиана смещаются в сторону длинного хвоста, причём среднее смещается сильнее, потому что оно учитывает величину значений, а медиана — только их порядок.</p>
+<p>Покажем это на времени первого клика — у времён реакции типично длинный правый хвост:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>share <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(time1)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">80</span>, <span class="at">fill =</span> <span class="st">"grey85"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(share<span class="sc">$</span>time1), <span class="at">colour =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">median</span>(share<span class="sc">$</span>time1), <span class="at">colour =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">6</span>)) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Время первого клика, с"</span>, <span class="at">y =</span> <span class="st">"Число проб"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-mean-median" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mean-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-desc_files/figure-html/fig-mean-median-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Рисунок&nbsp;9.1: Распределение времени первого клика. Красная линия — среднее, синяя — медиана"><img src="stats-desc_files/figure-html/fig-mean-median-1.png" class="img-fluid figure-img" width="624"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mean-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9.1: Распределение времени первого клика. Красная линия — среднее, синяя — медиана
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Среднее (1.52 с) больше медианы (1.3 с): правый хвост из медленных проб «тянет» среднее вправо. Какая из двух мер лучше описывает «типичное» время реакции? Здесь скорее медиана, потому что медленные пробы (когда человек отвлёкся или долго не мог найти стимул) — не типичные.</p>
+<p>Чувствительность среднего к экстремальным значениям покажем на маленьком примере. Пять оценок за выпускную работу:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>marks5 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">8</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(marks5), <span class="at">median =</span> <span class="fu">median</span>(marks5))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mean median 
+   7.2    7.0 </code></pre>
+</div>
+</div>
+<p>Теперь двое членов комиссии поставили сильно заниженные оценки:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>marks7 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(marks7), <span class="at">median =</span> <span class="fu">median</span>(marks7))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    mean   median 
+6.142857 7.000000 </code></pre>
+</div>
+</div>
+<p>Медиана не сдвинулась, а среднее заметно упало.</p>
+<div id="tbl-mean-vs-median" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mean-vs-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;9.2: Что выбрать?
+</figcaption>
+<div aria-describedby="tbl-mean-vs-median-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Ситуация</th>
+<th style="text-align: left;">Подходящая мера</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Номинальная переменная</td>
+<td style="text-align: left;">Мода</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Порядковая переменная</td>
+<td style="text-align: left;">Медиана</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Дискретная переменная с небольшим числом значений</td>
+<td style="text-align: left;">Медиана или мода</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Непрерывная, примерно симметричное распределение</td>
+<td style="text-align: left;">Среднее</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Непрерывная, асимметричное распределение или выбросы</td>
+<td style="text-align: left;">Медиана</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-desc-bimodal" class="level3" data-number="9.2.5">
+<h3 data-number="9.2.5" class="anchored" data-anchor-id="sec-desc-bimodal"><span class="header-section-number">9.2.5</span> Бимодальные распределения</h3>
+<p>Распределение может иметь несколько пиков. Такое распределение называют <strong>бимодальным</strong> (два пика) или <strong>полимодальным</strong> (больше двух). Бимодальность — как правило, сигнал <strong>неоднородности выборки</strong>: возможно, в ней смешаны две разные подгруппы. Смоделируем это:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>mix <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"новички"</span>, <span class="st">"эксперты"</span>), <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">250</span>, <span class="dv">250</span>)),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">250</span>, <span class="at">mean =</span> <span class="dv">40</span>, <span class="at">sd =</span> <span class="dv">8</span>), <span class="fu">rnorm</span>(<span class="dv">250</span>, <span class="at">mean =</span> <span class="dv">70</span>, <span class="at">sd =</span> <span class="dv">8</span>))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>mix <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(x)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">"grey80"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Результат теста"</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>mix <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(x, <span class="at">fill =</span> group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Результат теста"</span>, <span class="at">fill =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fig-bimodal" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bimodal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-bimodal" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-bimodal-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-bimodal-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-desc_files/figure-html/fig-bimodal-1.png" class="lightbox" data-gallery="fig-bimodal" title="Рисунок&nbsp;9.2&nbsp;(a): Всё вместе"><img src="stats-desc_files/figure-html/fig-bimodal-1.png" class="img-fluid figure-img" data-ref-parent="fig-bimodal" width="624"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-bimodal-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Всё вместе
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-bimodal" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-bimodal-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-bimodal-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-desc_files/figure-html/fig-bimodal-2.png" class="lightbox" data-gallery="fig-bimodal" title="Рисунок&nbsp;9.2&nbsp;(b): Раздельно по группам"><img src="stats-desc_files/figure-html/fig-bimodal-2.png" class="img-fluid figure-img" data-ref-parent="fig-bimodal" width="624"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-bimodal-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Раздельно по группам
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bimodal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9.2: Бимодальное распределение как смесь двух подгрупп
+</figcaption>
+</figure>
+</div>
+<p>Среднее такой выборки (55) находится там, где почти нет наблюдений, и ни про новичков, ни про экспертов ничего не говорит. Само по себе распределение не скажет, <em>почему</em> оно бимодально; чтобы найти причину, нужно разбить данные по другим переменным — «соцдему», условиям, времени сбора.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Соцдем лишним не бывает">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Совет</span>Соцдем лишним не бывает
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Планируя исследование, подумайте, чем ваши испытуемые могут отличаться друг от друга помимо индивидуальных различий, и зафиксируйте это в данных. Решение о том, что с этим делать, можно принять позже, а вот информацию, которую не записали, потом не получить.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="desc-variability" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="desc-variability"><span class="header-section-number">9.3</span> Меры разброса</h2>
+<p>Одной центральной тенденции для описания распределения недостаточно. Посмотрим на три распределения с одним и тем же средним:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="st">`</span><span class="at">sd = 0.5</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="fl">0.5</span>),</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">`</span><span class="at">sd = 1</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">1</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>       <span class="st">`</span><span class="at">sd = 3</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value)) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">fill =</span> <span class="st">"grey80"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> name) <span class="sc">+</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-same-mean" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-same-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-desc_files/figure-html/fig-same-mean-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Рисунок&nbsp;9.3: Три распределения с одинаковым средним и разным разбросом"><img src="stats-desc_files/figure-html/fig-same-mean-1.png" class="img-fluid figure-img" width="624"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-same-mean-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9.3: Три распределения с одинаковым средним и разным разбросом
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Чтобы описать, насколько плотно значения группируются вокруг центра, используют <strong>меры разброса (variability)</strong>.</p>
+<section id="desc-range" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="desc-range"><span class="header-section-number">9.3.1</span> Минимум, максимум, размах</h3>
+<p>Самый простой способ — указать границы: минимальное и максимальное значения. Их разность называется <strong>размахом (range)</strong>:</p>
+<p><span class="math display">\[
+\text{range} = x_{\max} - x_{\min}
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(share<span class="sc">$</span>time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.5392201 12.2325573</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span>(<span class="fu">range</span>(share<span class="sc">$</span>time1))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11.69334</code></pre>
+</div>
+</div>
+<p>Время первого клика колеблется от 0.54 до 12.23 с. Размах полезен для первичного знакомства с данными, но он определяется только двумя самыми крайними наблюдениями и ничего не говорит о том, как распределены остальные. Две выборки с одинаковым размахом могут сильно различаться по тому, насколько кучно лежат основные значения.</p>
+</section>
+<section id="desc-variance" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="desc-variance"><span class="header-section-number">9.3.2</span> Дисперсия</h3>
+<p>Хотелось бы измерить разброс так, чтобы учитывались все наблюдения. Естественная идея — посмотреть, насколько в среднем наблюдения отклоняются от среднего. Но среднее отклонение равно нулю (см. третье свойство среднего). Чтобы избавиться от знака, отклонения возводят в квадрат: большие отклонения тогда вносят больший вклад.</p>
+<div id="def-variance" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 9.4</strong></span> <strong>Дисперсия (variance)</strong> выборки — сумма квадратов отклонений от среднего, делённая на число наблюдений без единицы:</p>
+<p><span class="math display">\[
+s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar x)^2}{n - 1}
+\]</span></p>
+</div>
+<p>Дисперсия генеральной совокупности (когда мы знаем о ней всё) считается с делением на <span class="math inline">\(n\)</span> и обозначается <span class="math inline">\(\sigma^2\)</span>. Для выборки в знаменателе используют <span class="math inline">\(n-1\)</span> — это поправка, о которой мы поговорим ниже (<a href="#sec-desc-estimates" class="quarto-xref"><span>Раздел 9.7</span></a>). Именно такая формула реализована в функции <code>var()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">10</span>, <span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">30</span>, <span class="dv">3</span>, <span class="dv">25</span>, <span class="dv">8</span>, <span class="dv">18</span>, <span class="dv">7</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 71.55556</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 71.55556</code></pre>
+</div>
+</div>
+<p><strong>Степени свободы.</strong> Почему <span class="math inline">\(n-1\)</span>? Дисперсия считается относительно среднего, а среднее мы вычисляем по тем же самым данным. Если среднее и первые <span class="math inline">\(n-1\)</span> значений известны, последнее значение определяется однозначно, то есть «свободно варьироваться» могут только <span class="math inline">\(n-1\)</span> значений. Число независимых значений, участвующих в расчёте, называется <strong>числом степеней свободы (degrees of freedom, df)</strong>.</p>
+</section>
+<section id="desc-sd" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="desc-sd"><span class="header-section-number">9.3.3</span> Стандартное отклонение</h3>
+<p>Дисперсия измеряется в <em>квадратах</em> единиц измерения переменной (секунды в квадрате, баллы в квадрате), и это неудобно для интерпретации. Чтобы вернуться к исходным единицам, извлекают корень.</p>
+<div id="def-sd" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 9.5</strong></span> <strong>Стандартное отклонение (standard deviation, SD)</strong> — квадратный корень из дисперсии:</p>
+<p><span class="math display">\[
+s = \sqrt{s^2} = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar x)^2}{n - 1}}
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(share<span class="sc">$</span>time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8092264</code></pre>
+</div>
+</div>
+<p>Стандартное отклонение можно приблизительно интерпретировать как «типичное отклонение наблюдения от среднего» (на практике оно немного больше среднего абсолютного отклонения).</p>
+<p><strong>Свойства дисперсии и стандартного отклонения:</strong></p>
+<ol type="1">
+<li><em>Прибавление константы не меняет разброс:</em> <span class="math inline">\(s^2_{x+c} = s^2_x\)</span>, <span class="math inline">\(s_{x+c} = s_x\)</span>.</li>
+<li><em>Умножение на константу изменяет дисперсию в <span class="math inline">\(c^2\)</span> раз, а стандартное отклонение — в <span class="math inline">\(|c|\)</span> раз:</em> <span class="math inline">\(s^2_{cx} = c^2 s^2_x\)</span>, <span class="math inline">\(s_{cx} = |c| s_x\)</span>.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> share<span class="sc">$</span>time1</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">sd</span>(x), <span class="fu">sd</span>(x <span class="sc">+</span> <span class="dv">10</span>), <span class="fu">sd</span>(x <span class="sc">*</span> <span class="dv">1000</span>), <span class="dv">1000</span> <span class="sc">*</span> <span class="fu">sd</span>(x))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]   0.8092264   0.8092264 809.2264089 809.2264089</code></pre>
+</div>
+</div>
+<p>Эти свойства объясняют, почему при переводе из секунд в миллисекунды (умножении на 1000) разброс тоже увеличивается в 1000 раз.</p>
+</section>
+<section id="desc-quantiles" class="level3" data-number="9.3.4">
+<h3 data-number="9.3.4" class="anchored" data-anchor-id="desc-quantiles"><span class="header-section-number">9.3.4</span> Квантили, квартили и межквартильный размах</h3>
+<p>Дисперсия и стандартное отклонение, как и среднее, чувствительны к экстремальным значениям. Им есть «ранговая» альтернатива, основанная на квантилях.</p>
+<div id="def-quantile" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 9.6</strong></span> <strong>Квантиль (quantile)</strong> порядка <span class="math inline">\(p\)</span> — значение переменной, левее которого лежит доля <span class="math inline">\(p\)</span> наблюдений.</p>
+</div>
+<p>Например, квантиль порядка 0.05 отсекает слева 5% наблюдений; квантиль порядка 0.5 — это медиана. Квантили вычисляются функцией <code>quantile()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(share<span class="sc">$</span>time1, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      5%      25%      50%      75%      95% 
+0.796570 1.028439 1.296365 1.745703 2.979025 </code></pre>
+</div>
+</div>
+<p>Особое место занимают <strong>квартили</strong> — квантили порядков 0.25, 0.5 и 0.75, делящие данные на четыре равные части:</p>
+<ul>
+<li>первый квартиль <span class="math inline">\(Q_1\)</span> (нижний): 25% наблюдений лежит левее;</li>
+<li>второй квартиль <span class="math inline">\(Q_2\)</span>: это медиана;</li>
+<li>третий квартиль <span class="math inline">\(Q_3\)</span> (верхний): 75% наблюдений лежит левее.</li>
+</ul>
+<p>Квантили порядков 0.1, 0.2, …, 0.9 называют <strong>децилями</strong>, а порядков 0.01, 0.02, …, 0.99 — <strong>перцентилями</strong>. С перцентилями вы часто встречаетесь, когда видите результат в формате «выше, чем у 80% испытуемых»: это перцентиль 80.</p>
+<div id="def-iqr" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 9.7</strong></span> <strong>Межквартильный размах (interquartile range, IQR)</strong> — разность третьего и первого квартилей:</p>
+<p><span class="math display">\[
+\text{IQR} = Q_3 - Q_1
+\]</span></p>
+<p>В диапазоне такой ширины находятся центральные 50% наблюдений.</p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">IQR</span>(share<span class="sc">$</span>time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7172637</code></pre>
+</div>
+</div>
+<p>Межквартильный размах не чувствителен к экстремальным значениям и является естественным спутником медианы. Так же, как среднее «дружит» со стандартным отклонением, медиана — с IQR.</p>
+</section>
+<section id="desc-boxplot" class="level3" data-number="9.3.5">
+<h3 data-number="9.3.5" class="anchored" data-anchor-id="desc-boxplot"><span class="header-section-number">9.3.5</span> Ящик с усами</h3>
+<p>Квартили удобно отображать на графике <strong>ящик с усами (boxplot)</strong>:</p>
+<ul>
+<li>жирная линия внутри ящика — медиана;</li>
+<li>границы ящика — первый и третий квартили (то есть высота ящика равна IQR);</li>
+<li>«усы» идут до самого дальнего наблюдения, которое отстоит от границы ящика не больше, чем на <span class="math inline">\(1.5 \cdot \text{IQR}\)</span>;</li>
+<li>наблюдения за пределами усов отображаются отдельными точками — это потенциальные <strong>выбросы</strong>.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>share <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> time1)) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="at">breaks =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"Время первого клика, с"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-boxplot-desc" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-boxplot-desc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-desc_files/figure-html/fig-boxplot-desc-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Рисунок&nbsp;9.4: Ящик с усами для времени первого клика"><img src="stats-desc_files/figure-html/fig-boxplot-desc-1.png" class="img-fluid figure-img" width="624"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-boxplot-desc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9.4: Ящик с усами для времени первого клика
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Если ящик несимметричен — медиана ближе к одной из границ, а один ус длиннее другого — то и распределение несимметрично. Рядом можно рисовать несколько ящиков и сравнивать группы (см. <a href="rpy-vis.html#fig-boxplot" class="quarto-xref">Рисунок&nbsp;<span>7.12</span></a> в главе про <a href="../chpts/rpy-vis.html">визуализацию</a>).</p>
+</section>
+<section id="desc-variability-choice" class="level3" data-number="9.3.6">
+<h3 data-number="9.3.6" class="anchored" data-anchor-id="desc-variability-choice"><span class="header-section-number">9.3.6</span> Как выбрать меру разброса</h3>
+<p>Меры центра и разброса используют в парах:</p>
+<div id="tbl-central-var-pairs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-central-var-pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;9.3: Пары мер описания
+</figcaption>
+<div aria-describedby="tbl-central-var-pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 25%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Центр</th>
+<th style="text-align: left;">Разброс</th>
+<th style="text-align: left;">Когда</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Среднее</td>
+<td style="text-align: left;">Стандартное отклонение</td>
+<td style="text-align: left;">Интервальная/абсолютная шкала, симметричное распределение без выбросов</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Медиана</td>
+<td style="text-align: left;">Межквартильный размах (квартили)</td>
+<td style="text-align: left;">Порядковая шкала; асимметричное распределение; выбросы</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Мода</td>
+<td style="text-align: left;">Число уникальных значений</td>
+<td style="text-align: left;">Номинальная шкала</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Размах стоит указывать всегда: он даёт представление о границах измерения. Что касается номинальной шкалы, то и у неё есть вариативность: выборка, в которой встречаются Москва, Санкт-Петербург и Казань, разнообразнее, чем выборка только из Москвы. Простейшая мера разнообразия — число уникальных значений.</p>
+</section>
+</section>
+<section id="desc-shape" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="desc-shape"><span class="header-section-number">9.4</span> Форма распределения</h2>
+<p>Две характеристики описывают, насколько форма распределения отличается от нормальной «колоколообразной» кривой.</p>
+<section id="desc-skewness" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="desc-skewness"><span class="header-section-number">9.4.1</span> Асимметрия</h3>
+<p><strong>Коэффициент асимметрии (skewness)</strong> показывает, насколько распределение несимметрично.</p>
+<ul>
+<li>Около нуля — распределение примерно симметрично.</li>
+<li>Положительный — <em>правосторонняя</em> асимметрия: длинный хвост справа, основная масса значений сосредоточена слева.</li>
+<li>Отрицательный — <em>левосторонняя</em> асимметрия: длинный хвост слева.</li>
+</ul>
+<p>Формулу запоминать не нужно, ведь её считает R: он усредняет кубы отклонений от среднего, делённые на куб стандартного отклонения. Пользоваться удобно функцией <code>describe()</code> из пакета <code>psych</code>, которая сразу выдаёт набор описательных статистик, или отдельными функциями <code>skew()</code> и <code>kurtosi()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">skew</span>(share<span class="sc">$</span>time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.506374</code></pre>
+</div>
+</div>
+<p>Асимметрия 3.5 — сильно положительная: это правосторонняя асимметрия, о которой мы уже догадались по гистограмме. Для времён реакции это нормальная ситуация — очень быстрым ответ быть не может (есть физиологический предел), а вот медленным — сколь угодно.</p>
+</section>
+<section id="desc-kurtosis" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="desc-kurtosis"><span class="header-section-number">9.4.2</span> Эксцесс</h3>
+<p><strong>Коэффициент эксцесса (kurtosis)</strong> показывает, насколько распределение «острое» или «пологое» по сравнению с нормальным. Для нормального распределения эксцесс принимается равным нулю:</p>
+<ul>
+<li>положительный — острая вершина и тяжёлые хвосты (много значений вблизи центра и экстремальных значений в хвостах);</li>
+<li>отрицательный — пологая вершина, лёгкие хвосты.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kurtosi</span>(share<span class="sc">$</span>time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24.88919</code></pre>
+</div>
+</div>
+<p>Эксцесс времени первого клика очень большой, то есть в данных много экстремально долгих проб. Различные программы и пакеты считают асимметрию и эксцесс по немного отличающимся формулам (поправка на размер выборки), поэтому числа из разных источников могут немного различаться. На интерпретацию это не влияет.</p>
+<p>Для сравнения посмотрим, как меняются эти коэффициенты после логарифмирования времени:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">c</span>(<span class="st">"time1"</span>, <span class="st">"log(time1)"</span>),</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">skew =</span> <span class="fu">c</span>(<span class="fu">skew</span>(share<span class="sc">$</span>time1), <span class="fu">skew</span>(<span class="fu">log</span>(share<span class="sc">$</span>time1))),</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">kurtosis =</span> <span class="fu">c</span>(<span class="fu">kurtosi</span>(share<span class="sc">$</span>time1), <span class="fu">kurtosi</span>(<span class="fu">log</span>(share<span class="sc">$</span>time1)))</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  variable    skew kurtosis
+  &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+1 time1      3.51     24.9 
+2 log(time1) 0.863     1.06</code></pre>
+</div>
+</div>
+<p>Логарифмирование сильно уменьшило асимметрию и эксцесс. Это стандартный приём при работе с временами реакции, и мы к нему ещё вернёмся.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Заметка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Содержательная интерпретация формы распределения зависит от области. Асимметрия времён реакции ожидаема. Асимметрия баллов по опроснику может быть сигналом о проблемах с формулировками вопросов (например, потолочный эффект, когда почти все выбирают максимальный вариант).</p>
+</div>
+</div>
+</section>
+</section>
+<section id="desc-outliers" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="desc-outliers"><span class="header-section-number">9.5</span> Выбросы</h2>
+<div id="def-outlier" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 9.8</strong></span> <strong>Выброс (outlier)</strong> — наблюдение, которое сильно отличается от большинства других наблюдений в выборке.</p>
+</div>
+<p>Выбросы могут возникать по разным причинам: ошибка записи или измерения, технический сбой, невнимательность испытуемого (отвлёкся на пролетевшего за окном голубя — и в данных появилась реакция в 200 секунд), а также просто редкие, но настоящие значения. Первый шаг всегда содержательный: <strong>разобраться, откуда выброс взялся</strong>. Лишь после этого можно решать, что с ним делать. Формальные правила лишь помогают найти кандидатов.</p>
+<section id="desc-outliers-iqr" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="desc-outliers-iqr"><span class="header-section-number">9.5.1</span> Правило 1.5 IQR</h3>
+<p>Это то самое правило, по которому строятся усы боксплота. Выбросом считается значение, которое лежит за пределами интервала</p>
+<p><span class="math display">\[
+\left( Q_1 - 1.5 \cdot \text{IQR}, \;\; Q_3 + 1.5 \cdot \text{IQR} \right).
+\]</span></p>
+<p>Реализуем его:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>q1 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(share<span class="sc">$</span>time1, <span class="fl">0.25</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>q3 <span class="ot">&lt;-</span> <span class="fu">quantile</span>(share<span class="sc">$</span>time1, <span class="fl">0.75</span>)</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>iqr <span class="ot">&lt;-</span> q3 <span class="sc">-</span> q1</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>lower <span class="ot">&lt;-</span> q1 <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">&lt;-</span> q3 <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> iqr</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">lower =</span> <span class="fu">unname</span>(lower), <span class="at">upper =</span> <span class="fu">unname</span>(upper))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      lower       upper 
+-0.04745662  2.82159817 </code></pre>
+</div>
+</div>
+<p>Отметим выбросы с помощью <code>mutate()</code> и посчитаем их долю:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>share_flag <span class="ot">&lt;-</span> share <span class="sc">|&gt;</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outlier_iqr =</span> time1 <span class="sc">&lt;</span> lower <span class="sc">|</span> time1 <span class="sc">&gt;</span> upper)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>share_flag <span class="sc">|&gt;</span> <span class="fu">count</span>(outlier_iqr) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  outlier_iqr     n   prop
+  &lt;lgl&gt;       &lt;int&gt;  &lt;dbl&gt;
+1 FALSE        8473 0.941 
+2 TRUE          527 0.0586</code></pre>
+</div>
+</div>
+<p>Правило пометило почти 5.9% проб — и все они слишком долгие. Нижняя граница (-0.05) отрицательна, то есть слишком быстрых проб правило не видит и не может увидеть. Для сильно асимметричных распределений правило 1.5 IQR работает плохо: оно «считает выбросом» нормальную часть длинного хвоста.</p>
+</section>
+<section id="desc-outliers-sd" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="desc-outliers-sd"><span class="header-section-number">9.5.2</span> Правило <span class="math inline">\(N \sigma\)</span></h3>
+<p>Альтернативный подход — считать выбросом наблюдение, которое отстоит от среднего больше, чем на <span class="math inline">\(N\)</span> стандартных отклонений (чаще всего берут <span class="math inline">\(N = 3\)</span>):</p>
+<p><span class="math display">\[
+\left( \bar x - N \cdot s, \;\; \bar x + N \cdot s \right).
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(share<span class="sc">$</span>time1)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sd</span>(share<span class="sc">$</span>time1)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>share_flag <span class="ot">&lt;-</span> share_flag <span class="sc">|&gt;</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">outlier_sd =</span> time1 <span class="sc">&lt;</span> m <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> s <span class="sc">|</span> time1 <span class="sc">&gt;</span> m <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> s)</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>share_flag <span class="sc">|&gt;</span> <span class="fu">count</span>(outlier_sd) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">prop =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  outlier_sd     n  prop
+  &lt;lgl&gt;      &lt;int&gt; &lt;dbl&gt;
+1 FALSE       8847 0.983
+2 TRUE         153 0.017</code></pre>
+</div>
+</div>
+<p>Это правило жёстче и пометило меньше проб. Но у него есть собственный недостаток: среднее и стандартное отклонение сами чувствительны к выбросам, и экстремальные значения «раздувают» границы, в которые потом сами попадают. Правило <span class="math inline">\(3\sigma\)</span> имеет смысл для приблизительно нормальных данных.</p>
+</section>
+<section id="desc-outliers-what" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="desc-outliers-what"><span class="header-section-number">9.5.3</span> Что делать с выбросами</h3>
+<p>Выбросы можно:</p>
+<ul>
+<li><strong>оставить</strong> — если они настоящие и возникли в рамках изучаемого процесса;</li>
+<li><strong>исключить</strong> — если есть содержательное основание (техническая ошибка, нарушение инструкции). Критерий исключения лучше формулировать <em>до</em> анализа и обязательно описывать в отчёте или статье;</li>
+<li><strong>преобразовать</strong> данные (например, прологарифмировать), чтобы уменьшить влияние экстремальных значений;</li>
+<li>использовать <strong>устойчивые к выбросам методы</strong> — медиану вместо среднего, ранговые критерии.</li>
+</ul>
+<p>Для времени реакции хорошо работает применение правила на логарифмированных данных:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>log_t <span class="ot">&lt;-</span> <span class="fu">log</span>(share<span class="sc">$</span>time1)</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">quantile</span>(log_t, <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>bounds <span class="ot">&lt;-</span> <span class="fu">c</span>(q[<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">diff</span>(q), q[<span class="dv">2</span>] <span class="sc">+</span> <span class="fl">1.5</span> <span class="sc">*</span> <span class="fu">diff</span>(q))</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(log_t <span class="sc">&lt;</span> bounds[<span class="dv">1</span>] <span class="sc">|</span> log_t <span class="sc">&gt;</span> bounds[<span class="dv">2</span>])</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01855556</code></pre>
+</div>
+</div>
+<p>Доля подозрительных проб снизилась до 1.9%. Перейдём обратно к секундам, чтобы увидеть границы:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(bounds)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      25%       75% 
+0.4650406 3.8606275 </code></pre>
+</div>
+</div>
+<p>Теперь нижняя граница положительна (то есть имеет физический смысл), а верхняя находится заметно дальше, чем при расчёте на исходной шкале. Правило по-прежнему не нашло слишком быстрых проб — в этих данных их попросту нет.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Важность
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Удаление выбросов — один из самых «скользких» этапов анализа. Если исключать значения, пока не получится желаемый результат, можно получить любую закономерность. Определяйте правило заранее, применяйте его ко всем данным одинаково и описывайте в отчёте.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="desc-r" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="desc-r"><span class="header-section-number">9.6</span> Описательные статистики в R</h2>
+<section id="desc-r-summary" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="desc-r-summary"><span class="header-section-number">9.6.1</span> Быстрые сводки</h3>
+<p>Функция <code>summary()</code> выдаёт минимум, квартили, медиану, среднее и максимум:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(share<span class="sc">$</span>time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.5392  1.0284  1.2964  1.5201  1.7457 12.2326 </code></pre>
+</div>
+</div>
+<p>А функция <code>describe()</code> из <code>psych</code> — расширенный набор, включая асимметрию и эксцесс:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">describe</span>(share<span class="sc">$</span>time1)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   vars    n mean   sd median trimmed  mad  min   max range skew kurtosis   se
+X1    1 9000 1.52 0.81    1.3    1.39 0.47 0.54 12.23 11.69 3.51    24.89 0.01</code></pre>
+</div>
+</div>
+<p>Обратите внимание, что здесь <code>se</code> — это стандартная ошибка среднего. Что это такое, мы разберём в главе про <a href="stats-cltci.qmd">интервальные оценки</a>.</p>
+</section>
+<section id="desc-r-groups" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="desc-r-groups"><span class="header-section-number">9.6.2</span> Статистики по группам</h3>
+<p>Чаще всего мы описываем не всю выборку целиком, а группы. Для этого пригодятся функции <code>summarise()</code> и <code>.by</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>desc_table <span class="ot">&lt;-</span> share <span class="sc">|&gt;</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(correct) <span class="sc">|&gt;</span></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(time1),</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(time1),</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">median =</span> <span class="fu">median</span>(time1),</span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">q1 =</span> <span class="fu">quantile</span>(time1, <span class="fl">0.25</span>),</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">q3 =</span> <span class="fu">quantile</span>(time1, <span class="fl">0.75</span>),</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> <span class="fu">c</span>(trialtype, setsize)</span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(trialtype, setsize)</span>
+<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-14"><a href="#cb69-14" aria-hidden="true" tabindex="-1"></a>desc_table</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 8
+  trialtype setsize     n  mean    sd median    q1    q3
+  &lt;chr&gt;       &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 both            8   975  1.18 0.396   1.09 0.916  1.34
+2 both           12   995  1.30 0.559   1.17 0.974  1.48
+3 both           16   981  1.45 0.645   1.30 1.03   1.71
+4 dots            8   973  1.36 0.591   1.21 0.997  1.55
+5 dots           12   974  1.60 0.819   1.37 1.07   1.91
+6 dots           16   990  1.81 1.04    1.51 1.15   2.16
+7 tray            8   993  1.37 0.569   1.23 1.01   1.57
+8 tray           12   995  1.64 0.777   1.44 1.10   1.95
+9 tray           16   992  1.93 1.15    1.62 1.20   2.30</code></pre>
+</div>
+</div>
+<p>Чтобы не переписывать одни и те же функции для нескольких переменных, можно использовать <code>across()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>share <span class="sc">|&gt;</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(correct) <span class="sc">|&gt;</span></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(time1, click1x, click1y),</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">mean =</span> mean, <span class="at">sd =</span> sd)),</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">.by =</span> trialtype)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  trialtype time1_mean time1_sd click1x_mean click1x_sd click1y_mean click1y_sd
+  &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+1 tray            1.65    0.896         1.23       163.       -1.52        158.
+2 dots            1.59    0.860         5.88       165.        0.783       161.
+3 both            1.31    0.555        14.5        158.       26.7         143.</code></pre>
+</div>
+</div>
+</section>
+<section id="desc-reporting" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="desc-reporting"><span class="header-section-number">9.6.3</span> Как представлять описательные статистики в тексте</h3>
+<p>В научных текстах принято указывать меру центра и меру разброса вместе:</p>
+<ul>
+<li>для среднего: <em>M</em> = 1.52, <em>SD</em> = 0.81;</li>
+<li>для медианы: <em>Mdn</em> = 1.30, <em>IQR</em> = 0.72 (или [Q1; Q3]);</li>
+<li>для долей: 98.5% (<em>n</em> = 8868).</li>
+</ul>
+<p>Числа округляют до 2–3 значащих цифр, согласуя точность с точностью измерения.</p>
+</section>
+</section>
+<section id="sec-desc-estimates" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="sec-desc-estimates"><span class="header-section-number">9.7</span> Статистики как оценки параметров</h2>
+<p>До сих пор мы считали статистики по выборке и описывали ими эту самую выборку. Но чаще мы хотим сказать что-то о генеральной совокупности, из которой выборка была извлечена. Тогда статистика превращается в <strong>оценку параметра</strong>.</p>
+<ul>
+<li><strong>Параметр</strong> (<span class="math inline">\(\theta\)</span>) — характеристика генеральной совокупности (математическое ожидание <span class="math inline">\(\mu\)</span>, стандартное отклонение <span class="math inline">\(\sigma\)</span>, доля). Он постоянен, но неизвестен.</li>
+<li><strong>Оценка</strong> (<span class="math inline">\(\hat\theta\)</span>) — выборочный аналог параметра, который мы считаем по данным. Оценка — случайная величина: на разных выборках получаются разные значения.</li>
+</ul>
+<p>Так как оценка выражается одним числом, её называют <strong>точечной оценкой (point estimate)</strong>. Выборочное среднее <span class="math inline">\(\bar x\)</span> — точечная оценка математического ожидания <span class="math inline">\(\mu\)</span>; выборочное стандартное отклонение <span class="math inline">\(s\)</span> — оценка <span class="math inline">\(\sigma\)</span>.</p>
+<p>Посмотрим на это на модели. Пусть IQ в генеральной совокупности распределён нормально со средним 100 и стандартным отклонением 15. Мы многократно извлекаем из неё выборки по 50 человек и считаем в каждой среднее:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)))</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">m =</span> sample_means) <span class="sc">|&gt;</span></span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(m)) <span class="sc">+</span></span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>, <span class="at">fill =</span> <span class="st">"grey80"</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">100</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Выборочное среднее IQ"</span>, <span class="at">y =</span> <span class="st">"Число выборок"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-sample-means" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sample-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-desc_files/figure-html/fig-sample-means-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Рисунок&nbsp;9.5: Выборочные средние по 1000 выборок объёмом 50 из генеральной совокупности N(100, 15). Пунктир — истинное среднее"><img src="stats-desc_files/figure-html/fig-sample-means-1.png" class="img-fluid figure-img" width="624"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sample-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9.5: Выборочные средние по 1000 выборок объёмом 50 из генеральной совокупности <span class="math inline">\(N(100, 15)\)</span>. Пунктир — истинное среднее
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>На отдельной выборке мы можем промахнуться, но «в среднем» мы попадаем в параметр. Это и есть первое из трёх требований к хорошей оценке.</p>
+<section id="desc-estimator-properties" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="desc-estimator-properties"><span class="header-section-number">9.7.1</span> Свойства хороших оценок</h3>
+<ol type="1">
+<li><strong>Несмещённость (unbiasedness).</strong> При многократном повторении оценка в среднем равна параметру: <span class="math inline">\(\mathrm{E}(\hat\theta) = \theta\)</span>.</li>
+<li><strong>Состоятельность (consistency).</strong> С ростом объёма выборки оценка приближается к параметру.</li>
+<li><strong>Эффективность (efficiency).</strong> Среди несмещённых оценок лучше та, у которой меньше разброс от выборки к выборке.</li>
+</ol>
+<p>Проверим, что выборочное среднее несмещено. Для этого посмотрим, чему равно среднее по 1000 выборочным средним:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sample_means)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100.0386</code></pre>
+</div>
+</div>
+<p>Очень близко к 100. А теперь посмотрим на дисперсию. Сравним формулу с делением на <span class="math inline">\(n\)</span> и формулу с делением на <span class="math inline">\(n-1\)</span>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>sims <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">10000</span>, {</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">var_n =</span> <span class="fu">mean</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>),   <span class="co"># делим на n</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">var_n1 =</span> <span class="fu">var</span>(x))                 <span class="co"># делим на n - 1</span></span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rowMeans</span>(sims)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   var_n   var_n1 
+203.3152 225.9058 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="dv">15</span><span class="sc">^</span><span class="dv">2</span>   <span class="co"># истинная дисперсия</span></span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 225</code></pre>
+</div>
+</div>
+<p>Формула с делением на <span class="math inline">\(n\)</span> <strong>занижает</strong> истинную дисперсию (203 вместо 225): она смещена. Занижение происходит из-за того, что мы измеряем отклонения от среднего <em>выборки</em>, а оно всегда ближе к выборке, чем истинное среднее генеральной совокупности. Теоретически можно показать, что оценка с <span class="math inline">\(n\)</span> в знаменателе в среднем равна <span class="math inline">\(\frac{n-1}{n}\sigma^2\)</span>, а потому для исправления нужно умножить её на <span class="math inline">\(\frac{n}{n-1}\)</span>. Получается как раз формула с <span class="math inline">\(n-1\)</span>, которую вычисляют <code>var()</code> и <code>sd()</code>. Сравним: при <span class="math inline">\(n = 10\)</span> множитель равен 10/9, и 203.3 <span class="math inline">\(\times\)</span> 10/9 <span class="math inline">\(\approx\)</span> 225.9.</p>
+<p>Теперь состоятельность и эффективность. Сравним среднее и медиану как оценки центра нормального распределения при разных объёмах выборки:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>est <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(<span class="at">n =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">250</span>), <span class="at">rep =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sample =</span> <span class="fu">map</span>(n, \(n) <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)),</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">mean =</span> <span class="fu">map_dbl</span>(sample, mean),</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">median =</span> <span class="fu">map_dbl</span>(sample, median)) <span class="sc">|&gt;</span></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>sample) <span class="sc">|&gt;</span></span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(mean, median), <span class="at">names_to =</span> <span class="st">"estimator"</span>)</span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>est <span class="sc">|&gt;</span></span>
+<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(n), value, <span class="at">fill =</span> estimator)) <span class="sc">+</span></span>
+<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">100</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Объём выборки"</span>, <span class="at">y =</span> <span class="st">"Значение оценки"</span>, <span class="at">fill =</span> <span class="st">"Оценка"</span>)</span></code></pre></div><button title="Копировать" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-consistency" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-consistency-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-desc_files/figure-html/fig-consistency-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Рисунок&nbsp;9.6: Разброс выборочных среднего и медианы вокруг истинного значения при разных объёмах выборки"><img src="stats-desc_files/figure-html/fig-consistency-1.png" class="img-fluid figure-img" width="624"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-consistency-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;9.6: Разброс выборочных среднего и медианы вокруг истинного значения при разных объёмах выборки
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>С ростом выборки обе оценки концентрируются вокруг истинного значения 100 (состоятельность). При этом у среднего разброс заметно меньше, чем у медианы (эффективность) — для нормально распределённых данных среднее оценивает центр точнее.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Заметка
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Важно: «лучшая оценка» зависит от данных. Для распределений с тяжёлыми хвостами и выбросами среднее может оказаться менее эффективным, чем медиана. Выбор оценки — не вопрос вкуса, а вопрос свойств данных.</p>
+</div>
+</div>
+<p>Разброс оценки от выборки к выборке — это и есть неопределённость, с которой связана вся статистика вывода. Как её измерить и учесть, мы разберём в главе про <a href="stats-cltci.qmd">интервальные оценки</a>.</p>
+</section>
+</section>
+<section id="desc-summary" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="desc-summary"><span class="header-section-number">9.8</span> Итоги</h2>
+<ul>
+<li>Описательные статистики сжимают данные до нескольких чисел: центр, разброс и форма распределения.</li>
+<li>Меры центра и разброса подбираются по шкале и форме распределения: мода — для номинальных, медиана и IQR — для порядковых и асимметричных данных, среднее и стандартное отклонение — для интервальных симметричных.</li>
+<li>Среднее чувствительно к экстремальным значениям, медиана — нет; на асимметричном распределении среднее смещено к хвосту сильнее.</li>
+<li>Дисперсия выборки считается с делением на <span class="math inline">\(n-1\)</span>, чтобы быть несмещённой оценкой дисперсии генеральной совокупности.</li>
+<li>Выбросы нужно искать формальными правилами (1.5 IQR, <span class="math inline">\(N\sigma\)</span>), но решения по ним принимать содержательно и заранее.</li>
+<li>Статистика — это оценка параметра; она случайна и различается от выборки к выборке.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../tasks/preprocess-vis.html" class="pagination-link" aria-label="Задание | Предобработка и визуализация данных">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chpts/stats-norm.html" class="pagination-link" aria-label="Нормальное распределение">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Нормальное распределение</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

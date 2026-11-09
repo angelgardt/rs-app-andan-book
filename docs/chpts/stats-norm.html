@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Нормальное распределение – RS ANDAN // PSY&nbsp;HSE</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chpts/stats-cltci.html" rel="next">
+<link href="../chpts/stats-desc.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-84b129f27be8f528ae7b9875820b10cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Ничего не найдено",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Очистить",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Отмена",
+    "search-submit-button-title": "Отправить",
+    "search-label": "Поиск"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chpts/stats-norm.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Нормальное распределение</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Поиск" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">RS ANDAN // PSY&nbsp;HSE</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Поиск"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/intro-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Основания статистики</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Основы R</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/prob-randvals.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Измерения. Шкалы. Случайные величины</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Базовое исследование данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Предобработка данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-strdt.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Строки. Дата и время</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/rpy-vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Визуализация данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tasks/preprocess-vis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Задание | Предобработка и визуализация данных</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/stats-desc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Описательные статистики</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/stats-norm.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Нормальное распределение</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chpts/stats-cltci.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Интервальные оценки параметров</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Содержание</h2>
+   
+  <ul>
+  <li><a href="#norm-popdist" id="toc-norm-popdist" class="nav-link active" data-scroll-target="#norm-popdist"><span class="header-section-number">10.1</span> Распределение признаков в&nbsp;генеральной совокупности</a></li>
+  <li><a href="#norm-normdist" id="toc-norm-normdist" class="nav-link" data-scroll-target="#norm-normdist"><span class="header-section-number">10.2</span> Нормальное распределение</a>
+  <ul class="collapse">
+  <li><a href="#norm-normdist-params" id="toc-norm-normdist-params" class="nav-link" data-scroll-target="#norm-normdist-params"><span class="header-section-number">10.2.1</span> Параметры нормального распределения</a></li>
+  <li><a href="#norm-normdist-shape" id="toc-norm-normdist-shape" class="nav-link" data-scroll-target="#norm-normdist-shape"><span class="header-section-number">10.2.2</span> Форма нормального распределения и&nbsp;параметры</a></li>
+  <li><a href="#norm-normdist-probs" id="toc-norm-normdist-probs" class="nav-link" data-scroll-target="#norm-normdist-probs"><span class="header-section-number">10.2.3</span> Стандартные отклонения и&nbsp;вероятности</a></li>
+  </ul></li>
+  <li><a href="#normdist-stand" id="toc-normdist-stand" class="nav-link" data-scroll-target="#normdist-stand"><span class="header-section-number">10.3</span> Стандартизация</a>
+  <ul class="collapse">
+  <li><a href="#normdist-stnormdist" id="toc-normdist-stnormdist" class="nav-link" data-scroll-target="#normdist-stnormdist"><span class="header-section-number">10.3.1</span> Стандартное нормальное распределение</a></li>
+  <li><a href="#norm-standizaion" id="toc-norm-standizaion" class="nav-link" data-scroll-target="#norm-standizaion"><span class="header-section-number">10.3.2</span> Стандартизация</a></li>
+  <li><a href="#norm-stand-interpret" id="toc-norm-stand-interpret" class="nav-link" data-scroll-target="#norm-stand-interpret"><span class="header-section-number">10.3.3</span> Интерпретация z-значений</a></li>
+  <li><a href="#norm-stand-usage" id="toc-norm-stand-usage" class="nav-link" data-scroll-target="#norm-stand-usage"><span class="header-section-number">10.3.4</span> Применение стандартизации</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span id="stats-norm" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Нормальное распределение</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="intro">
+<p>Итак, мы научились описывать эмпирическое распределение переменных&nbsp;— то&nbsp;есть распределение, которое получено на&nbsp;выборке. Но&nbsp;ведь в&nbsp;генеральной совокупности наши переменные тоже каким-то образом распределены. Уделим внимание и&nbsp;этому вопросу.</p>
+</div>
+<section id="norm-popdist" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="norm-popdist"><span class="header-section-number">10.1</span> Распределение признаков в&nbsp;генеральной совокупности</h2>
+<blockquote class="blockquote">
+<p>— Можем&nbsp;ли мы знать наверняка, как&nbsp;распределен признак в&nbsp;генеральной совокупности? <br> — Нет. Однако мы можем предполагать некоторое теоретическое распределение признака.</p>
+</blockquote>
+<p>На&nbsp;основе чего мы можем сделать такое предположение? Конечно&nbsp;же, на&nbsp;основе собранных данных, то&nbsp;есть на&nbsp;основании выборки. Большой выборки. Очень большой выборки. Большого количества очень больших выборок.</p>
+<p>На&nbsp;практике мы руководствуемся либо рядом допущений относительно теоретического распределения случайной величины, либо опираемся на&nbsp;математические обоснования формы распределения.</p>
+<p>Теоретических распределений существует много. Они различаются по&nbsp;форме, параметрам, которыми они задаются, значениям, которые они могут принимать, величинам, которые ими можно описывать и&nbsp;т.&nbsp;д. Однако есть одно распределение, которое является крайне распространенным и&nbsp;очень широко используемым&nbsp;— <em>нормальное распределение</em>. Его мы и&nbsp;будем рассматривать.</p>
+</section>
+<section id="norm-normdist" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="norm-normdist"><span class="header-section-number">10.2</span> Нормальное распределение</h2>
+<p>Тот факт, что некоторая величина распределена согласно закону <strong>нормального распределения (normal distribution)</strong>, записывается следующим образом:</p>
+<p><span class="math display">\[
+X \thicksim \mathcal{N}(\mu, \sigma^2)
+\]</span></p>
+<p>Здесь <span class="math inline">\(X\)</span>&nbsp;— некоторая случайная величина (переменная), <span class="math inline">\(\mathcal{N}\)</span>&nbsp;— обозначение нормального распределения, <span class="math inline">\(\mu\)</span> и&nbsp;<span class="math inline">\(\sigma^2\)</span>&nbsp;— параметры нормального распределения.</p>
+<section id="norm-normdist-params" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="norm-normdist-params"><span class="header-section-number">10.2.1</span> Параметры нормального распределения</h3>
+<p>Итак, в&nbsp;скобках указаны параметры распределения&nbsp;— как можно видеть, их всего два. На&nbsp;самом деле, мы их уже хорошо знаем:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span>&nbsp;— это не&nbsp;что иное, как среднее,</li>
+<li><span class="math inline">\(\sigma^2\)</span>&nbsp;— дисперсия.</li>
+</ul>
+<p>Эти два параметра входят в&nbsp;формулу, описывающую график функции плотности вероятности нормального распределения (<a href="#eq-norm-pdf" class="quarto-xref">Уравнение&nbsp;<span>10.1</span></a>) и&nbsp;могут быть отображены на&nbsp;графике (<a href="#fig-normdist-pdf" class="quarto-xref">Рисунок&nbsp;<span>10.1</span></a>).</p>
+<p><span id="eq-norm-pdf"><span class="math display">\[
+f_{\mathcal{N}(\mu, \sigma^2)}(x) = \frac{1}{\sigma \sqrt{2\pi}} e ^{- \frac{(x-\mu)^2}{2 \sigma^2}}, \quad x \in \mathbb{R}, \, \mu \in \mathbb{R}, \, \sigma \in \mathbb{R}_{&gt;0}
+\tag{10.1}\]</span></span></p>
+<div id="fig-normdist-pdf" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normdist-pdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="stats-norm_files/figure-html/unnamed-chunk-2-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Рисунок&nbsp;10.1: Общий вид нормального распределения"><img src="stats-norm_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normdist-pdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.1: Общий вид нормального распределения
+</figcaption>
+</figure>
+</div>
+<!--
+:::{.callout-note #nte-normdist title="Почему нам так важно нормальное распределение?"}
+
+- Его очень давно знают. Карл Фридрих Гаусс (1777–1855) исчерпывающе его исследовал, и теперь про это распределение известно всё. И ещё чуть более.
+- Ряд статистических методов, называемых параметрическими, ~~требуют~~, чтобы распределение изучаемых переменных подчинялось нормальному закону.
+    - Сейчас, строго говоря, это уже не совсем так. Появляются новые исследования и симуляции, показывающие, что это далеко не ключевое требование.
+- С помощью нормального распределения определяют статистические нормы. Например, в образовательном тестировании, психодиагностике и иногда клинической практике.
+- На основании нормального распределения рассчитывается стандартная ошибка среднего --- важная оценка в статистике.
+- На основании нормального распределения, а точнее --- стандартной ошибки --- рассчитываются доверительные интервалы среднего --- одна из ключевых оценок в статистике.
+
+:::
+-->
+</section>
+<section id="norm-normdist-shape" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="norm-normdist-shape"><span class="header-section-number">10.2.2</span> Форма нормального распределения и&nbsp;параметры</h3>
+<p>Очевидно, что&nbsp;раз у&nbsp;распределения есть какие-то параметры, значит они каким-то образом на&nbsp;него влияют. Не&nbsp;менее очевидно, что&nbsp;среднее <span class="math inline">\(\mu\)</span> будет задавать положение центра колокола на&nbsp;оси <span class="math inline">\(x\)</span>, а&nbsp;дисперсия <span class="math inline">\(\sigma^2\)</span>&nbsp;— ширину колокола (<a href="#fig-normdist-params" class="quarto-xref">Рисунок&nbsp;<span>10.2</span></a>).</p>
+<div id="fig-normdist-params" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normdist-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="stats-norm_files/figure-html/unnamed-chunk-3-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Рисунок&nbsp;10.2: Вид функции плотности нормального распределения при&nbsp;различных значениях параметров"><img src="stats-norm_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normdist-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.2: Вид функции плотности нормального распределения при&nbsp;различных значениях параметров
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="norm-normdist-probs" class="level3" data-number="10.2.3">
+<h3 data-number="10.2.3" class="anchored" data-anchor-id="norm-normdist-probs"><span class="header-section-number">10.2.3</span> Стандартные отклонения и&nbsp;вероятности</h3>
+<p>Параметры распределения даны нам не&nbsp;просто так, а&nbsp;потому, что они исчерпывающе его описывают (<a href="#fig-normdist-probs" class="quarto-xref">Рисунок&nbsp;<span>10.3</span></a>).</p>
+<div id="fig-normdist-probs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normdist-probs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="stats-norm_files/figure-html/unnamed-chunk-4-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Рисунок&nbsp;10.3: Вероятности попадания значений нормально распределенной случайной величины в&nbsp;диапазоны между стандартными отклонениями"><img src="stats-norm_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normdist-probs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.3: Вероятности попадания значений нормально распределенной случайной величины в&nbsp;диапазоны между стандартными отклонениями
+</figcaption>
+</figure>
+</div>
+<p>Конкретно с этими вероятностями мы работаем реже&nbsp;— полезнее оказывается знать следующие (<a href="#fig-normdist-probs2" class="quarto-xref">Рисунок&nbsp;<span>10.4</span></a>).</p>
+<div id="fig-normdist-probs2" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-normdist-probs2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-normdist-probs2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-normdist-probs2-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-normdist-probs2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-norm_files/figure-html/fig-normdist-probs2-1.png" class="lightbox" data-gallery="fig-normdist-probs2" title="Рисунок&nbsp;10.4&nbsp;(a): Одно стандартное отклонение от&nbsp;среднего"><img src="stats-norm_files/figure-html/fig-normdist-probs2-1.png" class="img-fluid figure-img" data-ref-parent="fig-normdist-probs2" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-normdist-probs2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Одно стандартное отклонение от&nbsp;среднего
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-normdist-probs2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-normdist-probs2-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-normdist-probs2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-norm_files/figure-html/fig-normdist-probs2-2.png" class="lightbox" data-gallery="fig-normdist-probs2" title="Рисунок&nbsp;10.4&nbsp;(b): Два стандартных отклонения от&nbsp;среднего"><img src="stats-norm_files/figure-html/fig-normdist-probs2-2.png" class="img-fluid figure-img" data-ref-parent="fig-normdist-probs2" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-normdist-probs2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Два стандартных отклонения от&nbsp;среднего
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-normdist-probs2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-normdist-probs2-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-normdist-probs2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-norm_files/figure-html/fig-normdist-probs2-3.png" class="lightbox" data-gallery="fig-normdist-probs2" title="Рисунок&nbsp;10.4&nbsp;(c): Три стандартных отклонения от&nbsp;среднего"><img src="stats-norm_files/figure-html/fig-normdist-probs2-3.png" class="img-fluid figure-img" data-ref-parent="fig-normdist-probs2" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-normdist-probs2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Три стандартных отклонения от&nbsp;среднего
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-normdist-probs2" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-normdist-probs2-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-normdist-probs2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="stats-norm_files/figure-html/fig-normdist-probs2-4.png" class="lightbox" data-gallery="fig-normdist-probs2" title="Рисунок&nbsp;10.4&nbsp;(d): Четыре (и&nbsp;более) стандартных отклонения от&nbsp;среднего"><img src="stats-norm_files/figure-html/fig-normdist-probs2-4.png" class="img-fluid figure-img" data-ref-parent="fig-normdist-probs2" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-normdist-probs2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) Четыре (и&nbsp;более) стандартных отклонения от&nbsp;среднего
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-normdist-probs2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.4: Вероятности попадания значений нормально распределенной случайной величины в&nbsp;диапазоны стандартных отклонений от&nbsp;среднего значения
+</figcaption>
+</figure>
+</div>
+<p><span id="eq-normdist-probs"><span class="math display">\[
+\begin{split}
+&amp;\mathbb{P} \big( X \in (\mu - \sigma, \mu + \sigma) \big) = 68.2\% \\
+&amp;\mathbb{P} \big( X \in (\mu - 2\sigma, \mu + 2\sigma) \big) = 95.6\% \\
+&amp;\mathbb{P} \big( X \in (\mu - 3\sigma, \mu + 3\sigma) \big) = 99.8\%
+\end{split}
+\tag{10.2}\]</span></span></p>
+<p>То&nbsp;есть</p>
+<ul>
+<li>в&nbsp;пределах одного стандартного отклонения от&nbsp;среднего значения лежит почти 70% значений&nbsp;— это очень частотные значения (<a href="#fig-normdist-probs2-1" class="quarto-xref">Рисунок&nbsp;<span>10.4 (a)</span></a>);</li>
+<li>в&nbsp;пределах двух стандартных отклонений от&nbsp;среднего значения лежит 95% значений&nbsp;— бо́льшая часть выборки(<a href="#fig-normdist-probs2-2" class="quarto-xref">Рисунок&nbsp;<span>10.4 (b)</span></a>);</li>
+<li>в&nbsp;пределах трех стандартных отклонений от&nbsp;среднего значения лежит практически 100% выборки&nbsp;— практически вся выборка (<a href="#fig-normdist-probs2-3" class="quarto-xref">Рисунок&nbsp;<span>10.4 (c)</span></a>).</li>
+</ul>
+</section>
+</section>
+<section id="normdist-stand" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="normdist-stand"><span class="header-section-number">10.3</span> Стандартизация</h2>
+<p>Нормальных распределение существует много, и&nbsp;пример тому <span class="quarto-unresolved-ref">?fig-normdists-params</span>. Однако среди всех нормальных распределений одно выделяется особо.</p>
+<section id="normdist-stnormdist" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="normdist-stnormdist"><span class="header-section-number">10.3.1</span> Стандартное нормальное распределение</h3>
+<p>Нормальное распределение со&nbsp;средним <span class="math inline">\(0\)</span> и&nbsp;дисперсией <span class="math inline">\(1\)</span> называется <strong>стандартным нормальным распределением (standard normal distribution)</strong>, или <span class="math inline">\(z\)</span>-распределением. Значения на&nbsp;шкале такого распределения называются <span class="math inline">\(z\)</span>-значениями.</p>
+<p><span class="math display">\[
+z \thicksim \mathcal{N}(0, 1)
+\]</span></p>
+<p>Выглядит оно так:</p>
+<div id="fig-stnormdist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stnormdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="stats-norm_files/figure-html/unnamed-chunk-5-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Рисунок&nbsp;10.5: Вид стандартного нормального распределения"><img src="stats-norm_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stnormdist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.5: Вид стандартного нормального распределения
+</figcaption>
+</figure>
+</div>
+<p>Разумеется, так&nbsp;как стандартное нормальное распределение является частным случаем нормального распределения, оно сохраняет все его свойства.</p>
+</section>
+<section id="norm-standizaion" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="norm-standizaion"><span class="header-section-number">10.3.2</span> Стандартизация</h3>
+<p>Часто возникает следующая задача: нам нужно сравнить, например, баллы по&nbsp;шкалам двух опросников, при этом разброс баллов на&nbsp;шкале различный. Более того, сами распределения баллов по этим шкалам могут быть также различны.</p>
+<p>Рассмотрим следующий пример. Мы дали респондентам два опросника на&nbsp;измерение личностных черт&nbsp;— BFI-2 (по&nbsp;модели «Большая пятерка») и&nbsp;SD3 (по&nbsp;модели «Тёмная триада»). Допустим, что&nbsp;мы хотим сравнить баллы некоторого респондента по&nbsp;шкалам Нейротизм из&nbsp;BFI-2 и Нарциссизм из&nbsp;SD3. Вопрос будет простой: <em>по&nbsp;какой из&nbsp;двух шкал респондент набрал больший балл</em>?</p>
+<p>Данные говорят, что&nbsp;этот респондент набрал <span class="math inline">\(31\)</span> балл по&nbsp;обеим шкалам. Собственно, а&nbsp;в&nbsp;чём тогда вопрос? Ясно&nbsp;же, что&nbsp;баллов набрано по&nbsp;обеим шкалам одинаково. Или&nbsp;всё&nbsp;же нет…</p>
+<p>Шкалы BFI-2 состоят из&nbsp;двенадцати пунктов, а&nbsp;шкалы SD3&nbsp;— из&nbsp;девяти. И&nbsp;даже учитывая, что&nbsp;отвечали респонденты в&nbsp;обоих случаях по&nbsp;пятибалльной шкале Ликерта, суммарный балл по&nbsp;шкалам опросника будет иметь разные пределы изменчивости (<a href="#fig-survey-sample" class="quarto-xref">Рисунок&nbsp;<span>10.6</span></a>). Описательные статистики&nbsp;— например, среднее и&nbsp;стандартное отклонение&nbsp;— будут также различны (<a href="#tbl-survey-means" class="quarto-xref">Таблица&nbsp;<span>10.1</span></a>).</p>
+<div id="fig-survey-sample" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-survey-sample-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="stats-norm_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Рисунок&nbsp;10.6: Распределения баллов по&nbsp;шкалам опросников. BFI2_NEU&nbsp;— шкала Нейротизм опросника BFI-2, SD3_NAR&nbsp;— шкала Нарциссизм опросника SD3."><img src="stats-norm_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-survey-sample-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.6: Распределения баллов по&nbsp;шкалам опросников. <code>BFI2_NEU</code>&nbsp;— шкала Нейротизм опросника BFI-2, <code>SD3_NAR</code>&nbsp;— шкала Нарциссизм опросника SD3.
+</figcaption>
+</figure>
+</div>
+<div id="tbl-survey-means" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-survey-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Таблица&nbsp;10.1: Описательные статистики распределений баллов по&nbsp;шкалам опросников. <code>BFI2_NEU</code>&nbsp;— шкала Нейротизм опросника BFI-2, <code>SD3_NAR</code>&nbsp;— шкала Нарциссизм опросника SD3.
+</figcaption>
+<div aria-describedby="tbl-survey-means-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Шкала</th>
+<th style="text-align: center;">Количество пунктов</th>
+<th style="text-align: center;">Количество респондентов</th>
+<th style="text-align: center;">Среднее</th>
+<th style="text-align: center;">Стандартное отклонение</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>BFI2_NEU</code></td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">492</td>
+<td style="text-align: center;">36.34</td>
+<td style="text-align: center;">9.41</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>SD3_NAR</code></td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">492</td>
+<td style="text-align: center;">26.94</td>
+<td style="text-align: center;">6.95</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>В&nbsp;силу разного разброса значение одни и&nbsp;те&nbsp;же значения будут находится в&nbsp;разных частях распределений. В&nbsp;частности, внимательно присмотревшись к&nbsp;описательным статистикам (<a href="#tbl-survey-means" class="quarto-xref">Таблица&nbsp;<span>10.1</span></a>) можно заметить, что&nbsp;значение <span class="math inline">\(31\)</span> меньше среднего для&nbsp;шкалы <code>BFI2-NEU</code> и&nbsp;больше среднего для&nbsp;шкалы <code>SD3_NAR</code>. Это, безусловно, полезная информация, однако хотелось&nbsp;бы найти какой-то единый способ для&nbsp;сравнения значений из&nbsp;различных распределений. Такой способ есть&nbsp;— нам необходимо <em>стандартизировать</em> случайный величины.</p>
+<div id="def-standartization" class="theorem definition">
+<p><span class="theorem-title"><strong>Определение 10.1</strong></span> <strong>Стандартизация</strong>&nbsp;— преобразование случайной величины, в&nbsp;результате которого среднее её распределения становится равным <span class="math inline">\(0\)</span>, а&nbsp;стандартное отклонение&nbsp;— <span class="math inline">\(1\)</span>.</p>
+<p><span id="eq-standartization"><span class="math display">\[
+z_i = \frac{x_i - \overline X}{s_X},
+\tag{10.3}\]</span></span></p>
+<p>где <span class="math inline">\(z_i\)</span>&nbsp;— значение стандартизированной случайной величины, <span class="math inline">\(x_i\)</span>&nbsp;— значение исходной случайной величины, <span class="math inline">\(\overline X\)</span>&nbsp;— среднее исходной случайной величины, <span class="math inline">\(s_X\)</span>&nbsp;— стандартное отклонение исходной случайной величины.</p>
+</div>
+<p>Полученные стандартизированные значения также часто называют <span class="math inline">\(z\)</span>-значениями. В&nbsp;этом есть довольно понятный смысл, ведь если изначально переменная была распределена нормально&nbsp;— <span class="math inline">\(X \thicksim \mathcal{N}(\mu, \sigma^2)\)</span>&nbsp;— то стандартизированная случайная величина будет подчиняться стандартному нормальному распределению&nbsp;— <span class="math inline">\(z \thicksim \mathcal{N}(0, 1)\)</span>.</p>
+<p>Посмотрим на&nbsp;процедуру стандартизации детально, благо деталей всего две&nbsp;— числитель и&nbsp;знаменатель (см. <a href="#eq-standartization" class="quarto-xref">Уравнение&nbsp;<span>10.3</span></a>). Стандартизация состоит из&nbsp;двух операций:</p>
+<ul>
+<li><em>центрирование</em>&nbsp;— то, что&nbsp;происходит в&nbsp;числителе&nbsp;— обращает среднее в&nbsp;ноль (см. <span class="quarto-unresolved-ref">?prp-mean1</span>),</li>
+<li><em>нормирование</em>&nbsp;— то, что&nbsp;происходит в&nbsp;знаменателе&nbsp;— обращает стандартное отклонение в&nbsp;единицу (см. <span class="quarto-unresolved-ref">?cor-sd2</span>).</li>
+</ul>
+<p>Посмотрим на&nbsp;две операции отдельно на&nbsp;примере стандартизации какого-то нормального распределения.</p>
+<div id="fig-standartization-operations" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-standartization-operations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="stats-norm_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Рисунок&nbsp;10.7: Стандартизация, центрирование, нормирование. Пунктирная линия&nbsp;— стандартное нормальное распределение, точечная линия&nbsp;— исходное распределение."><img src="stats-norm_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-standartization-operations-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.7: Стандартизация, центрирование, нормирование. Пунктирная линия&nbsp;— стандартное нормальное распределение, точечная линия&nbsp;— исходное распределение.
+</figcaption>
+</figure>
+</div>
+<p>На&nbsp;рисунке <a href="#fig-standartization-operations" class="quarto-xref"><span>10.7</span></a> черной линией представлено исходное нормальное распределение <span class="math inline">\(\mathcal{N}(-1,0.25)\)</span> [слева сверху]. Если его центрировать, то&nbsp;оно подвинется вправо&nbsp;— <span class="math inline">\(x_i - \overline X\)</span>&nbsp;— и&nbsp;получится синее распределение <span class="math inline">\(\mathcal{N}(0, 0.25)\)</span> [справа сверху]. Если&nbsp;нормировать исходное распределение, то&nbsp;оно станет несколько шире&nbsp;— <span class="math inline">\(\frac{x_i}{s_X}\)</span>&nbsp;— как&nbsp;зелёное <span class="math inline">\(\mathcal{N}(-1,1)\)</span> [слева снизу]. А&nbsp;если осуществить обе операции вместе&nbsp;— <span class="math inline">\(\frac{x_i - \overline X}{s_X}\)</span>&nbsp;— это и&nbsp;будет стандартизация, и&nbsp;распределение совпадет сo&nbsp;стандартным нормальным распределением [справа снизу].</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Стандартизация не&nbsp;меняет форму распределения!">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Важность</span>Стандартизация не&nbsp;меняет форму распределения!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>В&nbsp;реальной ситуации никто не&nbsp;может нам гарантировать, что&nbsp;выборочное распределение обязательно будет нормальным. Вообще-то на&nbsp;выборке может случится всё, что угодно.</p>
+<p>Иногда можно услышать такое утверждение: <em>«стандартизация приводит произвольное распределение к&nbsp;стандартному нормальному»</em>&nbsp;— что совершеннейшая неправда. Вернитесь к&nbsp;определению <a href="#def-standartization" class="quarto-xref"><span>10.1</span></a> и&nbsp;убедить, что&nbsp;там нет ни&nbsp;слова про нормальность распределений.</p>
+<p>Рассмотрим пару примеров. Пусть исходное распределение асимметрично (<a href="#fig-asym-stand" class="quarto-xref">Рисунок&nbsp;<span>10.8</span></a>). Стандартизировав его, мы получим распределение со&nbsp;средним <span class="math inline">\(0\)</span> и&nbsp;стандартным отклонением <span class="math inline">\(1\)</span>, однако его форма совершенно не&nbsp;изменилась.</p>
+<div id="fig-asym-stand" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-asym-stand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="stats-norm_files/figure-html/unnamed-chunk-8-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Рисунок&nbsp;10.8: Стандартизация асимметричного распределения"><img src="stats-norm_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-asym-stand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.8: Стандартизация асимметричного распределения
+</figcaption>
+</figure>
+</div>
+<p>Теперь возьмем бимодальное распределение, и&nbsp;пронаблюдаем ровно ту&nbsp;же ситуацию&nbsp;— форма распределения вновь не&nbsp;изменилась (<a href="#fig-bimod-stand" class="quarto-xref">Рисунок&nbsp;<span>10.9</span></a>).</p>
+<div id="fig-bimod-stand" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bimod-stand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="stats-norm_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Рисунок&nbsp;10.9: Стандартизация бимодального распределения"><img src="stats-norm_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bimod-stand-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Рисунок&nbsp;10.9: Стандартизация бимодального распределения
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Вернёмся&nbsp;же, наконец, к&nbsp;нашей исходной задаче: мы собирались ответить на&nbsp;вопрос <em>по&nbsp;какой из&nbsp;двух шкал респондент набрал больший балл</em>, при&nbsp;этом данные нам говорят, что&nbsp;респондент набрал <span class="math inline">\(31\)</span> балл по&nbsp;обеим шкалам. Найдём стандартизированное значение по&nbsp;формуле <a href="#eq-standartization" class="quarto-xref"><span>10.3</span></a> взяв значения среднего и&nbsp;стандартного отклонения из&nbsp;таблицы <a href="#tbl-survey-means" class="quarto-xref"><span>10.1</span></a>. Получим</p>
+<p><span class="math display">\[
+z_\mathrm{BFI2.NEU} = \frac{31 - 36.34}{9.41} \approx -0.57
+\]</span> <span class="math display">\[
+z_\mathrm{SD3.NAR} = \frac{31 - 29.94}{6.95} \approx 0.58
+\]</span></p>
+<p>Таким образом, мы можем сказать, что&nbsp;наш респондент набрал более высокий балл по&nbsp;шкале нарциссизма.</p>
+</section>
+<section id="norm-stand-interpret" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="norm-stand-interpret"><span class="header-section-number">10.3.3</span> Интерпретация z-значений</h3>
+<p>Хорошо, мы сделали стандартизацию&nbsp;— довольно простая процедура. Но&nbsp;как с&nbsp;этими числами дальше работать? Можно&nbsp;ли из&nbsp;них выжать больше смысла, чем&nbsp;просто сравнение?</p>
+<p>Здесь надо понять всего одну вещь:</p>
+<div class="callout callout-style-simple callout-tip no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>единица <span class="math inline">\(z\)</span>-шкалы&nbsp;— это&nbsp;стандартное отклонение исходной переменной</p>
+</div>
+</div>
+</div>
+<p>Конечно, <span class="math inline">\(z\)</span>-шкала безразмерная, то&nbsp;есть не&nbsp;имеет единиц измерения (метры, секунды, года и&nbsp;др.). Однако единица&nbsp;— в смысле <span class="math inline">\(1\)</span>&nbsp;— на этой шкале небессмысленна. Это мера типичности.</p>
+<p>Взглянем ещё раз на&nbsp;рисунок <a href="#fig-stnormdist" class="quarto-xref"><span>10.5</span></a>. Обратим внимание вот на что: <span class="math inline">\(1\)</span>, <span class="math inline">\(2\)</span> <span class="math inline">\(3\)</span> и&nbsp;<span class="math inline">\(-1\)</span>, <span class="math inline">\(-2\)</span>, <span class="math inline">\(-3\)</span> находятся в&nbsp;тех самых точках, где в&nbsp;другом нормальном распределении находятся стандартные отклонения (<span class="math inline">\(\mu \pm \sigma\)</span>, <span class="math inline">\(\mu \pm 2\sigma\)</span>, <span class="math inline">\(\mu \pm 3\sigma\)</span>). Мы также знаем, что этим диапазонам соответствуют вероятности, с&nbsp;которыми значения случайных величин оказываются в&nbsp;этих диапазонах (<a href="#eq-normdist-probs" class="quarto-xref">Уравнение&nbsp;<span>10.2</span></a>).</p>
+<p>То&nbsp;есть мы можем говорить, что&nbsp;<span class="math inline">\(z\)</span>-значения</p>
+<ul>
+<li>в&nbsp;интервале <span class="math inline">\((-1,1)\)</span>&nbsp;— очень типичные, поскольку лежат в&nbsp;пределах одного стандартного отклонения от&nbsp;среднего,</li>
+<li>в&nbsp;интервалах <span class="math inline">\((-2, -1)\)</span> и&nbsp;<span class="math inline">\((1,2)\)</span>&nbsp;— тоже достаточно типичные, поскольку лежат в&nbsp;пределах двух стандартных отклонений от&nbsp;среднего,</li>
+<li>в&nbsp;интервалах <span class="math inline">\((-3, -2)\)</span> и&nbsp;<span class="math inline">\((2,3)\)</span>&nbsp;— менее типичные, но&nbsp;еще «нормальные», так как лежат в&nbsp;пределах трёх стандартных отклонений от&nbsp;среднего,</li>
+<li>меньшие <span class="math inline">\(-3\)</span> и&nbsp;большие <span class="math inline">\(3\)</span>&nbsp;— очень нетипичные, так как выходят за&nbsp;пределы трёх стандартных отклонений от среднего.</li>
+</ul>
+<p>Это и&nbsp;есть мера типичности.</p>
+<p>Таким образом, с&nbsp;помощью <span class="math inline">\(z\)</span>-значений мы можем быстро понять, где находится испытуемый или респондент на&nbsp;имеющемся распределении.</p>
+<p>Можно&nbsp;ли это понять без&nbsp;перевода значений в&nbsp;<span class="math inline">\(z\)</span>-шкалу? Можно. Но&nbsp;неудобно. Надо держать в&nbsp;голове среднее и&nbsp;стандартное отклонение конкретного распределения, а&nbsp;если сравниваем респондентов по&nbsp;нескольким шкалам, то по&nbsp;две характеристики для&nbsp;каждой шкалы, постоянно пересчитывая диапазоны&nbsp;— в&nbsp;общем, слишком много инфы. Трудно.</p>
+</section>
+<section id="norm-stand-usage" class="level3" data-number="10.3.4">
+<h3 data-number="10.3.4" class="anchored" data-anchor-id="norm-stand-usage"><span class="header-section-number">10.3.4</span> Применение стандартизации</h3>
+<p>Помимо обсужденного выше, есть ещё одно применение <span class="math inline">\(z\)</span>-значений. От&nbsp;них можно перейти к&nbsp;значениям любой другой стандартной шкалы, выполнив преобразование, обратное <a href="#eq-standartization" class="quarto-xref"><span>10.3</span></a>. Стандартных шкал существует много&nbsp;— Sten, Stanine, T-score, IQ-score… С&nbsp;ними вы познакомитесь в&nbsp;курсе психометрики. Они оказываются очень удобными для&nbsp;представления результатов тестов конечным пользователям. Однако для&nbsp;того, чтобы перейти к&nbsp;этим шкалам, сначала все равно будет необходимо перейти к&nbsp;<span class="math inline">\(z\)</span>-значениям.</p>
+<p>Кроме того, стандартизация также используется в&nbsp;некоторых статистических методах, когда нам необходимо уравнять дисперсии переменных. Поскольку после стандартизации дисперсия переменной всегда будет равна единице, такая процедура отлично подходит для&nbsp;этой задачи.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Скопировано!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Скопировано!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chpts/stats-desc.html" class="pagination-link" aria-label="Описательные статистики">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Описательные статистики</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chpts/stats-cltci.html" class="pagination-link" aria-label="Интервальные оценки параметров">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Интервальные оценки параметров</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>
